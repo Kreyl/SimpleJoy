@@ -1,6 +1,6 @@
-update=03.10.2017 21:52:40
+update=05.10.2017 13:24:10
 version=1
-last_client=kicad
+last_client=eeschema
 [general]
 version=1
 RootSch=
@@ -43,3 +43,14 @@ LibName9=st_kl
 LibName10=Switches
 LibName11=Tittar_kl
 LibName12=Transistors_kl
+LibName13=modules
+[schematic_editor]
+version=1
+PageLayoutDescrFile=
+PlotDirectoryName=
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=
+SpiceAjustPassiveValues=0
+LabSize=60
+ERC_TestSimilarLabels=1
