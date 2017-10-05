@@ -1,4 +1,4 @@
-update=05.10.2017 1:22:49
+update=05.10.2017 14:18:44
 version=1
 last_client=eeschema
 [general]
@@ -45,3 +45,13 @@ LibName11=Tittar_kl
 LibName12=Transistors_kl
 LibName13=standard_logic
 LibName14=modules
+[schematic_editor]
+version=1
+PageLayoutDescrFile=
+PlotDirectoryName=
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=Pcbnew
+SpiceAjustPassiveValues=0
+LabSize=60
+ERC_TestSimilarLabels=1
