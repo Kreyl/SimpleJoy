@@ -12,6 +12,11 @@
 		<Pcb>
 			<File path=".\SimpleJoyRx.fsx" Folder="-1" isopened="1"/>
 		</Pcb>
+		<Import>
+			<Specctra>
+			<Path name="D:\Nute\PresentTime\SimpleJoy\SimpleJoyRx_hw\SimpleJoyRx.dsn"/>
+			</Specctra>
+		</Import>
 		<ARouteSessions>
 		</ARouteSessions>
 	</Document>
