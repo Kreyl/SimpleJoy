@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project xsi:noNamespaceSchemaLocation="Project.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Version current="1"/>
+	<Format>Project</Format>
+	<Header>
+		<Program name="TopoR" version="6.1"/>
+		<GUID>{5C52C93F-9F37-4C63-93C8-F709BA91513A}</GUID>
+		<Annotation>Project file</Annotation>
+	</Header>
+	<Document>
+		<LocalLibrary />
+		<Pcb>
+			<File path=".\SimpleJoyRx.fsx" Folder="-1" isopened="1"/>
+		</Pcb>
+		<ARouteSessions>
+		</ARouteSessions>
+	</Document>
+</Project>
