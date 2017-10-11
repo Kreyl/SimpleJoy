@@ -5,7 +5,7 @@
 <!--   Version : 2                           -->
 <!--   Program : TopoR Lite 6.3.17875        -->
 <!--   Date    : Wednesday, October 11, 2017 -->
-<!--   Time    : 14:31                       -->
+<!--   Time    : 19:39                       -->
 <!--*****************************************-->
 
 <Project>
@@ -13,8 +13,13 @@
    <GUID>{8ECDA300-C037-457C-82CC-064E0D63ACE0}</GUID>
    <Documents>
       <Section name="PCB">
-         <File path=".\SimpleJoyTx.fsx" isopened="1" dateChange="2017-10-11 13:53:31"/>
+         <File path=".\SimpleJoyTx.fsx" isopened="1" dateChange="2017-10-11 16:39:44"/>
       </Section>
       <Section name="AutoRouting"/>
    </Documents>
+   <Import>
+      <Specctra>
+         <Path name="D:\Nute\PresentTime\SimpleJoy\SimpleJoyTx_hw\SimpleJoyTx.dsn"/>
+      </Specctra>
+   </Import>
 </Project>
