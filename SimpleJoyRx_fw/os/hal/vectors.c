@@ -70,7 +70,7 @@ void PendSV_Handler(void) __attribute__((weak, alias("_unhandled_exception")));
 void SysTick_Handler(void) __attribute__((weak, alias("_unhandled_exception")));
 void Vector40(void) __attribute__((weak, alias("_unhandled_exception")));
 void Vector44(void) __attribute__((weak, alias("_unhandled_exception")));
-void Vector48(void);// __attribute__((weak, alias("_unhandled_exception")));
+void Vector48(void) __attribute__((weak, alias("_unhandled_exception")));
 void Vector4C(void) __attribute__((weak, alias("_unhandled_exception")));
 #if CORTEX_NUM_VECTORS > 4
 void Vector50(void) __attribute__((weak, alias("_unhandled_exception")));

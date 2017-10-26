@@ -10,8 +10,8 @@
 #include <inttypes.h>
 
 // ==== General ====
-#define BOARD_NAME          "Lume3"
-#define APP_NAME            "Lume"
+#define BOARD_NAME          "SimpleJoyRx1"
+#define APP_NAME            "SimpleJoyRx"
 
 // MCU type as defined in the ST header.
 #define STM32F072xB     // no matter, 8 or B
@@ -21,48 +21,71 @@
 
 #define SYS_TIM_CLK             (Clk.APBFreqHz)
 
-#define SIMPLESENSORS_ENABLED   TRUE
-#define BUTTONS_ENABLED         TRUE
-#define ADC_REQUIRED            TRUE
+#define SIMPLESENSORS_ENABLED   FALSE
+#define BUTTONS_ENABLED         FALSE
+#define ADC_REQUIRED            FALSE
 #define I2C1_ENABLED            FALSE
 #define I2C_USE_SEMAPHORE       FALSE
 
 #if 1 // ========================== GPIO =======================================
 // PortMinTim_t: GPIO, Pin, Tim, TimChnl, invInverted, omPushPull, TopValue
 
-// Luminocity measurement
-#define LUM_MEAS_PIN    GPIOA, 1
-
-// Buttons
-#define BTN1_PIN        GPIOB, 3, pudPullUp
-#define BTN2_PIN        GPIOB, 4, pudPullUp
-#define BTN3_PIN        GPIOB, 5, pudPullUp
-#define BTN4_PIN        GPIOB, 6, pudPullUp
-
-// LCD
-#define LCD_SDA         GPIOB, 10
-#define LCD_XRES        GPIOB, 11
-#define LCD_SCLK        GPIOB, 12
-#define LCD_XCS         GPIOB, 13
-#define LCD_BCKLT       { GPIOB, 14, TIM15, 1, invNotInverted, omPushPull, 100 }
-#define LCD_PWR         GPIOA, 6
-
 // Battery measurement
-#define BAT_MEAS_PIN    GPIOA, 2
+#define BAT_MEAS_PIN    GPIOA, 0
+#define BAT_MEAS_EN     GPIOA, 1
 
-// UART
-#define UART_GPIO       GPIOA
-#define UART_TX_PIN     9
-#define UART_RX_PIN     10
+// Servo
+#define SRV1_PIN        GPIOA, 8, TIM1, 1
+#define SRV2_PIN        GPIOA, 9, TIM1, 2
+#define SRV3_PIN        GPIOA, 10, TIM1, 3
+#define SRV4_PIN        GPIOA, 2, TIM15, 1
+#define SRV5_PIN        GPIOA, 3, TIM15, 2
+#define SRV6_PIN        GPIOA, 4, TIM14, 1
+
+#define USB_DETECT      GPIOA, 5
+
+// PWM
+#define PWM1_PIN        { GPIOC, 6, TIM3, 1, invNotInverted, omPushPull, 255 }
+#define PWM2_PIN        { GPIOC, 7, TIM3, 2, invNotInverted, omPushPull, 255 }
+#define PWM3_PIN        { GPIOC, 8, TIM3, 3, invNotInverted, omPushPull, 255 }
+#define PWM4_PIN        { GPIOC, 9, TIM3, 4, invNotInverted, omPushPull, 255 }
+#define PWM5_PIN        { GPIOA, 6, TIM16, 1, invNotInverted, omPushPull, 255 }
+#define PWM6_PIN        { GPIOA, 7, TIM17, 1, invNotInverted, omPushPull, 255 }
+
+// Moter Dir
+#define DIR1_PIN        GPIOC, 2, omPushPull
+#define DIR2_PIN        GPIOC, 3, omPushPull
+#define DIR3_PIN        GPIOC, 4, omPushPull
+#define DIR4_PIN        GPIOC, 5, omPushPull
+
+// USB
+#define USB_DM          GPIOA, 11
+#define USB_DP          GPIOA, 12
 
 // LEDs
-#define LEDWS_PIN       GPIOB, 15, omPushPull, pudNone, AF0, psHigh
+#define LED_PWR         GPIOC, 0, omPushPull
+#define LED_LINK        GPIOC, 1, omPushPull
+
+// UART
+#define UART_GPIO       GPIOB
+#define UART_TX_PIN     6
+#define UART_RX_PIN     7
+
+// Radio: SPI, PGpio, Sck, Miso, Mosi, Cs, Gdo0
+#define CC_Setup0       SPI1, GPIOB, 3,4,5, 2, 1
+
+// DIP switch
+#define DIP_SW_CNT      8
+#define DIP_SW1         { GPIOB, 8, pudPullUp }
+#define DIP_SW2         { GPIOB, 9, pudPullUp }
+#define DIP_SW3         { GPIOB, 10, pudPullUp }
+#define DIP_SW4         { GPIOB, 11, pudPullUp }
+#define DIP_SW5         { GPIOB, 12, pudPullUp }
+#define DIP_SW6         { GPIOB, 13, pudPullUp }
+#define DIP_SW7         { GPIOB, 14, pudPullUp }
+#define DIP_SW8         { GPIOB, 15, pudPullUp }
 
 #endif // GPIO
-
-#if 1 // =========================== SPI =======================================
-#define LEDWS_SPI       SPI2
-#endif
 
 #if 1 // ========================== USART ======================================
 #define PRINTF_FLOAT_EN FALSE
@@ -70,8 +93,6 @@
 #define UART_USE_INDEPENDENT_CLK    TRUE
 #define UART_TXBUF_SZ   1024
 
-// LCD USART
-#define LCD_UART_SPEED      100000
 #endif
 
 #if 1 // ========================== USB ========================================
@@ -110,10 +131,6 @@
 #define UART_DMA_TX     STM32_DMA1_STREAM2
 #define UART_DMA_RX     STM32_DMA1_STREAM3
 #define UART_DMA_CHNL   0   // Dummy
-
-#define LCD_DMA         STM32_DMA1_STREAM7  // USART3 TX
-
-#define LEDWS_DMA       STM32_DMA1_STREAM5  // SPI2 TX
 
 // ==== I2C1 ====
 #define I2C1_DMA_TX     STM32_DMA1_STREAM2
