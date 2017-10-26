@@ -142,9 +142,13 @@ void ITask() {
                 break;
 
             case evtIdEverySecond: {
-//                uint32_t dip = GetDipSwitch();
-//                Printf("DIP: %u\r", dip);
-//                Radio.SetChannel(dip);
+                static int OldDip = -1;
+                int dip = GetDipSwitch();
+                if(dip != OldDip) {
+                    OldDip = dip;
+                    Printf("Dip: %u\r", dip);
+                    Radio.SetChannel(dip);
+                }
             } break;
 
             case evtIdAdcRslt: {
