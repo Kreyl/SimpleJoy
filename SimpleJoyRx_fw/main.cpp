@@ -14,6 +14,8 @@
 #include "kl_adc.h"
 #include "led.h"
 #include "Sequences.h"
+#include "kl_servo.h"
+#include "radio_lvl1.h"
 
 #if 1 // ======================== Variables and defines ========================
 // Forever
@@ -27,6 +29,52 @@ static uint8_t GetDipSwitch();
 
 LedBlinker_t LedPwr {LED_PWR};
 LedBlinker_t LedLink {LED_LINK};
+
+// Servo
+#define SRV_CNT     6
+static const Servo_t Srv1{SRV1_PIN};
+static const Servo_t Srv2{SRV2_PIN};
+static const Servo_t Srv3{SRV3_PIN};
+static const Servo_t Srv4{SRV4_PIN};
+static const Servo_t Srv5{SRV5_PIN};
+static const Servo_t Srv6{SRV6_PIN};
+static const Servo_t* Srv[SRV_CNT] = { &Srv1, &Srv2, &Srv3, &Srv4, &Srv5, &Srv6 };
+
+// PWM
+#define PWM_CNT     6
+static const PinOutputPWM_t Pwm1(PWM1_PIN);
+static const PinOutputPWM_t Pwm2(PWM2_PIN);
+static const PinOutputPWM_t Pwm3(PWM3_PIN);
+static const PinOutputPWM_t Pwm4(PWM4_PIN);
+static const PinOutputPWM_t Pwm5(PWM5_PIN);
+static const PinOutputPWM_t Pwm6(PWM6_PIN);
+static const PinOutputPWM_t *Pwm[PWM_CNT] = { &Pwm1, &Pwm2, &Pwm3, &Pwm4, &Pwm5, &Pwm6 };
+
+// Motor
+#define MOTOR_CNT   4
+enum Motordir_t { mdirForward, mdirBackward };
+class Motor_t {
+private:
+    const PinOutput_t IDirPin;
+    const PinOutputPWM_t *IPwmPin;
+public:
+    void Init() const {
+        IDirPin.Init();
+    }
+    void Set(Motordir_t Dir, uint8_t Value) const {
+        if(Dir == mdirForward) IDirPin.SetHi();
+        else IDirPin.SetLo();
+        IPwmPin->Set(Value);
+    }
+    Motor_t(GPIO_TypeDef *APGPIO, uint16_t APin, const PinOutputPWM_t *PPwm) :
+        IDirPin(APGPIO, APin, omPushPull), IPwmPin(PPwm) {}
+};
+
+static const Motor_t Motor1{DIR1_PIN, &Pwm1};
+static const Motor_t Motor2{DIR2_PIN, &Pwm2};
+static const Motor_t Motor3{DIR3_PIN, &Pwm3};
+static const Motor_t Motor4{DIR4_PIN, &Pwm4};
+static const Motor_t *Motor[MOTOR_CNT] = { &Motor1, &Motor2, &Motor3, &Motor4 };
 
 TmrKL_t TmrEverySecond {MS2ST(999), evtIdEverySecond, tktPeriodic};
 
@@ -50,7 +98,28 @@ int main(void) {
     LedPwr.Init();
     LedLink.Init();
     LedPwr.On();
-    LedLink.StartOrRestart(lbsqBlink1s);
+//    LedLink.StartOrRestart(lbsqBlink1s);
+
+    // Servo
+    for(int i=0; i<SRV_CNT; i++) {
+        Srv[i]->Init();
+        Srv[i]->SetAngle_dg(90);
+    }
+
+    // Pwm
+    for(int i=0; i<PWM_CNT; i++) {
+        Pwm[i]->Init();
+        Pwm[i]->SetFrequencyHz(3600);
+        Pwm[i]->Set(81);
+    }
+
+    // Motors
+    for(int i=0; i<MOTOR_CNT; i++) {
+        Motor[i]->Init();
+    }
+
+    if(Radio.Init() == retvOk) LedLink.StartOrRestart(lbsqBlink1s);
+    else LedLink.StartOrRestart(lbsqFailure);
 
     TmrEverySecond.StartOrRestart();
 
@@ -73,8 +142,9 @@ void ITask() {
                 break;
 
             case evtIdEverySecond: {
-                uint32_t dip = GetDipSwitch();
+//                uint32_t dip = GetDipSwitch();
 //                Printf("DIP: %u\r", dip);
+//                Radio.SetChannel(dip);
             } break;
 
             case evtIdAdcRslt: {

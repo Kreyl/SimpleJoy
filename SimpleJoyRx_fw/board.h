@@ -45,18 +45,18 @@
 #define USB_DETECT      GPIOA, 5
 
 // PWM
-#define PWM1_PIN        { GPIOC, 6, TIM3, 1, invNotInverted, omPushPull, 255 }
-#define PWM2_PIN        { GPIOC, 7, TIM3, 2, invNotInverted, omPushPull, 255 }
-#define PWM3_PIN        { GPIOC, 8, TIM3, 3, invNotInverted, omPushPull, 255 }
-#define PWM4_PIN        { GPIOC, 9, TIM3, 4, invNotInverted, omPushPull, 255 }
-#define PWM5_PIN        { GPIOA, 6, TIM16, 1, invNotInverted, omPushPull, 255 }
-#define PWM6_PIN        { GPIOA, 7, TIM17, 1, invNotInverted, omPushPull, 255 }
+#define PWM1_PIN        GPIOC, 6, TIM3, 1, invNotInverted, omPushPull, 255
+#define PWM2_PIN        GPIOC, 7, TIM3, 2, invNotInverted, omPushPull, 255
+#define PWM3_PIN        GPIOC, 8, TIM3, 3, invNotInverted, omPushPull, 255
+#define PWM4_PIN        GPIOC, 9, TIM3, 4, invNotInverted, omPushPull, 255
+#define PWM5_PIN        GPIOA, 6, TIM16, 1, invNotInverted, omPushPull, 255
+#define PWM6_PIN        GPIOA, 7, TIM17, 1, invNotInverted, omPushPull, 255
 
 // Moter Dir
-#define DIR1_PIN        GPIOC, 2, omPushPull
-#define DIR2_PIN        GPIOC, 3, omPushPull
-#define DIR3_PIN        GPIOC, 4, omPushPull
-#define DIR4_PIN        GPIOC, 5, omPushPull
+#define DIR1_PIN        GPIOC, 2
+#define DIR2_PIN        GPIOC, 3
+#define DIR3_PIN        GPIOC, 4
+#define DIR4_PIN        GPIOC, 5
 
 // USB
 #define USB_DM          GPIOA, 11
