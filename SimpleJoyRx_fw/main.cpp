@@ -22,6 +22,9 @@ extern CmdUart_t Uart;
 void OnCmd(Shell_t *PShell);
 void ITask();
 
+static const PinInputSetup_t DipSwPin[DIP_SW_CNT] = { DIP_SW8, DIP_SW7, DIP_SW6, DIP_SW5, DIP_SW4, DIP_SW3, DIP_SW2, DIP_SW1 };
+static uint8_t GetDipSwitch();
+
 LedBlinker_t LedPwr {LED_PWR};
 LedBlinker_t LedLink {LED_LINK};
 
@@ -43,10 +46,13 @@ int main(void) {
     Printf("\r%S %S\r", APP_NAME, BUILD_TIME);
     Clk.PrintFreqs();
 
+    // LEDs
     LedPwr.Init();
     LedLink.Init();
     LedPwr.On();
     LedLink.StartOrRestart(lbsqBlink1s);
+
+    TmrEverySecond.StartOrRestart();
 
     // Adc
 //    PinSetupAnalog(LUM_MEAS_PIN);
@@ -66,8 +72,10 @@ void ITask() {
                 ((Shell_t*)Msg.Ptr)->SignalCmdProcessed();
                 break;
 
-            case evtIdEverySecond:
-                break;
+            case evtIdEverySecond: {
+                uint32_t dip = GetDipSwitch();
+//                Printf("DIP: %u\r", dip);
+            } break;
 
             case evtIdAdcRslt: {
                 } break;
@@ -76,6 +84,17 @@ void ITask() {
         } // switch
     } // while true
 } // ITask()
+
+// ====== DIP switch ======
+uint8_t GetDipSwitch() {
+    uint8_t Rslt = 0;
+    for(int i=0; i<DIP_SW_CNT; i++) PinSetupInput(DipSwPin[i].PGpio, DipSwPin[i].Pin, DipSwPin[i].PullUpDown);
+    for(int i=0; i<DIP_SW_CNT; i++) {
+        if(!PinIsHi(DipSwPin[i].PGpio, DipSwPin[i].Pin)) Rslt |= (1 << i);
+        PinSetupAnalog(DipSwPin[i].PGpio, DipSwPin[i].Pin);
+    }
+    return Rslt;
+}
 
 #if UART_RX_ENABLED // ================= Command processing ====================
 void OnCmd(Shell_t *PShell) {
