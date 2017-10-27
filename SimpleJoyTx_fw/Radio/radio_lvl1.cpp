@@ -74,8 +74,6 @@ uint8_t rLevel1_t::Init() {
 }
 
 void rLevel1_t::SetChannel(uint8_t NewChannel) {
-    chSysLock();
     CC.SetChannel(NewChannel);
-    chSysUnlock();
 }
 #endif
