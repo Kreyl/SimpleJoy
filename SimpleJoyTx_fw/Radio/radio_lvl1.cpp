@@ -44,12 +44,13 @@ static void rLvl1Thread(void *arg) {
 __noreturn
 void rLevel1_t::ITask() {
     while(true) {
-        uint8_t RxRslt = CC.Receive(9, &PktRx, &Rssi);
-        if(RxRslt == retvOk) {
+        chThdSleepMilliseconds(450);
+//        uint8_t RxRslt = CC.Receive(9, &PktRx, &Rssi);
+//        if(RxRslt == retvOk) {
 //            Printf("Par %u; Rssi=%d\r", PktRx.CmdID, Rssi);
             // Transmit reply, it formed inside OnRadioRx
 //            if(OnRadioRx() == retvOk) CC.Transmit(&PktTx);
-        } // if RxRslt ok
+//        } // if RxRslt ok
     } // while
 }
 #endif // task

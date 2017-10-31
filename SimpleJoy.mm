@@ -119,9 +119,10 @@
 <node TEXT="&#x414;&#x43b;&#x44f; &#x432;&#x44b;&#x431;&#x43e;&#x440;&#x430; &#x43a;&#x430;&#x43d;&#x430;&#x43b;&#x430;" ID="ID_1075866070" CREATED="1505753168710" MODIFIED="1505753170149"/>
 </node>
 </node>
-<node TEXT="NextTime" POSITION="left" ID="ID_972226907" CREATED="1509050624449" MODIFIED="1509050631290">
+<node TEXT="NextTime" LOCALIZED_STYLE_REF="AutomaticLayout.level,3" POSITION="left" ID="ID_972226907" CREATED="1509050624449" MODIFIED="1509353763911">
 <node TEXT="TX" ID="ID_585136609" CREATED="1509050632354" MODIFIED="1509050642735">
-<node TEXT="&#x41a;&#x43e;&#x43d;&#x434;&#x435;&#x43d;&#x441;&#x430;&#x442;&#x43e;&#x440; &#x43f;&#x43e;&#x441;&#x43b;&#x435;&#x434;&#x43e;&#x432;&#x430;&#x442;&#x435;&#x43b;&#x44c;&#x43d;&#x43e; &#x432; &#x430;&#x43d;&#x442;&#x435;&#x43d;&#x43d;&#x443;" ID="ID_1265304732" CREATED="1509050643521" MODIFIED="1509050656696"/>
+<node TEXT="&#x41a;&#x43e;&#x43d;&#x434;&#x435;&#x43d;&#x441;&#x430;&#x442;&#x43e;&#x440; &#x43f;&#x43e;&#x441;&#x43b;&#x435;&#x434;&#x43e;&#x432;&#x430;&#x442;&#x435;&#x43b;&#x44c;&#x43d;&#x43e; &#x432; &#x430;&#x43d;&#x442;&#x435;&#x43d;&#x43d;&#x443;" ID="ID_1265304732" CREATED="1509050643521" MODIFIED="1509353762435"/>
+<node TEXT="&#x412;&#x43a;&#x43b;/&#x432;&#x44b;&#x43a;&#x43b; &#x432;&#x43e;&#x437;&#x43b;&#x435; &#x432;&#x44b;&#x43a;&#x43b;&#x44e;&#x447;&#x430;&#x442;&#x435;&#x43b;&#x44f;" ID="ID_1769921901" CREATED="1509385756013" MODIFIED="1509385767679"/>
 </node>
 </node>
 </node>

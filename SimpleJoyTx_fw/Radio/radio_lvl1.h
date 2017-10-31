@@ -11,6 +11,7 @@
 #include "ch.h"
 #include "cc1101.h"
 #include "kl_buf.h"
+#include "shell.h"
 
 #if 0 // ========================= Signal levels ===============================
 // Python translation for db
@@ -56,44 +57,23 @@ static inline void Lvl250ToLvl1000(uint16_t *PLvl) {
 #define CC_TX_PWR   CC_PwrPlus5dBm
 
 #if 1 // =========================== Pkt_t =====================================
-union rPktHost2Dev_t  {
-    uint32_t DWord[4];
+union rPkt_t  {
+    uint32_t DWord[2];
     struct {
-        int16_t ID;
-        uint8_t CmdID;
-        uint16_t Values[3];
+        int8_t Ch[6];
+        uint8_t Btns;
+        uint8_t Rsrvd;
     } __packed;
-    rPktHost2Dev_t& operator = (const rPktHost2Dev_t &Right) {
+    rPkt_t& operator = (const rPkt_t &Right) {
         DWord[0] = Right.DWord[0];
         DWord[1] = Right.DWord[1];
-        DWord[2] = Right.DWord[2];
-        DWord[3] = Right.DWord[3];
         return *this;
     }
+    void Print() { Printf("%d %d %d %d %d %d; %X\r", Ch[0],Ch[1],Ch[2],Ch[3],Ch[4],Ch[5], Btns); }
 } __packed;
 
-union rPktDev2Host_t  {
-    uint32_t DWord[4];
-    // Real data
-    struct {
-        int16_t a[3];
-        int16_t g[3];
-        uint8_t CmdID;
-        uint8_t Values[3];
-    } __packed;
-//    rPkt_t() : DWord[0](0) { }
-    rPktDev2Host_t& operator = (const rPktDev2Host_t &Right) {
-        DWord[0] = Right.DWord[0];
-        DWord[1] = Right.DWord[1];
-        DWord[2] = Right.DWord[2];
-        DWord[3] = Right.DWord[3];
-        return *this;
-    }
-} __packed;
-#define RPKT_LEN    16
+#define RPKT_LEN    8
 #endif
-
-// ==== Sizes ====
 
 #if 1 // ======================= Channels & cycles =============================
 #define RCHNL_SRV       0
@@ -117,8 +97,8 @@ private:
 public:
     int8_t Rssi;
     uint8_t Init();
-    rPktHost2Dev_t PktRx;
-    rPktDev2Host_t PktTx;
+//    rPktHost2Dev_t PktRx;
+//    rPktDev2Host_t PktTx;
     void SetChannel(uint8_t NewChannel);
     // Inner use
     void ITask();

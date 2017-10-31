@@ -31,17 +31,29 @@ static void AdcThread(void *arg) {
 //        Printf("AdcDone\r");
         if(FirstConversion) FirstConversion = false;
         else {
-            uint32_t VRef_adc = Adc.GetResult(ADC_VREFINT_CHNL);
-//            Printf("VRef_adc=%u\r", VRef_adc);
-            // Iterate all channels
+            // Iterate channels
             for(int i=0; i<ADC_CHANNEL_CNT; i++) {
-                if(AdcChannels[i] == ADC_VREFINT_CHNL) continue; // Ignore VrefInt channel
-                uint32_t Vadc = Adc.GetResult(AdcChannels[i]);
-                uint32_t Vmv = Adc.Adc2mV(Vadc, VRef_adc);   // Resistor divider
-//                Printf("N=%u; Vadc=%u; Vmv=%u\r", i, Vadc, Vmv);
-                EvtMsg_t Msg(evtIdAdcRslt, AdcChannels[i], Vmv);
-                EvtQMain.SendNowOrExit(Msg);
-            } // for
+                int32_t v = 0;
+                // Average value
+                for(int j = i; j < ADC_SEQ_LEN; j += ADC_CHANNEL_CNT) v += Adc.IBuf[j];
+                v /= ADC_SAMPLE_CNT;
+                Adc.Values[i] = v;
+            }
+            EvtMsg_t Msg(evtIdAdcRslt, Adc.Values);
+            EvtQMain.SendNowOrExit(Msg);
+
+//            uint32_t VRef_adc = Adc.GetResult(ADC_VREFINT_CHNL);
+////            Printf("VRef_adc=%u\r", VRef_adc);
+//            // Iterate all channels
+//            for(int i=0; i<ADC_CHANNEL_CNT; i++) {
+//                if(AdcChannels[i] == ADC_VREFINT_CHNL) continue; // Ignore VrefInt channel
+//                uint32_t Vadc = Adc.GetResult(AdcChannels[i]);
+//                uint32_t Vmv = Adc.Adc2mV(Vadc, VRef_adc);   // Resistor divider
+////                Printf("N=%u; Vadc=%u; Vmv=%u\r", AdcChannels[i], Vadc, Vmv);
+////                Printf("N=%u; Vadc=%u; Vmv=%u\r", i, Vadc, Vmv);
+//                EvtMsg_t Msg(evtIdAdcRslt, AdcChannels[i], Vmv);
+//                EvtQMain.SendNowOrExit(Msg);
+//            } // for
         } // not first conv
     } // while true
 }
@@ -61,6 +73,9 @@ void AdcTxIrq(void *p, uint32_t flags) {
 }
 
 #if defined STM32F0XX
+/*
+ * Channels should be setup in increasing order. No way to measure 1 after 2.
+ */
 void Adc_t::Init() {
     FirstConversion = true;
     rccResetADC1();
@@ -73,6 +88,7 @@ void Adc_t::Init() {
     for(uint8_t i=0; i < ADC_CHANNEL_CNT; i++) {
         ADC1->CHSELR |= (1 << AdcChannels[i]);
     }
+//    Printf("ADC CHSELR %X\r", ADC1->CHSELR);
     ADC1->SMPR = (uint32_t)ADC_SAMPLE_TIME;       // Setup sampling time
     // Calibrate
     uint32_t cnt=0;
@@ -130,7 +146,9 @@ uint32_t Adc_t::GetResult(uint8_t AChannel) {
 //        Uart.Printf("%u; ", IBuf[i]);
     }
 //    Uart.Printf("\r");
-    return Rslt / ADC_SAMPLE_CNT;
+    Rslt /= ADC_SAMPLE_CNT;
+//    Printf("ch=%u; i=%u; Vmv=%u\r", AChannel, Indx, Rslt);
+    return Rslt;
 }
 #endif // stm32f0
 

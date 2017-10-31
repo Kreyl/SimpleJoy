@@ -29,7 +29,22 @@ static uint8_t GetDipSwitch();
 LedBlinker_t LedPwr {LED_PWR};
 LedBlinker_t LedLink {LED_LINK};
 
+bool CalibrationMode = true;
+void ProcessAdc(int32_t *Values);
+#define CONTROL_CNT         6
+#define CALIBRATION_CNT     16
+int32_t AdcOffset[CONTROL_CNT];
+int32_t CalibrationCounter[CONTROL_CNT];
+
 TmrKL_t TmrEverySecond {MS2ST(999), evtIdEverySecond, tktPeriodic};
+
+struct AdcValues_t {
+    int32_t Battery;
+    int32_t Ch[6];
+    int32_t Vref;
+} __packed;
+
+int32_t Offset[6];
 
 #endif
 
@@ -58,10 +73,22 @@ int main(void) {
 
     TmrEverySecond.StartOrRestart();
 
-    // Adc
-//    PinSetupAnalog(LUM_MEAS_PIN);
-//    Adc.Init();
-//    Adc.EnableVRef();
+    // ==== Adc ====
+    PinSetupOut(BAT_MEAS_EN, omPushPull);
+    PinSetHi(BAT_MEAS_EN);  // Enable battery measurement
+    PinSetupAnalog(BAT_MEAS_PIN);
+    PinSetupAnalog(ADC0_PIN);
+    PinSetupAnalog(ADC1_PIN);
+    PinSetupAnalog(ADC2_PIN);
+    PinSetupAnalog(ADC3_PIN);
+    PinSetupAnalog(ADC4_PIN);
+    PinSetupAnalog(ADC5_PIN);
+    memset(CalibrationCounter, 0, sizeof(CalibrationCounter));
+    memset(AdcOffset, 0, sizeof(AdcOffset));
+    memset(Offset, 0, sizeof(Offset));
+    Adc.Init();
+    Adc.EnableVRef();
+
     // Main cycle
     ITask();
 }
@@ -86,13 +113,51 @@ void ITask() {
                 }
             } break;
 
-            case evtIdAdcRslt: {
-                } break;
+            case evtIdAdcRslt:
+//                Printf("ID: %u; V: %u\r", Msg.ValueID, Msg.Value);
+                ProcessAdc((int32_t*)Msg.Ptr);
+                break;
 
             default: break;
         } // switch
     } // while true
 } // ITask()
+
+void ProcessAdc(int32_t *Values) {
+    AdcValues_t *pVal = (AdcValues_t*)Values;
+    // Battery
+//    int32_t VBat_mv = Adc.Adc2mV(pVal->Battery, pVal->Vref);
+//    Printf("Battery: %u\r", VBat_mv);
+
+//    Printf("%u\r", pVal->Ch[0]);
+    if(CalibrationMode) {
+        static int CalibrationCnt = 0;
+        for(int i=0; i<6; i++) {
+            Offset[i] += pVal->Ch[i];
+        }
+        CalibrationCnt++;
+        if(CalibrationCnt == 8) {   // 8, why not? Put here something else if you want.
+            for(int i=0; i<6; i++) Offset[i] /= 8;
+            CalibrationMode = false;
+            Printf("Calibration done\r");
+        }
+    }
+    // Not calibration
+    else {
+        rPkt_t Pkt;
+        for(int i=0; i<6; i++) {
+            int32_t v = pVal->Ch[i]; // To make things shorter
+            v -= Offset[i];
+            v /= 16L;  // [0...4095] => [0...255]
+            if(v < -128L) v = -128L;
+            if(v > 127L) v = 127L;
+            Pkt.Ch[i] = v;
+        }
+        Pkt.Print();
+    }
+}
+
+
 
 // ====== DIP switch ======
 uint8_t GetDipSwitch() {

@@ -21,9 +21,9 @@
 
 #define SYS_TIM_CLK             (Clk.APBFreqHz)
 
-#define SIMPLESENSORS_ENABLED   FALSE
-#define BUTTONS_ENABLED         FALSE
-#define ADC_REQUIRED            FALSE
+#define SIMPLESENSORS_ENABLED   TRUE
+#define BUTTONS_ENABLED         TRUE
+#define ADC_REQUIRED            TRUE
 #define I2C1_ENABLED            FALSE
 #define I2C_USE_SEMAPHORE       FALSE
 
@@ -122,16 +122,22 @@
 #endif
 
 #if ADC_REQUIRED // ======================= Inner ADC ==========================
-#define ADC_MEAS_PERIOD_MS  450
+#define ADC_MEAS_PERIOD_MS  72
 // Clock divider: clock is generated from the APB2
 #define ADC_CLK_DIVIDER     adcDiv2
 
 // ADC channels
-#define ADC_LUM_CHNL        1
+#define ADC_BAT_CHNL        0
+#define ADC0_CHNL           10
+#define ADC1_CHNL           11
+#define ADC2_CHNL           12
+#define ADC3_CHNL           13
+#define ADC4_CHNL           14
+#define ADC5_CHNL           15
 
 #define ADC_VREFINT_CHNL    17  // All 4xx, F072 and L151 devices. Do not change.
-#define ADC_CHANNELS        { ADC_LUM_CHNL, ADC_VREFINT_CHNL }
-#define ADC_CHANNEL_CNT     2   // Do not use countof(AdcChannels) as preprocessor does not know what is countof => cannot check
+#define ADC_CHANNELS        { ADC_BAT_CHNL, ADC0_CHNL, ADC1_CHNL, ADC2_CHNL, ADC3_CHNL, ADC4_CHNL, ADC5_CHNL, ADC_VREFINT_CHNL }
+#define ADC_CHANNEL_CNT     8   // Do not use countof(AdcChannels) as preprocessor does not know what is countof => cannot check
 #define ADC_SAMPLE_TIME     ast55d5Cycles
 #define ADC_SAMPLE_CNT      8   // How many times to measure every channel
 
