@@ -15,6 +15,8 @@
 #include "led.h"
 #include "Sequences.h"
 #include "radio_lvl1.h"
+#include "SimpleSensors.h"
+
 
 #if 1 // ======================== Variables and defines ========================
 // Forever
@@ -70,6 +72,9 @@ int main(void) {
 
     if(Radio.Init() == retvOk) LedLink.StartOrRestart(lbsqBlink1s);
     else LedLink.StartOrRestart(lbsqFailure);
+
+    // Buttons
+    SimpleSensors::Init();
 
     TmrEverySecond.StartOrRestart();
 
@@ -144,15 +149,28 @@ void ProcessAdc(int32_t *Values) {
     }
     // Not calibration
     else {
+        // Put adc values to pkt
         rPkt_t Pkt;
         for(int i=0; i<6; i++) {
             int32_t v = pVal->Ch[i]; // To make things shorter
             v -= Offset[i];
             v /= 16L;  // [0...4095] => [0...255]
-            if(v < -128L) v = -128L;
+            if(v < -128L) v = -127L;
             if(v > 127L) v = 127L;
             Pkt.Ch[i] = v;
         }
+        // Correct sign
+        Pkt.Ch[0] = -Pkt.Ch[0];
+        Pkt.Ch[3] = -Pkt.Ch[3];
+        Pkt.Ch[4] = -Pkt.Ch[4];
+        Pkt.Ch[5] = -Pkt.Ch[5];
+
+        // Add buttons
+        uint8_t b = 0;
+        for(int i=0; i<7; i++) {
+            if(GetBtnState(i) == pssLo) b |= 1<<i;
+        }
+        Pkt.Btns = b;
         Pkt.Print();
     }
 }

@@ -36,4 +36,12 @@ const PinSns_t PinSns[] = {
 };
 #define PIN_SNS_CNT     countof(PinSns)
 
+#define BTN_A_INDX  0
+#define BTN_B_INDX  1
+#define BTN_C_INDX  2
+#define BTN_D_INDX  3
+#define BTN_L_INDX  4
+#define BTN_J1_INDX  5
+#define BTN_J2_INDX  6
+
 #endif  // if enabled
