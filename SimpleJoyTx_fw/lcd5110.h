@@ -50,7 +50,7 @@ class Lcd_t: public PrintfHelper_t {
 private:
     const PinOutputPWM_t BckLt{LCD_BCKLT_PIN};
     uint8_t IBuf[LCD_VIDEOBUF_SIZE];
-    uint16_t CurrentPosition;   // x, y to place data to
+    int16_t CurrentPosition;   // x, y to place data to
     bool Inverted = false;
     // Pin driving functions
     void RES_Hi() { PinSetHi(LCD_RST_PIN); }
@@ -75,7 +75,7 @@ public:
     void Update();
     void Backlight(uint8_t ABrightness)  { BckLt.Set(ABrightness); }
     // High-level
-    void GotoCharXY(uint8_t x, uint8_t y) { CurrentPosition =  x*6 + y*96; }
+    void GotoCharXY(uint8_t x, uint8_t y) { CurrentPosition = 384 + (x*6 + y*84); }
     void DrawChar(uint8_t AChar, Invert_t AInvert);
     void Print(const uint8_t x, const uint8_t y, const char *S, ...);
     void PrintInverted(const uint8_t x, const uint8_t y, const char *S, ...);

@@ -121,9 +121,8 @@ uint8_t Lcd_t::IPutChar(char c) {
     for(uint8_t i=0; i<6; i++) {
         uint8_t b = Font_6x8_Data[(uint32_t)c][i];
         if(Inverted) b = ~b;
-        uint16_t w = b;
-        w = (w << 1) | 0x0001;
-        IBuf[CurrentPosition++] = w;
+        b = __RBIT(b) >> 24;    // Inverse bit order
+        IBuf[CurrentPosition++] = b;
         if(CurrentPosition >= LCD_VIDEOBUF_SIZE) CurrentPosition = 0;
     }
     return retvOk;
@@ -134,6 +133,7 @@ void Lcd_t::Print(const uint8_t x, const uint8_t y, const char *S, ...) {
     msg_t msg = chSemWait(&semLcd);
     if(msg == MSG_OK) {
         GotoCharXY(x, y);
+//        CurrentPosition = 384;
         va_list args;
         va_start(args, S);
         IVsPrintf(S, args);
@@ -158,14 +158,13 @@ void Lcd_t::PrintInverted(const uint8_t x, const uint8_t y, const char *S, ...) 
 // ================================ Graphics ===================================
 void Lcd_t::DrawImage(const uint8_t x, const uint8_t y, const uint8_t* Img) {
     uint8_t *p = (uint8_t*)Img;
-    uint16_t w;
+    uint8_t b;
     uint8_t Width = *p++, Height = *p++;
     for(uint8_t fy=y; fy < y+Height; fy++) {
         GotoXY(x, fy);
         for(uint8_t fx=x; fx < x+Width; fx++) {
-            w = *p++;
-            w = (w << 1) | 0x0001;
-            IBuf[CurrentPosition++] = w;
+            b = *p++;
+            IBuf[CurrentPosition++] = b;
             if(CurrentPosition >= LCD_VIDEOBUF_SIZE) continue;
         } // fx
     } // fy

@@ -76,6 +76,8 @@ int main(void) {
     Lcd.Init();
     Lcd.Backlight(100);
     Lcd.Print(0, 0, "Aiya Feanaro!");
+    Lcd.Print(0, 1, "Aiya Feanaro!");
+//    Lcd.Print(0, 2, "Aiya Feanaro!");
     Lcd.Update();
 
     // Buttons
