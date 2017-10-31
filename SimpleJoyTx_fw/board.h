@@ -152,6 +152,9 @@
 #define UART_DMA_RX     STM32_DMA1_STREAM3
 #define UART_DMA_CHNL   0   // Dummy
 
+// LCD
+#define LCD_DMA         STM32_DMA1_STREAM5
+
 // ==== I2C1 ====
 #define I2C1_DMA_TX     STM32_DMA1_STREAM2
 #define I2C1_DMA_RX     STM32_DMA1_STREAM3

@@ -16,7 +16,7 @@
 #include "Sequences.h"
 #include "radio_lvl1.h"
 #include "SimpleSensors.h"
-
+#include "lcd5110.h"
 
 #if 1 // ======================== Variables and defines ========================
 // Forever
@@ -72,6 +72,11 @@ int main(void) {
 
     if(Radio.Init() == retvOk) LedLink.StartOrRestart(lbsqBlink1s);
     else LedLink.StartOrRestart(lbsqFailure);
+
+    Lcd.Init();
+    Lcd.Backlight(100);
+    Lcd.Print(0, 0, "Aiya Feanaro!");
+    Lcd.Update();
 
     // Buttons
     SimpleSensors::Init();
@@ -171,7 +176,7 @@ void ProcessAdc(int32_t *Values) {
             if(GetBtnState(i) == pssLo) b |= 1<<i;
         }
         Pkt.Btns = b;
-        Pkt.Print();
+//        Pkt.Print();
     }
 }
 
