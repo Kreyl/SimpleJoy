@@ -11,29 +11,57 @@
 
 #define Y0          8
 #define R_HEIGHT    40
-#define R_WIDTH     5
-#define R1_X        72
-#define R2_X        78
+#define R_WIDTH     4
+#define R_COEF      (255 / R_HEIGHT)
+#define R1_X        0
+#define R2_X        79
+#define J1_X        7
+#define J2_X        36
+#define J_HEIGHT    32
+#define J_WIDTH     4
+#define J_COEF      (255 / J_HEIGHT)
 
 class Interface_t {
 public:
     void Reset() {
-        Lcd.Print(0, 0, "Время:  00:00");
+        Lcd.Print(0, 0, "Канал: 00");
         Lcd.Update();
     }
 
-    void DrawR1(uint8_t Value) {}
-    void DrawR2(uint8_t Value) {
+    void DrawR(uint8_t x, uint8_t Value) {
         for(int y = Y0; y < (Y0 + R_HEIGHT); y++) {
-            Lcd.DrawPixel(R2_X, y, Inverted);
-            Lcd.DrawPixel((R2_X+R_WIDTH), y, Inverted);
-            if(y == Y0 or y == (Y0 + R_HEIGHT -1)) {
-
+            Lcd.DrawPixel(x, y, Inverted);
+            Lcd.DrawPixel((x+R_WIDTH), y, Inverted);
+            int Threshold = R_HEIGHT - Value / R_COEF;
+            if(y == Y0 or y > (Y0 + Threshold) or y == (Y0 + R_HEIGHT - 1)) {
+                Lcd.DrawPixel((x+1), y, Inverted);
+                Lcd.DrawPixel((x+2), y, Inverted);
+                Lcd.DrawPixel((x+3), y, Inverted);
             }
             else {
-
+                Lcd.DrawPixel((x+1), y, NotInverted);
+                Lcd.DrawPixel((x+2), y, NotInverted);
+                Lcd.DrawPixel((x+3), y, NotInverted);
             }
-        }
+        } // for
+    }
+
+    void DrawJy(uint8_t x, int8_t Value) {
+        for(int y = Y0; y < (Y0 + J_HEIGHT); y++) {
+            Lcd.DrawPixel(x, y, Inverted);
+            Lcd.DrawPixel((x+J_WIDTH), y, Inverted);
+            int Threshold = (J_HEIGHT / 2) - Value / R_COEF;
+            if(y == Y0 or y > (Y0 + Threshold) or y == (Y0 + J_HEIGHT - 1) or y == (Y0 + J_HEIGHT / 2)) {
+                Lcd.DrawPixel((x+1), y, Inverted);
+                Lcd.DrawPixel((x+2), y, Inverted);
+                Lcd.DrawPixel((x+3), y, Inverted);
+            }
+            else {
+                Lcd.DrawPixel((x+1), y, NotInverted);
+                Lcd.DrawPixel((x+2), y, NotInverted);
+                Lcd.DrawPixel((x+3), y, NotInverted);
+            }
+        } // for
     }
 
     void Error(const char* msg) { Lcd.PrintInverted(0, 0, "%S", msg); }

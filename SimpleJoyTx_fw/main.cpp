@@ -186,8 +186,10 @@ void ProcessAdc(int32_t *Values) {
         Pkt.Btns = b;
 //        Pkt.Print();
         // Display values
-        Interface.DrawR1(Pkt.R1);
-        Interface.DrawR2(Pkt.R2);
+        Interface.DrawR(R1_X, Pkt.R1);
+        Interface.DrawR(R2_X, Pkt.R2);
+        Interface.DrawJy(J1_X, Pkt.Ch[0]);
+        Interface.DrawJy(J2_X, Pkt.Ch[2]);
         Lcd.Update();
     }
 }
