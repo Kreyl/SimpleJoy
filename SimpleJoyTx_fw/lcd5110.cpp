@@ -52,7 +52,7 @@ void Lcd_t::Init(void) {
     // ======================== Switch to SPI + DMA ============================
     PinSetupAlterFunc(LCD_CLK_PIN, omPushPull, pudNone, AF0, psHigh);
     PinSetupAlterFunc(LCD_DIN_PIN, omPushPull, pudNone, AF0, psHigh);
-    ISpi.Setup(boMSB, cpolIdleLow, cphaFirstEdge, sclkDiv8);
+    ISpi.Setup(boMSB, cpolIdleLow, cphaFirstEdge, sclkDiv2);
     ISpi.EnableTxDma();
     ISpi.Enable();
 
@@ -62,6 +62,7 @@ void Lcd_t::Init(void) {
     dmaStreamSetMemory0   (LCD_DMA, IBuf);
     dmaStreamSetTransactionSize(LCD_DMA, LCD_VIDEOBUF_SIZE);
     dmaStreamSetMode      (LCD_DMA, LCD_DMA_TX_MODE);
+    chSemObjectInit(&semLcd, 1);
     Cls();
 }
 
@@ -81,16 +82,19 @@ void Lcd_t::Update() {
         dmaStreamDisable(LCD_DMA);
         dmaStreamSetTransactionSize(LCD_DMA, LCD_VIDEOBUF_SIZE);
         dmaStreamSetMode(LCD_DMA, LCD_DMA_TX_MODE);
+        dmaStreamSetMemory0(LCD_DMA, IBuf);
         DC_Hi(); // Set "Data" line
         CE_Lo();
         dmaStreamEnable(LCD_DMA);
-        chSemSignal(&semLcd);
     }
 }
 
 void Lcd_t::IIrqHandler() {
     CE_Hi();
     dmaStreamDisable(LCD_DMA);
+    chSysLockFromISR();
+    chSemSignalI(&semLcd);
+    chSysUnlockFromISR();
 //    PrintfI("Irq");
 }
 
