@@ -49,8 +49,6 @@ void Lcd_t::Init(void) {
     WriteCmd(0x80);
     WriteCmd(0x40);
 
-    Cls();          // clear LCD buffer
-
     // ======================== Switch to SPI + DMA ============================
     PinSetupAlterFunc(LCD_CLK_PIN, omPushPull, pudNone, AF0, psHigh);
     PinSetupAlterFunc(LCD_DIN_PIN, omPushPull, pudNone, AF0, psHigh);
@@ -64,11 +62,7 @@ void Lcd_t::Init(void) {
     dmaStreamSetMemory0   (LCD_DMA, IBuf);
     dmaStreamSetTransactionSize(LCD_DMA, LCD_VIDEOBUF_SIZE);
     dmaStreamSetMode      (LCD_DMA, LCD_DMA_TX_MODE);
-    // Start transmission
-    DC_Hi(); // Set "Data" line
-    CE_Lo();
-    dmaStreamEnable(LCD_DMA);   // Do cls
-    chSemObjectInit(&semLcd, 1);
+    Cls();
 }
 
 void Lcd_t::Shutdown(void) {
@@ -97,7 +91,7 @@ void Lcd_t::Update() {
 void Lcd_t::IIrqHandler() {
     CE_Hi();
     dmaStreamDisable(LCD_DMA);
-    PrintfI("Irq");
+//    PrintfI("Irq");
 }
 
 void Lcd_t::WriteCmd(uint8_t AByte) {
@@ -133,7 +127,6 @@ void Lcd_t::Print(const uint8_t x, const uint8_t y, const char *S, ...) {
     msg_t msg = chSemWait(&semLcd);
     if(msg == MSG_OK) {
         GotoCharXY(x, y);
-//        CurrentPosition = 384;
         va_list args;
         va_start(args, S);
         IVsPrintf(S, args);
@@ -194,6 +187,7 @@ void Lcd_t::Symbols(const uint8_t x, const uint8_t y, ...) {
 
 void Lcd_t::Cls() {
     memset(IBuf, 0, sizeof(IBuf));
+    Update();
 }
 
 #if USE_LARGE_FONTS // ================== LargeFonts ======================
