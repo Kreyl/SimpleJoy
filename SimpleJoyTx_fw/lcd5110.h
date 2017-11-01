@@ -51,7 +51,7 @@ private:
     const PinOutputPWM_t BckLt{LCD_BCKLT_PIN};
     uint8_t IBuf[LCD_VIDEOBUF_SIZE];
     int16_t CurrentPosition;   // x, y to place data to
-    bool Inverted = false;
+    bool IInverted = false;
     // Pin driving functions
     void RES_Hi() { PinSetHi(LCD_RST_PIN); }
     void RES_Lo() { PinSetLo(LCD_RST_PIN); }
@@ -68,7 +68,7 @@ private:
     uint8_t IPutChar(char c);
     void IStartTransmissionIfNotYet(){};
     // High-level
-    void GotoXY(uint8_t x, uint8_t y) { CurrentPosition =  x + y*96; }
+    void GotoXY(uint8_t x, uint8_t y) { CurrentPosition =  x + y*84; }
 public:
     void Init();
     void Shutdown();
@@ -84,10 +84,12 @@ public:
 #endif
     void Cls();
     void DrawImage(const uint8_t x, const uint8_t y, const uint8_t *Img);
+    void DrawPixel(const uint8_t x, const uint8_t y, Invert_t AInvert);
     // Symbols printing
     void Symbols(const uint8_t x, const uint8_t y, ...);
 
     void IIrqHandler();
+    friend class Interface_t;
 };
 
 extern Lcd_t Lcd;

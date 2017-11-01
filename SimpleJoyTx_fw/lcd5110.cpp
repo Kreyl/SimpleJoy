@@ -118,7 +118,7 @@ void Lcd_t::WriteCmd(uint8_t AByte) {
 uint8_t Lcd_t::IPutChar(char c) {
     for(uint8_t i=0; i<6; i++) {
         uint8_t b = Font_6x8_Data[(uint32_t)c][i];
-        if(Inverted) b = ~b;
+        if(IInverted) b = ~b;
         b = __RBIT(b) >> 24;    // Inverse bit order
         IBuf[CurrentPosition++] = b;
         if(CurrentPosition >= LCD_VIDEOBUF_SIZE) CurrentPosition = 0;
@@ -127,7 +127,7 @@ uint8_t Lcd_t::IPutChar(char c) {
 }
 
 void Lcd_t::Print(const uint8_t x, const uint8_t y, const char *S, ...) {
-    Inverted = false;
+    IInverted = false;
     msg_t msg = chSemWait(&semLcd);
     if(msg == MSG_OK) {
         GotoCharXY(x, y);
@@ -140,7 +140,7 @@ void Lcd_t::Print(const uint8_t x, const uint8_t y, const char *S, ...) {
 }
 
 void Lcd_t::PrintInverted(const uint8_t x, const uint8_t y, const char *S, ...) {
-    Inverted = true;
+    IInverted = true;
     msg_t msg = chSemWait(&semLcd);
     if(msg == MSG_OK) {
         GotoCharXY(x, y);
@@ -153,6 +153,18 @@ void Lcd_t::PrintInverted(const uint8_t x, const uint8_t y, const char *S, ...) 
 }
 
 // ================================ Graphics ===================================
+static const uint8_t
+setBit[] = { 0x80, 0x40, 0x20, 0x10, 0x08, 0x04, 0x02, 0x01 },
+clrBit[] = { 0x7F, 0xBF, 0xDF, 0xEF, 0xF7, 0xFB, 0xFD, 0xFE };
+
+void Lcd_t::DrawPixel(const uint8_t x, const uint8_t y, Invert_t AInvert) {
+    uint8_t yStr = y / 8;
+    GotoXY(x, yStr);
+    uint8_t Offset = y & 7;
+    if(AInvert == Inverted) IBuf[CurrentPosition] |= setBit[Offset];
+    else IBuf[CurrentPosition] &= clrBit[Offset];
+}
+
 void Lcd_t::DrawImage(const uint8_t x, const uint8_t y, const uint8_t* Img) {
     uint8_t *p = (uint8_t*)Img;
     uint8_t b;

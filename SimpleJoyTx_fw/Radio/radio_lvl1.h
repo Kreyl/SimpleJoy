@@ -60,7 +60,8 @@ static inline void Lvl250ToLvl1000(uint16_t *PLvl) {
 union rPkt_t  {
     uint32_t DWord[2];
     struct {
-        int8_t Ch[6];
+        int8_t Ch[4];
+        uint8_t R1, R2;
         uint8_t Btns;
         uint8_t Rsrvd;
     } __packed;
@@ -69,7 +70,7 @@ union rPkt_t  {
         DWord[1] = Right.DWord[1];
         return *this;
     }
-    void Print() { Printf("%d %d %d %d %d %d; %X\r", Ch[0],Ch[1],Ch[2],Ch[3],Ch[4],Ch[5], Btns); }
+    void Print() { Printf("%d %d %d %d %d %d; %X\r", Ch[0],Ch[1],Ch[2],Ch[3],R1, R2, Btns); }
 } __packed;
 
 #define RPKT_LEN    8

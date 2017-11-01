@@ -17,6 +17,7 @@
 #include "radio_lvl1.h"
 #include "SimpleSensors.h"
 #include "lcd5110.h"
+#include "interface.h"
 
 #if 1 // ======================== Variables and defines ========================
 // Forever
@@ -31,6 +32,8 @@ static uint8_t GetDipSwitch();
 LedBlinker_t LedPwr {LED_PWR};
 LedBlinker_t LedLink {LED_LINK};
 
+Interface_t Interface;
+
 bool CalibrationMode = true;
 void ProcessAdc(int32_t *Values);
 #define CONTROL_CNT         6
@@ -42,7 +45,8 @@ TmrKL_t TmrEverySecond {MS2ST(999), evtIdEverySecond, tktPeriodic};
 
 struct AdcValues_t {
     int32_t Battery;
-    int32_t Ch[6];
+    int32_t Ch[4];
+    int32_t R1, R2;
     int32_t Vref;
 } __packed;
 
@@ -75,11 +79,12 @@ int main(void) {
 
     Lcd.Init();
     Lcd.Backlight(100);
-    Lcd.Print(0, 0, "Aiya1Feanaro!");
-    Lcd.Update();
-    Lcd.Print(0, 1, "Aiya2Feanaro!");
+    Interface.Reset();
+//    Lcd.Print(0, 0, "Aiya1Feanaro!");
+//    Lcd.Update();
+//    Lcd.Print(0, 1, "Aiya2Feanaro!");
 //    Lcd.Print(0, 2, "Aiya Feanaro!");
-    Lcd.Update();
+//    Lcd.Update();
 
     // Buttons
     SimpleSensors::Init();
@@ -145,12 +150,12 @@ void ProcessAdc(int32_t *Values) {
 //    Printf("%u\r", pVal->Ch[0]);
     if(CalibrationMode) {
         static int CalibrationCnt = 0;
-        for(int i=0; i<6; i++) {
+        for(int i=0; i<4; i++) {
             Offset[i] += pVal->Ch[i];
         }
         CalibrationCnt++;
         if(CalibrationCnt == 8) {   // 8, why not? Put here something else if you want.
-            for(int i=0; i<6; i++) Offset[i] /= 8;
+            for(int i=0; i<4; i++) Offset[i] /= 8;
             CalibrationMode = false;
             Printf("Calibration done\r");
         }
@@ -159,7 +164,7 @@ void ProcessAdc(int32_t *Values) {
     else {
         // Put adc values to pkt
         rPkt_t Pkt;
-        for(int i=0; i<6; i++) {
+        for(int i=0; i<4; i++) {
             int32_t v = pVal->Ch[i]; // To make things shorter
             v -= Offset[i];
             v /= 16L;  // [0...4095] => [0...255]
@@ -170,8 +175,8 @@ void ProcessAdc(int32_t *Values) {
         // Correct sign
         Pkt.Ch[0] = -Pkt.Ch[0];
         Pkt.Ch[3] = -Pkt.Ch[3];
-        Pkt.Ch[4] = -Pkt.Ch[4];
-        Pkt.Ch[5] = -Pkt.Ch[5];
+        Pkt.R1 = 255 - pVal->R2 / 16L;
+        Pkt.R2 = 255 - pVal->R1 / 16L;
 
         // Add buttons
         uint8_t b = 0;
@@ -180,6 +185,10 @@ void ProcessAdc(int32_t *Values) {
         }
         Pkt.Btns = b;
 //        Pkt.Print();
+        // Display values
+        Interface.DrawR1(Pkt.R1);
+        Interface.DrawR2(Pkt.R2);
+        Lcd.Update();
     }
 }
 
