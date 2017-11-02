@@ -44,9 +44,10 @@ static void rLvl1Thread(void *arg) {
 __noreturn
 void rLevel1_t::ITask() {
     while(true) {
-        uint8_t RxRslt = CC.Receive(9, &PktRx, &Rssi);
+        CC.SetPktSize(RPKT_LEN);
+        uint8_t RxRslt = CC.Receive(99, &rPkt, &Rssi);
         if(RxRslt == retvOk) {
-//            Printf("Par %u; Rssi=%d\r", PktRx.CmdID, Rssi);
+            Printf("Rssi=%d\r", Rssi);
             // Transmit reply, it formed inside OnRadioRx
 //            if(OnRadioRx() == retvOk) CC.Transmit(&PktTx);
         } // if RxRslt ok
@@ -63,7 +64,7 @@ uint8_t rLevel1_t::Init() {
 
     if(CC.Init() == retvOk) {
         CC.SetTxPower(CC_TX_PWR);
-        CC.SetPktSize(RPKT_LEN);
+//        CC.SetPktSize(RPKT_LEN);
 //        CC.SetChannel(Settings.RChnl);
         CC.Recalibrate();
         // Thread

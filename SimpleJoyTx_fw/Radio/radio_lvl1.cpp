@@ -30,8 +30,7 @@ cc1101_t CC(CC_Setup0);
 #endif
 
 rLevel1_t Radio;
-extern LedSmooth_t Led1;
-uint8_t OnRadioRx();
+extern LedBlinker_t LedLink;
 
 #if 1 // ================================ Task =================================
 static THD_WORKING_AREA(warLvl1Thread, 256);
@@ -48,6 +47,21 @@ void rLevel1_t::ITask() {
         switch(Msg.ID) {
             case RMSGID_PKT:
 //                Msg.Pkt.Print();
+                for(int i=0; i<RETRY_CNT; i++) {
+                    // Transmit
+                    LedLink.On();
+                    CC.SetPktSize(RPKT_LEN);
+                    CC.Transmit(&Msg.Pkt);
+                    LedLink.Off();
+                    // Receive
+                    CC.SetPktSize(REPLY_PKT_LEN);
+                    uint8_t RxRslt = CC.Receive(RX_T_MS, &rPktReply, &Rssi);
+                    if(RxRslt == retvOk) {
+                        EvtMsg_t OutMsg(evtIdRadioRx, Rssi);
+                        EvtQMain.SendNowOrExit(OutMsg);
+                        break; // Get out of retries
+                    }
+                }
                 break;
 
             case RMSGID_CHNL:
@@ -56,8 +70,8 @@ void rLevel1_t::ITask() {
 
             default: break;
         } // switch
-//        uint8_t RxRslt = CC.Receive(9, &PktRx, &Rssi);
-//        if(RxRslt == retvOk) {
+//
+//
 //            Printf("Par %u; Rssi=%d\r", PktRx.CmdID, Rssi);
             // Transmit reply, it formed inside OnRadioRx
 //            if(OnRadioRx() == retvOk) CC.Transmit(&PktTx);
@@ -77,7 +91,7 @@ uint8_t rLevel1_t::Init() {
 
     if(CC.Init() == retvOk) {
         CC.SetTxPower(CC_TX_PWR);
-        CC.SetPktSize(RPKT_LEN);
+//        CC.SetPktSize(RPKT_LEN);
 //        CC.SetChannel(Settings.RChnl);
         CC.Recalibrate();
         // Thread

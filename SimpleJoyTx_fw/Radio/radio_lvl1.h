@@ -75,6 +75,13 @@ union rPkt_t  {
 } __packed;
 
 #define RPKT_LEN    8
+
+struct rPktReply_t {
+    uint8_t Reply;
+} __packed;
+
+#define REPLY_PKT_LEN   1
+
 #endif
 
 #if 1 // ======================= Channels & cycles =============================
@@ -83,10 +90,10 @@ union rPkt_t  {
 #endif
 
 #if 1 // =========================== Timings ===================================
-#define RX_T_MS                 180      // pkt duration at 10k is around 12 ms
+#define RX_T_MS                 11
 #define RX_SLEEP_T_MS           810
 #define MIN_SLEEP_DURATION_MS   18
-#define RETRY_CNT               4
+#define RETRY_CNT               2
 
 #endif
 
@@ -127,9 +134,8 @@ private:
 public:
     int8_t Rssi;
     EvtMsgQ_t<RMsg_t, RMSG_Q_LEN> RMsgQ;
+    rPktReply_t rPktReply;
     uint8_t Init();
-//    rPktHost2Dev_t PktRx;
-//    rPktDev2Host_t PktTx;
     void SetChannel(uint8_t NewChannel);
     // Inner use
     void ITask();

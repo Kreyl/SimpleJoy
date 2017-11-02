@@ -128,6 +128,10 @@ void ITask() {
                 }
                 break;
 
+            case evtIdRadioRx:
+                Printf("Rx: %d\r", Msg.Value);
+                break;
+
             case evtIdEverySecond: {
                 static int OldDip = -1;
                 int dip = GetDipSwitch();
