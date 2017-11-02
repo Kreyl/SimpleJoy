@@ -133,7 +133,7 @@ void ITask() {
                 int dip = GetDipSwitch();
                 if(dip != OldDip) {
                     OldDip = dip;
-                    Printf("Dip: %u\r", dip);
+//                    Printf("Dip: %u\r", dip);
                     Interface.ShowChannel(dip);
                     RMsg_t RMsg(dip);
                     Radio.RMsgQ.SendWaitingAbility(RMsg, MS2ST(2007));

@@ -41,7 +41,7 @@ public:
         Lcd.Update();
     }
 
-    void ShowChannel(uint8_t AChnl) { Lcd.Print(6, 0, "%02u", AChnl); }
+    void ShowChannel(uint8_t AChnl) { Lcd.Print(6, 0, "%02u ", AChnl); }
 
     void DrawR(uint8_t x, uint8_t Value) {
         for(int y = Y0; y < (Y0 + R_HEIGHT); y++) {
