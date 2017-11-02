@@ -29,9 +29,17 @@
 class Interface_t {
 public:
     void Reset() {
-        Lcd.Print(0, 0, "Канал: 00");
+        Lcd.Print(0, 0, "Канал 00");
+        Lcd.Print(4, 2, "%c", 0x1E);
+        Lcd.Print(3, 3, "%c%c%c", 0x11, 0x0F, 0x10);
+        Lcd.Print(4, 4, "%c", 0x1F);
+        Lcd.Print(10, 2, "%c", 0x1E);
+        Lcd.Print(9, 3, "%c%c%c", 0x11, 0x0F, 0x10);
+        Lcd.Print(10, 4, "%c", 0x1F);
         Lcd.Update();
     }
+
+    void ShowChannel(uint8_t AChnl) { Lcd.Print(6, 0, "%02u", AChnl); }
 
     void DrawR(uint8_t x, uint8_t Value) {
         for(int y = Y0; y < (Y0 + R_HEIGHT); y++) {

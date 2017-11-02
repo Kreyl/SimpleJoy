@@ -81,13 +81,8 @@ int main(void) {
     else LedLink.StartOrRestart(lbsqFailure);
 
     Lcd.Init();
-    Lcd.Backlight(100);
+    Lcd.SetBacklight(100);
     Interface.Reset();
-//    Lcd.Print(0, 0, "Aiya1Feanaro!");
-//    Lcd.Update();
-//    Lcd.Print(0, 1, "Aiya2Feanaro!");
-//    Lcd.Print(0, 2, "Aiya Feanaro!");
-//    Lcd.Update();
 
     // Buttons
     SimpleSensors::Init();
@@ -124,13 +119,23 @@ void ITask() {
                 ((Shell_t*)Msg.Ptr)->SignalCmdProcessed();
                 break;
 
+            case evtIdButtons:
+//              Printf("BtnType %u; N=%u; Btns %u %u\r", Msg.BtnEvtInfo.Type, Msg.BtnEvtInfo.BtnCnt, Msg.BtnEvtInfo.BtnID[0], Msg.BtnEvtInfo.BtnID[1]);
+                if(Msg.BtnEvtInfo.BtnID == 4) { // "L" btn
+                    if(Lcd.GetBacklight() == 0) Lcd.SetBacklight(100);
+                    else Lcd.SetBacklight(0);
+                }
+                break;
+
             case evtIdEverySecond: {
                 static int OldDip = -1;
                 int dip = GetDipSwitch();
                 if(dip != OldDip) {
                     OldDip = dip;
                     Printf("Dip: %u\r", dip);
-                    Radio.SetChannel(dip);
+                    Interface.ShowChannel(dip);
+                    RMsg_t RMsg(dip);
+                    Radio.RMsgQ.SendWaitingAbility(RMsg, MS2ST(2007));
                 }
             } break;
 
@@ -144,13 +149,13 @@ void ITask() {
     } // while true
 } // ITask()
 
+
 void ProcessAdc(int32_t *Values) {
     AdcValues_t *pVal = (AdcValues_t*)Values;
     // Battery
 //    int32_t VBat_mv = Adc.Adc2mV(pVal->Battery, pVal->Vref);
 //    Printf("Battery: %u\r", VBat_mv);
 
-//    Printf("%u\r", pVal->Ch[0]);
     if(CalibrationMode) {
         static int CalibrationCnt = 0;
         for(int i=0; i<4; i++) {
@@ -188,6 +193,10 @@ void ProcessAdc(int32_t *Values) {
         }
         Pkt.Btns = b;
 //        Pkt.Print();
+        // Transmit data
+        RMsg_t RMsg(Pkt);
+        Radio.RMsgQ.SendNowOrExit(RMsg);
+//        RMsgQ.SendWaitingAbility(RMsg, MS2ST(180));
         // Display values
         Interface.DrawR(R1_X, Pkt.R1);
         Interface.DrawR(R2_X, Pkt.R2);
@@ -198,8 +207,6 @@ void ProcessAdc(int32_t *Values) {
         Lcd.Update();
     }
 }
-
-
 
 // ====== DIP switch ======
 uint8_t GetDipSwitch() {

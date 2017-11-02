@@ -44,7 +44,18 @@ static void rLvl1Thread(void *arg) {
 __noreturn
 void rLevel1_t::ITask() {
     while(true) {
-        chThdSleepMilliseconds(450);
+        RMsg_t Msg = RMsgQ.Fetch(TIME_INFINITE);
+        switch(Msg.ID) {
+            case RMSGID_PKT:
+//                Msg.Pkt.Print();
+                break;
+
+            case RMSGID_CHNL:
+                CC.SetChannel(Msg.Value);
+                break;
+
+            default: break;
+        } // switch
 //        uint8_t RxRslt = CC.Receive(9, &PktRx, &Rssi);
 //        if(RxRslt == retvOk) {
 //            Printf("Par %u; Rssi=%d\r", PktRx.CmdID, Rssi);
@@ -62,13 +73,15 @@ uint8_t rLevel1_t::Init() {
 //    PinSetupOut(DBG_GPIO2, DBG_PIN2, omPushPull);
 #endif    // Init radioIC
 
+    RMsgQ.Init();
+
     if(CC.Init() == retvOk) {
         CC.SetTxPower(CC_TX_PWR);
         CC.SetPktSize(RPKT_LEN);
 //        CC.SetChannel(Settings.RChnl);
         CC.Recalibrate();
         // Thread
-        chThdCreateStatic(warLvl1Thread, sizeof(warLvl1Thread), HIGHPRIO, (tfunc_t)rLvl1Thread, NULL);
+        chThdCreateStatic(warLvl1Thread, sizeof(warLvl1Thread), NORMALPRIO, (tfunc_t)rLvl1Thread, NULL);
         return retvOk;
     }
     else return retvFail;

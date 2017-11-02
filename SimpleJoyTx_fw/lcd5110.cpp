@@ -72,7 +72,7 @@ void Lcd_t::Shutdown(void) {
     CE_Lo();
     CLK_Lo();
     Din_Lo();
-    Backlight(0);
+    SetBacklight(0);
     chSemReset(&semLcd, 1);
 }
 

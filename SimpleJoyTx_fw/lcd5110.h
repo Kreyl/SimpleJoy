@@ -73,7 +73,8 @@ public:
     void Init();
     void Shutdown();
     void Update();
-    void Backlight(uint8_t ABrightness)  { BckLt.Set(ABrightness); }
+    void SetBacklight(uint8_t ABrightness)  { BckLt.Set(ABrightness); }
+    uint8_t GetBacklight() { return BckLt.Get(); }
     // High-level
     void GotoCharXY(uint8_t x, uint8_t y) { CurrentPosition = (x*6 + y*84); }
     void DrawChar(uint8_t AChar, Invert_t AInvert);

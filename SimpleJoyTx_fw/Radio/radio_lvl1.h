@@ -12,6 +12,7 @@
 #include "cc1101.h"
 #include "kl_buf.h"
 #include "shell.h"
+#include "MsgQ.h"
 
 #if 0 // ========================= Signal levels ===============================
 // Python translation for db
@@ -89,6 +90,34 @@ union rPkt_t  {
 
 #endif
 
+#define RMSG_Q_LEN      18
+#define RMSGID_PKT      1
+#define RMSGID_CHNL     2
+
+union RMsg_t {
+    uint32_t DWord[3];
+    rPkt_t Pkt;
+    struct {
+        uint32_t _Rsrvd;
+        uint32_t Value;
+        uint32_t ID;
+    };
+    RMsg_t& operator = (const RMsg_t &Right) {
+        DWord[0] = Right.DWord[0];
+        DWord[1] = Right.DWord[1];
+        DWord[2] = Right.DWord[2];
+        return *this;
+    }
+    RMsg_t() {
+        DWord[0] = 0;
+        DWord[1] = 0;
+        DWord[2] = 0;
+    }
+    RMsg_t(rPkt_t &APkt)  { ID = RMSGID_PKT;  Pkt = APkt; }
+    RMsg_t(uint8_t AChnl) { ID = RMSGID_CHNL; Value = AChnl; _Rsrvd = 0; }
+} __attribute__((__packed__));
+
+
 class rLevel1_t {
 private:
     void TryToSleep(uint32_t SleepDuration) {
@@ -97,6 +126,7 @@ private:
     }
 public:
     int8_t Rssi;
+    EvtMsgQ_t<RMsg_t, RMSG_Q_LEN> RMsgQ;
     uint8_t Init();
 //    rPktHost2Dev_t PktRx;
 //    rPktDev2Host_t PktTx;
