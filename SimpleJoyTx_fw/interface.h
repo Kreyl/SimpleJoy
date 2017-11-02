@@ -8,6 +8,8 @@
 #pragma once
 
 #include "lcd5110.h"
+#include "lcd_images.h"
+#include "battery_consts.h"
 
 #define Y0          8
 #define R_HEIGHT    40
@@ -78,7 +80,6 @@ public:
             }
         } // for
     }
-
     void DrawJx(uint8_t x0, uint8_t y0, int8_t Value) {
         int Threshold = (J_WIDTHx / 2) + Value / J_COEFx;
         for(int x = x0; x < (x0 + J_WIDTHx); x++) {
@@ -97,6 +98,15 @@ public:
                 Lcd.DrawPixel(x, (y0+3), NotInverted);
             }
         } // for
+    }
+
+    void ShowBattery(BatteryState_t BatteryState) {
+        switch (BatteryState) {
+            case bsFull:  Lcd.DrawImage(70, 0, icon_BatteryFull);  break;
+            case bsHalf:  Lcd.DrawImage(70, 0, icon_BatteryHalf);  break;
+            case bsEmpty: Lcd.DrawImage(70, 0, icon_BatteryEmpty); break;
+            default: break;
+        }
     }
 
     void Error(const char* msg) { Lcd.PrintInverted(0, 0, "%S", msg); }

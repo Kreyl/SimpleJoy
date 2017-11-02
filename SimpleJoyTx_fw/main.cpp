@@ -18,6 +18,7 @@
 #include "SimpleSensors.h"
 #include "lcd5110.h"
 #include "interface.h"
+#include "battery_consts.h"
 
 #if 1 // ======================== Variables and defines ========================
 // Forever
@@ -153,7 +154,16 @@ void ITask() {
 void ProcessAdc(int32_t *Values) {
     AdcValues_t *pVal = (AdcValues_t*)Values;
     // Battery
-//    int32_t VBat_mv = Adc.Adc2mV(pVal->Battery, pVal->Vref);
+    int32_t VBat_mv = 2 * Adc.Adc2mV(pVal->Battery, pVal->Vref); // *2 because of divider
+    static BatteryState_t OldBatState = bsNone;
+    BatteryState_t CurrState;
+    if(VBat_mv > 4100) CurrState = bsFull;
+    else if(VBat_mv > 3400) CurrState = bsHalf;
+    else CurrState = bsEmpty;
+    if(CurrState != OldBatState) {
+        OldBatState = CurrState;
+        Interface.ShowBattery(CurrState);
+    }
 //    Printf("Battery: %u\r", VBat_mv);
 
     if(CalibrationMode) {
