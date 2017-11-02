@@ -51,7 +51,9 @@ public:
             Lcd.DrawPixel(x, y, Inverted);
             Lcd.DrawPixel((x+J_WIDTH), y, Inverted);
             int Threshold = (J_HEIGHT / 2) - Value / R_COEF;
-            if(y == Y0 or y > (Y0 + Threshold) or y == (Y0 + J_HEIGHT - 1) or y == (Y0 + J_HEIGHT / 2)) {
+            if(     (y < (Y0 + J_HEIGHT / 2) and Value > 0 and y > (Y0 + Threshold)) or // Top half
+                    (y > (Y0 + J_HEIGHT / 2) and Value < 0 and y < (Y0 + Threshold)) or // Bottom half
+                    y == Y0 or y == (Y0 + J_HEIGHT - 1) or y == (Y0 + J_HEIGHT / 2)) {
                 Lcd.DrawPixel((x+1), y, Inverted);
                 Lcd.DrawPixel((x+2), y, Inverted);
                 Lcd.DrawPixel((x+3), y, Inverted);
