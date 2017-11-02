@@ -122,7 +122,7 @@
 #endif
 
 #if ADC_REQUIRED // ======================= Inner ADC ==========================
-#define ADC_MEAS_PERIOD_MS  72
+#define ADC_MEAS_PERIOD_MS  36
 // Clock divider: clock is generated from the APB2
 #define ADC_CLK_DIVIDER     adcDiv2
 

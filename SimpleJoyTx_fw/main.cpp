@@ -56,6 +56,9 @@ int32_t Offset[6];
 
 int main(void) {
     // ==== Init Clock system ====
+    Clk.EnablePrefetch();
+    Clk.SetupFlashLatency(48000000);
+    Clk.SwitchTo(csHSI48);
     Clk.UpdateFreqValues();
 
     // === Init OS ===
@@ -190,6 +193,8 @@ void ProcessAdc(int32_t *Values) {
         Interface.DrawR(R2_X, Pkt.R2);
         Interface.DrawJy(J1_X, Pkt.Ch[0]);
         Interface.DrawJy(J2_X, Pkt.Ch[2]);
+        Interface.DrawJx((J1_X + J_WIDTHy+1), J_Y, Pkt.Ch[1]);
+        Interface.DrawJx((J2_X + J_WIDTHy+1), J_Y, Pkt.Ch[3]);
         Lcd.Update();
     }
 }

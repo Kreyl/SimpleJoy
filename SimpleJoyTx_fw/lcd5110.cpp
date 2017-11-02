@@ -52,7 +52,7 @@ void Lcd_t::Init(void) {
     // ======================== Switch to SPI + DMA ============================
     PinSetupAlterFunc(LCD_CLK_PIN, omPushPull, pudNone, AF0, psHigh);
     PinSetupAlterFunc(LCD_DIN_PIN, omPushPull, pudNone, AF0, psHigh);
-    ISpi.Setup(boMSB, cpolIdleLow, cphaFirstEdge, sclkDiv2);
+    ISpi.Setup(boMSB, cpolIdleLow, cphaFirstEdge, sclkDiv4);
     ISpi.EnableTxDma();
     ISpi.Enable();
 

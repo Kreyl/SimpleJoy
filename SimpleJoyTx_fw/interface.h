@@ -16,10 +16,15 @@
 #define R1_X        0
 #define R2_X        79
 #define J1_X        7
-#define J2_X        36
-#define J_HEIGHT    32
-#define J_WIDTH     4
-#define J_COEF      (255 / J_HEIGHT)
+#define J2_X        44
+#define J_Y         40
+#define J_HEIGHTy   32
+#define J_WIDTHy    4
+#define J_COEFy     (255 / J_HEIGHTy)
+#define J_WIDTHx    28
+#define J_HEIGHTx   4
+#define J_COEFx     (255 / J_WIDTHx)
+
 
 class Interface_t {
 public:
@@ -46,22 +51,42 @@ public:
         } // for
     }
 
-    void DrawJy(uint8_t x, int8_t Value) {
-        for(int y = Y0; y < (Y0 + J_HEIGHT); y++) {
-            Lcd.DrawPixel(x, y, Inverted);
-            Lcd.DrawPixel((x+J_WIDTH), y, Inverted);
-            int Threshold = (J_HEIGHT / 2) - Value / R_COEF;
-            if(     (y < (Y0 + J_HEIGHT / 2) and Value > 0 and y > (Y0 + Threshold)) or // Top half
-                    (y > (Y0 + J_HEIGHT / 2) and Value < 0 and y < (Y0 + Threshold)) or // Bottom half
-                    y == Y0 or y == (Y0 + J_HEIGHT - 1) or y == (Y0 + J_HEIGHT / 2)) {
-                Lcd.DrawPixel((x+1), y, Inverted);
-                Lcd.DrawPixel((x+2), y, Inverted);
-                Lcd.DrawPixel((x+3), y, Inverted);
+    void DrawJy(uint8_t x0, int8_t Value) {
+        int Threshold = (J_HEIGHTy / 2) - Value / J_COEFy;
+        for(int y = Y0; y < (Y0 + J_HEIGHTy); y++) {
+            Lcd.DrawPixel(x0, y, Inverted);
+            Lcd.DrawPixel((x0+J_WIDTHy), y, Inverted);
+            if(     (y < (Y0 + J_HEIGHTy / 2) and Value > 0 and y > (Y0 + Threshold)) or // Top half
+                    (y > (Y0 + J_HEIGHTy / 2) and Value < 0 and y < (Y0 + Threshold)) or // Bottom half
+                    y == Y0 or y == (Y0 + J_HEIGHTy - 1) or y == (Y0 + J_HEIGHTy / 2)) {
+                Lcd.DrawPixel((x0+1), y, Inverted);
+                Lcd.DrawPixel((x0+2), y, Inverted);
+                Lcd.DrawPixel((x0+3), y, Inverted);
             }
             else {
-                Lcd.DrawPixel((x+1), y, NotInverted);
-                Lcd.DrawPixel((x+2), y, NotInverted);
-                Lcd.DrawPixel((x+3), y, NotInverted);
+                Lcd.DrawPixel((x0+1), y, NotInverted);
+                Lcd.DrawPixel((x0+2), y, NotInverted);
+                Lcd.DrawPixel((x0+3), y, NotInverted);
+            }
+        } // for
+    }
+
+    void DrawJx(uint8_t x0, uint8_t y0, int8_t Value) {
+        int Threshold = (J_WIDTHx / 2) + Value / J_COEFx;
+        for(int x = x0; x < (x0 + J_WIDTHx); x++) {
+            Lcd.DrawPixel(x, y0, Inverted);
+            Lcd.DrawPixel(x, (y0 + J_HEIGHTx), Inverted);
+            if(     (x < (x0 + J_WIDTHx / 2) and Value < 0 and x > (x0 + Threshold)) or
+                    (x > (x0 + J_WIDTHx / 2) and Value > 0 and x < (x0 + Threshold)) or
+                    x == x0 or x == (x0 + J_WIDTHx / 2) or x == (x0 + J_WIDTHx - 1)) {
+                Lcd.DrawPixel(x, (y0+1), Inverted);
+                Lcd.DrawPixel(x, (y0+2), Inverted);
+                Lcd.DrawPixel(x, (y0+3), Inverted);
+            }
+            else {
+                Lcd.DrawPixel(x, (y0+1), NotInverted);
+                Lcd.DrawPixel(x, (y0+2), NotInverted);
+                Lcd.DrawPixel(x, (y0+3), NotInverted);
             }
         } // for
     }
