@@ -19,4 +19,5 @@ enum EvtMsgId_t {
 
     evtIdMenuTimeout,
     evtIdRadioRx,
+    evtIdLinkLost,
 };

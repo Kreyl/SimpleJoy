@@ -77,7 +77,8 @@ static const Motor_t Motor3{DIR3_PIN, &Pwm3};
 static const Motor_t Motor4{DIR4_PIN, &Pwm4};
 static const Motor_t *Motor[MOTOR_CNT] = { &Motor1, &Motor2, &Motor3, &Motor4 };
 
-TmrKL_t TmrEverySecond {MS2ST(999), evtIdEverySecond, tktPeriodic};
+TmrKL_t TmrEverySecond {MS2ST(999),  evtIdEverySecond, tktPeriodic};
+TmrKL_t TmrLinkLost    {MS2ST(5400), evtIdLinkLost, tktOneShot};
 
 #endif
 
@@ -146,6 +147,17 @@ void ITask() {
                 OnRadioRx();
                 break;
 
+            case evtIdLinkLost: // Stop everything
+                Radio.PktRx.Ch[0] = 0;
+                Radio.PktRx.Ch[1] = 0;
+                Radio.PktRx.Ch[2] = 0;
+                Radio.PktRx.Ch[3] = 0;
+                Radio.PktRx.R1 = 0;
+                Radio.PktRx.R2 = 0;
+                Radio.PktRx.Btns = 0;
+                OnRadioRx();
+                break;
+
             case evtIdEverySecond: {
                 static int OldDip = -1;
                 int dip = GetDipSwitch();
@@ -165,6 +177,7 @@ void ITask() {
 } // ITask()
 
 void OnRadioRx() {
+    TmrLinkLost.StartOrRestart();
     rPkt_t Pkt = Radio.PktRx;
 //    Pkt.Print();
     // Servo
