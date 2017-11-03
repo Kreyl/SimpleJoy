@@ -21,8 +21,8 @@
 #if SIMPLESENSORS_ENABLED
 #define SNS_POLL_PERIOD_MS      72
 
-// Button handler
 extern void ProcessButtons(PinSnsState_t *PState, uint32_t Len);
+extern void ProcessUsbDetect(PinSnsState_t *PState, uint32_t Len);
 
 const PinSns_t PinSns[] = {
         // Buttons
@@ -33,6 +33,8 @@ const PinSns_t PinSns[] = {
         {BTN_L_PIN, ProcessButtons},
         {BTN_J1_PIN, ProcessButtons},
         {BTN_J2_PIN, ProcessButtons},
+        // USB
+        {USB_DETECT_PIN, pudPullDown, ProcessUsbDetect},
 };
 #define PIN_SNS_CNT     countof(PinSns)
 

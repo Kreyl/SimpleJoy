@@ -19,4 +19,12 @@ enum EvtMsgId_t {
 
     evtIdMenuTimeout,
     evtIdRadioRx,
+
+    // Usb
+    evtIdUsbConnect,
+    evtIdUsbDisconnect,
+    evtIdUsbReady,
+    evtIdUsbNewCmd,
+    evtIdUsbInDone,
+    evtIdUsbOutDone,
 };

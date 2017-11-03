@@ -34,7 +34,7 @@
 #define BAT_MEAS_PIN    GPIOA, 0
 #define BAT_MEAS_EN     GPIOA, 1
 
-#define USB_DETECT      GPIOA, 2
+#define USB_DETECT_PIN  GPIOA, 2
 
 // Buttons
 #define BTN_A_PIN       GPIOC, 7, pudPullUp

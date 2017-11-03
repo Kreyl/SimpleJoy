@@ -19,6 +19,7 @@
 #include "lcd5110.h"
 #include "interface.h"
 #include "battery_consts.h"
+#include "usb_cdc.h"
 
 #if 1 // ======================== Variables and defines ========================
 // Forever
@@ -108,6 +109,8 @@ int main(void) {
     Adc.Init();
     Adc.EnableVRef();
 
+    UsbCDC.Init();
+
     // Main cycle
     ITask();
 }
@@ -117,6 +120,7 @@ void ITask() {
     while(true) {
         EvtMsg_t Msg = EvtQMain.Fetch(TIME_INFINITE);
         switch(Msg.ID) {
+            case evtIdUsbNewCmd:
             case evtIdShellCmd:
                 OnCmd((Shell_t*)Msg.Ptr);
                 ((Shell_t*)Msg.Ptr)->SignalCmdProcessed();
@@ -142,7 +146,6 @@ void ITask() {
                     OldRadioLvl = Lvl;
                     Interface.ShowRadioLvl(Lvl);
                 }
-//                Interface
             } break;
 
             case evtIdEverySecond: {
@@ -165,6 +168,23 @@ void ITask() {
                 }
             } break;
 
+#if 1 // ======= USB =======
+            case evtIdUsbConnect:
+                Printf("USB connect\r");
+                Clk.EnableCRS();
+                Clk.SelectUSBClock_HSI48();
+                UsbCDC.Connect();
+                break;
+            case evtIdUsbDisconnect:
+                Printf("USB disconnect\r");
+                UsbCDC.Disconnect();
+                Clk.DisableCRS();
+                break;
+            case evtIdUsbReady:
+                Printf("USB ready\r");
+                break;
+#endif
+
             case evtIdAdcRslt:
 //                Printf("ID: %u; V: %u\r", Msg.ValueID, Msg.Value);
                 ProcessAdc((int32_t*)Msg.Ptr);
@@ -175,6 +195,12 @@ void ITask() {
     } // while true
 } // ITask()
 
+void ProcessUsbDetect(PinSnsState_t *PState, uint32_t Len) {
+    EvtMsg_t Msg;
+    if(*PState == pssRising) Msg.ID = evtIdUsbConnect;
+    else if(*PState == pssFalling) Msg.ID = evtIdUsbDisconnect;
+    EvtQMain.SendNowOrExit(Msg);
+}
 
 void ProcessAdc(int32_t *Values) {
     AdcValues_t *pVal = (AdcValues_t*)Values;
