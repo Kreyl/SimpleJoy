@@ -31,6 +31,9 @@ void ITask();
 static const PinInputSetup_t DipSwPin[DIP_SW_CNT] = { DIP_SW8, DIP_SW7, DIP_SW6, DIP_SW5, DIP_SW4, DIP_SW3, DIP_SW2, DIP_SW1 };
 static uint8_t GetDipSwitch();
 
+static void SetChannel(int32_t Chnl);
+static void SendData(rPkt_t &Pkt);
+
 LedBlinker_t LedPwr {LED_PWR};
 LedBlinker_t LedLink {LED_LINK};
 
@@ -45,6 +48,7 @@ int32_t CalibrationCounter[CONTROL_CNT];
 
 TmrKL_t TmrEverySecond {MS2ST(999), evtIdEverySecond, tktPeriodic};
 bool RPktReceived = false;
+bool UseUsb = false;
 
 struct AdcValues_t {
     int32_t Battery;
@@ -53,8 +57,9 @@ struct AdcValues_t {
     int32_t Vref;
 } __packed;
 
-int32_t Offset[6];
-uint8_t OldRadioLvl = 255;
+static int32_t Offset[6];
+static uint8_t OldRadioLvl = 255;
+static rPkt_t Pkt;
 
 #endif
 
@@ -148,7 +153,7 @@ void ITask() {
                 }
             } break;
 
-            case evtIdEverySecond: {
+            case evtIdEverySecond:
                 // Radio: reset rx level if nothing received
                 if(RPktReceived) RPktReceived = false;
                 else {
@@ -156,17 +161,13 @@ void ITask() {
                     OldRadioLvl = 255;
                 }
                 // Dip
-                static int OldDip = -1;
-                int dip = GetDipSwitch();
-                if(dip > 99) dip = 99;
-                if(dip != OldDip) {
-                    OldDip = dip;
+                if(!UseUsb) {
+                    int dip = GetDipSwitch();
+                    if(dip > 99) dip = 99;
 //                    Printf("Dip: %u\r", dip);
-                    Interface.ShowChannel(dip);
-                    RMsg_t RMsg(dip);
-                    Radio.RMsgQ.SendWaitingAbility(RMsg, MS2ST(2007));
+                    SetChannel(dip);
                 }
-            } break;
+                break;
 
 #if 1 // ======= USB =======
             case evtIdUsbConnect:
@@ -202,6 +203,32 @@ void ProcessUsbDetect(PinSnsState_t *PState, uint32_t Len) {
     EvtQMain.SendNowOrExit(Msg);
 }
 
+
+void SetChannel(int32_t Chnl) {
+    static int32_t OldChnl = -1;
+    if(Chnl != OldChnl) {
+        OldChnl = Chnl;
+        Interface.ShowChannel(Chnl);
+        RMsg_t RMsg(Chnl);
+        Radio.RMsgQ.SendWaitingAbility(RMsg, MS2ST(2007));
+    }
+}
+
+void SendData(rPkt_t &Pkt) {
+//    Pkt.Print();
+    // Transmit data
+    RMsg_t RMsg(Pkt);
+    Radio.RMsgQ.SendNowOrExit(RMsg);
+    // Display values
+    Interface.DrawR(R1_X, Pkt.R1);
+    Interface.DrawR(R2_X, Pkt.R2);
+    Interface.DrawJy(J1_X, Pkt.Ch[0]);
+    Interface.DrawJy(J2_X, Pkt.Ch[2]);
+    Interface.DrawJx((J1_X + J_WIDTHy+1), J_Y, Pkt.Ch[1]);
+    Interface.DrawJx((J2_X + J_WIDTHy+1), J_Y, Pkt.Ch[3]);
+    Lcd.Update();
+}
+
 void ProcessAdc(int32_t *Values) {
     AdcValues_t *pVal = (AdcValues_t*)Values;
     // Battery
@@ -217,56 +244,46 @@ void ProcessAdc(int32_t *Values) {
     }
 //    Printf("Battery: %u\r", VBat_mv);
 
-    if(CalibrationMode) {
-        static int CalibrationCnt = 0;
-        for(int i=0; i<4; i++) {
-            Offset[i] += pVal->Ch[i];
+    if(!UseUsb) {
+        if(CalibrationMode) {
+            static int CalibrationCnt = 0;
+            for(int i=0; i<4; i++) {
+                Offset[i] += pVal->Ch[i];
+            }
+            CalibrationCnt++;
+            if(CalibrationCnt == 8) {   // 8, why not? Put here something else if you want.
+                for(int i=0; i<4; i++) Offset[i] /= 8;
+                CalibrationMode = false;
+                Printf("Calibration done\r");
+            }
         }
-        CalibrationCnt++;
-        if(CalibrationCnt == 8) {   // 8, why not? Put here something else if you want.
-            for(int i=0; i<4; i++) Offset[i] /= 8;
-            CalibrationMode = false;
-            Printf("Calibration done\r");
-        }
-    }
-    // Not calibration
-    else {
-        // Put adc values to pkt
-        rPkt_t Pkt;
-        for(int i=0; i<4; i++) {
-            int32_t v = pVal->Ch[i]; // To make things shorter
-            v -= Offset[i];
-            v /= 16L;  // [0...4095] => [0...255]
-            if(v < -128L) v = -127L;
-            if(v > 127L) v = 127L;
-            Pkt.Ch[i] = v;
-        }
-        // Correct sign
-        Pkt.Ch[0] = -Pkt.Ch[0];
-        Pkt.Ch[3] = -Pkt.Ch[3];
-        Pkt.R1 = 255 - pVal->R2 / 16L;
-        Pkt.R2 = 255 - pVal->R1 / 16L;
+        // Not calibration
+        else {
+            // Put adc values to pkt
 
-        // Add buttons
-        uint8_t b = 0;
-        for(int i=0; i<7; i++) {
-            if(GetBtnState(i) == pssLo) b |= 1<<i;
+            for(int i=0; i<4; i++) {
+                int32_t v = pVal->Ch[i]; // To make things shorter
+                v -= Offset[i];
+                v /= 16L;  // [0...4095] => [0...255]
+                if(v < -128L) v = -127L;
+                if(v > 127L) v = 127L;
+                Pkt.Ch[i] = v;
+            }
+            // Correct sign
+            Pkt.Ch[0] = -Pkt.Ch[0];
+            Pkt.Ch[3] = -Pkt.Ch[3];
+            Pkt.R1 = 255 - pVal->R2 / 16L;
+            Pkt.R2 = 255 - pVal->R1 / 16L;
+
+            // Add buttons
+            uint8_t b = 0;
+            for(int i=0; i<7; i++) {
+                if(GetBtnState(i) == pssLo) b |= 1<<i;
+            }
+            Pkt.Btns = b;
         }
-        Pkt.Btns = b;
-//        Pkt.Print();
-        // Transmit data
-        RMsg_t RMsg(Pkt);
-        Radio.RMsgQ.SendNowOrExit(RMsg);
-//        RMsgQ.SendWaitingAbility(RMsg, MS2ST(180));
-        // Display values
-        Interface.DrawR(R1_X, Pkt.R1);
-        Interface.DrawR(R2_X, Pkt.R2);
-        Interface.DrawJy(J1_X, Pkt.Ch[0]);
-        Interface.DrawJy(J2_X, Pkt.Ch[2]);
-        Interface.DrawJx((J1_X + J_WIDTHy+1), J_Y, Pkt.Ch[1]);
-        Interface.DrawJx((J2_X + J_WIDTHy+1), J_Y, Pkt.Ch[3]);
-        Lcd.Update();
-    }
+    } // if !UseUsb
+    if(UseUsb or !CalibrationMode) SendData(Pkt);
 }
 
 // ====== DIP switch ======
@@ -288,6 +305,37 @@ void OnCmd(Shell_t *PShell) {
     // Handle command
     if(PCmd->NameIs("Ping")) {
         PShell->Ack(retvOk);
+    }
+
+    else if(PCmd->NameIs("UseUsb")) {
+        UseUsb = true;
+        PShell->Ack(retvOk);
+    }
+    else if(PCmd->NameIs("UseControls")) {
+        UseUsb = false;
+        PShell->Ack(retvOk);
+    }
+
+    else if(PCmd->NameIs("SetChannel")) {
+        uint32_t Chnl;
+        if(PCmd->GetNext<uint32_t>(&Chnl) == retvOk) {
+            if(Chnl <= 99) {
+                SetChannel(Chnl);
+                PShell->Ack(retvOk);
+            }
+            else PShell->Ack(retvBadValue);
+        }
+        else PShell->Ack(retvBadValue);
+    }
+
+    else if(PCmd->NameIs("Send")) {
+        rPkt_t IPkt;
+        if(PCmd->GetArray<int8_t>(&IPkt.Ch[0], 7) == retvOk) {
+            Pkt = IPkt;
+            SendData(Pkt);
+            PShell->Ack(retvOk);
+        }
+        else PShell->Ack(retvBadValue);
     }
 
     else PShell->Ack(retvCmdUnknown);
