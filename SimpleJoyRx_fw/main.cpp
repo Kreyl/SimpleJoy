@@ -26,6 +26,7 @@ void ITask();
 
 static const PinInputSetup_t DipSwPin[DIP_SW_CNT] = { DIP_SW8, DIP_SW7, DIP_SW6, DIP_SW5, DIP_SW4, DIP_SW3, DIP_SW2, DIP_SW1 };
 static uint8_t GetDipSwitch();
+static void OnRadioRx();
 
 LedBlinker_t LedPwr {LED_PWR};
 LedBlinker_t LedLink {LED_LINK};
@@ -141,6 +142,10 @@ void ITask() {
                 ((Shell_t*)Msg.Ptr)->SignalCmdProcessed();
                 break;
 
+            case evtIdRadioRx:
+                OnRadioRx();
+                break;
+
             case evtIdEverySecond: {
                 static int OldDip = -1;
                 int dip = GetDipSwitch();
@@ -158,6 +163,27 @@ void ITask() {
         } // switch
     } // while true
 } // ITask()
+
+void OnRadioRx() {
+    rPkt_t Pkt = Radio.PktRx;
+//    Pkt.Print();
+    // Servo
+    for(int i=0; i<4; i++) {
+        Srv[i]->SetValue(Pkt.Ch[i], -127L, 127L);
+    }
+    Srv[4]->SetValue(255-Pkt.R1, 0, 255);
+    Srv[5]->SetValue(255-Pkt.R2, 0, 255);
+    // Motors
+    for(int i=0; i<4; i++) {
+        Motordir_t Dir = (Pkt.Ch[i] > 0)? mdirForward : mdirBackward;
+        uint32_t v = 2 * ABS(Pkt.Ch[i]);
+        if(v > 255) v = 255;
+        Motor[i]->Set(Dir, v);
+    }
+    // PWM
+    Pwm5.Set(Pkt.R1);
+    Pwm6.Set(Pkt.R2);
+}
 
 // ====== DIP switch ======
 uint8_t GetDipSwitch() {

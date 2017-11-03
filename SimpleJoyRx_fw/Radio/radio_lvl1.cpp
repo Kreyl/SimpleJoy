@@ -54,6 +54,8 @@ void rLevel1_t::ITask() {
 //            PktRx.Print();
             // Transmit reply
             CC.Transmit(&PktReply, PktReply.Length+1);
+            EvtMsg_t Msg(evtIdRadioRx, &PktRx);
+            EvtQMain.SendNowOrExit(Msg);
         } // if RxRslt ok
         else LedLink.Off();
     } // while
