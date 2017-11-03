@@ -49,18 +49,18 @@ void rLevel1_t::ITask() {
 //                Msg.Pkt.Print();
                 for(int i=0; i<RETRY_CNT; i++) {
                     // Transmit
-                    LedLink.On();
-                    CC.SetPktSize(RPKT_LEN);
-                    CC.Transmit(&Msg.Pkt);
-                    LedLink.Off();
+                    Msg.Pkt.Length = 7;
+                    CC.Recalibrate();
+                    CC.Transmit(&Msg.Pkt, Msg.Pkt.Length+1); // Length byte + payload
                     // Receive
-                    CC.SetPktSize(REPLY_PKT_LEN);
-                    uint8_t RxRslt = CC.Receive(RX_T_MS, &rPktReply, &Rssi);
+                    uint8_t RxRslt = CC.Receive(RX_T_MS, &rPktReply, 2, &Rssi);
                     if(RxRslt == retvOk) {
-                        EvtMsg_t OutMsg(evtIdRadioRx, Rssi);
-                        EvtQMain.SendNowOrExit(OutMsg);
+                        LedLink.On();
+//                        EvtMsg_t OutMsg(evtIdRadioRx, Rssi);
+//                        EvtQMain.SendNowOrExit(OutMsg);
                         break; // Get out of retries
                     }
+                    else LedLink.Off();
                 }
                 break;
 
@@ -91,7 +91,7 @@ uint8_t rLevel1_t::Init() {
 
     if(CC.Init() == retvOk) {
         CC.SetTxPower(CC_TX_PWR);
-//        CC.SetPktSize(RPKT_LEN);
+        CC.SetPktSize(RPKT_LEN+1);
 //        CC.SetChannel(Settings.RChnl);
         CC.Recalibrate();
         // Thread

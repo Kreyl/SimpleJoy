@@ -61,10 +61,10 @@ static inline void Lvl250ToLvl1000(uint16_t *PLvl) {
 union rPkt_t  {
     uint32_t DWord[2];
     struct {
+        uint8_t Length;
         int8_t Ch[4];
         uint8_t R1, R2;
         uint8_t Btns;
-        uint8_t Rsrvd;
     } __packed;
     rPkt_t& operator = (const rPkt_t &Right) {
         DWord[0] = Right.DWord[0];
@@ -74,9 +74,10 @@ union rPkt_t  {
     void Print() { Printf("%d %d %d %d %d %d; %X\r", Ch[0],Ch[1],Ch[2],Ch[3],R1, R2, Btns); }
 } __packed;
 
-#define RPKT_LEN    8
+#define RPKT_LEN    7   // 7 bytes of payload
 
 struct rPktReply_t {
+    uint8_t Length;
     uint8_t Reply;
 } __packed;
 
