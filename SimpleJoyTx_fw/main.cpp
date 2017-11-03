@@ -43,6 +43,7 @@ int32_t AdcOffset[CONTROL_CNT];
 int32_t CalibrationCounter[CONTROL_CNT];
 
 TmrKL_t TmrEverySecond {MS2ST(999), evtIdEverySecond, tktPeriodic};
+bool RPktReceived = false;
 
 struct AdcValues_t {
     int32_t Battery;
@@ -52,6 +53,7 @@ struct AdcValues_t {
 } __packed;
 
 int32_t Offset[6];
+uint8_t OldRadioLvl = 255;
 
 #endif
 
@@ -128,13 +130,32 @@ void ITask() {
                 }
                 break;
 
-            case evtIdRadioRx:
-                Printf("Rx: %d\r", Msg.Value);
-                break;
+            case evtIdRadioRx: {
+//                Printf("Rx: %d\r", Msg.Value);
+                RPktReceived = true;
+                uint8_t Lvl = 0;
+                if(Msg.Value > -35) Lvl = 4;
+                else if(Msg.Value > -65) Lvl = 3;
+                else if(Msg.Value > -85) Lvl = 2;
+                else Lvl = 1;
+                if(Lvl != OldRadioLvl) {
+                    OldRadioLvl = Lvl;
+                    Interface.ShowRadioLvl(Lvl);
+                }
+//                Interface
+            } break;
 
             case evtIdEverySecond: {
+                // Radio: reset rx level if nothing received
+                if(RPktReceived) RPktReceived = false;
+                else {
+                    Interface.ShowRadioLvl(0);
+                    OldRadioLvl = 255;
+                }
+                // Dip
                 static int OldDip = -1;
                 int dip = GetDipSwitch();
+                if(dip > 99) dip = 99;
                 if(dip != OldDip) {
                     OldDip = dip;
 //                    Printf("Dip: %u\r", dip);

@@ -53,11 +53,12 @@ void rLevel1_t::ITask() {
                     CC.Recalibrate();
                     CC.Transmit(&Msg.Pkt, Msg.Pkt.Length+1); // Length byte + payload
                     // Receive
-                    uint8_t RxRslt = CC.Receive(RX_T_MS, &rPktReply, 2, &Rssi);
+                    uint8_t RxRslt = CC.Receive(RX_T_MS, &rPktReply, 3, &Rssi);
                     if(RxRslt == retvOk) {
                         LedLink.On();
-//                        EvtMsg_t OutMsg(evtIdRadioRx, Rssi);
-//                        EvtQMain.SendNowOrExit(OutMsg);
+//                        Printf("%d\r", Rssi);
+                        EvtMsg_t OutMsg(evtIdRadioRx, Rssi);
+                        EvtQMain.SendNowOrExit(OutMsg);
                         break; // Get out of retries
                     }
                     else LedLink.Off();

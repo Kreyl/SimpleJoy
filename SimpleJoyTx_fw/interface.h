@@ -27,7 +27,6 @@
 #define J_HEIGHTx   4
 #define J_COEFx     (255 / J_WIDTHx)
 
-
 class Interface_t {
 public:
     void Reset() {
@@ -106,6 +105,16 @@ public:
             case bsHalf:  Lcd.DrawImage(70, 0, icon_BatteryHalf);  break;
             case bsEmpty: Lcd.DrawImage(70, 0, icon_BatteryEmpty); break;
             default: break;
+        }
+    }
+
+    void ShowRadioLvl(uint8_t Lvl) {
+        switch(Lvl) {
+            case 1: Lcd.DrawImage(54, 0, icon_Radio1); break;
+            case 2: Lcd.DrawImage(54, 0, icon_Radio2); break;
+            case 3: Lcd.DrawImage(54, 0, icon_Radio3); break;
+            case 4: Lcd.DrawImage(54, 0, icon_Radio4); break;
+            default: Lcd.DrawImage(54, 0, icon_Radio0); break;
         }
     }
 
