@@ -41,8 +41,8 @@ void Lcd_t::Init(void) {
     WriteCmd(0x13); // bias system (1:48)
     WriteCmd(0xC2); // default Vop (3.06 + 66 * 0.06 = 7V)
     WriteCmd(0x20); // extended instruction set control (H=0)
-    WriteCmd(0x09); // all display segments on
-    chThdSleepMilliseconds(207);
+//    WriteCmd(0x09); // all display segments on
+//    chThdSleepMilliseconds(207);
     WriteCmd(0x08); // display blank
     WriteCmd(0x0C); // normal mode (0x0d = inverse mode)
     // Place the cursor at the origin
