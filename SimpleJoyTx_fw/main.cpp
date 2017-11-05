@@ -60,7 +60,6 @@ struct AdcValues_t {
 static int32_t Offset[6];
 static uint8_t OldRadioLvl = 255;
 static rPkt_t Pkt;
-
 #endif
 
 int main(void) {
@@ -91,7 +90,8 @@ int main(void) {
 
     Lcd.Init();
     Lcd.SetBacklight(100);
-    Interface.Reset();
+    Interface.Start();
+    Interface.EnterIdle();
 
     // Buttons
     SimpleSensors::Init();

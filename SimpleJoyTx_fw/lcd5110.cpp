@@ -173,6 +173,7 @@ void Lcd_t::DrawImage(const uint8_t x, const uint8_t y, const uint8_t* Img) {
         GotoXY(x, fy);
         for(uint8_t fx=x; fx < x+Width; fx++) {
             b = *p++;
+            b = __RBIT(b) >> 24;    // Inverse bit order
             IBuf[CurrentPosition++] = b;
             if(CurrentPosition >= LCD_VIDEOBUF_SIZE) continue;
         } // fx
