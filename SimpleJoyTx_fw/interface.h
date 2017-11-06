@@ -33,10 +33,10 @@ public:
     void Start() {
         Lcd.DrawImage(0, 0, icon_Logo);
         Lcd.Update();
-        chThdSleepMilliseconds(999);
+        chThdSleepMilliseconds(1980);
         Lcd.DrawImage(0, 0, icon_Livetronic);
         Lcd.Update();
-        chThdSleepMilliseconds(999);
+        chThdSleepMilliseconds(1980);
         Lcd.Cls();
     }
 
