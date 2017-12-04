@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--***************************************-->
-<!--   File    : SimpleJoyTx.fsproj        -->
-<!--   Format  : TopoR Project file        -->
-<!--   Version : 2                         -->
-<!--   Program : TopoR Lite 6.3.17875      -->
-<!--   Date    : Tuesday, October 24, 2017 -->
-<!--   Time    : 12:52                     -->
-<!--***************************************-->
+<!--*****************************************-->
+<!--   File    : SimpleJoyTx.fsproj          -->
+<!--   Format  : TopoR Project file          -->
+<!--   Version : 2                           -->
+<!--   Program : TopoR Lite 6.3.17875        -->
+<!--   Date    : Thursday, November 16, 2017 -->
+<!--   Time    : 19:45                       -->
+<!--*****************************************-->
 
 <Project>
    <Version current="2"/>
    <GUID>{8ECDA300-C037-457C-82CC-064E0D63ACE0}</GUID>
    <Documents>
       <Section name="PCB">
-         <File path=".\SimpleJoyTx.fsx" isopened="1" dateChange="2017-10-11 17:48:15"/>
+         <File path=".\SimpleJoyTx.fsx" isopened="0" dateChange="2017-10-11 17:48:15"/>
       </Section>
       <Section name="AutoRouting"/>
    </Documents>
