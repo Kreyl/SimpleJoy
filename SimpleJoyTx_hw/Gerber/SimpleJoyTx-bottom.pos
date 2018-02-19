@@ -1,0 +1,11 @@
+### Module positions - created on 02/01/18 21:01:58 ###
+### Printed by Pcbnew version kicad (2018-01-21 revision 81642dddd)-makepkg
+## Unit = mm, Angle = deg.
+## Side : bottom
+# Ref     Val       Package                PosX       PosY       Rot  Side
+Logo3     Logo      Livetronic27x9      62.4000    54.8000   90.0000  bottom
+RP2       REFPOINT  REF_POINT_1MM        1.8000   100.0000  270.0000  bottom
+RP3       REFPOINT  REF_POINT_1MM       64.2000     1.6000  270.0000  bottom
+SW1       IT-1187A  BTN_4x4_SMD          4.4000    24.6000   90.0000  bottom
+SW2       DIPx8     DIP_SMD_X8          35.1495    27.3010    0.0000  bottom
+## End

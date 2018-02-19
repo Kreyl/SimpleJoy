@@ -4,7 +4,7 @@
 	<Format>Project</Format>
 	<Header>
 		<Program name="TopoR" version="6.1"/>
-		<GUID>{3551281E-3B92-4485-840E-279AE75CCCF8}</GUID>
+		<GUID>{D22C2C01-0A18-40EA-B273-B033C82ACA37}</GUID>
 		<Annotation>Project file</Annotation>
 	</Header>
 	<Document>
@@ -12,11 +12,6 @@
 		<Pcb>
 			<File path=".\SimpleJoyRx.fsx" Folder="-1" isopened="1"/>
 		</Pcb>
-		<Import>
-			<Specctra>
-			<Path name="D:\Nute\PresentTime\SimpleJoy\SimpleJoyRx_hw\SimpleJoyRx.dsn"/>
-			</Specctra>
-		</Import>
 		<ARouteSessions>
 		</ARouteSessions>
 	</Document>

@@ -1,4 +1,4 @@
-update=06.02.2018 14:59:27
+update=18.10.2017 19:11:20
 version=1
 last_client=kicad
 [general]
@@ -39,4 +39,20 @@ LabSize=60
 ERC_TestSimilarLabels=1
 [eeschema]
 version=1
-LibDir=
+LibDir=D:/Libs/Kicad
+[eeschema/libraries]
+LibName1=Antennas_kl
+LibName2=Connectors_kl
+LibName3=display_kl
+LibName4=ESDProtection
+LibName5=pcb_details
+LibName6=power
+LibName7=Power_kl
+LibName8=RF ICs
+LibName9=st_kl
+LibName10=Switches
+LibName11=Tittar_kl
+LibName12=Transistors_kl
+LibName13=standard_logic
+LibName14=modules
+LibName15=Sensors

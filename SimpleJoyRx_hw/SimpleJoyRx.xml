@@ -1,0 +1,2274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="D">
+  <design>
+    <source>D:\Nute\PresentTime\SimpleJoy\SimpleJoyRx_hw\SimpleJoyRx.sch</source>
+    <date>18.02.2018 16:51:04</date>
+    <tool>Eeschema (2018-02-15 revision 29b28de31)-makepkg</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>SimpleJoy Receiver</title>
+        <company>Ostranna</company>
+        <rev>2</rev>
+        <date>2017-10-05</date>
+        <source>SimpleJoyRx.sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="C2">
+      <value>10u</value>
+      <footprint>Capacitors:CAP_0603</footprint>
+      <fields>
+        <field name="SolderPoints">2</field>
+        <field name="Price">4</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D3E711</tstamp>
+    </comp>
+    <comp ref="SW2">
+      <value>IT-1187A</value>
+      <footprint>BtnsSwitches:BTN_4x4_SMD</footprint>
+      <fields>
+        <field name="PN">IT-1187A</field>
+        <field name="SolderPoints">4</field>
+        <field name="Price">4</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="BUTTON-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D3E775</tstamp>
+    </comp>
+    <comp ref="XL2">
+      <value>USB_MICRO</value>
+      <footprint>Connectors:USBmicro_MOLEX_1050170001</footprint>
+      <fields>
+        <field name="PN">105017-0001</field>
+        <field name="SolderPoints">9</field>
+        <field name="Price">46</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="USB_MINI_B-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D3E4ED</tstamp>
+    </comp>
+    <comp ref="XL1">
+      <value>CONN_6</value>
+      <footprint>Connectors:PLS-6</footprint>
+      <fields>
+        <field name="SolderPoints">6</field>
+        <field name="Price">1</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="CONN_6-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D3E521</tstamp>
+    </comp>
+    <comp ref="DD2">
+      <value>CC1101</value>
+      <footprint>QFN_DFN:QFN20</footprint>
+      <fields>
+        <field name="URL">http://</field>
+        <field name="Price">140</field>
+        <field name="SolderPoints">21</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="CC1101-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D408DA</tstamp>
+    </comp>
+    <comp ref="XTAL1">
+      <value>27MHz</value>
+      <footprint>Quartz:03225C4</footprint>
+      <fields>
+        <field name="Price">15</field>
+        <field name="SolderPoints">4</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="CRYSTAL_H-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D408E3</tstamp>
+    </comp>
+    <comp ref="C26">
+      <value>18pF</value>
+      <footprint>Capacitors:CAP_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D408EC</tstamp>
+    </comp>
+    <comp ref="C27">
+      <value>18pF</value>
+      <footprint>Capacitors:CAP_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D408F5</tstamp>
+    </comp>
+    <comp ref="R8">
+      <value>56k</value>
+      <footprint>Resistors:RES_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="R-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D408FE</tstamp>
+    </comp>
+    <comp ref="L2">
+      <value>1.2nH</value>
+      <footprint>Inductors:IND_0402</footprint>
+      <fields>
+        <field name="Price">4</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="L-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D40907</tstamp>
+    </comp>
+    <comp ref="C35">
+      <value>2.4pF</value>
+      <footprint>Capacitors:CAP_0402</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D40910</tstamp>
+    </comp>
+    <comp ref="C28">
+      <value>0.1u</value>
+      <footprint>Capacitors:CAP_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D4092B</tstamp>
+    </comp>
+    <comp ref="TP1">
+      <value>TESTPOINT</value>
+      <footprint>PCB:TESTPOINT_1MM</footprint>
+      <fields>
+        <field name="Price">0</field>
+        <field name="SolderPoints">0</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="TESTPOINT-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D40936</tstamp>
+    </comp>
+    <comp ref="BLN1">
+      <value>BALUN868JOHANSON</value>
+      <footprint>Radio:BALUN_JOHANSON868</footprint>
+      <fields>
+        <field name="PN">0896BM15A0001E</field>
+        <field name="URL">http://onelec.ru/products/0896bm15a0001e-52ab3408-7c12-4b8c-99ab-cc294cdc1e18</field>
+        <field name="SolderPoints">6</field>
+        <field name="Price">45</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="BALUN868JOHANSON-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D40940</tstamp>
+    </comp>
+    <comp ref="ANT1">
+      <value>ANT_PCB_MONO</value>
+      <footprint>Radio:ANT_868_24x30</footprint>
+      <fields>
+        <field name="Price">0</field>
+        <field name="SolderPoints">0</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="ANT_PCB_MONO-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D40949</tstamp>
+    </comp>
+    <comp ref="C43">
+      <value>0.1u</value>
+      <footprint>Capacitors:CAP_0603</footprint>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D40991</tstamp>
+    </comp>
+    <comp ref="C39">
+      <value>0.1u</value>
+      <footprint>Capacitors:CAP_0603</footprint>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D4099E</tstamp>
+    </comp>
+    <comp ref="C42">
+      <value>0.1u</value>
+      <footprint>Capacitors:CAP_0603</footprint>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D409A5</tstamp>
+    </comp>
+    <comp ref="C37">
+      <value>0.1u</value>
+      <footprint>Capacitors:CAP_0603</footprint>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D409B8</tstamp>
+    </comp>
+    <comp ref="C36">
+      <value>0.1u</value>
+      <footprint>Capacitors:CAP_0603</footprint>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D409BF</tstamp>
+    </comp>
+    <comp ref="C33">
+      <value>0.1u</value>
+      <footprint>Capacitors:CAP_0603</footprint>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D409D2</tstamp>
+    </comp>
+    <comp ref="L1">
+      <value>BLM15AG102SN1</value>
+      <footprint>Inductors:IND_0402</footprint>
+      <fields>
+        <field name="Price">1</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="L-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D40A02</tstamp>
+    </comp>
+    <comp ref="DA7">
+      <value>MCP1700</value>
+      <footprint>SOT:SOT23-3A</footprint>
+      <datasheet>http://datasheet.elcodis.com/pdf2/93/72/937252/mcp1700-1202e.pdf</datasheet>
+      <fields>
+        <field name="Price">20</field>
+        <field name="SolderPoints">3</field>
+        <field name="PN">MCP1700T-3302E/TT</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="MCP1700-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D47894</tstamp>
+    </comp>
+    <comp ref="C4">
+      <value>0.1u</value>
+      <footprint>Capacitors:CAP_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D484EC</tstamp>
+    </comp>
+    <comp ref="C5">
+      <value>0.1u</value>
+      <footprint>Capacitors:CAP_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D48921</tstamp>
+    </comp>
+    <comp ref="C6">
+      <value>0.1u</value>
+      <footprint>Capacitors:CAP_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D4898E</tstamp>
+    </comp>
+    <comp ref="C8">
+      <value>10n</value>
+      <footprint>Capacitors:CAP_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D48A1B</tstamp>
+    </comp>
+    <comp ref="C9">
+      <value>1u</value>
+      <footprint>Capacitors:CAP_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D48AE3</tstamp>
+    </comp>
+    <comp ref="C7">
+      <value>0.1u</value>
+      <footprint>Capacitors:CAP_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D49EB1</tstamp>
+    </comp>
+    <comp ref="C24">
+      <value>0.1u</value>
+      <footprint>Capacitors:CAP_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D4B4F7</tstamp>
+    </comp>
+    <comp ref="C25">
+      <value>0.1u</value>
+      <footprint>Capacitors:CAP_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D4B8CB</tstamp>
+    </comp>
+    <comp ref="Q2">
+      <value>2N7002</value>
+      <footprint>SOT:SOT23-3</footprint>
+      <fields>
+        <field name="SolderPoints">3</field>
+        <field name="Price">1.6</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="N_3PIN-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D4DD32</tstamp>
+    </comp>
+    <comp ref="Logo1">
+      <value>Logo</value>
+      <footprint>Pictures:Ostranna_8x8</footprint>
+      <fields>
+        <field name="Price">0</field>
+        <field name="SolderPoints">0</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="Logo-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D4DD55</tstamp>
+    </comp>
+    <comp ref="HOLE1">
+      <value>HOLE_METALLED</value>
+      <footprint>PCB:Hole3d3_out5d5mm</footprint>
+      <fields>
+        <field name="Price">0</field>
+        <field name="SolderPoints">0</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="HOLE_METALLED-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D53F97</tstamp>
+    </comp>
+    <comp ref="HOLE2">
+      <value>HOLE_METALLED</value>
+      <footprint>PCB:Hole3d3_out5d5mm</footprint>
+      <fields>
+        <field name="Price">0</field>
+        <field name="SolderPoints">0</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="HOLE_METALLED-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D53FA0</tstamp>
+    </comp>
+    <comp ref="C3">
+      <value>0.1u</value>
+      <footprint>Capacitors:CAP_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D593A5</tstamp>
+    </comp>
+    <comp ref="XL12">
+      <value>PLS3</value>
+      <footprint>Connectors:PLS-3</footprint>
+      <fields>
+        <field name="Price">1</field>
+        <field name="SolderPoints">3</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="CONN_3-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D514E7</tstamp>
+    </comp>
+    <comp ref="XL11">
+      <value>PLS3</value>
+      <footprint>Connectors:PLS-3</footprint>
+      <fields>
+        <field name="Price">1</field>
+        <field name="SolderPoints">3</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="CONN_3-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D5BB96</tstamp>
+    </comp>
+    <comp ref="XL16">
+      <value>PLS3</value>
+      <footprint>Connectors:PLS-3</footprint>
+      <fields>
+        <field name="Price">1</field>
+        <field name="SolderPoints">3</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="CONN_3-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D5BFFE</tstamp>
+    </comp>
+    <comp ref="R12">
+      <value>56k</value>
+      <footprint>Resistors:RES_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="R-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D5C03D</tstamp>
+    </comp>
+    <comp ref="C41">
+      <value>0.1u</value>
+      <footprint>Capacitors:CAP_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D5C054</tstamp>
+    </comp>
+    <comp ref="C38">
+      <value>100u 6V3</value>
+      <footprint>Capacitors:CAP_1206</footprint>
+      <fields>
+        <field name="Price">7</field>
+        <field name="SolderPoints">2</field>
+        <field name="PN">CL31A107MQHNNNE</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D5C066</tstamp>
+    </comp>
+    <comp ref="D6">
+      <value>PMEG2020</value>
+      <footprint>Diodes:SOD323</footprint>
+      <fields>
+        <field name="Price">5.5</field>
+        <field name="SolderPoints">2</field>
+        <field name="PN">PMEG2020EJ.115</field>
+        <field name="URL">https://www.terraelectronica.ru/catalog_info.php?CODE=192057</field>
+        <field name="Info">2A 20V Vf=525mV</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="D_Shottky-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D5C075</tstamp>
+    </comp>
+    <comp ref="XL17">
+      <value>PLS2</value>
+      <footprint>Connectors:PLS-2</footprint>
+      <fields>
+        <field name="SolderPointsDip">2</field>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="CONN_2-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D5C083</tstamp>
+    </comp>
+    <comp ref="Q4">
+      <value>IRLML0030</value>
+      <footprint>SOT:SOT23-3</footprint>
+      <fields>
+        <field name="SolderPoints">3</field>
+        <field name="PN">IRLML0030TRPBF</field>
+        <field name="URL">https://www.terraelectronica.ru/catalog.php?ID=349&amp;search=irlml0030</field>
+        <field name="Price">7.5</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="N_3PIN-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D5C08D</tstamp>
+    </comp>
+    <comp ref="XL13">
+      <value>PLS3</value>
+      <footprint>Connectors:PLS-3</footprint>
+      <fields>
+        <field name="Price">1</field>
+        <field name="SolderPoints">3</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="CONN_3-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D5C0A2</tstamp>
+    </comp>
+    <comp ref="R11">
+      <value>56k</value>
+      <footprint>Resistors:RES_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="R-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D5C0E1</tstamp>
+    </comp>
+    <comp ref="C31">
+      <value>0.1u</value>
+      <footprint>Capacitors:CAP_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D5C0F8</tstamp>
+    </comp>
+    <comp ref="C30">
+      <value>100u 6V3</value>
+      <footprint>Capacitors:CAP_1206</footprint>
+      <fields>
+        <field name="Price">7</field>
+        <field name="SolderPoints">2</field>
+        <field name="PN">CL31A107MQHNNNE</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D5C10A</tstamp>
+    </comp>
+    <comp ref="D5">
+      <value>PMEG2020</value>
+      <footprint>Diodes:SOD323</footprint>
+      <fields>
+        <field name="Price">5.5</field>
+        <field name="SolderPoints">2</field>
+        <field name="PN">PMEG2020EJ.115</field>
+        <field name="URL">https://www.terraelectronica.ru/catalog_info.php?CODE=192057</field>
+        <field name="Info">2A 20V Vf=525mV</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="D_Shottky-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D5C119</tstamp>
+    </comp>
+    <comp ref="XL14">
+      <value>PLS2</value>
+      <footprint>Connectors:PLS-2</footprint>
+      <fields>
+        <field name="SolderPointsDip">2</field>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="CONN_2-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D5C127</tstamp>
+    </comp>
+    <comp ref="Q3">
+      <value>IRLML0030</value>
+      <footprint>SOT:SOT23-3</footprint>
+      <fields>
+        <field name="SolderPoints">3</field>
+        <field name="PN">IRLML0030TRPBF</field>
+        <field name="URL">https://www.terraelectronica.ru/catalog.php?ID=349&amp;search=irlml0030</field>
+        <field name="Price">7.5</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="N_3PIN-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D5C131</tstamp>
+    </comp>
+    <comp ref="XL10">
+      <value>PLS3</value>
+      <footprint>Connectors:PLS-3</footprint>
+      <fields>
+        <field name="Price">1</field>
+        <field name="SolderPoints">3</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="CONN_3-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D5C5BB</tstamp>
+    </comp>
+    <comp ref="XL9">
+      <value>PLS3</value>
+      <footprint>Connectors:PLS-3</footprint>
+      <fields>
+        <field name="Price">1</field>
+        <field name="SolderPoints">3</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="CONN_3-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D5C65F</tstamp>
+    </comp>
+    <comp ref="XL3">
+      <value>CONN_2</value>
+      <footprint>Connectors:W02_Pitch_2d54</footprint>
+      <fields>
+        <field name="Price">2</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="CONN_2-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D615EB</tstamp>
+    </comp>
+    <comp ref="R1">
+      <value>1k</value>
+      <footprint>Resistors:RES_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="R-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D615FB</tstamp>
+    </comp>
+    <comp ref="SW3">
+      <value>SS-12F23</value>
+      <footprint>BtnsSwitches:SW_SS-12F23</footprint>
+      <fields>
+        <field name="Price">10</field>
+        <field name="SolderPoints">3</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="SWITCH_H-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D65EAE</tstamp>
+    </comp>
+    <comp ref="Q1">
+      <value>IRF9358</value>
+      <footprint>SO_DIL_TSSOP:SO8_150MIL</footprint>
+      <fields>
+        <field name="Price">29</field>
+        <field name="SolderPoints">8</field>
+        <field name="URL">http://onelec.ru/products/irf9358pbf-dd012426-33d8-429e-9c6a-2b35b0a91da1</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="Px2_SO8-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D65EC5</tstamp>
+    </comp>
+    <comp ref="R6">
+      <value>100k</value>
+      <footprint>Resistors:RES_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="R-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D65EE5</tstamp>
+    </comp>
+    <comp ref="D4">
+      <value>PMEG2020</value>
+      <footprint>Diodes:SOD323</footprint>
+      <fields>
+        <field name="Price">5.5</field>
+        <field name="SolderPoints">2</field>
+        <field name="PN">PMEG2020EJ.115</field>
+        <field name="URL">https://www.terraelectronica.ru/catalog_info.php?CODE=192057</field>
+        <field name="Info">2A 20V Vf=525mV</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="D_Shottky-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D70EA8</tstamp>
+    </comp>
+    <comp ref="D3">
+      <value>PMEG2020</value>
+      <footprint>Diodes:SOD323</footprint>
+      <fields>
+        <field name="Price">5.5</field>
+        <field name="SolderPoints">2</field>
+        <field name="PN">PMEG2020EJ.115</field>
+        <field name="URL">https://www.terraelectronica.ru/catalog_info.php?CODE=192057</field>
+        <field name="Info">2A 20V Vf=525mV</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="D_Shottky-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D712F0</tstamp>
+    </comp>
+    <comp ref="SW1">
+      <value>DIPx8</value>
+      <footprint>BtnsSwitches:DIP_SMD_X8</footprint>
+      <fields>
+        <field name="URL">http://www.zip-2002.ru/kommutatsiya/dip_pereklyuchateli/71280/swd_4-8/</field>
+        <field name="Price">27</field>
+        <field name="SolderPoints">16</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="DIPx8-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D7CD18</tstamp>
+    </comp>
+    <comp ref="F1">
+      <value>Fuse0R</value>
+      <footprint>PCB:FuseShorted</footprint>
+      <fields>
+        <field name="SolderPoints">1</field>
+        <field name="Price">0</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="Fuse0R-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D7FC35</tstamp>
+    </comp>
+    <comp ref="R4">
+      <value>1k</value>
+      <footprint>Resistors:RES_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="R-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D6450F</tstamp>
+    </comp>
+    <comp ref="D1">
+      <value>L-C191KGCT</value>
+      <footprint>LEDs:LED_0603</footprint>
+      <fields>
+        <field name="Price">2.2</field>
+        <field name="SolderPoints">2</field>
+        <field name="URL">http://onelec.ru/products/l-c191kgct</field>
+        <field name="PN">L-C191KGCT</field>
+        <field name="Color">Green</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="LED-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D6451C</tstamp>
+    </comp>
+    <comp ref="R5">
+      <value>1k</value>
+      <footprint>Resistors:RES_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="R-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D670D7</tstamp>
+    </comp>
+    <comp ref="D2">
+      <value>L-C191LBCT</value>
+      <footprint>LEDs:LED_0603</footprint>
+      <fields>
+        <field name="Price">2.4</field>
+        <field name="SolderPoints">2</field>
+        <field name="URL">http://onelec.ru/products/l-c191lbct</field>
+        <field name="PN">L-C191LBCT</field>
+        <field name="Color">Blue</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="LED-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D670E4</tstamp>
+    </comp>
+    <comp ref="R3">
+      <value>1k</value>
+      <footprint>Resistors:RES_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="R-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D6C7D4</tstamp>
+    </comp>
+    <comp ref="DA2">
+      <value>DRV8835</value>
+      <footprint>QFN_DFN:WSON12</footprint>
+      <fields>
+        <field name="SolderPoints">13</field>
+        <field name="PN">DRV8835DSSR</field>
+        <field name="Price">95</field>
+        <field name="URL">http://onelec.ru/products/drv8835dssr</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="DRV8835-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D784FB</tstamp>
+    </comp>
+    <comp ref="C19">
+      <value>0.1u</value>
+      <footprint>Capacitors:CAP_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D7850C</tstamp>
+    </comp>
+    <comp ref="C15">
+      <value>100u 6V3</value>
+      <footprint>Capacitors:CAP_1206</footprint>
+      <fields>
+        <field name="Price">7</field>
+        <field name="SolderPoints">2</field>
+        <field name="PN">CL31A107MQHNNNE</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D7851F</tstamp>
+    </comp>
+    <comp ref="C11">
+      <value>0.1u</value>
+      <footprint>Capacitors:CAP_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D78539</tstamp>
+    </comp>
+    <comp ref="XL6">
+      <value>PLS2</value>
+      <footprint>Connectors:PLS-2</footprint>
+      <fields>
+        <field name="SolderPointsDip">2</field>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="CONN_2-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D78557</tstamp>
+    </comp>
+    <comp ref="XL7">
+      <value>PLS2</value>
+      <footprint>Connectors:PLS-2</footprint>
+      <fields>
+        <field name="SolderPointsDip">2</field>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="CONN_2-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D78560</tstamp>
+    </comp>
+    <comp ref="DA1">
+      <value>DRV8835</value>
+      <footprint>QFN_DFN:WSON12</footprint>
+      <fields>
+        <field name="SolderPoints">13</field>
+        <field name="PN">DRV8835DSSR</field>
+        <field name="Price">95</field>
+        <field name="URL">http://onelec.ru/products/drv8835dssr</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="DRV8835-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D7B759</tstamp>
+    </comp>
+    <comp ref="C10">
+      <value>0.1u</value>
+      <footprint>Capacitors:CAP_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D7B794</tstamp>
+    </comp>
+    <comp ref="XL4">
+      <value>PLS2</value>
+      <footprint>Connectors:PLS-2</footprint>
+      <fields>
+        <field name="SolderPointsDip">2</field>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="CONN_2-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D7B7AB</tstamp>
+    </comp>
+    <comp ref="XL5">
+      <value>PLS2</value>
+      <footprint>Connectors:PLS-2</footprint>
+      <fields>
+        <field name="SolderPointsDip">2</field>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="CONN_2-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D7B7B3</tstamp>
+    </comp>
+    <comp ref="C17">
+      <value>100u 6V3</value>
+      <footprint>Capacitors:CAP_1206</footprint>
+      <fields>
+        <field name="Price">7</field>
+        <field name="SolderPoints">2</field>
+        <field name="PN">CL31A107MQHNNNE</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D7F14C</tstamp>
+    </comp>
+    <comp ref="C18">
+      <value>0.1u</value>
+      <footprint>Capacitors:CAP_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D7F87E</tstamp>
+    </comp>
+    <comp ref="C14">
+      <value>100u 6V3</value>
+      <footprint>Capacitors:CAP_1206</footprint>
+      <fields>
+        <field name="Price">7</field>
+        <field name="SolderPoints">2</field>
+        <field name="PN">CL31A107MQHNNNE</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D7F890</tstamp>
+    </comp>
+    <comp ref="C16">
+      <value>100u 6V3</value>
+      <footprint>Capacitors:CAP_1206</footprint>
+      <fields>
+        <field name="Price">7</field>
+        <field name="SolderPoints">2</field>
+        <field name="PN">CL31A107MQHNNNE</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D7F8AB</tstamp>
+    </comp>
+    <comp ref="C12">
+      <value>100u 6V3</value>
+      <footprint>Capacitors:CAP_1206</footprint>
+      <fields>
+        <field name="Price">7</field>
+        <field name="SolderPoints">2</field>
+        <field name="PN">CL31A107MQHNNNE</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D987F4</tstamp>
+    </comp>
+    <comp ref="C13">
+      <value>100u 6V3</value>
+      <footprint>Capacitors:CAP_1206</footprint>
+      <fields>
+        <field name="Price">7</field>
+        <field name="SolderPoints">2</field>
+        <field name="PN">CL31A107MQHNNNE</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D98804</tstamp>
+    </comp>
+    <comp ref="XL18">
+      <value>CONN_1</value>
+      <footprint>Connectors:PLS-1Rnd</footprint>
+      <fields>
+        <field name="SolderPoints">0</field>
+        <field name="Price">0</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="CONN_1-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D9BB5D</tstamp>
+    </comp>
+    <comp ref="RP1">
+      <value>REFPOINT</value>
+      <footprint>PCB:REF_POINT_1MM</footprint>
+      <fields>
+        <field name="SolderPoints">0</field>
+        <field name="Price">0</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="REFPOINT-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D9D146</tstamp>
+    </comp>
+    <comp ref="Logo2">
+      <value>Logo</value>
+      <footprint>Pictures:Livetronic27x9</footprint>
+      <fields>
+        <field name="SolderPoints">0</field>
+        <field name="Price">0</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="Logo-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59DBA4A2</tstamp>
+    </comp>
+    <comp ref="Logo3">
+      <value>Logo</value>
+      <footprint>Pictures:Livetronic13x4</footprint>
+      <fields>
+        <field name="SolderPoints">0</field>
+        <field name="Price">0</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="Logo-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59DBBB16</tstamp>
+    </comp>
+    <comp ref="C1">
+      <value>10n</value>
+      <footprint>Capacitors:CAP_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A02AA59</tstamp>
+    </comp>
+    <comp ref="C32">
+      <value>1u</value>
+      <footprint>Capacitors:CAP_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A02CD77</tstamp>
+    </comp>
+    <comp ref="R2">
+      <value>56k</value>
+      <footprint>Resistors:RES_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="R-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A0314F6</tstamp>
+    </comp>
+    <comp ref="R7">
+      <value>100k</value>
+      <footprint>Resistors:RES_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="R-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A033923</tstamp>
+    </comp>
+    <comp ref="R9">
+      <value>100k</value>
+      <footprint>Resistors:RES_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="R-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A034189</tstamp>
+    </comp>
+    <comp ref="R10">
+      <value>100k</value>
+      <footprint>Resistors:RES_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="R-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A0342A2</tstamp>
+    </comp>
+    <comp ref="RP2">
+      <value>REFPOINT</value>
+      <footprint>PCB:REF_POINT_1MM</footprint>
+      <fields>
+        <field name="SolderPoints">0</field>
+        <field name="Price">0</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="REFPOINT-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A035D29</tstamp>
+    </comp>
+    <comp ref="RP3">
+      <value>REFPOINT</value>
+      <footprint>PCB:REF_POINT_1MM</footprint>
+      <fields>
+        <field name="SolderPoints">0</field>
+        <field name="Price">0</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="REFPOINT-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A035E5B</tstamp>
+    </comp>
+    <comp ref="RP4">
+      <value>REFPOINT</value>
+      <footprint>PCB:REF_POINT_1MM</footprint>
+      <fields>
+        <field name="SolderPoints">0</field>
+        <field name="Price">0</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="REFPOINT-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A035E63</tstamp>
+    </comp>
+    <comp ref="XL8">
+      <value>PLS2</value>
+      <footprint>Connectors:PLS-2</footprint>
+      <fields>
+        <field name="SolderPointsDip">2</field>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="CONN_2-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A03F0B4</tstamp>
+    </comp>
+    <comp ref="DD1">
+      <value>STM32F072RxTx</value>
+      <footprint>LQFP_TQFP:LQFP64</footprint>
+      <fields>
+        <field name="PN">stm32f072R8t6</field>
+        <field name="URL">http://</field>
+        <field name="Price">170</field>
+        <field name="SolderPoints">64</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="STM32F072RxTx-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D5752C</tstamp>
+    </comp>
+    <comp ref="XL15">
+      <value>PLS3</value>
+      <footprint>Connectors:PLS-3</footprint>
+      <fields>
+        <field name="Price">1</field>
+        <field name="SolderPoints">3</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="CONN_3-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A2417E2</tstamp>
+    </comp>
+    <comp ref="XL20">
+      <value>PLS3</value>
+      <footprint>Connectors:PLS-3</footprint>
+      <fields>
+        <field name="Price">1</field>
+        <field name="SolderPoints">3</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="CONN_3-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A241BC6</tstamp>
+    </comp>
+    <comp ref="XL19">
+      <value>PLS3</value>
+      <footprint>Connectors:PLS-3</footprint>
+      <fields>
+        <field name="Price">1</field>
+        <field name="SolderPoints">3</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="CONN_3-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A241DDA</tstamp>
+    </comp>
+    <comp ref="XL21">
+      <value>PLS3</value>
+      <footprint>Connectors:PLS-3</footprint>
+      <fields>
+        <field name="Price">1</field>
+        <field name="SolderPoints">3</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="CONN_3-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A241DF0</tstamp>
+    </comp>
+    <comp ref="C40">
+      <value>DoNotMount</value>
+      <footprint>Capacitors:CAP_0402</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59D40919</tstamp>
+    </comp>
+    <comp ref="DA3">
+      <value>MCP1700</value>
+      <footprint>SOT:SOT23-3A</footprint>
+      <datasheet>http://datasheet.elcodis.com/pdf2/93/72/937252/mcp1700-1202e.pdf</datasheet>
+      <fields>
+        <field name="Price">20</field>
+        <field name="SolderPoints">3</field>
+        <field name="PN">MCP1700T-3302E/TT</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="MCP1700-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A24B179</tstamp>
+    </comp>
+    <comp ref="C20">
+      <value>0.1u</value>
+      <footprint>Capacitors:CAP_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A24B193</tstamp>
+    </comp>
+    <comp ref="C21">
+      <value>0.1u</value>
+      <footprint>Capacitors:CAP_0603</footprint>
+      <fields>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <libsource lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A24B1A1</tstamp>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="SimpleJoyRx-rescue" part="ANT_PCB_MONO-RESCUE-SimpleJoyRx">
+      <fields>
+        <field name="Reference">ANT</field>
+        <field name="Value">ANT_PCB_MONO-RESCUE-SimpleJoyRx</field>
+        <field name="Price">0</field>
+        <field name="SolderPoints">0</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SimpleJoyRx-rescue" part="BALUN868JOHANSON-RESCUE-SimpleJoyRx">
+      <fields>
+        <field name="Reference">BLN</field>
+        <field name="Value">BALUN868JOHANSON-RESCUE-SimpleJoyRx</field>
+        <field name="Footprint">Radio:BALUN_JOHANSON868</field>
+        <field name="PN">0896BM15A0001E</field>
+        <field name="URL">http://onelec.ru/products/0896bm15a0001e-52ab3408-7c12-4b8c-99ab-cc294cdc1e18</field>
+        <field name="SolderPoints">6</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Unbal" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+        <pin num="3" name="Bal1" type="passive"/>
+        <pin num="4" name="Bal2" type="passive"/>
+        <pin num="5" name="GND" type="passive"/>
+        <pin num="6" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SimpleJoyRx-rescue" part="BUTTON-RESCUE-SimpleJoyRx">
+      <footprints>
+        <fp>BUTTON*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">SW</field>
+        <field name="Value">BUTTON-RESCUE-SimpleJoyRx</field>
+        <field name="Price">1</field>
+        <field name="SolderPoints">4</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SimpleJoyRx-rescue" part="C-RESCUE-SimpleJoyRx">
+      <footprints>
+        <fp>c*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C-RESCUE-SimpleJoyRx</field>
+        <field name="Footprint">Capacitors:CAP_0603</field>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SimpleJoyRx-rescue" part="CC1101-RESCUE-SimpleJoyRx">
+      <footprints>
+        <fp>QFN20</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">DD</field>
+        <field name="Value">CC1101-RESCUE-SimpleJoyRx</field>
+        <field name="Footprint">QFN_DFN:QFN20</field>
+        <field name="URL">http://</field>
+        <field name="Price">140</field>
+        <field name="SolderPoints">21</field>
+      </fields>
+      <pins>
+        <pin num="1" name="SCLK" type="passive"/>
+        <pin num="2" name="SO(GDO1)" type="passive"/>
+        <pin num="3" name="GDO2" type="passive"/>
+        <pin num="4" name="DVDD" type="power_in"/>
+        <pin num="5" name="DCOUPL" type="passive"/>
+        <pin num="6" name="GDO0" type="passive"/>
+        <pin num="7" name="CSn" type="passive"/>
+        <pin num="8" name="XOSC_Q1" type="passive"/>
+        <pin num="9" name="AVDD" type="power_in"/>
+        <pin num="10" name="XOSC_Q2" type="passive"/>
+        <pin num="11" name="AVDD" type="power_in"/>
+        <pin num="12" name="RF_P" type="output"/>
+        <pin num="13" name="RF_N" type="output"/>
+        <pin num="14" name="AVDD" type="power_in"/>
+        <pin num="15" name="AVDD" type="power_in"/>
+        <pin num="16" name="GND" type="power_in"/>
+        <pin num="17" name="RBIAS" type="passive"/>
+        <pin num="18" name="DGUARD" type="passive"/>
+        <pin num="19" name="GND" type="power_in"/>
+        <pin num="20" name="SI" type="passive"/>
+        <pin num="PAD" name="GND" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="SimpleJoyRx-rescue" part="CONN_1-RESCUE-SimpleJoyRx">
+      <fields>
+        <field name="Reference">XL</field>
+        <field name="Value">CONN_1-RESCUE-SimpleJoyRx</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SimpleJoyRx-rescue" part="CONN_2-RESCUE-SimpleJoyRx">
+      <fields>
+        <field name="Reference">XL</field>
+        <field name="Value">CONN_2-RESCUE-SimpleJoyRx</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="PM" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SimpleJoyRx-rescue" part="CONN_3-RESCUE-SimpleJoyRx">
+      <fields>
+        <field name="Reference">XL</field>
+        <field name="Value">CONN_3-RESCUE-SimpleJoyRx</field>
+        <field name="Price">1</field>
+        <field name="SolderPoints">3</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="PM" type="passive"/>
+        <pin num="3" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SimpleJoyRx-rescue" part="CONN_6-RESCUE-SimpleJoyRx">
+      <fields>
+        <field name="Reference">XL</field>
+        <field name="Value">CONN_6-RESCUE-SimpleJoyRx</field>
+        <field name="SolderPoints">0</field>
+        <field name="SolderPointsDIP">6</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+        <pin num="3" name="~" type="passive"/>
+        <pin num="4" name="~" type="passive"/>
+        <pin num="5" name="~" type="passive"/>
+        <pin num="6" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SimpleJoyRx-rescue" part="CRYSTAL_H-RESCUE-SimpleJoyRx">
+      <footprints>
+        <fp>CRYSTAL*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">XTAL</field>
+        <field name="Value">CRYSTAL_H-RESCUE-SimpleJoyRx</field>
+        <field name="Footprint">CRYSTAL</field>
+        <field name="Price">15</field>
+        <field name="SolderPoints">4</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+        <pin num="H" name="H" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SimpleJoyRx-rescue" part="DIPx8-RESCUE-SimpleJoyRx">
+      <fields>
+        <field name="Reference">SW</field>
+        <field name="Value">DIPx8-RESCUE-SimpleJoyRx</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+        <pin num="3" name="~" type="passive"/>
+        <pin num="4" name="~" type="passive"/>
+        <pin num="5" name="~" type="passive"/>
+        <pin num="6" name="~" type="passive"/>
+        <pin num="7" name="~" type="passive"/>
+        <pin num="8" name="~" type="passive"/>
+        <pin num="9" name="~" type="passive"/>
+        <pin num="10" name="~" type="passive"/>
+        <pin num="11" name="~" type="passive"/>
+        <pin num="12" name="~" type="passive"/>
+        <pin num="13" name="~" type="passive"/>
+        <pin num="14" name="~" type="passive"/>
+        <pin num="15" name="~" type="passive"/>
+        <pin num="16" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SimpleJoyRx-rescue" part="DRV8835-RESCUE-SimpleJoyRx">
+      <fields>
+        <field name="Reference">DA</field>
+        <field name="Value">DRV8835-RESCUE-SimpleJoyRx</field>
+        <field name="Footprint">QFN_DFN:WSON12</field>
+        <field name="SolderPoints">13</field>
+        <field name="PN">DRV8835DSSR</field>
+        <field name="Price">95</field>
+        <field name="URL">http://onelec.ru/products/drv8835dssr</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VM" type="power_in"/>
+        <pin num="2" name="AOUT1" type="passive"/>
+        <pin num="3" name="AOUT2" type="passive"/>
+        <pin num="4" name="BOUT1" type="passive"/>
+        <pin num="5" name="BOUT2" type="passive"/>
+        <pin num="6" name="GND" type="power_in"/>
+        <pin num="7" name="Bin2/BEn" type="passive"/>
+        <pin num="8" name="Bin1/BPhase" type="passive"/>
+        <pin num="9" name="Ain2/AEn" type="passive"/>
+        <pin num="10" name="Ain1/APhase" type="passive"/>
+        <pin num="11" name="Mode" type="passive"/>
+        <pin num="12" name="Vcc" type="power_in"/>
+        <pin num="PAD" name="GND" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="SimpleJoyRx-rescue" part="D_Shottky-RESCUE-SimpleJoyRx">
+      <footprints>
+        <fp>d*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">D_Shottky-RESCUE-SimpleJoyRx</field>
+        <field name="Price">5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <pins>
+        <pin num="A" name="~" type="passive"/>
+        <pin num="C" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SimpleJoyRx-rescue" part="Fuse0R-RESCUE-SimpleJoyRx">
+      <footprints>
+        <fp>SMD*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">F</field>
+        <field name="Value">Fuse0R-RESCUE-SimpleJoyRx</field>
+        <field name="Footprint">Resistors:RES_0603_FUSE</field>
+        <field name="SolderPoints">1</field>
+        <field name="Price">0</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SimpleJoyRx-rescue" part="HOLE_METALLED-RESCUE-SimpleJoyRx">
+      <footprints>
+        <fp>HOLE*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">HOLE</field>
+        <field name="Value">HOLE_METALLED-RESCUE-SimpleJoyRx</field>
+        <field name="Price">0</field>
+        <field name="SolderPoints">0</field>
+      </fields>
+      <pins>
+        <pin num="H" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SimpleJoyRx-rescue" part="L-RESCUE-SimpleJoyRx">
+      <footprints>
+        <fp>IND*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">L</field>
+        <field name="Value">L-RESCUE-SimpleJoyRx</field>
+        <field name="Footprint">Inductors:IND_0402</field>
+        <field name="Price">4</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SimpleJoyRx-rescue" part="LED-RESCUE-SimpleJoyRx">
+      <footprints>
+        <fp>LED*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">LED-RESCUE-SimpleJoyRx</field>
+        <field name="Price">4</field>
+        <field name="SolderPoints">2</field>
+        <field name="Color">Green</field>
+      </fields>
+      <pins>
+        <pin num="A" name="A" type="passive"/>
+        <pin num="C" name="C" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SimpleJoyRx-rescue" part="Logo-RESCUE-SimpleJoyRx">
+      <fields>
+        <field name="Reference">Logo</field>
+        <field name="Value">Logo-RESCUE-SimpleJoyRx</field>
+      </fields>
+    </libpart>
+    <libpart lib="SimpleJoyRx-rescue" part="MCP1700-RESCUE-SimpleJoyRx">
+      <footprints>
+        <fp>D2PAK</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">DA</field>
+        <field name="Value">MCP1700-RESCUE-SimpleJoyRx</field>
+        <field name="Footprint">SOT:SOT23-3A</field>
+        <field name="Datasheet">http://datasheet.elcodis.com/pdf2/93/72/937252/mcp1700-1202e.pdf</field>
+        <field name="Price">10</field>
+        <field name="SolderPoints">3</field>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="passive"/>
+        <pin num="2" name="OUT" type="power_out"/>
+        <pin num="3" name="IN" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="SimpleJoyRx-rescue" part="N_3PIN-RESCUE-SimpleJoyRx">
+      <footprints>
+        <fp>SOT23</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">N_3PIN-RESCUE-SimpleJoyRx</field>
+        <field name="SolderPoints">3</field>
+      </fields>
+      <pins>
+        <pin num="1" name="G" type="passive"/>
+        <pin num="2" name="S" type="passive"/>
+        <pin num="3" name="D" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SimpleJoyRx-rescue" part="Px2_SO8-RESCUE-SimpleJoyRx">
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">Px2_SO8-RESCUE-SimpleJoyRx</field>
+        <field name="Footprint">SO_DIL_TSSOP:SO8_150MIL</field>
+        <field name="SolderPoints">8</field>
+      </fields>
+      <pins>
+        <pin num="1" name="S" type="passive"/>
+        <pin num="2" name="G" type="passive"/>
+        <pin num="3" name="S" type="passive"/>
+        <pin num="4" name="G" type="passive"/>
+        <pin num="5" name="D" type="passive"/>
+        <pin num="6" name="D" type="passive"/>
+        <pin num="7" name="D" type="passive"/>
+        <pin num="8" name="D" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SimpleJoyRx-rescue" part="R-RESCUE-SimpleJoyRx">
+      <footprints>
+        <fp>r*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R-RESCUE-SimpleJoyRx</field>
+        <field name="Footprint">Resistors:RES_0603</field>
+        <field name="Price">0.5</field>
+        <field name="SolderPoints">2</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SimpleJoyRx-rescue" part="REFPOINT-RESCUE-SimpleJoyRx">
+      <footprints>
+        <fp>REF_POINT*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">RP</field>
+        <field name="Value">REFPOINT-RESCUE-SimpleJoyRx</field>
+      </fields>
+    </libpart>
+    <libpart lib="SimpleJoyRx-rescue" part="STM32F072RxTx-RESCUE-SimpleJoyRx">
+      <footprints>
+        <fp>LQFP48*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">DD</field>
+        <field name="Value">STM32F072RxTx-RESCUE-SimpleJoyRx</field>
+        <field name="Footprint">LQFP_TQFP:LQFP64</field>
+        <field name="PN">stm32f072R8t6</field>
+        <field name="URL">http://</field>
+        <field name="Price">170</field>
+        <field name="SolderPoints">64</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VBat" type="power_in"/>
+        <pin num="2" name="WKUP2/RTC_OUT/PC13" type="passive"/>
+        <pin num="3" name="OC32IN/PC14" type="passive"/>
+        <pin num="4" name="OC32OUT/PC15" type="passive"/>
+        <pin num="5" name="OSCIN/PF0" type="passive"/>
+        <pin num="6" name="OSCOUT/PF1" type="passive"/>
+        <pin num="7" name="NRST" type="passive"/>
+        <pin num="8" name="ADC10/PC0" type="passive"/>
+        <pin num="9" name="ADC11/PC1" type="passive"/>
+        <pin num="10" name="ADC12/MISO2/PC2" type="passive"/>
+        <pin num="11" name="ADC13/MOSI2/PC3" type="passive"/>
+        <pin num="12" name="VSSA" type="power_in"/>
+        <pin num="13" name="VDDA" type="power_in"/>
+        <pin num="14" name="ADC0/TX4/T2C1ETR/WKUP1/PA0" type="passive"/>
+        <pin num="15" name="ADC1/RX4/T15C1N/T2C2/PA1" type="passive"/>
+        <pin num="16" name="ADC2/T15C1/T2C3/TX2/PA2" type="passive"/>
+        <pin num="17" name="ADC3/T15C2/T2C4/RX2/PA3" type="passive"/>
+        <pin num="18" name="VSS" type="power_in"/>
+        <pin num="19" name="VDD" type="power_in"/>
+        <pin num="20" name="ADC4/DAC1/T14C1/CK2/PA4" type="passive"/>
+        <pin num="21" name="ADC5/T2C1ETR/DAC2/SCK1/PA5" type="passive"/>
+        <pin num="22" name="ADC6/T16C1/T3C1/MISO1/PA6" type="passive"/>
+        <pin num="23" name="ADC7/T14C1/T17C1/T1C1N/T3C2/MOSI1/PA7" type="passive"/>
+        <pin num="24" name="ADC14/TX3/PC4" type="passive"/>
+        <pin num="25" name="ADC15/WKUP5/RX3/PC5" type="passive"/>
+        <pin num="26" name="PB0/T3C3/T1C2N/CK3/ADC8" type="passive"/>
+        <pin num="27" name="PB1/T3C4/T14C1/T1C3N/ADC9" type="passive"/>
+        <pin num="28" name="PB2" type="passive"/>
+        <pin num="29" name="PB10/SCK2/SCL2/TX3/T2C3" type="passive"/>
+        <pin num="30" name="PB11/SDA2/RX3/T2C4" type="passive"/>
+        <pin num="31" name="VSS" type="power_in"/>
+        <pin num="32" name="VDD" type="power_in"/>
+        <pin num="33" name="PB12/CK3" type="passive"/>
+        <pin num="34" name="PB13/SCK2/SCL2/T1C1N" type="passive"/>
+        <pin num="35" name="PB14/MISO2/SDA2/T1C2N/T15C1" type="passive"/>
+        <pin num="36" name="PB15/MOSI2/T1C3N/T15C1N/T15C2" type="passive"/>
+        <pin num="37" name="T3C1/PC6" type="passive"/>
+        <pin num="38" name="T3C2/PC7" type="passive"/>
+        <pin num="39" name="T3C3/PC8" type="passive"/>
+        <pin num="40" name="T3C4/PC9" type="passive"/>
+        <pin num="41" name="MCO/CK1/T1C1/PA8" type="passive"/>
+        <pin num="42" name="T1C2/TX1/PA9" type="passive"/>
+        <pin num="43" name="T1C3/RX1/PA10" type="passive"/>
+        <pin num="44" name="T1C4/USBDM/PA11" type="passive"/>
+        <pin num="45" name="T1ETR/USBDP/PA12" type="passive"/>
+        <pin num="46" name="IROUT/USBNOE/SWDIO/PA13" type="passive"/>
+        <pin num="47" name="VSS" type="power_in"/>
+        <pin num="48" name="VDDIO2" type="power_in"/>
+        <pin num="49" name="TX2/SWCLK/PA14" type="passive"/>
+        <pin num="50" name="RX2/T2C1ETR/PA15" type="passive"/>
+        <pin num="51" name="TX3/TX4/PC10" type="passive"/>
+        <pin num="52" name="RX3/RX4/PC11" type="passive"/>
+        <pin num="53" name="CK3/CK4/PC12" type="passive"/>
+        <pin num="54" name="PD2" type="passive"/>
+        <pin num="55" name="PB3/T2C2/SCK1" type="passive"/>
+        <pin num="56" name="PB4/T3C1/MISO1" type="passive"/>
+        <pin num="57" name="PB5/T3C2/MOSI1" type="passive"/>
+        <pin num="58" name="PB6/SCL1/T16C1N/TX1" type="passive"/>
+        <pin num="59" name="PB7/SDA1/T17C1N/RX1" type="passive"/>
+        <pin num="60" name="BOOT0" type="passive"/>
+        <pin num="61" name="PB8/SCL1/T16C1" type="passive"/>
+        <pin num="62" name="PB9/SDA1/T17C1/IROUT" type="passive"/>
+        <pin num="63" name="VSS" type="power_in"/>
+        <pin num="64" name="VDD" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="SimpleJoyRx-rescue" part="SWITCH_H-RESCUE-SimpleJoyRx">
+      <footprints>
+        <fp>BUTTON*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">SW</field>
+        <field name="Value">SWITCH_H-RESCUE-SimpleJoyRx</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+        <pin num="3" name="~" type="passive"/>
+        <pin num="H" name="~" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="SimpleJoyRx-rescue" part="TESTPOINT-RESCUE-SimpleJoyRx">
+      <footprints>
+        <fp>TESTPOINT*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">TP</field>
+        <field name="Value">TESTPOINT-RESCUE-SimpleJoyRx</field>
+        <field name="Footprint">PCB:TESTPOINT_1MM</field>
+        <field name="Price">0</field>
+        <field name="SolderPoints">0</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SimpleJoyRx-rescue" part="USB_MINI_B-RESCUE-SimpleJoyRx">
+      <footprints>
+        <fp>USB*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">XL</field>
+        <field name="Value">USB_MINI_B-RESCUE-SimpleJoyRx</field>
+      </fields>
+      <pins>
+        <pin num="1" name="UVcc" type="power_out"/>
+        <pin num="2" name="D-" type="passive"/>
+        <pin num="3" name="D+" type="passive"/>
+        <pin num="4" name="UID" type="passive"/>
+        <pin num="5" name="UGND" type="power_out"/>
+        <pin num="H1" name="~" type="passive"/>
+        <pin num="H2" name="~" type="passive"/>
+        <pin num="H3" name="~" type="passive"/>
+        <pin num="H4" name="~" type="passive"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="SimpleJoyRx-rescue">
+      <uri>D:\Nute\PresentTime\SimpleJoy\SimpleJoyRx_hw/SimpleJoyRx-rescue.lib</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="GNDPWR">
+      <node ref="C13" pin="1"/>
+      <node ref="C12" pin="1"/>
+      <node ref="C16" pin="1"/>
+      <node ref="XL8" pin="2"/>
+      <node ref="R7" pin="1"/>
+      <node ref="C41" pin="1"/>
+      <node ref="C38" pin="1"/>
+      <node ref="HOLE2" pin="H"/>
+      <node ref="Q2" pin="2"/>
+      <node ref="XL15" pin="3"/>
+      <node ref="XL21" pin="3"/>
+      <node ref="F1" pin="2"/>
+      <node ref="C10" pin="1"/>
+      <node ref="XL20" pin="3"/>
+      <node ref="XL19" pin="3"/>
+      <node ref="R1" pin="2"/>
+      <node ref="XL10" pin="3"/>
+      <node ref="Q3" pin="2"/>
+      <node ref="SW3" pin="1"/>
+      <node ref="SW3" pin="H"/>
+      <node ref="XL12" pin="3"/>
+      <node ref="Q4" pin="2"/>
+      <node ref="XL13" pin="3"/>
+      <node ref="R11" pin="2"/>
+      <node ref="R12" pin="2"/>
+      <node ref="C30" pin="1"/>
+      <node ref="C31" pin="1"/>
+      <node ref="XL3" pin="1"/>
+      <node ref="XL9" pin="3"/>
+      <node ref="XL11" pin="3"/>
+      <node ref="XL16" pin="3"/>
+      <node ref="C19" pin="1"/>
+      <node ref="C15" pin="1"/>
+      <node ref="C18" pin="1"/>
+      <node ref="C14" pin="1"/>
+      <node ref="DA2" pin="PAD"/>
+      <node ref="DA2" pin="6"/>
+      <node ref="DA1" pin="PAD"/>
+      <node ref="DA1" pin="6"/>
+      <node ref="C17" pin="1"/>
+      <node ref="C11" pin="1"/>
+    </net>
+    <net code="2" name="/PWM2">
+      <node ref="DA2" pin="7"/>
+      <node ref="DD1" pin="38"/>
+    </net>
+    <net code="3" name="/MOTORB2">
+      <node ref="DA2" pin="5"/>
+      <node ref="XL7" pin="1"/>
+    </net>
+    <net code="4" name="/MOTORB1">
+      <node ref="XL7" pin="2"/>
+      <node ref="DA2" pin="4"/>
+    </net>
+    <net code="5" name="Net-(DD1-Pad21)">
+      <node ref="DD1" pin="21"/>
+      <node ref="R3" pin="2"/>
+    </net>
+    <net code="6" name="Net-(DD1-Pad9)">
+      <node ref="DD1" pin="9"/>
+      <node ref="R5" pin="2"/>
+    </net>
+    <net code="7" name="Net-(D2-PadA)">
+      <node ref="R5" pin="1"/>
+      <node ref="D2" pin="A"/>
+    </net>
+    <net code="8" name="Net-(D1-PadA)">
+      <node ref="D1" pin="A"/>
+      <node ref="R4" pin="1"/>
+    </net>
+    <net code="9" name="/CC_GDO0">
+      <node ref="DD1" pin="27"/>
+      <node ref="DD2" pin="6"/>
+      <node ref="TP1" pin="1"/>
+    </net>
+    <net code="10" name="/CC_CS">
+      <node ref="DD2" pin="7"/>
+      <node ref="DD1" pin="28"/>
+    </net>
+    <net code="11" name="/MOTORA2">
+      <node ref="XL6" pin="1"/>
+      <node ref="DA2" pin="3"/>
+    </net>
+    <net code="12" name="/MOTORA1">
+      <node ref="DA2" pin="2"/>
+      <node ref="XL6" pin="2"/>
+    </net>
+    <net code="13" name="/MOTORD2">
+      <node ref="DA1" pin="5"/>
+      <node ref="XL5" pin="1"/>
+    </net>
+    <net code="14" name="/MOTORD1">
+      <node ref="DA1" pin="4"/>
+      <node ref="XL5" pin="2"/>
+    </net>
+    <net code="15" name="/MOTORC2">
+      <node ref="XL4" pin="1"/>
+      <node ref="DA1" pin="3"/>
+    </net>
+    <net code="16" name="/MOTORC1">
+      <node ref="XL4" pin="2"/>
+      <node ref="DA1" pin="2"/>
+    </net>
+    <net code="17" name="/PWM3">
+      <node ref="DD1" pin="39"/>
+      <node ref="DA1" pin="9"/>
+    </net>
+    <net code="18" name="PwrUnst">
+      <node ref="DA1" pin="1"/>
+      <node ref="C19" pin="2"/>
+      <node ref="XL13" pin="2"/>
+      <node ref="XL17" pin="1"/>
+      <node ref="C41" pin="2"/>
+      <node ref="XL12" pin="2"/>
+      <node ref="D4" pin="A"/>
+      <node ref="C18" pin="2"/>
+      <node ref="C14" pin="2"/>
+      <node ref="D6" pin="C"/>
+      <node ref="DA2" pin="1"/>
+      <node ref="C17" pin="2"/>
+      <node ref="C38" pin="2"/>
+      <node ref="C16" pin="2"/>
+      <node ref="XL10" pin="2"/>
+      <node ref="XL14" pin="1"/>
+      <node ref="Q1" pin="6"/>
+      <node ref="XL11" pin="2"/>
+      <node ref="XL16" pin="2"/>
+      <node ref="XL9" pin="2"/>
+      <node ref="Q1" pin="5"/>
+      <node ref="C15" pin="2"/>
+      <node ref="C31" pin="2"/>
+      <node ref="C30" pin="2"/>
+      <node ref="D5" pin="C"/>
+    </net>
+    <net code="19" name="/CC_SCK">
+      <node ref="DD1" pin="55"/>
+      <node ref="DD2" pin="1"/>
+    </net>
+    <net code="20" name="+3.3V">
+      <node ref="C11" pin="2"/>
+      <node ref="DD1" pin="19"/>
+      <node ref="DD1" pin="13"/>
+      <node ref="DD1" pin="1"/>
+      <node ref="L1" pin="2"/>
+      <node ref="DA2" pin="11"/>
+      <node ref="DA2" pin="12"/>
+      <node ref="C2" pin="1"/>
+      <node ref="SW2" pin="2"/>
+      <node ref="DA7" pin="2"/>
+      <node ref="XL1" pin="1"/>
+      <node ref="C3" pin="1"/>
+      <node ref="C7" pin="1"/>
+      <node ref="DD1" pin="64"/>
+      <node ref="DD1" pin="32"/>
+      <node ref="DD1" pin="48"/>
+      <node ref="C9" pin="1"/>
+      <node ref="C8" pin="1"/>
+      <node ref="C6" pin="1"/>
+      <node ref="C5" pin="1"/>
+      <node ref="C4" pin="1"/>
+      <node ref="C25" pin="1"/>
+      <node ref="DA1" pin="11"/>
+      <node ref="DA1" pin="12"/>
+      <node ref="C10" pin="2"/>
+    </net>
+    <net code="21" name="/5V_USB">
+      <node ref="D3" pin="A"/>
+      <node ref="XL2" pin="1"/>
+      <node ref="R3" pin="1"/>
+      <node ref="C1" pin="2"/>
+    </net>
+    <net code="22" name="Net-(C27-Pad1)">
+      <node ref="XTAL1" pin="2"/>
+      <node ref="DD2" pin="10"/>
+      <node ref="C27" pin="1"/>
+    </net>
+    <net code="23" name="VCC">
+      <node ref="DD2" pin="15"/>
+      <node ref="DD2" pin="18"/>
+      <node ref="C39" pin="1"/>
+      <node ref="DD2" pin="14"/>
+      <node ref="C42" pin="1"/>
+      <node ref="C36" pin="1"/>
+      <node ref="C33" pin="1"/>
+      <node ref="C43" pin="1"/>
+      <node ref="DD2" pin="11"/>
+      <node ref="DD2" pin="4"/>
+      <node ref="C37" pin="1"/>
+      <node ref="L1" pin="1"/>
+      <node ref="DD2" pin="9"/>
+      <node ref="C32" pin="2"/>
+    </net>
+    <net code="24" name="/BAT_MEAS">
+      <node ref="R10" pin="2"/>
+      <node ref="DD1" pin="14"/>
+      <node ref="R9" pin="1"/>
+    </net>
+    <net code="25" name="Net-(DD1-Pad60)">
+      <node ref="DD1" pin="60"/>
+      <node ref="SW2" pin="1"/>
+      <node ref="R2" pin="1"/>
+    </net>
+    <net code="26" name="Net-(Q2-Pad3)">
+      <node ref="R10" pin="1"/>
+      <node ref="Q2" pin="3"/>
+    </net>
+    <net code="27" name="/MEASURE_EN">
+      <node ref="R7" pin="2"/>
+      <node ref="DD1" pin="15"/>
+      <node ref="Q2" pin="1"/>
+    </net>
+    <net code="28" name="/SWCLK">
+      <node ref="DD1" pin="49"/>
+      <node ref="XL1" pin="2"/>
+    </net>
+    <net code="29" name="/D-">
+      <node ref="XL2" pin="2"/>
+      <node ref="DD1" pin="44"/>
+    </net>
+    <net code="30" name="/D+">
+      <node ref="DD1" pin="45"/>
+      <node ref="XL2" pin="3"/>
+    </net>
+    <net code="31" name="/UART_TX">
+      <node ref="DD1" pin="58"/>
+      <node ref="XL1" pin="5"/>
+    </net>
+    <net code="32" name="/UART_RX">
+      <node ref="XL1" pin="6"/>
+      <node ref="DD1" pin="59"/>
+    </net>
+    <net code="33" name="/SWDIO">
+      <node ref="DD1" pin="46"/>
+      <node ref="XL1" pin="4"/>
+    </net>
+    <net code="34" name="/CC_MISO">
+      <node ref="DD1" pin="56"/>
+      <node ref="DD2" pin="2"/>
+    </net>
+    <net code="35" name="/CC_MOSI">
+      <node ref="DD2" pin="20"/>
+      <node ref="DD1" pin="57"/>
+    </net>
+    <net code="36" name="Net-(DD2-Pad17)">
+      <node ref="DD2" pin="17"/>
+      <node ref="R8" pin="1"/>
+    </net>
+    <net code="37" name="Net-(C28-Pad2)">
+      <node ref="C28" pin="2"/>
+      <node ref="DD2" pin="5"/>
+    </net>
+    <net code="38" name="Net-(C26-Pad1)">
+      <node ref="C26" pin="1"/>
+      <node ref="XTAL1" pin="1"/>
+      <node ref="DD2" pin="8"/>
+    </net>
+    <net code="39" name="GND">
+      <node ref="XL1" pin="3"/>
+      <node ref="XL2" pin="5"/>
+      <node ref="XTAL1" pin="H"/>
+      <node ref="DD2" pin="PAD"/>
+      <node ref="C43" pin="2"/>
+      <node ref="C26" pin="2"/>
+      <node ref="BLN1" pin="6"/>
+      <node ref="BLN1" pin="5"/>
+      <node ref="BLN1" pin="2"/>
+      <node ref="C28" pin="1"/>
+      <node ref="C35" pin="2"/>
+      <node ref="C2" pin="2"/>
+      <node ref="R8" pin="2"/>
+      <node ref="DD2" pin="16"/>
+      <node ref="C27" pin="2"/>
+      <node ref="DD2" pin="19"/>
+      <node ref="HOLE1" pin="H"/>
+      <node ref="C25" pin="2"/>
+      <node ref="C33" pin="2"/>
+      <node ref="C4" pin="2"/>
+      <node ref="C5" pin="2"/>
+      <node ref="C6" pin="2"/>
+      <node ref="C8" pin="2"/>
+      <node ref="C24" pin="2"/>
+      <node ref="C7" pin="2"/>
+      <node ref="C39" pin="2"/>
+      <node ref="C42" pin="2"/>
+      <node ref="C37" pin="2"/>
+      <node ref="C36" pin="2"/>
+      <node ref="C40" pin="2"/>
+      <node ref="SW1" pin="13"/>
+      <node ref="SW1" pin="12"/>
+      <node ref="DA3" pin="1"/>
+      <node ref="DD1" pin="63"/>
+      <node ref="DD1" pin="18"/>
+      <node ref="SW1" pin="10"/>
+      <node ref="SW1" pin="11"/>
+      <node ref="DD1" pin="12"/>
+      <node ref="DD1" pin="31"/>
+      <node ref="C9" pin="2"/>
+      <node ref="DD1" pin="47"/>
+      <node ref="D1" pin="C"/>
+      <node ref="R2" pin="2"/>
+      <node ref="XL2" pin="4"/>
+      <node ref="C32" pin="1"/>
+      <node ref="SW1" pin="16"/>
+      <node ref="C1" pin="1"/>
+      <node ref="SW1" pin="15"/>
+      <node ref="SW1" pin="14"/>
+      <node ref="D2" pin="C"/>
+      <node ref="C3" pin="2"/>
+      <node ref="F1" pin="1"/>
+      <node ref="SW1" pin="9"/>
+      <node ref="C20" pin="2"/>
+      <node ref="C21" pin="2"/>
+      <node ref="DA7" pin="1"/>
+    </net>
+    <net code="40" name="VAA">
+      <node ref="DA3" pin="2"/>
+      <node ref="XL20" pin="2"/>
+      <node ref="XL15" pin="2"/>
+      <node ref="XL19" pin="2"/>
+      <node ref="XL21" pin="2"/>
+      <node ref="C21" pin="1"/>
+    </net>
+    <net code="41" name="/MCU_PWR">
+      <node ref="DA7" pin="3"/>
+      <node ref="D4" pin="C"/>
+      <node ref="DA3" pin="3"/>
+      <node ref="D3" pin="C"/>
+      <node ref="C24" pin="1"/>
+      <node ref="C20" pin="1"/>
+    </net>
+    <net code="42" name="Net-(Q1-Pad4)">
+      <node ref="Q1" pin="4"/>
+      <node ref="R6" pin="1"/>
+      <node ref="XL8" pin="1"/>
+      <node ref="SW3" pin="2"/>
+    </net>
+    <net code="43" name="/DIR4">
+      <node ref="DD1" pin="2"/>
+      <node ref="DA1" pin="8"/>
+    </net>
+    <net code="44" name="/A2">
+      <node ref="XL20" pin="1"/>
+      <node ref="DD1" pin="11"/>
+    </net>
+    <net code="45" name="/A1">
+      <node ref="XL15" pin="1"/>
+      <node ref="DD1" pin="10"/>
+    </net>
+    <net code="46" name="/DIR3">
+      <node ref="DA1" pin="10"/>
+      <node ref="DD1" pin="53"/>
+    </net>
+    <net code="47" name="/DIR2">
+      <node ref="DD1" pin="52"/>
+      <node ref="DA2" pin="8"/>
+    </net>
+    <net code="48" name="/DIR1">
+      <node ref="DD1" pin="51"/>
+      <node ref="DA2" pin="10"/>
+    </net>
+    <net code="49" name="Net-(DD1-Pad8)">
+      <node ref="R4" pin="2"/>
+      <node ref="DD1" pin="8"/>
+    </net>
+    <net code="50" name="+BATT">
+      <node ref="Q1" pin="3"/>
+      <node ref="Q1" pin="1"/>
+      <node ref="C12" pin="2"/>
+      <node ref="C13" pin="2"/>
+      <node ref="R9" pin="2"/>
+      <node ref="R6" pin="2"/>
+    </net>
+    <net code="51" name="/A3">
+      <node ref="DD1" pin="24"/>
+      <node ref="XL19" pin="1"/>
+    </net>
+    <net code="52" name="/A4">
+      <node ref="DD1" pin="25"/>
+      <node ref="XL21" pin="1"/>
+    </net>
+    <net code="53" name="Net-(DD1-Pad7)">
+      <node ref="DD1" pin="7"/>
+    </net>
+    <net code="54" name="/DIP2">
+      <node ref="SW1" pin="2"/>
+      <node ref="DD1" pin="62"/>
+    </net>
+    <net code="55" name="/DIP1">
+      <node ref="SW1" pin="1"/>
+      <node ref="DD1" pin="61"/>
+    </net>
+    <net code="56" name="Net-(DD1-Pad6)">
+      <node ref="DD1" pin="6"/>
+    </net>
+    <net code="57" name="/SRV6">
+      <node ref="DD1" pin="20"/>
+      <node ref="XL16" pin="1"/>
+    </net>
+    <net code="58" name="/SRV5">
+      <node ref="XL13" pin="1"/>
+      <node ref="DD1" pin="17"/>
+    </net>
+    <net code="59" name="Net-(DD1-Pad4)">
+      <node ref="DD1" pin="4"/>
+    </net>
+    <net code="60" name="/DIP8">
+      <node ref="DD1" pin="36"/>
+      <node ref="SW1" pin="8"/>
+    </net>
+    <net code="61" name="/DIP7">
+      <node ref="DD1" pin="35"/>
+      <node ref="SW1" pin="7"/>
+    </net>
+    <net code="62" name="/DIP6">
+      <node ref="SW1" pin="6"/>
+      <node ref="DD1" pin="34"/>
+    </net>
+    <net code="63" name="/DIP5">
+      <node ref="SW1" pin="5"/>
+      <node ref="DD1" pin="33"/>
+    </net>
+    <net code="64" name="/DIP4">
+      <node ref="DD1" pin="30"/>
+      <node ref="SW1" pin="4"/>
+    </net>
+    <net code="65" name="Net-(DD1-Pad3)">
+      <node ref="DD1" pin="3"/>
+    </net>
+    <net code="66" name="/DIP3">
+      <node ref="SW1" pin="3"/>
+      <node ref="DD1" pin="29"/>
+    </net>
+    <net code="67" name="Net-(DD1-Pad26)">
+      <node ref="DD1" pin="26"/>
+    </net>
+    <net code="68" name="Net-(DD1-Pad5)">
+      <node ref="DD1" pin="5"/>
+    </net>
+    <net code="69" name="Net-(DD1-Pad54)">
+      <node ref="DD1" pin="54"/>
+    </net>
+    <net code="70" name="Net-(DD1-Pad50)">
+      <node ref="DD1" pin="50"/>
+    </net>
+    <net code="71" name="/PWM6">
+      <node ref="DD1" pin="23"/>
+      <node ref="R12" pin="1"/>
+      <node ref="Q4" pin="1"/>
+    </net>
+    <net code="72" name="/PWM_OUT5">
+      <node ref="Q3" pin="3"/>
+      <node ref="XL14" pin="2"/>
+      <node ref="D5" pin="A"/>
+    </net>
+    <net code="73" name="/PWM5">
+      <node ref="R11" pin="1"/>
+      <node ref="DD1" pin="22"/>
+      <node ref="Q3" pin="1"/>
+    </net>
+    <net code="74" name="/PWM_OUT6">
+      <node ref="Q4" pin="3"/>
+      <node ref="XL17" pin="2"/>
+      <node ref="D6" pin="A"/>
+    </net>
+    <net code="75" name="/SRV2">
+      <node ref="DD1" pin="42"/>
+      <node ref="XL11" pin="1"/>
+    </net>
+    <net code="76" name="/SRV3">
+      <node ref="DD1" pin="43"/>
+      <node ref="XL12" pin="1"/>
+    </net>
+    <net code="77" name="/PWM1">
+      <node ref="DA2" pin="9"/>
+      <node ref="DD1" pin="37"/>
+    </net>
+    <net code="78" name="/SRV1">
+      <node ref="XL10" pin="1"/>
+      <node ref="DD1" pin="41"/>
+    </net>
+    <net code="79" name="/PWM4">
+      <node ref="DA1" pin="7"/>
+      <node ref="DD1" pin="40"/>
+    </net>
+    <net code="80" name="/SRV4">
+      <node ref="DD1" pin="16"/>
+      <node ref="XL9" pin="1"/>
+    </net>
+    <net code="81" name="Net-(XL2-PadH4)">
+      <node ref="XL2" pin="H4"/>
+    </net>
+    <net code="82" name="Net-(XL2-PadH3)">
+      <node ref="XL2" pin="H3"/>
+    </net>
+    <net code="83" name="Net-(XL2-PadH2)">
+      <node ref="XL2" pin="H2"/>
+    </net>
+    <net code="84" name="Net-(XL2-PadH1)">
+      <node ref="XL2" pin="H1"/>
+    </net>
+    <net code="85" name="Net-(DD2-Pad3)">
+      <node ref="DD2" pin="3"/>
+    </net>
+    <net code="86" name="/RF1">
+      <node ref="DD2" pin="12"/>
+      <node ref="BLN1" pin="4"/>
+    </net>
+    <net code="87" name="/RF2">
+      <node ref="BLN1" pin="3"/>
+      <node ref="DD2" pin="13"/>
+    </net>
+    <net code="88" name="/ANT2">
+      <node ref="C40" pin="1"/>
+      <node ref="L2" pin="1"/>
+      <node ref="ANT1" pin="1"/>
+      <node ref="XL18" pin="1"/>
+    </net>
+    <net code="89" name="/ANT1">
+      <node ref="BLN1" pin="1"/>
+      <node ref="L2" pin="2"/>
+      <node ref="C35" pin="1"/>
+    </net>
+    <net code="90" name="Net-(Q1-Pad2)">
+      <node ref="R1" pin="1"/>
+      <node ref="Q1" pin="2"/>
+    </net>
+    <net code="91" name="Net-(SW3-Pad3)">
+      <node ref="SW3" pin="3"/>
+    </net>
+    <net code="92" name="/PRE_BAT_PWR">
+      <node ref="XL3" pin="2"/>
+      <node ref="Q1" pin="8"/>
+      <node ref="Q1" pin="7"/>
+    </net>
+  </nets>
+</export>

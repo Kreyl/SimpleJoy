@@ -53,10 +53,10 @@
 #define PWM6_PIN        GPIOA, 7, TIM17, 1, invNotInverted, omPushPull, 255
 
 // Moter Dir
-#define DIR1_PIN        GPIOC, 2
-#define DIR2_PIN        GPIOC, 3
-#define DIR3_PIN        GPIOC, 4
-#define DIR4_PIN        GPIOC, 5
+#define DIR1_PIN        GPIOC, 10
+#define DIR2_PIN        GPIOC, 11
+#define DIR3_PIN        GPIOC, 12
+#define DIR4_PIN        GPIOC, 13
 
 // USB
 #define USB_DM          GPIOA, 11

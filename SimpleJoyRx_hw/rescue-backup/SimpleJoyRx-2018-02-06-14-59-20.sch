@@ -1,4 +1,19 @@
-EESchema Schematic File Version 4
+EESchema Schematic File Version 2
+LIBS:Antennas_kl
+LIBS:Connectors_kl
+LIBS:display_kl
+LIBS:ESDProtection
+LIBS:pcb_details
+LIBS:power
+LIBS:Power_kl
+LIBS:RF ICs
+LIBS:st_kl
+LIBS:Switches
+LIBS:Tittar_kl
+LIBS:Transistors_kl
+LIBS:standard_logic
+LIBS:modules
+LIBS:Sensors
 LIBS:SimpleJoyRx-cache
 EELAYER 26 0
 EELAYER END
@@ -15,7 +30,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR022
+L GND #PWR022
 U 1 1 59D3E6BB
 P 5800 5050
 F 0 "#PWR022" H 5890 5030 30  0001 C CNN
@@ -30,7 +45,7 @@ SWCLK
 Text Label 9200 2200 0    60   ~ 0
 SWDIO
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR024
+L GND #PWR024
 U 1 1 59D3E6C3
 P 7000 4650
 F 0 "#PWR024" H 7090 4630 30  0001 C CNN
@@ -41,7 +56,7 @@ F 3 "" H 7000 4650 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR021
+L GND #PWR021
 U 1 1 59D3E6C9
 P 5550 5050
 F 0 "#PWR021" H 5640 5030 30  0001 C CNN
@@ -52,7 +67,7 @@ F 3 "" H 5550 5050 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR018
+L GND #PWR018
 U 1 1 59D3E6CF
 P 5050 5050
 F 0 "#PWR018" H 5140 5030 30  0001 C CNN
@@ -63,7 +78,7 @@ F 3 "" H 5050 5050 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR014
+L GND #PWR014
 U 1 1 59D3E6D5
 P 4550 5050
 F 0 "#PWR014" H 4640 5030 30  0001 C CNN
@@ -74,7 +89,7 @@ F 3 "" H 4550 5050 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:+3.3V-RESCUE-SimpleJoyRx #PWR015
+L +3.3V #PWR015
 U 1 1 59D3E6DB
 P 4750 3650
 F 0 "#PWR015" H 4750 3610 30  0001 C CNN
@@ -85,7 +100,7 @@ F 3 "" H 4750 3650 60  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:+3.3V-RESCUE-SimpleJoyRx #PWR011
+L +3.3V #PWR011
 U 1 1 59D3E6E1
 P 4250 3450
 F 0 "#PWR011" H 4250 3410 30  0001 C CNN
@@ -96,7 +111,7 @@ F 3 "" H 4250 3450 60  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:+3.3V-RESCUE-SimpleJoyRx #PWR023
+L +3.3V #PWR023
 U 1 1 59D3E6E7
 P 6050 4450
 F 0 "#PWR023" H 6050 4410 30  0001 C CNN
@@ -109,7 +124,7 @@ $EndComp
 Text Label 5550 1500 2    60   ~ 0
 UART_TX
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR010
+L GND #PWR010
 U 1 1 59D3E70B
 P 4050 5050
 F 0 "#PWR010" H 4140 5030 30  0001 C CNN
@@ -120,7 +135,7 @@ F 3 "" H 4050 5050 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C2
+L C C2
 U 1 1 59D3E711
 P 4050 4750
 F 0 "C2" H 3950 4650 50  0000 L CNN
@@ -145,7 +160,7 @@ CC_MOSI
 Text Label 5550 1600 2    60   ~ 0
 UART_RX
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR016
+L GND #PWR016
 U 1 1 59D3E720
 P 4800 5050
 F 0 "#PWR016" H 4890 5030 30  0001 C CNN
@@ -156,7 +171,7 @@ F 3 "" H 4800 5050 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:+3.3V-RESCUE-SimpleJoyRx #PWR013
+L +3.3V #PWR013
 U 1 1 59D3E72D
 P 4500 3550
 F 0 "#PWR013" H 4500 3510 30  0001 C CNN
@@ -171,7 +186,7 @@ D-
 Text Label 9250 2100 0    60   ~ 0
 D+
 $Comp
-L SimpleJoyRx-rescue:BUTTON-RESCUE-SimpleJoyRx SW2
+L BUTTON SW2
 U 1 1 59D3E775
 P 7950 4450
 F 0 "SW2" H 7750 4600 50  0000 C CNN
@@ -185,7 +200,7 @@ F 6 "4" H 7950 4450 60  0001 C CNN "Price"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR025
+L GND #PWR025
 U 1 1 59D3E787
 P 7500 5050
 F 0 "#PWR025" H 7590 5030 30  0001 C CNN
@@ -196,7 +211,7 @@ F 3 "" H 7500 5050 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:+3.3V-RESCUE-SimpleJoyRx #PWR026
+L +3.3V #PWR026
 U 1 1 59D3E797
 P 8350 4450
 F 0 "#PWR026" H 8350 4410 30  0001 C CNN
@@ -209,7 +224,7 @@ $EndComp
 Text Notes 1100 1850 0    60   ~ 0
 USB
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR03
+L GND #PWR03
 U 1 1 59D3E4E5
 P 1550 2100
 F 0 "#PWR03" H 1640 2080 30  0001 C CNN
@@ -220,7 +235,7 @@ F 3 "" H 1550 2100 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:USB_MINI_B-RESCUE-SimpleJoyRx XL2
+L USB_MINI_B XL2
 U 1 1 59D3E4ED
 P 1200 2900
 F 0 "XL2" H 1000 3350 60  0000 C CNN
@@ -234,7 +249,7 @@ F 6 "46" H 1200 2900 60  0001 C CNN "Price"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR04
+L GND #PWR04
 U 1 1 59D3E4F4
 P 1550 3200
 F 0 "#PWR04" H 1640 3180 30  0001 C CNN
@@ -247,7 +262,7 @@ $EndComp
 Text Notes 750  600  0    60   ~ 0
 Programming & debug
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR05
+L GND #PWR05
 U 1 1 59D3E50B
 P 1650 1000
 F 0 "#PWR05" H 1740 980 30  0001 C CNN
@@ -266,7 +281,7 @@ UART_TX
 Text Label 1350 1300 0    60   ~ 0
 UART_RX
 $Comp
-L SimpleJoyRx-rescue:CONN_6-RESCUE-SimpleJoyRx XL1
+L CONN_6 XL1
 U 1 1 59D3E521
 P 900 1050
 F 0 "XL1" V 850 1050 50  0000 C CNN
@@ -285,7 +300,7 @@ NoConn ~ 850  3400
 Text Notes 16300 1200 0    60   ~ 0
 Radio
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR083
+L GND #PWR083
 U 1 1 59D4087C
 P 14700 3500
 F 0 "#PWR083" H 14790 3480 30  0001 C CNN
@@ -296,7 +311,7 @@ F 3 "" H 14700 3500 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR081
+L GND #PWR081
 U 1 1 59D40882
 P 14200 3500
 F 0 "#PWR081" H 14290 3480 30  0001 C CNN
@@ -307,7 +322,7 @@ F 3 "" H 14200 3500 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR082
+L GND #PWR082
 U 1 1 59D40888
 P 14450 3500
 F 0 "#PWR082" H 14540 3480 30  0001 C CNN
@@ -332,7 +347,7 @@ RF2
 Text Label 16750 1700 0    60   ~ 0
 RF1
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR0100
+L GND #PWR0100
 U 1 1 59D40895
 P 16700 3100
 F 0 "#PWR0100" H 16790 3080 30  0001 C CNN
@@ -343,7 +358,7 @@ F 3 "" H 16700 3100 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR094
+L GND #PWR094
 U 1 1 59D4089B
 P 16000 3500
 F 0 "#PWR094" H 16090 3480 30  0001 C CNN
@@ -354,7 +369,7 @@ F 3 "" H 16000 3500 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR084
+L GND #PWR084
 U 1 1 59D408A1
 P 15000 3500
 F 0 "#PWR084" H 15090 3480 30  0001 C CNN
@@ -365,7 +380,7 @@ F 3 "" H 15000 3500 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR088
+L GND #PWR088
 U 1 1 59D408A7
 P 15250 3500
 F 0 "#PWR088" H 15340 3480 30  0001 C CNN
@@ -376,7 +391,7 @@ F 3 "" H 15250 3500 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR0111
+L GND #PWR0111
 U 1 1 59D408AD
 P 18400 2450
 F 0 "#PWR0111" H 18490 2430 30  0001 C CNN
@@ -389,7 +404,7 @@ $EndComp
 Text Notes 18400 1350 0    60   ~ 0
 Matching circuit
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR0105
+L GND #PWR0105
 U 1 1 59D408B4
 P 17550 2450
 F 0 "#PWR0105" H 17640 2430 30  0001 C CNN
@@ -416,7 +431,7 @@ Balun
 Text Label 19150 1700 0    60   ~ 0
 ANT2
 $Comp
-L SimpleJoyRx-rescue:VCC-RESCUE-SimpleJoyRx #PWR0102
+L VCC #PWR0102
 U 1 1 59D408CB
 P 16900 2600
 F 0 "#PWR0102" H 16900 2650 30  0001 C CNN
@@ -427,7 +442,7 @@ F 3 "" H 16900 2600 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:CC1101-RESCUE-SimpleJoyRx DD2
+L CC1101 DD2
 U 1 1 59D408DA
 P 16050 2350
 F 0 "DD2" H 15600 3150 60  0000 C CNN
@@ -441,7 +456,7 @@ F 6 "21" H 15900 3450 60  0001 C CNN "SolderPoints"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:CRYSTAL_H-RESCUE-SimpleJoyRx XTAL1
+L CRYSTAL_H XTAL1
 U 1 1 59D408E3
 P 14450 2950
 F 0 "XTAL1" H 14450 3225 60  0000 C CNN
@@ -454,7 +469,7 @@ F 5 "4" H 14650 3425 60  0001 C CNN "SolderPoints"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C26
+L C C26
 U 1 1 59D408EC
 P 14200 3200
 F 0 "C26" H 14100 3100 50  0000 L CNN
@@ -467,7 +482,7 @@ F 5 "2" H 14300 3300 60  0001 C CNN "SolderPoints"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C27
+L C C27
 U 1 1 59D408F5
 P 14700 3200
 F 0 "C27" H 14600 3100 50  0000 L CNN
@@ -480,7 +495,7 @@ F 5 "2" H 14800 3300 60  0001 C CNN "SolderPoints"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:R-RESCUE-SimpleJoyRx R8
+L R R8
 U 1 1 59D408FE
 P 15250 3200
 F 0 "R8" V 15330 3050 50  0000 C CNN
@@ -493,7 +508,7 @@ F 5 "2" V 15530 3250 60  0001 C CNN "SolderPoints"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:L-RESCUE-SimpleJoyRx L2
+L L L2
 U 1 1 59D40907
 P 18750 1700
 F 0 "L2" V 18650 1560 40  0000 C CNN
@@ -506,7 +521,7 @@ F 5 "2" V 18850 1760 60  0001 C CNN "SolderPoints"
 	0    1    1    0   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C35
+L C C35
 U 1 1 59D40910
 P 18400 2200
 F 0 "C35" H 18300 2100 50  0000 L CNN
@@ -519,7 +534,7 @@ F 5 "2" H 18500 2300 60  0001 C CNN "SolderPoints"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C28
+L C C28
 U 1 1 59D4092B
 P 15000 3200
 F 0 "C28" H 14900 3100 50  0000 L CNN
@@ -536,7 +551,7 @@ Entry Wire Line
 Text Label 14050 1900 0    60   ~ 0
 CC_GDO0
 $Comp
-L SimpleJoyRx-rescue:TESTPOINT-RESCUE-SimpleJoyRx TP1
+L TESTPOINT TP1
 U 1 1 59D40936
 P 14000 1900
 F 0 "TP1" H 13775 1900 60  0000 C CNN
@@ -549,7 +564,7 @@ F 5 "0" H 14200 2250 60  0001 C CNN "SolderPoints"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:BALUN868JOHANSON-RESCUE-SimpleJoyRx BLN1
+L BALUN868JOHANSON BLN1
 U 1 1 59D40940
 P 17450 1800
 F 0 "BLN1" H 17100 2150 60  0000 C CNN
@@ -564,7 +579,7 @@ F 7 "45" H 17450 1800 60  0001 C CNN "Price"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:ANT_PCB_MONO-RESCUE-SimpleJoyRx ANT1
+L ANT_PCB_MONO ANT1
 U 1 1 59D40949
 P 20200 1700
 F 0 "ANT1" H 20000 1950 60  0000 C CNN
@@ -578,7 +593,7 @@ F 5 "0" H 20200 2150 60  0001 C CNN "SolderPoints"
 $EndComp
 NoConn ~ 15300 2300
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR0124
+L GND #PWR0124
 U 1 1 59D4098B
 P 19600 4500
 F 0 "#PWR0124" H 19690 4480 30  0001 C CNN
@@ -589,7 +604,7 @@ F 3 "" H 19600 4500 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C43
+L C C43
 U 1 1 59D40991
 P 19600 4200
 F 0 "C43" H 19500 4300 50  0000 L CNN
@@ -600,7 +615,7 @@ F 3 "" H 19600 4200 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR0116
+L GND #PWR0116
 U 1 1 59D40998
 P 19000 4500
 F 0 "#PWR0116" H 19090 4480 30  0001 C CNN
@@ -611,7 +626,7 @@ F 3 "" H 19000 4500 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C39
+L C C39
 U 1 1 59D4099E
 P 19000 4200
 F 0 "C39" H 18900 4300 50  0000 L CNN
@@ -622,7 +637,7 @@ F 3 "" H 19000 4200 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C42
+L C C42
 U 1 1 59D409A5
 P 19300 4200
 F 0 "C42" H 19200 4300 50  0000 L CNN
@@ -633,7 +648,7 @@ F 3 "" H 19300 4200 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR0120
+L GND #PWR0120
 U 1 1 59D409AC
 P 19300 4500
 F 0 "#PWR0120" H 19390 4480 30  0001 C CNN
@@ -644,7 +659,7 @@ F 3 "" H 19300 4500 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR0114
+L GND #PWR0114
 U 1 1 59D409B2
 P 18700 4500
 F 0 "#PWR0114" H 18790 4480 30  0001 C CNN
@@ -655,7 +670,7 @@ F 3 "" H 18700 4500 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C37
+L C C37
 U 1 1 59D409B8
 P 18700 4200
 F 0 "C37" H 18600 4300 50  0000 L CNN
@@ -666,7 +681,7 @@ F 3 "" H 18700 4200 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C36
+L C C36
 U 1 1 59D409BF
 P 18400 4200
 F 0 "C36" H 18300 4300 50  0000 L CNN
@@ -677,7 +692,7 @@ F 3 "" H 18400 4200 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR0112
+L GND #PWR0112
 U 1 1 59D409C6
 P 18400 4500
 F 0 "#PWR0112" H 18490 4480 30  0001 C CNN
@@ -688,7 +703,7 @@ F 3 "" H 18400 4500 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR0108
+L GND #PWR0108
 U 1 1 59D409CC
 P 18100 4500
 F 0 "#PWR0108" H 18190 4480 30  0001 C CNN
@@ -699,7 +714,7 @@ F 3 "" H 18100 4500 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C33
+L C C33
 U 1 1 59D409D2
 P 18100 4200
 F 0 "C33" H 18000 4300 50  0000 L CNN
@@ -714,7 +729,7 @@ CC Power Filter
 Text Notes 17750 3750 0    60   ~ 0
 Pins  15,   14,    11,    9,     4,    18
 $Comp
-L SimpleJoyRx-rescue:PWR_FLAG-RESCUE-SimpleJoyRx #FLG05
+L PWR_FLAG #FLG05
 U 1 1 59D409DB
 P 19750 3750
 F 0 "#FLG05" H 19750 4020 30  0001 C CNN
@@ -725,7 +740,7 @@ F 3 "" H 19750 3750 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:VCC-RESCUE-SimpleJoyRx #PWR0126
+L VCC #PWR0126
 U 1 1 59D409E1
 P 19850 3900
 F 0 "#PWR0126" H 19850 3950 30  0001 C CNN
@@ -736,7 +751,7 @@ F 3 "" H 19850 3900 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:L-RESCUE-SimpleJoyRx L1
+L L L1
 U 1 1 59D40A02
 P 17500 3900
 F 0 "L1" V 17350 3750 40  0000 C CNN
@@ -749,7 +764,7 @@ F 5 "2" V 17500 3900 60  0001 C CNN "SolderPoints"
 	0    1    1    0   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR0106
+L GND #PWR0106
 U 1 1 59D40A09
 P 17800 4500
 F 0 "#PWR0106" H 17890 4480 30  0001 C CNN
@@ -760,7 +775,7 @@ F 3 "" H 17800 4500 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:+3.3V-RESCUE-SimpleJoyRx #PWR0103
+L +3.3V #PWR0103
 U 1 1 59D40A19
 P 17200 3900
 F 0 "#PWR0103" H 17200 3860 30  0001 C CNN
@@ -770,14 +785,50 @@ F 3 "" H 17200 3900 60  0001 C CNN
 	1    17200 3900
 	-1   0    0    -1  
 $EndComp
-Text Label 1700 2800 0    60   ~ 0
+$Comp
+L USBLC6 U1
+U 1 1 59D4595A
+P 1700 4600
+F 0 "U1" H 1350 4900 60  0000 C CNN
+F 1 "USBLC6" H 2000 4900 60  0000 C CNN
+F 2 "SOT:SOT23-6" H 2400 4550 60  0001 C CNN
+F 3 "" H 2400 4550 60  0000 C CNN
+F 4 "USBLC6-2SC6" H 1450 5000 60  0001 C CNN "PN"
+F 5 "9" H 1550 5100 60  0001 C CNN "Price"
+F 6 "https://www.terraelectronica.ru/catalog_info.php?CODE=244787" H 1650 5200 60  0001 C CNN "URL"
+F 7 "6" H 1700 4600 60  0001 C CNN "SolderPoints"
+	1    1700 4600
+	1    0    0    -1  
+$EndComp
+Text Label 1000 4450 2    60   ~ 0
+D_IN-
+Text Label 1000 4750 2    60   ~ 0
+D_IN+
+$Comp
+L GND #PWR01
+U 1 1 59D45964
+P 1000 4600
+F 0 "#PWR01" H 1090 4580 30  0001 C CNN
+F 1 "GND" H 1000 4520 30  0001 C CNN
+F 2 "" H 1000 4600 60  0000 C CNN
+F 3 "" H 1000 4600 60  0000 C CNN
+	1    1000 4600
+	0    1    -1   0   
+$EndComp
+Text Label 2450 4450 0    60   ~ 0
 D-
-Text Label 1700 2900 0    60   ~ 0
+Text Label 2450 4750 0    60   ~ 0
 D+
+Text Notes 1950 4150 2    60   ~ 0
+Protection
+Text Label 1700 2800 2    60   ~ 0
+D_IN-
+Text Label 1700 2900 2    60   ~ 0
+D_IN+
 Text Label 2050 2700 2    60   ~ 0
 5V_USB
 $Comp
-L SimpleJoyRx-rescue:MCP1700-RESCUE-SimpleJoyRx DA7
+L MCP1700 DA7
 U 1 1 59D47894
 P 10050 14750
 F 0 "DA7" H 10075 15187 60  0000 C CNN
@@ -791,7 +842,7 @@ F 6 "MCP1700T-3302E/TT" H 10500 15350 60  0001 C CNN "PN"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:+3.3V-RESCUE-SimpleJoyRx #PWR080
+L +3.3V #PWR080
 U 1 1 59D478A1
 P 10750 14600
 F 0 "#PWR080" H 10750 14560 30  0001 C CNN
@@ -802,7 +853,7 @@ F 3 "" H 10750 14600 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR078
+L GND #PWR078
 U 1 1 59D478A9
 P 10050 15250
 F 0 "#PWR078" H 10140 15230 30  0001 C CNN
@@ -813,7 +864,7 @@ F 3 "" H 10050 15250 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C4
+L C C4
 U 1 1 59D484EC
 P 4550 4750
 F 0 "C4" H 4450 4650 50  0000 L CNN
@@ -826,7 +877,7 @@ F 5 "2" H 4650 4850 60  0001 C CNN "SolderPoints"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C5
+L C C5
 U 1 1 59D48921
 P 4800 4750
 F 0 "C5" H 4700 4650 50  0000 L CNN
@@ -839,7 +890,7 @@ F 5 "2" H 4900 4850 60  0001 C CNN "SolderPoints"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C6
+L C C6
 U 1 1 59D4898E
 P 5050 4750
 F 0 "C6" H 4950 4650 50  0000 L CNN
@@ -852,7 +903,7 @@ F 5 "2" H 5150 4850 60  0001 C CNN "SolderPoints"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C8
+L C C8
 U 1 1 59D48A1B
 P 5550 4750
 F 0 "C8" H 5450 4650 50  0000 L CNN
@@ -865,7 +916,7 @@ F 5 "2" H 5650 4850 60  0001 C CNN "SolderPoints"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C9
+L C C9
 U 1 1 59D48AE3
 P 5800 4750
 F 0 "C9" H 5700 4650 50  0000 L CNN
@@ -878,7 +929,7 @@ F 5 "2" H 5900 4850 60  0001 C CNN "SolderPoints"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR020
+L GND #PWR020
 U 1 1 59D49EA8
 P 5300 5050
 F 0 "#PWR020" H 5390 5030 30  0001 C CNN
@@ -889,7 +940,7 @@ F 3 "" H 5300 5050 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C7
+L C C7
 U 1 1 59D49EB1
 P 5300 4750
 F 0 "C7" H 5200 4650 50  0000 L CNN
@@ -902,7 +953,7 @@ F 5 "2" H 5400 4850 60  0001 C CNN "SolderPoints"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:+3.3V-RESCUE-SimpleJoyRx #PWR017
+L +3.3V #PWR017
 U 1 1 59D49FF3
 P 5000 3750
 F 0 "#PWR017" H 5000 3710 30  0001 C CNN
@@ -913,7 +964,7 @@ F 3 "" H 5000 3750 60  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR070
+L GND #PWR070
 U 1 1 59D4B4EE
 P 9500 15250
 F 0 "#PWR070" H 9590 15230 30  0001 C CNN
@@ -924,7 +975,7 @@ F 3 "" H 9500 15250 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C24
+L C C24
 U 1 1 59D4B4F7
 P 9500 14950
 F 0 "C24" H 9400 14850 50  0000 L CNN
@@ -937,7 +988,7 @@ F 5 "2" H 9600 15050 60  0001 C CNN "SolderPoints"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR079
+L GND #PWR079
 U 1 1 59D4B8C2
 P 10650 15250
 F 0 "#PWR079" H 10740 15230 30  0001 C CNN
@@ -948,7 +999,7 @@ F 3 "" H 10650 15250 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C25
+L C C25
 U 1 1 59D4B8CB
 P 10650 14950
 F 0 "C25" H 10550 14850 50  0000 L CNN
@@ -965,7 +1016,7 @@ Power
 Text Label 16100 14150 0    60   ~ 0
 BAT_MEAS
 $Comp
-L SimpleJoyRx-rescue:N_3PIN-RESCUE-SimpleJoyRx Q2
+L N_3PIN Q2
 U 1 1 59D4DD32
 P 15950 14950
 F 0 "Q2" H 16087 14904 50  0000 L CNN
@@ -980,7 +1031,7 @@ $EndComp
 Text Label 15100 15000 0    60   ~ 0
 MEASURE_EN
 $Comp
-L SimpleJoyRx-rescue:+BATT-RESCUE-SimpleJoyRx #PWR091
+L +BATT #PWR091
 U 1 1 59D4DD3A
 P 16000 13450
 F 0 "#PWR091" H 16000 13410 30  0001 C CNN
@@ -991,7 +1042,7 @@ F 3 "" H 16000 13450 60  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR0104
+L GND #PWR0104
 U 1 1 59D4DD4F
 P 20800 14300
 F 0 "#PWR0104" H 20890 14280 30  0001 C CNN
@@ -1002,7 +1053,7 @@ F 3 "" H 20800 14300 60  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:Logo-RESCUE-SimpleJoyRx Logo1
+L Logo Logo1
 U 1 1 59D4DD55
 P 18000 13550
 F 0 "Logo1" H 18278 13603 60  0000 L CNN
@@ -1019,7 +1070,7 @@ BAT_MEAS
 Text Label 9100 1000 0    60   ~ 0
 MEASURE_EN
 $Comp
-L SimpleJoyRx-rescue:PwrUnst-RESCUE-SimpleJoyRx #PWR063
+L PwrUnst #PWR063
 U 1 1 59D50E14
 P 8600 14600
 F 0 "#PWR063" H 8650 14650 30  0001 C CNN
@@ -1030,7 +1081,7 @@ F 3 "" H 1000 850 60  0000 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:HOLE_METALLED-RESCUE-SimpleJoyRx HOLE1
+L HOLE_METALLED HOLE1
 U 1 1 59D53F97
 P 20400 14300
 F 0 "HOLE1" H 20050 14300 60  0000 C CNN
@@ -1043,7 +1094,7 @@ F 5 "0" H 20100 14450 60  0001 C CNN "SolderPoints"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:HOLE_METALLED-RESCUE-SimpleJoyRx HOLE2
+L HOLE_METALLED HOLE2
 U 1 1 59D53FA0
 P 20400 14550
 F 0 "HOLE2" H 20050 14550 60  0000 C CNN
@@ -1057,7 +1108,7 @@ F 5 "0" H 20100 14700 60  0001 C CNN "SolderPoints"
 $EndComp
 NoConn ~ 5750 3250
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR012
+L GND #PWR012
 U 1 1 59D5939C
 P 4300 5050
 F 0 "#PWR012" H 4390 5030 30  0001 C CNN
@@ -1068,7 +1119,7 @@ F 3 "" H 4300 5050 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C3
+L C C3
 U 1 1 59D593A5
 P 4300 4750
 F 0 "C3" H 4200 4650 50  0000 L CNN
@@ -1081,7 +1132,7 @@ F 5 "2" H 4400 4850 60  0001 C CNN "SolderPoints"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:+3.3V-RESCUE-SimpleJoyRx #PWR019
+L +3.3V #PWR019
 U 1 1 59D5A36C
 P 5250 3900
 F 0 "#PWR019" H 5250 3860 30  0001 C CNN
@@ -1092,7 +1143,7 @@ F 3 "" H 5250 3900 60  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:CONN_3-RESCUE-SimpleJoyRx XL12
+L CONN_3 XL12
 U 1 1 59D514E7
 P 19400 6150
 F 0 "XL12" H 19200 6300 40  0000 C CNN
@@ -1105,7 +1156,7 @@ F 5 "3" V 19550 6350 60  0001 C CNN "SolderPoints"
 	-1   0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR077
+L GNDPWR #PWR077
 U 1 1 59D51B67
 P 19200 6700
 F 0 "#PWR077" H 19200 6750 40  0001 C CNN
@@ -1144,7 +1195,7 @@ SRV1
 Text Label 9100 3200 0    60   ~ 0
 PWM1
 $Comp
-L SimpleJoyRx-rescue:CONN_3-RESCUE-SimpleJoyRx XL11
+L CONN_3 XL11
 U 1 1 59D5BB96
 P 17350 6200
 F 0 "XL11" H 17150 6350 40  0000 C CNN
@@ -1157,7 +1208,7 @@ F 5 "3" V 17500 6400 60  0001 C CNN "SolderPoints"
 	-1   0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR076
+L GNDPWR #PWR076
 U 1 1 59D5BB9C
 P 17150 6750
 F 0 "#PWR076" H 17150 6800 40  0001 C CNN
@@ -1170,7 +1221,7 @@ $EndComp
 Text Label 3900 6550 0    60   ~ 0
 PWM2
 $Comp
-L SimpleJoyRx-rescue:CONN_3-RESCUE-SimpleJoyRx XL16
+L CONN_3 XL16
 U 1 1 59D5BFFE
 P 19400 7600
 F 0 "XL16" H 19200 7750 40  0000 C CNN
@@ -1183,7 +1234,7 @@ F 5 "3" V 19550 7800 60  0001 C CNN "SolderPoints"
 	-1   0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR0125
+L GNDPWR #PWR0125
 U 1 1 59D5C004
 P 19200 8150
 F 0 "#PWR0125" H 19200 8200 40  0001 C CNN
@@ -1198,7 +1249,7 @@ SRV6
 Text Label 17850 10950 0    60   ~ 0
 PWM6
 $Comp
-L SimpleJoyRx-rescue:R-RESCUE-SimpleJoyRx R12
+L R R12
 U 1 1 59D5C03D
 P 18400 11300
 F 0 "R12" V 18480 11150 50  0000 C CNN
@@ -1213,7 +1264,7 @@ $EndComp
 Text Label 19100 10600 0    60   ~ 0
 PWM_OUT6
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR0122
+L GNDPWR #PWR0122
 U 1 1 59D5C044
 P 18800 11650
 F 0 "#PWR0122" H 18800 11700 40  0001 C CNN
@@ -1224,7 +1275,7 @@ F 3 "" H 18800 11650 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR0115
+L GNDPWR #PWR0115
 U 1 1 59D5C04A
 P 18150 10600
 F 0 "#PWR0115" H 18150 10650 40  0001 C CNN
@@ -1235,7 +1286,7 @@ F 3 "" H 18150 10600 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C41
+L C C41
 U 1 1 59D5C054
 P 18450 10300
 F 0 "C41" H 18350 10200 50  0000 L CNN
@@ -1250,7 +1301,7 @@ F 7 "~" H 18450 10300 60  0001 C CNN "URL"
 	1    0    0    1   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR0119
+L GNDPWR #PWR0119
 U 1 1 59D5C05A
 P 18450 10600
 F 0 "#PWR0119" H 18450 10650 40  0001 C CNN
@@ -1261,7 +1312,7 @@ F 3 "" H 18450 10600 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C38
+L C C38
 U 1 1 59D5C066
 P 18150 10300
 F 0 "C38" H 18050 10200 50  0000 L CNN
@@ -1276,7 +1327,7 @@ F 7 "~" H 18150 10300 60  0001 C CNN "URL"
 	1    0    0    1   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:D_Shottky-RESCUE-SimpleJoyRx D6
+L D_Shottky D6
 U 1 1 59D5C075
 P 18800 10300
 F 0 "D6" H 18800 10400 40  0000 C CNN
@@ -1292,7 +1343,7 @@ F 8 "2A 20V Vf=525mV" H 18800 10300 60  0001 C CNN "Info"
 	0    -1   -1   0   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR0117
+L GNDPWR #PWR0117
 U 1 1 59D5C07B
 P 18400 11650
 F 0 "#PWR0117" H 18400 11700 40  0001 C CNN
@@ -1303,7 +1354,7 @@ F 3 "" H 18400 11650 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:CONN_2-RESCUE-SimpleJoyRx XL17
+L CONN_2 XL17
 U 1 1 59D5C083
 P 19300 10250
 F 0 "XL17" H 19500 10150 40  0000 C CNN
@@ -1317,7 +1368,7 @@ F 6 "2" H 19300 10250 60  0001 C CNN "SolderPoints"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:N_3PIN-RESCUE-SimpleJoyRx Q4
+L N_3PIN Q4
 U 1 1 59D5C08D
 P 18750 10900
 F 0 "Q4" H 18950 10950 50  0000 C CNN
@@ -1332,7 +1383,7 @@ F 7 "7.5" H 18750 10900 60  0001 C CNN "Price"
 	1    0    0    1   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:CONN_3-RESCUE-SimpleJoyRx XL13
+L CONN_3 XL13
 U 1 1 59D5C0A2
 P 17350 7650
 F 0 "XL13" H 17150 7800 40  0000 C CNN
@@ -1345,7 +1396,7 @@ F 5 "3" V 17500 7850 60  0001 C CNN "SolderPoints"
 	-1   0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR0101
+L GNDPWR #PWR0101
 U 1 1 59D5C0A8
 P 17150 8200
 F 0 "#PWR0101" H 17150 8250 40  0001 C CNN
@@ -1360,7 +1411,7 @@ SRV5
 Text Label 14900 10900 0    60   ~ 0
 PWM5
 $Comp
-L SimpleJoyRx-rescue:R-RESCUE-SimpleJoyRx R11
+L R R11
 U 1 1 59D5C0E1
 P 15450 11250
 F 0 "R11" V 15530 11100 50  0000 C CNN
@@ -1375,7 +1426,7 @@ $EndComp
 Text Label 16150 10550 0    60   ~ 0
 PWM_OUT5
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR098
+L GNDPWR #PWR098
 U 1 1 59D5C0E8
 P 15850 11600
 F 0 "#PWR098" H 15850 11650 40  0001 C CNN
@@ -1386,7 +1437,7 @@ F 3 "" H 15850 11600 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR093
+L GNDPWR #PWR093
 U 1 1 59D5C0EE
 P 15200 10550
 F 0 "#PWR093" H 15200 10600 40  0001 C CNN
@@ -1397,7 +1448,7 @@ F 3 "" H 15200 10550 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C31
+L C C31
 U 1 1 59D5C0F8
 P 15500 10250
 F 0 "C31" H 15400 10150 50  0000 L CNN
@@ -1412,7 +1463,7 @@ F 7 "~" H 15500 10250 60  0001 C CNN "URL"
 	1    0    0    1   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR096
+L GNDPWR #PWR096
 U 1 1 59D5C0FE
 P 15500 10550
 F 0 "#PWR096" H 15500 10600 40  0001 C CNN
@@ -1423,7 +1474,7 @@ F 3 "" H 15500 10550 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C30
+L C C30
 U 1 1 59D5C10A
 P 15200 10250
 F 0 "C30" H 15100 10150 50  0000 L CNN
@@ -1438,7 +1489,7 @@ F 7 "~" H 15200 10250 60  0001 C CNN "URL"
 	1    0    0    1   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:D_Shottky-RESCUE-SimpleJoyRx D5
+L D_Shottky D5
 U 1 1 59D5C119
 P 15850 10250
 F 0 "D5" H 15850 10350 40  0000 C CNN
@@ -1454,7 +1505,7 @@ F 8 "2A 20V Vf=525mV" H 15850 10250 60  0001 C CNN "Info"
 	0    -1   -1   0   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR095
+L GNDPWR #PWR095
 U 1 1 59D5C11F
 P 15450 11600
 F 0 "#PWR095" H 15450 11650 40  0001 C CNN
@@ -1465,7 +1516,7 @@ F 3 "" H 15450 11600 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:CONN_2-RESCUE-SimpleJoyRx XL14
+L CONN_2 XL14
 U 1 1 59D5C127
 P 16350 10200
 F 0 "XL14" H 16550 10100 40  0000 C CNN
@@ -1479,7 +1530,7 @@ F 6 "2" H 16350 10200 60  0001 C CNN "SolderPoints"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:N_3PIN-RESCUE-SimpleJoyRx Q3
+L N_3PIN Q3
 U 1 1 59D5C131
 P 15800 10850
 F 0 "Q3" H 16000 10900 50  0000 C CNN
@@ -1494,7 +1545,7 @@ F 7 "7.5" H 15800 10850 60  0001 C CNN "Price"
 	1    0    0    1   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:CONN_3-RESCUE-SimpleJoyRx XL10
+L CONN_3 XL10
 U 1 1 59D5C5BB
 P 15500 6200
 F 0 "XL10" H 15300 6350 40  0000 C CNN
@@ -1507,7 +1558,7 @@ F 5 "3" V 15650 6400 60  0001 C CNN "SolderPoints"
 	-1   0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR075
+L GNDPWR #PWR075
 U 1 1 59D5C5C1
 P 15300 6750
 F 0 "#PWR075" H 15300 6800 40  0001 C CNN
@@ -1522,7 +1573,7 @@ SRV1
 Text Label 3900 6300 0    60   ~ 0
 PWM1
 $Comp
-L SimpleJoyRx-rescue:CONN_3-RESCUE-SimpleJoyRx XL9
+L CONN_3 XL9
 U 1 1 59D5C65F
 P 15450 7700
 F 0 "XL9" H 15250 7850 40  0000 C CNN
@@ -1535,7 +1586,7 @@ F 5 "3" V 15600 7900 60  0001 C CNN "SolderPoints"
 	-1   0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR074
+L GNDPWR #PWR074
 U 1 1 59D5C665
 P 15250 8250
 F 0 "#PWR074" H 15250 8300 40  0001 C CNN
@@ -1552,7 +1603,7 @@ PWM4
 Text Label 16400 6100 0    60   ~ 0
 SRV2
 $Comp
-L SimpleJoyRx-rescue:PWR_FLAG-RESCUE-SimpleJoyRx #FLG02
+L PWR_FLAG #FLG02
 U 1 1 59D615DF
 P 3300 14050
 F 0 "#FLG02" H 3300 14320 30  0001 C CNN
@@ -1563,7 +1614,7 @@ F 3 "" H 3300 14050 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:+BATT-RESCUE-SimpleJoyRx #PWR09
+L +BATT #PWR09
 U 1 1 59D615E5
 P 3500 14100
 F 0 "#PWR09" H 3500 14060 30  0001 C CNN
@@ -1574,7 +1625,7 @@ F 3 "" H 3500 14100 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:CONN_2-RESCUE-SimpleJoyRx XL3
+L CONN_2 XL3
 U 1 1 59D615EB
 P 1450 14200
 F 0 "XL3" V 1400 14200 40  0000 C CNN
@@ -1589,7 +1640,7 @@ $EndComp
 Text Notes 1250 13900 0    60   ~ 0
 Power\nconnector
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR06
+L GNDPWR #PWR06
 U 1 1 59D615F3
 P 1650 15050
 F 0 "#PWR06" H 1650 15100 40  0001 C CNN
@@ -1600,7 +1651,7 @@ F 3 "" H 1650 15050 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:R-RESCUE-SimpleJoyRx R1
+L R R1
 U 1 1 59D615FB
 P 2850 14900
 F 0 "R1" V 2930 14750 50  0000 C CNN
@@ -1615,7 +1666,7 @@ $EndComp
 Text Notes 2350 13750 0    60   ~ 0
 Reverse polarity protection
 $Comp
-L SimpleJoyRx-rescue:PWR_FLAG-RESCUE-SimpleJoyRx #FLG01
+L PWR_FLAG #FLG01
 U 1 1 59D61605
 P 1800 14900
 F 0 "#FLG01" H 1800 15170 30  0001 C CNN
@@ -1628,7 +1679,7 @@ $EndComp
 Text Label 1750 14100 0    60   ~ 0
 PRE_BAT_PWR
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR08
+L GNDPWR #PWR08
 U 1 1 59D61612
 P 2850 15250
 F 0 "#PWR08" H 2850 15300 40  0001 C CNN
@@ -1639,7 +1690,7 @@ F 3 "" H 2850 15250 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:PwrUnst-RESCUE-SimpleJoyRx #PWR049
+L PwrUnst #PWR049
 U 1 1 59D65E9B
 P 6750 14250
 F 0 "#PWR049" H 6750 14210 30  0001 C CNN
@@ -1650,12 +1701,12 @@ F 3 "" H 6750 14250 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:SWITCH_H-RESCUE-SimpleJoyRx SW3
+L SWITCH_H SW3
 U 1 1 59D65EAE
 P 5550 15100
 F 0 "SW3" H 5700 14950 60  0000 C CNN
-F 1 "SS-12F23" H 5200 14950 60  0000 C CNN
-F 2 "BtnsSwitches:SW_SS-12F23" H 5550 15100 60  0001 C CNN
+F 1 "1P2T" H 5200 14950 60  0000 C CNN
+F 2 "BtnsSwitches:SW_SS-1P2T" H 5550 15100 60  0001 C CNN
 F 3 "" H 5550 15100 60  0000 C CNN
 F 4 "10" H 5550 15100 60  0001 C CNN "Price"
 F 5 "3" H 5550 15100 60  0001 C CNN "SolderPoints"
@@ -1663,7 +1714,7 @@ F 5 "3" H 5550 15100 60  0001 C CNN "SolderPoints"
 	-1   0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR041
+L GNDPWR #PWR041
 U 1 1 59D65EB5
 P 5600 15400
 F 0 "#PWR041" H 5600 15450 40  0001 C CNN
@@ -1674,7 +1725,7 @@ F 3 "" H 5600 15400 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR037
+L GNDPWR #PWR037
 U 1 1 59D65EBB
 P 5100 15400
 F 0 "#PWR037" H 5100 15450 40  0001 C CNN
@@ -1687,7 +1738,7 @@ $EndComp
 Text Notes 5250 15600 0    60   ~ 0
 Power switch
 $Comp
-L SimpleJoyRx-rescue:Px2_SO8-RESCUE-SimpleJoyRx Q1
+L Px2_SO8 Q1
 U 2 1 59D65EC5
 P 5950 14500
 F 0 "Q1" V 6400 14700 50  0000 C CNN
@@ -1701,7 +1752,7 @@ F 6 "http://onelec.ru/products/irf9358pbf-dd012426-33d8-429e-9c6a-2b35b0a91da1" 
 	0    1    -1   0   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:PWR_FLAG-RESCUE-SimpleJoyRx #FLG03
+L PWR_FLAG #FLG03
 U 1 1 59D65ECC
 P 6500 14150
 F 0 "#FLG03" H 6500 14420 30  0001 C CNN
@@ -1713,7 +1764,7 @@ F 3 "" H 6500 14150 60  0000 C CNN
 $EndComp
 NoConn ~ 5300 15000
 $Comp
-L SimpleJoyRx-rescue:R-RESCUE-SimpleJoyRx R6
+L R R6
 U 1 1 59D65EE5
 P 5100 14600
 F 0 "R6" V 5180 14450 50  0000 C CNN
@@ -1726,7 +1777,7 @@ F 5 "2" V 5380 14650 60  0001 C CNN "SolderPoints"
 	1    0    0    1   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR048
+L GNDPWR #PWR048
 U 1 1 59D65EF6
 P 6350 15400
 F 0 "#PWR048" H 6350 15450 40  0001 C CNN
@@ -1739,7 +1790,7 @@ $EndComp
 Text Notes 6900 15050 0    60   ~ 0
 Outer \npower\nswitch
 $Comp
-L SimpleJoyRx-rescue:PwrUnst-RESCUE-SimpleJoyRx #PWR072
+L PwrUnst #PWR072
 U 1 1 59D67CFD
 P 15150 6200
 F 0 "#PWR072" H 15150 6160 30  0001 C CNN
@@ -1750,7 +1801,7 @@ F 3 "" H 15150 6200 60  0000 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:PwrUnst-RESCUE-SimpleJoyRx #PWR073
+L PwrUnst #PWR073
 U 1 1 59D67F53
 P 17050 6200
 F 0 "#PWR073" H 17050 6160 30  0001 C CNN
@@ -1761,7 +1812,7 @@ F 3 "" H 17050 6200 60  0000 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:PwrUnst-RESCUE-SimpleJoyRx #PWR071
+L PwrUnst #PWR071
 U 1 1 59D68053
 P 19000 6150
 F 0 "#PWR071" H 19000 6110 30  0001 C CNN
@@ -1772,7 +1823,7 @@ F 3 "" H 19000 6150 60  0000 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:PwrUnst-RESCUE-SimpleJoyRx #PWR0123
+L PwrUnst #PWR0123
 U 1 1 59D68059
 P 19000 7600
 F 0 "#PWR0123" H 19000 7560 30  0001 C CNN
@@ -1783,7 +1834,7 @@ F 3 "" H 19000 7600 60  0000 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:PwrUnst-RESCUE-SimpleJoyRx #PWR0113
+L PwrUnst #PWR0113
 U 1 1 59D68065
 P 17800 10000
 F 0 "#PWR0113" H 17800 9960 30  0001 C CNN
@@ -1794,7 +1845,7 @@ F 3 "" H 17800 10000 60  0000 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:PwrUnst-RESCUE-SimpleJoyRx #PWR086
+L PwrUnst #PWR086
 U 1 1 59D681B9
 P 14550 9950
 F 0 "#PWR086" H 14550 9910 30  0001 C CNN
@@ -1805,7 +1856,7 @@ F 3 "" H 14550 9950 60  0000 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:PwrUnst-RESCUE-SimpleJoyRx #PWR099
+L PwrUnst #PWR099
 U 1 1 59D6CF15
 P 16950 7650
 F 0 "#PWR099" H 16950 7610 30  0001 C CNN
@@ -1816,7 +1867,7 @@ F 3 "" H 16950 7650 60  0000 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:D_Shottky-RESCUE-SimpleJoyRx D4
+L D_Shottky D4
 U 1 1 59D70EA8
 P 8950 14600
 F 0 "D4" H 8950 14700 40  0000 C CNN
@@ -1832,7 +1883,7 @@ F 8 "2A 20V Vf=525mV" H 8950 14600 60  0001 C CNN "Info"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:D_Shottky-RESCUE-SimpleJoyRx D3
+L D_Shottky D3
 U 1 1 59D712F0
 P 8950 14300
 F 0 "D3" H 8950 14400 40  0000 C CNN
@@ -1852,7 +1903,7 @@ MCU_PWR
 Text Label 8450 14300 0    60   ~ 0
 5V_USB
 $Comp
-L SimpleJoyRx-rescue:DIPx8-RESCUE-SimpleJoyRx SW1
+L DIPx8 SW1
 U 1 1 59D7CD18
 P 1700 6750
 F 0 "SW1" H 1700 7187 60  0000 C CNN
@@ -1866,7 +1917,7 @@ F 6 "16" H 1700 6750 60  0001 C CNN "SolderPoints"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR055
+L GNDPWR #PWR055
 U 1 1 59D7FC27
 P 7700 15500
 F 0 "#PWR055" H 7700 15550 40  0001 C CNN
@@ -1877,7 +1928,7 @@ F 3 "" H 7700 15500 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR064
+L GND #PWR064
 U 1 1 59D7FC2D
 P 8400 15500
 F 0 "#PWR064" H 8490 15480 30  0001 C CNN
@@ -1888,7 +1939,7 @@ F 3 "" H 8400 15500 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:Fuse0R-RESCUE-SimpleJoyRx F1
+L Fuse0R F1
 U 1 1 59D7FC35
 P 8050 15400
 F 0 "F1" V 7980 15400 50  0000 C CNN
@@ -1903,7 +1954,7 @@ $EndComp
 Text Notes 7700 15200 0    60   ~ 0
 Always shorted
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR087
+L GNDPWR #PWR087
 U 1 1 59D8136D
 P 15650 15700
 F 0 "#PWR087" H 15650 15750 40  0001 C CNN
@@ -1914,7 +1965,7 @@ F 3 "" H 15650 15700 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR092
+L GNDPWR #PWR092
 U 1 1 59D81467
 P 16000 15700
 F 0 "#PWR092" H 16000 15750 40  0001 C CNN
@@ -1925,7 +1976,7 @@ F 3 "" H 16000 15700 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR07
+L GND #PWR07
 U 1 1 59D82AEF
 P 2100 7400
 F 0 "#PWR07" H 2190 7380 30  0001 C CNN
@@ -1970,7 +2021,7 @@ DIP8
 Text Notes 1450 5550 0    60   ~ 0
 DIP Switch
 $Comp
-L SimpleJoyRx-rescue:PwrUnst-RESCUE-SimpleJoyRx #PWR069
+L PwrUnst #PWR069
 U 1 1 59D8A106
 P 15050 7700
 F 0 "#PWR069" H 15050 7660 30  0001 C CNN
@@ -1981,7 +2032,7 @@ F 3 "" H 15050 7700 60  0000 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:Px2_SO8-RESCUE-SimpleJoyRx Q1
+L Px2_SO8 Q1
 U 1 1 59D63B24
 P 2800 14350
 F 0 "Q1" V 3250 14550 50  0000 C CNN
@@ -1995,7 +2046,7 @@ F 6 "http://onelec.ru/products/irf9358pbf-dd012426-33d8-429e-9c6a-2b35b0a91da1" 
 	0    -1   -1   0   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR045
+L GND #PWR045
 U 1 1 59D64507
 P 11050 2350
 F 0 "#PWR045" H 11140 2330 30  0001 C CNN
@@ -2006,7 +2057,7 @@ F 3 "" H 11050 2350 60  0000 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:R-RESCUE-SimpleJoyRx R4
+L R R4
 U 1 1 59D6450F
 P 10200 2350
 F 0 "R4" V 10280 2200 50  0000 C CNN
@@ -2021,7 +2072,7 @@ $EndComp
 Text Notes 11150 2400 0    60   ~ 0
 Power
 $Comp
-L SimpleJoyRx-rescue:LED-RESCUE-SimpleJoyRx D1
+L LED D1
 U 1 1 59D6451C
 P 10750 2350
 F 0 "D1" H 11050 2500 50  0000 C CNN
@@ -2037,7 +2088,7 @@ F 8 "Green" H 10600 2300 39  0000 C CNN "Color"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR046
+L GND #PWR046
 U 1 1 59D670CF
 P 11050 2700
 F 0 "#PWR046" H 11140 2680 30  0001 C CNN
@@ -2048,7 +2099,7 @@ F 3 "" H 11050 2700 60  0000 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:R-RESCUE-SimpleJoyRx R5
+L R R5
 U 1 1 59D670D7
 P 10200 2700
 F 0 "R5" V 10280 2550 50  0000 C CNN
@@ -2063,7 +2114,7 @@ $EndComp
 Text Notes 11150 2700 0    60   ~ 0
 Link
 $Comp
-L SimpleJoyRx-rescue:LED-RESCUE-SimpleJoyRx D2
+L LED D2
 U 1 1 59D670E4
 P 10750 2700
 F 0 "D2" H 11050 2850 50  0000 C CNN
@@ -2086,7 +2137,7 @@ NoConn ~ 9000 2400
 NoConn ~ 9000 4000
 NoConn ~ 9000 4100
 $Comp
-L SimpleJoyRx-rescue:+3.3V-RESCUE-SimpleJoyRx #PWR02
+L +3.3V #PWR02
 U 1 1 59D69F0A
 P 1550 800
 F 0 "#PWR02" H 1550 760 30  0001 C CNN
@@ -2098,8 +2149,10 @@ F 3 "" H 1550 800 60  0001 C CNN
 $EndComp
 Text Label 10100 1400 0    60   ~ 0
 5V_USB
+Text Label 2450 4600 0    60   ~ 0
+MCU_PWR
 $Comp
-L SimpleJoyRx-rescue:R-RESCUE-SimpleJoyRx R3
+L R R3
 U 1 1 59D6C7D4
 P 9750 1400
 F 0 "R3" V 9830 1250 50  0000 C CNN
@@ -2114,7 +2167,7 @@ $EndComp
 Text Notes 10550 1400 0    60   ~ 0
 USB Detect
 $Comp
-L SimpleJoyRx-rescue:PWR_FLAG-RESCUE-SimpleJoyRx #FLG04
+L PWR_FLAG #FLG04
 U 1 1 59D6DEAA
 P 9200 14200
 F 0 "#FLG04" H 9200 14470 30  0001 C CNN
@@ -2131,7 +2184,7 @@ Wire Notes Line
 Wire Notes Line
 	12000 500  12000 13000
 Wire Wire Line
-	2950 14100 3300 14100
+	2950 14100 3500 14100
 Wire Wire Line
 	2950 14200 2950 14100
 Connection ~ 2500 14100
@@ -2195,7 +2248,7 @@ Wire Wire Line
 Wire Wire Line
 	2100 7300 2000 7300
 Wire Wire Line
-	2100 6600 2100 6700
+	2100 6600 2100 7400
 Wire Wire Line
 	7700 15400 7800 15400
 Wire Wire Line
@@ -2210,13 +2263,13 @@ Wire Wire Line
 	8600 14600 8750 14600
 Connection ~ 9200 14600
 Wire Wire Line
-	9200 14200 9200 14300
+	9200 14200 9200 14600
 Wire Wire Line
 	9150 14300 9200 14300
 Wire Wire Line
 	16950 7650 17150 7650
 Wire Wire Line
-	14550 9950 15200 9950
+	14550 9950 16150 9950
 Wire Wire Line
 	19000 7600 19200 7600
 Wire Wire Line
@@ -2226,19 +2279,19 @@ Wire Wire Line
 Wire Wire Line
 	15150 6200 15300 6200
 Wire Wire Line
-	4250 14250 4400 14250
+	4250 14250 5800 14250
 Wire Wire Line
 	6350 15050 6350 15400
 Connection ~ 5900 14850
 Wire Wire Line
-	5100 14850 5900 14850
+	5100 14850 6350 14850
 Wire Wire Line
 	5100 14350 5100 14250
 Connection ~ 6500 14250
 Wire Wire Line
 	6500 14150 6500 14250
 Wire Wire Line
-	5900 15100 5900 14850
+	5900 15100 5900 14700
 Wire Wire Line
 	5100 15100 5300 15100
 Connection ~ 5100 14250
@@ -2252,7 +2305,7 @@ Wire Wire Line
 Wire Wire Line
 	5100 15100 5100 15400
 Wire Wire Line
-	6100 14250 6250 14250
+	6100 14250 6750 14250
 Wire Wire Line
 	5600 15400 5600 15300
 Connection ~ 4800 14250
@@ -2263,24 +2316,26 @@ Wire Wire Line
 Wire Wire Line
 	2850 15250 2850 15150
 Wire Wire Line
-	1650 14100 2500 14100
+	1650 14100 2650 14100
 Wire Wire Line
 	2850 14650 2850 14550
 Connection ~ 1650 14900
 Wire Wire Line
 	1800 14900 1650 14900
 Wire Wire Line
-	1650 14300 1650 14900
+	1650 14300 1650 15050
 Wire Wire Line
 	3300 14050 3300 14100
 Connection ~ 3300 14100
+Wire Notes Line
+	12000 13000 11950 13000
 Wire Wire Line
 	14450 6100 15300 6100
 Connection ~ 15450 10900
 Wire Wire Line
 	15450 11000 15450 10900
 Wire Wire Line
-	14900 10900 15450 10900
+	14900 10900 15600 10900
 Wire Wire Line
 	15850 10050 15850 9950
 Wire Wire Line
@@ -2293,7 +2348,7 @@ Wire Wire Line
 Wire Wire Line
 	15850 10550 16150 10550
 Wire Wire Line
-	15850 10450 15850 10550
+	15850 10450 15850 10650
 Connection ~ 15850 9950
 Wire Wire Line
 	16150 9950 16150 10100
@@ -2311,7 +2366,7 @@ Connection ~ 18400 10950
 Wire Wire Line
 	18400 11050 18400 10950
 Wire Wire Line
-	17850 10950 18400 10950
+	17850 10950 18550 10950
 Wire Wire Line
 	18800 10100 18800 10000
 Wire Wire Line
@@ -2324,12 +2379,12 @@ Wire Wire Line
 Wire Wire Line
 	18800 10600 19100 10600
 Wire Wire Line
-	18800 10500 18800 10600
+	18800 10500 18800 10700
 Connection ~ 18800 10000
 Wire Wire Line
 	19100 10000 19100 10150
 Wire Wire Line
-	17800 10000 18150 10000
+	17800 10000 19100 10000
 Connection ~ 18150 10000
 Wire Wire Line
 	18150 10100 18150 10000
@@ -2377,23 +2432,23 @@ Wire Wire Line
 Wire Wire Line
 	4050 4550 4050 4400
 Wire Wire Line
-	4250 3450 4300 3450
+	4250 3450 5750 3450
 Wire Wire Line
-	4300 4550 4300 4400
+	4300 4550 4300 3450
 Wire Wire Line
 	4550 3550 4550 4550
 Wire Wire Line
-	4500 3550 4550 3550
+	4500 3550 5750 3550
 Wire Wire Line
-	4750 3650 4800 3650
+	4750 3650 5750 3650
 Wire Wire Line
 	4800 4550 4800 3650
 Wire Wire Line
 	5050 3750 5050 4550
 Wire Wire Line
-	5000 3750 5050 3750
+	5000 3750 5750 3750
 Wire Wire Line
-	5250 3900 5300 3900
+	5250 3900 5750 3900
 Wire Wire Line
 	5300 4550 5300 3900
 Wire Wire Line
@@ -2401,15 +2456,17 @@ Wire Wire Line
 Wire Wire Line
 	5550 4100 5750 4100
 Wire Wire Line
-	5550 4550 5550 4450
+	5550 4550 5550 4100
 Connection ~ 7100 4500
 Wire Wire Line
 	7200 4500 7200 4400
 Connection ~ 7500 4450
 Wire Wire Line
-	7500 4400 7500 4450
+	7500 4400 7500 4500
 Wire Wire Line
 	7650 4450 7500 4450
+Wire Notes Line
+	500  13000 22900 13000
 Connection ~ 9500 14600
 Wire Wire Line
 	9100 1000 9000 1000
@@ -2419,7 +2476,7 @@ Wire Wire Line
 	16000 14150 16100 14150
 Connection ~ 15650 15000
 Wire Wire Line
-	15100 15000 15650 15000
+	15100 15000 15750 15000
 Wire Wire Line
 	15650 15100 15650 15000
 Wire Wire Line
@@ -2430,7 +2487,7 @@ Wire Wire Line
 	16000 14750 16000 14700
 Connection ~ 16000 14150
 Wire Wire Line
-	16000 14050 16000 14150
+	16000 14050 16000 14200
 Wire Wire Line
 	16000 13550 16000 13450
 Connection ~ 10650 14600
@@ -2448,16 +2505,28 @@ Connection ~ 5550 4450
 Wire Wire Line
 	5300 4950 5300 5050
 Wire Wire Line
-	5550 4450 5800 4450
+	5550 4450 6050 4450
 Connection ~ 5800 4450
 Wire Wire Line
 	10050 15200 10050 15250
 Wire Wire Line
-	9150 14600 9200 14600
+	9150 14600 9600 14600
 Wire Wire Line
-	10550 14600 10650 14600
+	10550 14600 10750 14600
 Wire Wire Line
-	1400 2700 1550 2700
+	1400 2700 2050 2700
+Wire Wire Line
+	2350 4750 2450 4750
+Wire Wire Line
+	2450 4450 2350 4450
+Wire Wire Line
+	1000 4600 1100 4600
+Wire Wire Line
+	1100 4750 1000 4750
+Wire Wire Line
+	2450 4600 2350 4600
+Wire Wire Line
+	1100 4450 1000 4450
 Connection ~ 17800 3900
 Wire Wire Line
 	17800 4000 17800 3900
@@ -2495,7 +2564,7 @@ Wire Wire Line
 	19300 4000 19300 3900
 Connection ~ 19300 3900
 Wire Wire Line
-	17700 3900 17800 3900
+	17700 3900 19850 3900
 Wire Notes Line
 	18250 3650 18250 4500
 Wire Notes Line
@@ -2514,19 +2583,19 @@ Wire Wire Line
 	17650 2250 17650 2150
 Connection ~ 17550 2250
 Wire Wire Line
-	17450 2250 17550 2250
+	17450 2250 17650 2250
 Wire Wire Line
 	17450 2150 17450 2250
 Wire Wire Line
 	14000 1900 14550 1900
 Wire Wire Line
-	14700 3000 14700 2950
+	14700 3000 14700 2600
 Wire Wire Line
 	14700 2600 15300 2600
 Wire Wire Line
 	15300 2500 14200 2500
 Wire Wire Line
-	14200 2500 14200 2950
+	14200 2500 14200 3000
 Wire Wire Line
 	14700 3400 14700 3500
 Connection ~ 14700 2950
@@ -2538,7 +2607,7 @@ Wire Wire Line
 Wire Wire Line
 	14750 1800 15300 1800
 Wire Wire Line
-	16700 3100 16700 2900
+	16700 3100 16700 2800
 Connection ~ 16700 2900
 Wire Wire Line
 	16650 2900 16700 2900
@@ -2573,14 +2642,16 @@ Wire Wire Line
 Wire Wire Line
 	18400 2400 18400 2450
 Wire Wire Line
-	17550 2150 17550 2250
+	17550 2150 17550 2450
 Wire Wire Line
-	18950 1700 19100 1700
+	18950 1700 20000 1700
 Wire Wire Line
 	14750 2200 15300 2200
+Wire Bus Line
+	14650 1200 14650 2300
 Connection ~ 18400 1700
 Wire Wire Line
-	17900 1700 18400 1700
+	17900 1700 18550 1700
 Wire Wire Line
 	16650 1700 17000 1700
 Wire Wire Line
@@ -2588,9 +2659,9 @@ Wire Wire Line
 Wire Wire Line
 	16650 2100 16750 2100
 Wire Wire Line
-	16750 2100 16750 2200
+	16750 2100 16750 2600
 Wire Wire Line
-	16650 2600 16750 2600
+	16650 2600 16900 2600
 Wire Wire Line
 	16650 2500 16750 2500
 Connection ~ 16750 2500
@@ -2629,7 +2700,7 @@ Wire Wire Line
 	1550 2600 1550 2700
 Connection ~ 1550 3100
 Wire Wire Line
-	1550 3000 1550 3100
+	1550 3000 1550 3200
 Wire Wire Line
 	1400 3000 1550 3000
 Wire Wire Line
@@ -2637,7 +2708,7 @@ Wire Wire Line
 Wire Wire Line
 	7500 5000 7500 5050
 Wire Wire Line
-	6800 4500 6900 4500
+	6800 4500 7200 4500
 Wire Wire Line
 	9000 2100 9250 2100
 Wire Wire Line
@@ -2651,7 +2722,7 @@ Connection ~ 7000 4500
 Wire Wire Line
 	6800 4400 6800 4500
 Wire Wire Line
-	7000 4650 7000 4500
+	7000 4650 7000 4400
 Wire Wire Line
 	4800 4950 4800 5050
 Wire Wire Line
@@ -2698,7 +2769,7 @@ Wire Wire Line
 	10000 1400 10100 1400
 Connection ~ 9200 14300
 $Comp
-L SimpleJoyRx-rescue:+BATT-RESCUE-SimpleJoyRx #PWR031
+L +BATT #PWR031
 U 1 1 59D71FC7
 P 4250 14250
 F 0 "#PWR031" H 4250 14210 30  0001 C CNN
@@ -4516,7 +4587,7 @@ DE E9 AB 4F 3F 55 94 DE 01 B5 2B 28 28 5D 65 FE B9 F9 17 8A 2E 04 70 02 5E 71 7D
 EndData
 $EndBitmap
 $Comp
-L SimpleJoyRx-rescue:DRV8835-RESCUE-SimpleJoyRx DA2
+L DRV8835 DA2
 U 1 1 59D784FB
 P 4900 6550
 F 0 "DA2" H 4900 7187 60  0000 C CNN
@@ -4531,7 +4602,7 @@ F 7 "http://onelec.ru/products/drv8835dssr" H 5600 7450 60  0001 C CNN "URL"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR038
+L GNDPWR #PWR038
 U 1 1 59D78502
 P 5650 7500
 F 0 "#PWR038" H 5650 7550 40  0001 C CNN
@@ -4542,7 +4613,7 @@ F 3 "" H 5650 7500 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C19
+L C C19
 U 1 1 59D7850C
 P 6350 7200
 F 0 "C19" H 6250 7100 50  0000 L CNN
@@ -4557,7 +4628,7 @@ F 7 "~" H 6350 7200 60  0001 C CNN "URL"
 	1    0    0    1   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR043
+L GNDPWR #PWR043
 U 1 1 59D78513
 P 6350 7500
 F 0 "#PWR043" H 6350 7550 40  0001 C CNN
@@ -4572,7 +4643,7 @@ Wire Wire Line
 Wire Wire Line
 	6350 7500 6350 7400
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C15
+L C C15
 U 1 1 59D7851F
 P 5650 7200
 F 0 "C15" H 5550 7100 50  0000 L CNN
@@ -4593,7 +4664,7 @@ Wire Wire Line
 	5650 7000 5650 6900
 Connection ~ 5650 6900
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR034
+L GNDPWR #PWR034
 U 1 1 59D7852B
 P 4950 7500
 F 0 "#PWR034" H 4950 7550 40  0001 C CNN
@@ -4604,14 +4675,14 @@ F 3 "" H 4950 7500 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	4950 7200 4950 7300
+	4950 7200 4950 7500
 Wire Wire Line
 	4800 7200 4800 7300
 Wire Wire Line
 	4800 7300 4950 7300
 Connection ~ 4950 7300
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C11
+L C C11
 U 1 1 59D78539
 P 4150 7200
 F 0 "C11" H 4050 7100 50  0000 L CNN
@@ -4626,7 +4697,7 @@ F 7 "~" H 4150 7200 60  0001 C CNN "URL"
 	1    0    0    1   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR030
+L GNDPWR #PWR030
 U 1 1 59D78540
 P 4150 7500
 F 0 "#PWR030" H 4150 7550 40  0001 C CNN
@@ -4639,9 +4710,9 @@ $EndComp
 Wire Wire Line
 	4150 7500 4150 7400
 Wire Wire Line
-	4050 6900 4150 6900
+	4050 6900 4250 6900
 Wire Wire Line
-	4150 6700 4150 6900
+	4150 6700 4150 7000
 Connection ~ 4150 6900
 Wire Wire Line
 	4250 6700 4150 6700
@@ -4654,7 +4725,7 @@ Wire Wire Line
 Wire Wire Line
 	3900 6550 4250 6550
 $Comp
-L SimpleJoyRx-rescue:CONN_2-RESCUE-SimpleJoyRx XL6
+L CONN_2 XL6
 U 1 1 59D78557
 P 6350 6300
 F 0 "XL6" H 6550 6200 40  0000 C CNN
@@ -4668,7 +4739,7 @@ F 6 "2" H 6350 6300 60  0001 C CNN "SolderPoints"
 	1    0    0    1   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:CONN_2-RESCUE-SimpleJoyRx XL7
+L CONN_2 XL7
 U 1 1 59D78560
 P 6350 6650
 F 0 "XL7" H 6550 6550 40  0000 C CNN
@@ -4698,7 +4769,7 @@ Wire Wire Line
 Wire Wire Line
 	6150 6200 5550 6200
 $Comp
-L SimpleJoyRx-rescue:PwrUnst-RESCUE-SimpleJoyRx #PWR047
+L PwrUnst #PWR047
 U 1 1 59D7856F
 P 6450 6900
 F 0 "#PWR047" H 6450 6860 30  0001 C CNN
@@ -4709,7 +4780,7 @@ F 3 "" H 6450 6900 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:+3.3V-RESCUE-SimpleJoyRx #PWR028
+L +3.3V #PWR028
 U 1 1 59D7A873
 P 4050 6900
 F 0 "#PWR028" H 4050 6860 30  0001 C CNN
@@ -4720,7 +4791,7 @@ F 3 "" H 4050 6900 60  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:DRV8835-RESCUE-SimpleJoyRx DA1
+L DRV8835 DA1
 U 1 1 59D7B759
 P 4850 8700
 F 0 "DA1" H 4850 9337 60  0000 C CNN
@@ -4735,7 +4806,7 @@ F 7 "http://onelec.ru/products/drv8835dssr" H 5550 9600 60  0001 C CNN "URL"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR032
+L GNDPWR #PWR032
 U 1 1 59D7B786
 P 4900 9650
 F 0 "#PWR032" H 4900 9700 40  0001 C CNN
@@ -4746,14 +4817,14 @@ F 3 "" H 4900 9650 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	4900 9350 4900 9450
+	4900 9350 4900 9650
 Wire Wire Line
 	4750 9350 4750 9450
 Wire Wire Line
 	4750 9450 4900 9450
 Connection ~ 4900 9450
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C10
+L C C10
 U 1 1 59D7B794
 P 4100 9350
 F 0 "C10" H 4000 9250 50  0000 L CNN
@@ -4768,7 +4839,7 @@ F 7 "~" H 4100 9350 60  0001 C CNN "URL"
 	1    0    0    1   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR029
+L GNDPWR #PWR029
 U 1 1 59D7B79A
 P 4100 9650
 F 0 "#PWR029" H 4100 9700 40  0001 C CNN
@@ -4781,9 +4852,9 @@ $EndComp
 Wire Wire Line
 	4100 9650 4100 9550
 Wire Wire Line
-	4000 9050 4100 9050
+	4000 9050 4200 9050
 Wire Wire Line
-	4100 8850 4100 9050
+	4100 8850 4100 9150
 Connection ~ 4100 9050
 Wire Wire Line
 	4200 8850 4100 8850
@@ -4796,7 +4867,7 @@ Wire Wire Line
 Wire Wire Line
 	3850 8700 4200 8700
 $Comp
-L SimpleJoyRx-rescue:CONN_2-RESCUE-SimpleJoyRx XL4
+L CONN_2 XL4
 U 1 1 59D7B7AB
 P 6300 8450
 F 0 "XL4" H 6500 8350 40  0000 C CNN
@@ -4810,7 +4881,7 @@ F 6 "2" H 6300 8450 60  0001 C CNN "SolderPoints"
 	1    0    0    1   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:CONN_2-RESCUE-SimpleJoyRx XL5
+L CONN_2 XL5
 U 1 1 59D7B7B3
 P 6300 8800
 F 0 "XL5" H 6500 8700 40  0000 C CNN
@@ -4840,7 +4911,7 @@ Wire Wire Line
 Wire Wire Line
 	6100 8350 5500 8350
 $Comp
-L SimpleJoyRx-rescue:+3.3V-RESCUE-SimpleJoyRx #PWR027
+L +3.3V #PWR027
 U 1 1 59D7B7C7
 P 4000 9050
 F 0 "#PWR027" H 4000 9010 30  0001 C CNN
@@ -4851,7 +4922,7 @@ F 3 "" H 4000 9050 60  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR040
+L GNDPWR #PWR040
 U 1 1 59D7F141
 P 6050 7500
 F 0 "#PWR040" H 6050 7550 40  0001 C CNN
@@ -4864,7 +4935,7 @@ $EndComp
 Wire Wire Line
 	6050 7500 6050 7400
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C17
+L C C17
 U 1 1 59D7F14C
 P 6050 7200
 F 0 "C17" H 5950 7100 50  0000 L CNN
@@ -4881,10 +4952,10 @@ $EndComp
 Wire Wire Line
 	6050 7000 6050 6900
 Wire Wire Line
-	5550 6900 5650 6900
+	5550 6900 6450 6900
 Connection ~ 6350 6900
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR036
+L GNDPWR #PWR036
 U 1 1 59D7F874
 P 5600 9650
 F 0 "#PWR036" H 5600 9700 40  0001 C CNN
@@ -4895,7 +4966,7 @@ F 3 "" H 5600 9650 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C18
+L C C18
 U 1 1 59D7F87E
 P 6300 9350
 F 0 "C18" H 6200 9250 50  0000 L CNN
@@ -4910,7 +4981,7 @@ F 7 "~" H 6300 9350 60  0001 C CNN "URL"
 	1    0    0    1   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR042
+L GNDPWR #PWR042
 U 1 1 59D7F884
 P 6300 9650
 F 0 "#PWR042" H 6300 9700 40  0001 C CNN
@@ -4925,7 +4996,7 @@ Wire Wire Line
 Wire Wire Line
 	6300 9650 6300 9550
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C14
+L C C14
 U 1 1 59D7F890
 P 5600 9350
 F 0 "C14" H 5500 9250 50  0000 L CNN
@@ -4946,7 +5017,7 @@ Wire Wire Line
 	5600 9150 5600 9050
 Connection ~ 5600 9050
 $Comp
-L SimpleJoyRx-rescue:PwrUnst-RESCUE-SimpleJoyRx #PWR044
+L PwrUnst #PWR044
 U 1 1 59D7F89A
 P 6400 9050
 F 0 "#PWR044" H 6400 9010 30  0001 C CNN
@@ -4957,7 +5028,7 @@ F 3 "" H 6400 9050 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR039
+L GNDPWR #PWR039
 U 1 1 59D7F8A0
 P 6000 9650
 F 0 "#PWR039" H 6000 9700 40  0001 C CNN
@@ -4970,7 +5041,7 @@ $EndComp
 Wire Wire Line
 	6000 9650 6000 9550
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C16
+L C C16
 U 1 1 59D7F8AB
 P 6000 9350
 F 0 "C16" H 5900 9250 50  0000 L CNN
@@ -4987,7 +5058,7 @@ $EndComp
 Wire Wire Line
 	6000 9150 6000 9050
 Wire Wire Line
-	5500 9050 5600 9050
+	5500 9050 6400 9050
 Connection ~ 6300 9050
 Wire Wire Line
 	9000 2600 9850 2600
@@ -5022,7 +5093,7 @@ DIR4
 Text Notes 4400 5700 0    60   ~ 0
 Motor drivers\nLogic high sets PH/EN mode 
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR033
+L GNDPWR #PWR033
 U 1 1 59D987E9
 P 4400 14850
 F 0 "#PWR033" H 4400 14900 40  0001 C CNN
@@ -5035,7 +5106,7 @@ $EndComp
 Wire Wire Line
 	4400 14850 4400 14750
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C12
+L C C12
 U 1 1 59D987F4
 P 4400 14550
 F 0 "C12" H 4300 14450 50  0000 L CNN
@@ -5050,7 +5121,7 @@ F 7 "~" H 4400 14550 60  0001 C CNN "URL"
 	1    0    0    1   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR035
+L GNDPWR #PWR035
 U 1 1 59D987FA
 P 4800 14850
 F 0 "#PWR035" H 4800 14900 40  0001 C CNN
@@ -5061,7 +5132,7 @@ F 3 "" H 4800 14850 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C13
+L C C13
 U 1 1 59D98804
 P 4800 14550
 F 0 "C13" H 4700 14450 50  0000 L CNN
@@ -5081,7 +5152,7 @@ Wire Wire Line
 	4400 14350 4400 14250
 Connection ~ 4400 14250
 $Comp
-L SimpleJoyRx-rescue:CONN_1-RESCUE-SimpleJoyRx XL18
+L CONN_1 XL18
 U 1 1 59D9BB5D
 P 20300 2100
 F 0 "XL18" H 20377 2138 40  0000 L CNN
@@ -5099,7 +5170,7 @@ Wire Wire Line
 	19800 2100 19800 1700
 Connection ~ 19800 1700
 $Comp
-L SimpleJoyRx-rescue:REFPOINT-RESCUE-SimpleJoyRx RP1
+L REFPOINT RP1
 U 1 1 59D9D146
 P 20050 13350
 F 0 "RP1" H 20178 13350 60  0000 L CNN
@@ -5114,7 +5185,7 @@ $EndComp
 Wire Wire Line
 	20800 14300 20700 14300
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR0127
+L GNDPWR #PWR0127
 U 1 1 59DB0108
 P 20800 14550
 F 0 "#PWR0127" H 20800 14600 40  0001 C CNN
@@ -5127,7 +5198,7 @@ $EndComp
 Wire Wire Line
 	20700 14550 20800 14550
 $Comp
-L SimpleJoyRx-rescue:Logo-RESCUE-SimpleJoyRx Logo2
+L Logo Logo2
 U 1 1 59DBA4A2
 P 18000 14450
 F 0 "Logo2" H 18278 14503 60  0000 L CNN
@@ -5142,7 +5213,7 @@ $EndComp
 Wire Notes Line
 	17400 13000 17400 16050
 $Comp
-L SimpleJoyRx-rescue:Logo-RESCUE-SimpleJoyRx Logo3
+L Logo Logo3
 U 1 1 59DBBB16
 P 18000 15400
 F 0 "Logo3" H 18278 15453 60  0000 L CNN
@@ -5155,7 +5226,7 @@ F 5 "0" H 18000 15400 60  0001 C CNN "Price"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C1
+L C C1
 U 1 1 5A02AA59
 P 1550 2400
 F 0 "C1" H 1450 2300 50  0000 L CNN
@@ -5168,7 +5239,7 @@ F 5 "2" H 1650 2500 60  0001 C CNN "SolderPoints"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C32
+L C C32
 U 1 1 5A02CD77
 P 17800 4200
 F 0 "C32" H 17700 4100 50  0000 L CNN
@@ -5181,7 +5252,7 @@ F 5 "2" H 17900 4300 60  0001 C CNN "SolderPoints"
 	1    0    0    1   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:R-RESCUE-SimpleJoyRx R2
+L R R2
 U 1 1 5A0314F6
 P 7500 4750
 F 0 "R2" V 7580 4600 50  0000 C CNN
@@ -5194,7 +5265,7 @@ F 5 "2" V 7780 4800 60  0001 C CNN "SolderPoints"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:R-RESCUE-SimpleJoyRx R7
+L R R7
 U 1 1 5A033923
 P 15650 15350
 F 0 "R7" V 15730 15200 50  0000 C CNN
@@ -5207,7 +5278,7 @@ F 5 "2" V 15930 15400 60  0001 C CNN "SolderPoints"
 	1    0    0    1   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:R-RESCUE-SimpleJoyRx R9
+L R R9
 U 1 1 5A034189
 P 16000 13800
 F 0 "R9" V 16080 13650 50  0000 C CNN
@@ -5220,7 +5291,7 @@ F 5 "2" V 16280 13850 60  0001 C CNN "SolderPoints"
 	1    0    0    1   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:R-RESCUE-SimpleJoyRx R10
+L R R10
 U 1 1 5A0342A2
 P 16000 14450
 F 0 "R10" V 16080 14300 50  0000 C CNN
@@ -5233,7 +5304,7 @@ F 5 "2" V 16280 14500 60  0001 C CNN "SolderPoints"
 	1    0    0    1   
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:REFPOINT-RESCUE-SimpleJoyRx RP2
+L REFPOINT RP2
 U 1 1 5A035D29
 P 20050 13650
 F 0 "RP2" H 20178 13650 60  0000 L CNN
@@ -5246,7 +5317,7 @@ F 5 "0" H 20050 13650 60  0001 C CNN "Price"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:REFPOINT-RESCUE-SimpleJoyRx RP3
+L REFPOINT RP3
 U 1 1 5A035E5B
 P 20550 13350
 F 0 "RP3" H 20678 13350 60  0000 L CNN
@@ -5259,7 +5330,7 @@ F 5 "0" H 20550 13350 60  0001 C CNN "Price"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:REFPOINT-RESCUE-SimpleJoyRx RP4
+L REFPOINT RP4
 U 1 1 5A035E63
 P 20550 13650
 F 0 "RP4" H 20678 13650 60  0000 L CNN
@@ -5272,7 +5343,7 @@ F 5 "0" H 20550 13650 60  0001 C CNN "Price"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:CONN_2-RESCUE-SimpleJoyRx XL8
+L CONN_2 XL8
 U 1 1 5A03F0B4
 P 6550 14950
 F 0 "XL8" H 6750 14850 40  0000 C CNN
@@ -5286,7 +5357,7 @@ F 6 "2" H 6550 14950 60  0001 C CNN "SolderPoints"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:STM32F072RxTx-RESCUE-SimpleJoyRx DD1
+L STM32F072RxTx DD1
 U 1 1 59D5752C
 P 7350 2400
 F 0 "DD1" H 7375 4187 60  0000 C CNN
@@ -5347,7 +5418,7 @@ A4
 Wire Notes Line
 	7150 5200 7150 13000
 $Comp
-L SimpleJoyRx-rescue:CONN_3-RESCUE-SimpleJoyRx XL15
+L CONN_3 XL15
 U 1 1 5A2417E2
 P 9000 5850
 F 0 "XL15" H 8800 6000 40  0000 C CNN
@@ -5360,7 +5431,7 @@ F 5 "3" V 9150 6050 60  0001 C CNN "SolderPoints"
 	-1   0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR052
+L GNDPWR #PWR052
 U 1 1 5A2417E8
 P 8800 6400
 F 0 "#PWR052" H 8800 6450 40  0001 C CNN
@@ -5375,7 +5446,7 @@ Wire Wire Line
 Wire Wire Line
 	8800 5950 8800 6400
 $Comp
-L SimpleJoyRx-rescue:CONN_3-RESCUE-SimpleJoyRx XL20
+L CONN_3 XL20
 U 1 1 5A241BC6
 P 10200 5850
 F 0 "XL20" H 10000 6000 40  0000 C CNN
@@ -5388,7 +5459,7 @@ F 5 "3" V 10350 6050 60  0001 C CNN "SolderPoints"
 	-1   0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR057
+L GNDPWR #PWR057
 U 1 1 5A241BCC
 P 10000 6400
 F 0 "#PWR057" H 10000 6450 40  0001 C CNN
@@ -5403,7 +5474,7 @@ Wire Wire Line
 Wire Wire Line
 	10000 5950 10000 6400
 $Comp
-L SimpleJoyRx-rescue:CONN_3-RESCUE-SimpleJoyRx XL19
+L CONN_3 XL19
 U 1 1 5A241DDA
 P 9000 7350
 F 0 "XL19" H 8800 7500 40  0000 C CNN
@@ -5416,7 +5487,7 @@ F 5 "3" V 9150 7550 60  0001 C CNN "SolderPoints"
 	-1   0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR053
+L GNDPWR #PWR053
 U 1 1 5A241DE0
 P 8800 7900
 F 0 "#PWR053" H 8800 7950 40  0001 C CNN
@@ -5431,7 +5502,7 @@ Wire Wire Line
 Wire Wire Line
 	8800 7450 8800 7900
 $Comp
-L SimpleJoyRx-rescue:CONN_3-RESCUE-SimpleJoyRx XL21
+L CONN_3 XL21
 U 1 1 5A241DF0
 P 10200 7350
 F 0 "XL21" H 10000 7500 40  0000 C CNN
@@ -5444,7 +5515,7 @@ F 5 "3" V 10350 7550 60  0001 C CNN "SolderPoints"
 	-1   0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GNDPWR-RESCUE-SimpleJoyRx #PWR058
+L GNDPWR #PWR058
 U 1 1 5A241DF6
 P 10000 7900
 F 0 "#PWR058" H 10000 7950 40  0001 C CNN
@@ -5474,7 +5545,7 @@ Wire Wire Line
 Wire Wire Line
 	19100 1700 19100 2000
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C40
+L C C40
 U 1 1 59D40919
 P 19100 2200
 F 0 "C40" H 19000 2100 50  0000 L CNN
@@ -5487,7 +5558,7 @@ F 5 "2" H 19200 2300 60  0001 C CNN "SolderPoints"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR0118
+L GND #PWR0118
 U 1 1 59D408C0
 P 19100 2450
 F 0 "#PWR0118" H 19190 2430 30  0001 C CNN
@@ -5498,7 +5569,7 @@ F 3 "" H 19100 2450 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:MCP1700-RESCUE-SimpleJoyRx DA3
+L MCP1700 DA3
 U 1 1 5A24B179
 P 13150 14700
 F 0 "DA3" H 13175 15137 60  0000 C CNN
@@ -5512,7 +5583,7 @@ F 6 "MCP1700T-3302E/TT" H 13600 15300 60  0001 C CNN "PN"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR050
+L GND #PWR050
 U 1 1 5A24B185
 P 13150 15200
 F 0 "#PWR050" H 13240 15180 30  0001 C CNN
@@ -5523,7 +5594,7 @@ F 3 "" H 13150 15200 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR051
+L GND #PWR051
 U 1 1 5A24B18B
 P 12600 15200
 F 0 "#PWR051" H 12690 15180 30  0001 C CNN
@@ -5534,7 +5605,7 @@ F 3 "" H 12600 15200 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C20
+L C C20
 U 1 1 5A24B193
 P 12600 14900
 F 0 "C20" H 12500 14800 50  0000 L CNN
@@ -5547,7 +5618,7 @@ F 5 "2" H 12700 15000 60  0001 C CNN "SolderPoints"
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:GND-RESCUE-SimpleJoyRx #PWR054
+L GND #PWR054
 U 1 1 5A24B199
 P 13750 15200
 F 0 "#PWR054" H 13840 15180 30  0001 C CNN
@@ -5558,7 +5629,7 @@ F 3 "" H 13750 15200 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:C-RESCUE-SimpleJoyRx C21
+L C C21
 U 1 1 5A24B1A1
 P 13750 14900
 F 0 "C21" H 13650 14800 50  0000 L CNN
@@ -5585,11 +5656,11 @@ Wire Wire Line
 Wire Wire Line
 	13150 15150 13150 15200
 Wire Wire Line
-	13650 14550 13750 14550
+	13650 14550 13850 14550
 Wire Wire Line
-	12350 14550 12600 14550
+	12350 14550 12700 14550
 $Comp
-L SimpleJoyRx-rescue:VAA-RESCUE-SimpleJoyRx #PWR056
+L VAA #PWR056
 U 1 1 5A24D08A
 P 13850 14550
 F 0 "#PWR056" H 13850 14600 30  0001 C CNN
@@ -5600,7 +5671,7 @@ F 3 "" H 13850 14550 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:VAA-RESCUE-SimpleJoyRx #PWR059
+L VAA #PWR059
 U 1 1 5A24D8B3
 P 8650 5850
 F 0 "#PWR059" H 8650 5900 30  0001 C CNN
@@ -5611,7 +5682,7 @@ F 3 "" H 8650 5850 60  0000 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:VAA-RESCUE-SimpleJoyRx #PWR060
+L VAA #PWR060
 U 1 1 5A24DB4B
 P 8650 7350
 F 0 "#PWR060" H 8650 7400 30  0001 C CNN
@@ -5622,7 +5693,7 @@ F 3 "" H 8650 7350 60  0000 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:VAA-RESCUE-SimpleJoyRx #PWR061
+L VAA #PWR061
 U 1 1 5A24DC2B
 P 9850 5850
 F 0 "#PWR061" H 9850 5900 30  0001 C CNN
@@ -5633,7 +5704,7 @@ F 3 "" H 9850 5850 60  0000 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L SimpleJoyRx-rescue:VAA-RESCUE-SimpleJoyRx #PWR062
+L VAA #PWR062
 U 1 1 5A24DC31
 P 9850 7350
 F 0 "#PWR062" H 9850 7400 30  0001 C CNN
@@ -5643,174 +5714,4 @@ F 3 "" H 9850 7350 60  0000 C CNN
 	1    9850 7350
 	-1   0    0    -1  
 $EndComp
-Wire Wire Line
-	2500 14100 2650 14100
-Wire Wire Line
-	2100 6700 2100 6800
-Wire Wire Line
-	2100 6800 2100 6900
-Wire Wire Line
-	2100 6900 2100 7000
-Wire Wire Line
-	2100 7000 2100 7100
-Wire Wire Line
-	2100 7100 2100 7200
-Wire Wire Line
-	2100 7200 2100 7300
-Wire Wire Line
-	2100 7300 2100 7400
-Wire Wire Line
-	9200 14600 9500 14600
-Wire Wire Line
-	5900 14850 6350 14850
-Wire Wire Line
-	5900 14850 5900 14700
-Wire Wire Line
-	6500 14250 6750 14250
-Wire Wire Line
-	5100 14250 5800 14250
-Wire Wire Line
-	6250 14250 6500 14250
-Wire Wire Line
-	4800 14250 5100 14250
-Wire Wire Line
-	1650 14900 1650 15050
-Wire Wire Line
-	3300 14100 3500 14100
-Wire Wire Line
-	15450 10900 15600 10900
-Wire Wire Line
-	15850 10550 15850 10650
-Wire Wire Line
-	15850 9950 16150 9950
-Wire Wire Line
-	15200 9950 15500 9950
-Wire Wire Line
-	15500 9950 15850 9950
-Wire Wire Line
-	18400 10950 18550 10950
-Wire Wire Line
-	18800 10600 18800 10700
-Wire Wire Line
-	18800 10000 19100 10000
-Wire Wire Line
-	18150 10000 18450 10000
-Wire Wire Line
-	18450 10000 18800 10000
-Wire Wire Line
-	5300 3900 5750 3900
-Wire Wire Line
-	4300 3450 5750 3450
-Wire Wire Line
-	4550 3550 5750 3550
-Wire Wire Line
-	4800 3650 5750 3650
-Wire Wire Line
-	5050 3750 5750 3750
-Wire Wire Line
-	4300 4400 4300 3450
-Wire Wire Line
-	7100 4500 7200 4500
-Wire Wire Line
-	7500 4450 7500 4500
-Wire Wire Line
-	9500 14600 9600 14600
-Wire Wire Line
-	15650 15000 15750 15000
-Wire Wire Line
-	16000 14150 16000 14200
-Wire Wire Line
-	10650 14600 10750 14600
-Wire Wire Line
-	5550 4450 5550 4100
-Wire Wire Line
-	5800 4450 6050 4450
-Wire Wire Line
-	17800 3900 18100 3900
-Wire Wire Line
-	18100 3900 18400 3900
-Wire Wire Line
-	18400 3900 18700 3900
-Wire Wire Line
-	18700 3900 19000 3900
-Wire Wire Line
-	19000 3900 19300 3900
-Wire Wire Line
-	19300 3900 19600 3900
-Wire Wire Line
-	19600 3900 19750 3900
-Wire Wire Line
-	19750 3900 19850 3900
-Wire Wire Line
-	17550 2250 17650 2250
-Wire Wire Line
-	17550 2250 17550 2450
-Wire Wire Line
-	14700 2950 14700 2600
-Wire Wire Line
-	14200 2950 14200 3000
-Wire Wire Line
-	16700 2900 16700 2800
-Wire Wire Line
-	18400 1700 18550 1700
-Wire Wire Line
-	16750 2500 16750 2600
-Wire Wire Line
-	16750 2400 16750 2500
-Wire Wire Line
-	16750 2300 16750 2400
-Wire Wire Line
-	16750 2200 16750 2300
-Wire Wire Line
-	16750 2600 16900 2600
-Wire Wire Line
-	1550 2700 2050 2700
-Wire Wire Line
-	1550 3100 1550 3200
-Wire Wire Line
-	6900 4500 7000 4500
-Wire Wire Line
-	7000 4500 7000 4400
-Wire Wire Line
-	7000 4500 7100 4500
-Wire Wire Line
-	9200 14300 9200 14600
-Wire Wire Line
-	6050 6900 6350 6900
-Wire Wire Line
-	5650 6900 6050 6900
-Wire Wire Line
-	4950 7300 4950 7500
-Wire Wire Line
-	4150 6900 4250 6900
-Wire Wire Line
-	4150 6900 4150 7000
-Wire Wire Line
-	4900 9450 4900 9650
-Wire Wire Line
-	4100 9050 4200 9050
-Wire Wire Line
-	4100 9050 4100 9150
-Wire Wire Line
-	6350 6900 6450 6900
-Wire Wire Line
-	6000 9050 6300 9050
-Wire Wire Line
-	5600 9050 6000 9050
-Wire Wire Line
-	6300 9050 6400 9050
-Wire Wire Line
-	4400 14250 4800 14250
-Wire Wire Line
-	19800 1700 20000 1700
-Wire Wire Line
-	19100 1700 19800 1700
-Wire Wire Line
-	12600 14550 12700 14550
-Wire Wire Line
-	13750 14550 13850 14550
-Wire Notes Line
-	500  13000 22900 13000
-Wire Bus Line
-	14650 1200 14650 2300
 $EndSCHEMATC

@@ -1,6 +1,6 @@
-update=06.02.2018 14:59:27
+update=05.10.2017 13:24:10
 version=1
-last_client=kicad
+last_client=eeschema
 [general]
 version=1
 RootSch=
@@ -27,6 +27,23 @@ ModuleOutlineThickness=0.150000000000
 [cvpcb]
 version=1
 NetIExt=net
+[eeschema]
+version=1
+LibDir=D:/Libs/Kicad
+[eeschema/libraries]
+LibName1=Antennas_kl
+LibName2=Connectors_kl
+LibName3=display_kl
+LibName4=ESDProtection
+LibName5=pcb_details
+LibName6=power
+LibName7=Power_kl
+LibName8=RF ICs
+LibName9=st_kl
+LibName10=Switches
+LibName11=Tittar_kl
+LibName12=Transistors_kl
+LibName13=modules
 [schematic_editor]
 version=1
 PageLayoutDescrFile=
@@ -37,6 +54,3 @@ NetFmtName=
 SpiceAjustPassiveValues=0
 LabSize=60
 ERC_TestSimilarLabels=1
-[eeschema]
-version=1
-LibDir=
