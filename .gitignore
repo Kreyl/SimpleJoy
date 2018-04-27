@@ -4,3 +4,5 @@ SimpleJoyTx_hw/SimpleJoyTx.kicad_pcb-bak
 SimpleJoyRx_fw/.settings/language.settings.xml
 SimpleJoyTx_fw/.settings/language.settings.xml
 SimpleJoyTx_fw/Debug/
+*.csv
+*.zip

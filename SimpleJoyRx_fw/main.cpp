@@ -16,6 +16,7 @@
 #include "Sequences.h"
 #include "kl_servo.h"
 #include "radio_lvl1.h"
+#include "kl_adc.h"
 
 #if 1 // ======================== Variables and defines ========================
 // Forever
@@ -52,16 +53,14 @@ static const PinOutputPWM_t Pwm6(PWM6_PIN);
 static const PinOutputPWM_t *Pwm[PWM_CNT] = { &Pwm1, &Pwm2, &Pwm3, &Pwm4, &Pwm5, &Pwm6 };
 
 // Motor
-#define MOTOR_CNT   4
+#define MOTOR_CNT   6
 enum Motordir_t { mdirForward, mdirBackward };
 class Motor_t {
 private:
     const PinOutput_t IDirPin;
     const PinOutputPWM_t *IPwmPin;
 public:
-    void Init() const {
-        IDirPin.Init();
-    }
+    void Init() const { IDirPin.Init(); }
     void Set(Motordir_t Dir, uint8_t Value) const {
         if(Dir == mdirForward) IDirPin.SetHi();
         else IDirPin.SetLo();
@@ -75,7 +74,9 @@ static const Motor_t Motor1{DIR1_PIN, &Pwm1};
 static const Motor_t Motor2{DIR2_PIN, &Pwm2};
 static const Motor_t Motor3{DIR3_PIN, &Pwm3};
 static const Motor_t Motor4{DIR4_PIN, &Pwm4};
-static const Motor_t *Motor[MOTOR_CNT] = { &Motor1, &Motor2, &Motor3, &Motor4 };
+static const Motor_t Motor5{DIR5_PIN, &Pwm5};
+static const Motor_t Motor6{DIR6_PIN, &Pwm6};
+static const Motor_t *Motor[MOTOR_CNT] = { &Motor1, &Motor2, &Motor3, &Motor4, &Motor5, &Motor6 };
 
 TmrKL_t TmrEverySecond {MS2ST(999),  evtIdEverySecond, tktPeriodic};
 TmrKL_t TmrLinkLost    {MS2ST(5400), evtIdLinkLost, tktOneShot};
@@ -126,9 +127,12 @@ int main(void) {
     TmrEverySecond.StartOrRestart();
 
     // Adc
-//    PinSetupAnalog(LUM_MEAS_PIN);
-//    Adc.Init();
-//    Adc.EnableVRef();
+    PinSetupAnalog(A1_PIN);
+    PinSetupAnalog(A2_PIN);
+    PinSetupAnalog(A3_PIN);
+    PinSetupAnalog(A4_PIN);
+    Adc.Init();
+    Adc.EnableVRef();
     // Main cycle
     ITask();
 }
@@ -169,6 +173,13 @@ void ITask() {
             } break;
 
             case evtIdAdcRslt: {
+                switch(Msg.ValueID) {
+                    case ADC_A1_CHNL: Radio.PktReply.Adc[0] = Msg.Value; break;
+                    case ADC_A2_CHNL: Radio.PktReply.Adc[1] = Msg.Value; break;
+                    case ADC_A3_CHNL: Radio.PktReply.Adc[2] = Msg.Value; break;
+                    case ADC_A4_CHNL: Radio.PktReply.Adc[3] = Msg.Value; break;
+                    default: break;
+                } // switch
                 } break;
 
             default: break;
@@ -186,16 +197,20 @@ void OnRadioRx() {
     }
     Srv[4]->SetValue(255-Pkt.R1, 0, 255);
     Srv[5]->SetValue(255-Pkt.R2, 0, 255);
-    // Motors
+    // Motors 1...4
     for(int i=0; i<4; i++) {
         Motordir_t Dir = (Pkt.Ch[i] > 0)? mdirForward : mdirBackward;
         uint32_t v = 2 * ABS(Pkt.Ch[i]);
         if(v > 255) v = 255;
         Motor[i]->Set(Dir, v);
     }
-    // PWM
-    Pwm5.Set(Pkt.R1);
-    Pwm6.Set(Pkt.R2);
+    // Motors 5...6
+    if     (Pkt.R1 == 255) Motor[4]->Set(mdirForward,  255);
+    else if(Pkt.R1 >= 127) Motor[4]->Set(mdirForward,  (Pkt.R1 - 127)*2);
+    else                   Motor[4]->Set(mdirBackward, (127 - Pkt.R1)*2);
+    if     (Pkt.R2 == 255) Motor[5]->Set(mdirForward,  255);
+    else if(Pkt.R2 >= 127) Motor[5]->Set(mdirForward,  (Pkt.R2 - 127)*2);
+    else                   Motor[5]->Set(mdirBackward, (127 - Pkt.R2)*2);
 }
 
 // ====== DIP switch ======

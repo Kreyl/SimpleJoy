@@ -10,7 +10,7 @@
 #include <inttypes.h>
 
 // ==== General ====
-#define BOARD_NAME          "SimpleJoyRx1"
+#define BOARD_NAME          "SimpleJoyRx3"
 #define APP_NAME            "SimpleJoyRx"
 
 // MCU type as defined in the ST header.
@@ -23,7 +23,7 @@
 
 #define SIMPLESENSORS_ENABLED   FALSE
 #define BUTTONS_ENABLED         FALSE
-#define ADC_REQUIRED            FALSE
+#define ADC_REQUIRED            TRUE
 #define I2C1_ENABLED            FALSE
 #define I2C_USE_SEMAPHORE       FALSE
 
@@ -32,7 +32,6 @@
 
 // Battery measurement
 #define BAT_MEAS_PIN    GPIOA, 0
-#define BAT_MEAS_EN     GPIOA, 1
 
 // Servo
 #define SRV1_PIN        GPIOA, 8, TIM1, 1
@@ -52,11 +51,19 @@
 #define PWM5_PIN        GPIOA, 6, TIM16, 1, invNotInverted, omPushPull, 255
 #define PWM6_PIN        GPIOA, 7, TIM17, 1, invNotInverted, omPushPull, 255
 
-// Moter Dir
+// Motor Dir
 #define DIR1_PIN        GPIOC, 10
 #define DIR2_PIN        GPIOC, 11
 #define DIR3_PIN        GPIOC, 12
 #define DIR4_PIN        GPIOC, 13
+#define DIR5_PIN        GPIOC, 14
+#define DIR6_PIN        GPIOC, 15
+
+// Analog pins
+#define A1_PIN          GPIOC, 2
+#define A2_PIN          GPIOC, 3
+#define A3_PIN          GPIOC, 4
+#define A4_PIN          GPIOC, 5
 
 // USB
 #define USB_DM          GPIOA, 11
@@ -71,13 +78,17 @@
 #define UART_TX_PIN     6
 #define UART_RX_PIN     7
 
+// I2C
+#define I2C_SCL         GPIOB, 8
+#define I2C_SDA         GPIOB, 9
+
 // Radio: SPI, PGpio, Sck, Miso, Mosi, Cs, Gdo0
 #define CC_Setup0       SPI1, GPIOB, 3,4,5, 2, 1
 
 // DIP switch
 #define DIP_SW_CNT      8
-#define DIP_SW1         { GPIOB, 8, pudPullUp }
-#define DIP_SW2         { GPIOB, 9, pudPullUp }
+#define DIP_SW1         { GPIOB, 0, pudPullUp }
+#define DIP_SW2         { GPIOA, 15, pudPullUp }
 #define DIP_SW3         { GPIOB, 10, pudPullUp }
 #define DIP_SW4         { GPIOB, 11, pudPullUp }
 #define DIP_SW5         { GPIOB, 12, pudPullUp }
@@ -108,16 +119,19 @@
 #endif
 
 #if ADC_REQUIRED // ======================= Inner ADC ==========================
-#define ADC_MEAS_PERIOD_MS  450
+#define ADC_MEAS_PERIOD_MS  99
 // Clock divider: clock is generated from the APB2
 #define ADC_CLK_DIVIDER     adcDiv2
 
 // ADC channels
-#define ADC_LUM_CHNL        1
+#define ADC_A1_CHNL         12
+#define ADC_A2_CHNL         13
+#define ADC_A3_CHNL         14
+#define ADC_A4_CHNL         15
 
 #define ADC_VREFINT_CHNL    17  // All 4xx, F072 and L151 devices. Do not change.
-#define ADC_CHANNELS        { ADC_LUM_CHNL, ADC_VREFINT_CHNL }
-#define ADC_CHANNEL_CNT     2   // Do not use countof(AdcChannels) as preprocessor does not know what is countof => cannot check
+#define ADC_CHANNELS        { ADC_A1_CHNL, ADC_A2_CHNL, ADC_A3_CHNL, ADC_A4_CHNL, ADC_VREFINT_CHNL }
+#define ADC_CHANNEL_CNT     5   // Do not use countof(AdcChannels) as preprocessor does not know what is countof => cannot check
 #define ADC_SAMPLE_TIME     ast55d5Cycles
 #define ADC_SAMPLE_CNT      8   // How many times to measure every channel
 

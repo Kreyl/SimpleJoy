@@ -31,7 +31,6 @@ cc1101_t CC(CC_Setup0);
 
 rLevel1_t Radio;
 extern LedBlinker_t LedLink;
-uint8_t OnRadioRx();
 
 #if 1 // ================================ Task =================================
 static THD_WORKING_AREA(warLvl1Thread, 256);
@@ -43,17 +42,15 @@ static void rLvl1Thread(void *arg) {
 
 __noreturn
 void rLevel1_t::ITask() {
-    PktReply.Length = 2;
-    PktReply.Reply = retvOk;
     while(true) {
         CC.Recalibrate();
-        uint8_t RxRslt = CC.Receive(36, &PktRx, 8, &Rssi);
+        uint8_t RxRslt = CC.Receive(36, &PktRx, RPKT_LEN, &Rssi);
         if(RxRslt == retvOk) {
             LedLink.On();
 //            Printf("Rssi=%d\r", Rssi);
 //            PktRx.Print();
             // Transmit reply
-            CC.Transmit(&PktReply, PktReply.Length+1);
+            CC.Transmit(&PktReply, RPKT_LEN);
             EvtMsg_t Msg(evtIdRadioRx, &PktRx);
             EvtQMain.SendNowOrExit(Msg);
         } // if RxRslt ok
@@ -71,7 +68,7 @@ uint8_t rLevel1_t::Init() {
 
     if(CC.Init() == retvOk) {
         CC.SetTxPower(CC_TX_PWR);
-        CC.SetPktSize(RPKT_LEN+1);
+        CC.SetPktSize(RPKT_LEN);
 //        CC.SetChannel(Settings.RChnl);
         CC.Recalibrate();
         // Thread

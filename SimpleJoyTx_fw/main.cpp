@@ -49,6 +49,7 @@ int32_t CalibrationCounter[CONTROL_CNT];
 TmrKL_t TmrEverySecond {MS2ST(999), evtIdEverySecond, tktPeriodic};
 bool RPktReceived = false;
 bool UseUsb = false;
+bool AdcOn = false;
 
 struct AdcValues_t {
     int32_t Battery;
@@ -150,6 +151,12 @@ void ITask() {
                 if(Lvl != OldRadioLvl) {
                     OldRadioLvl = Lvl;
                     Interface.ShowRadioLvl(Lvl);
+                }
+                // ADC values received
+                if(AdcOn and UsbCDC.IsActive()) {
+                    UsbCDC.Printf("%u;%u;%u;%u\r\n",
+                        Radio.rPktReply.Adc[0], Radio.rPktReply.Adc[1],
+                        Radio.rPktReply.Adc[2], Radio.rPktReply.Adc[3]);
                 }
             } break;
 
@@ -336,6 +343,13 @@ void OnCmd(Shell_t *PShell) {
             PShell->Ack(retvOk);
         }
         else PShell->Ack(retvBadValue);
+    }
+
+    else if(PCmd->NameIs("AdcOn")) {
+        AdcOn = true;
+    }
+    else if(PCmd->NameIs("AdcOff")) {
+        AdcOn = false;
     }
 
     else PShell->Ack(retvCmdUnknown);

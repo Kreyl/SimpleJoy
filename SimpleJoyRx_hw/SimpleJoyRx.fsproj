@@ -4,13 +4,13 @@
 	<Format>Project</Format>
 	<Header>
 		<Program name="TopoR" version="6.1"/>
-		<GUID>{D22C2C01-0A18-40EA-B273-B033C82ACA37}</GUID>
+		<GUID>{5A4EF33C-9F07-4D21-A24F-32969463B3EC}</GUID>
 		<Annotation>Project file</Annotation>
 	</Header>
 	<Document>
 		<LocalLibrary />
 		<Pcb>
-			<File path=".\SimpleJoyRx.fsx" Folder="-1" isopened="1"/>
+			<File path=".\SimpleJoyRx.fsx" Folder="-1" isopened="0"/>
 		</Pcb>
 		<ARouteSessions>
 		</ARouteSessions>

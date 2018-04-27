@@ -37,7 +37,7 @@ static void AdcThread(void *arg) {
             for(int i=0; i<ADC_CHANNEL_CNT; i++) {
                 if(AdcChannels[i] == ADC_VREFINT_CHNL) continue; // Ignore VrefInt channel
                 uint32_t Vadc = Adc.GetResult(AdcChannels[i]);
-                uint32_t Vmv = Adc.Adc2mV(Vadc, VRef_adc);   // Resistor divider
+                uint32_t Vmv = Adc.Adc2mV(Vadc, VRef_adc);
 //                Printf("N=%u; Vadc=%u; Vmv=%u\r", i, Vadc, Vmv);
                 EvtMsg_t Msg(evtIdAdcRslt, AdcChannels[i], Vmv);
                 EvtQMain.SendNowOrExit(Msg);

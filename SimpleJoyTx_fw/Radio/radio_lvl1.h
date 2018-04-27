@@ -61,11 +61,11 @@ static inline void Lvl250ToLvl1000(uint16_t *PLvl) {
 union rPkt_t  {
     uint32_t DWord[2];
     struct {
-        uint8_t Length;
         int8_t Ch[4];
         uint8_t R1, R2;
         uint8_t Btns;
     } __packed;
+    uint16_t Adc[4];
     rPkt_t& operator = (const rPkt_t &Right) {
         DWord[0] = Right.DWord[0];
         DWord[1] = Right.DWord[1];
@@ -74,14 +74,7 @@ union rPkt_t  {
     void Print() { Printf("%d %d %d %d %d %d; %X\r", Ch[0],Ch[1],Ch[2],Ch[3],R1, R2, Btns); }
 } __packed;
 
-#define RPKT_LEN    7   // 7 bytes of payload
-
-struct rPktReply_t {
-    uint8_t Length;
-    uint8_t Reply;
-} __packed;
-
-#define REPLY_PKT_LEN   1
+#define RPKT_LEN    sizeof(rPkt_t)
 
 #endif
 
@@ -135,7 +128,7 @@ private:
 public:
     int8_t Rssi;
     EvtMsgQ_t<RMsg_t, RMSG_Q_LEN> RMsgQ;
-    rPktReply_t rPktReply;
+    rPkt_t rPktReply;
     uint8_t Init();
     void SetChannel(uint8_t NewChannel);
     // Inner use
