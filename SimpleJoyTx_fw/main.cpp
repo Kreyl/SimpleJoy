@@ -25,6 +25,7 @@ void ITask();
 LedBlinker_t LedPwr {LED_PWR};
 
 Interface_t Interface;
+Mode_t Mode = modeOff;
 
 bool CalibrationMode = true;
 void ProcessAdc(int32_t *Values);
@@ -44,7 +45,6 @@ struct AdcValues_t {
 } __packed;
 
 static int32_t Offset[6];
-static uint8_t OldRadioLvl = 255;
 static rPkt_t Pkt;
 #endif
 
@@ -116,11 +116,17 @@ void ITask() {
                 break;
 
             case evtIdButtons:
-//              Printf("BtnType %u; N=%u; Btns %u %u\r", Msg.BtnEvtInfo.Type, Msg.BtnEvtInfo.BtnCnt, Msg.BtnEvtInfo.BtnID[0], Msg.BtnEvtInfo.BtnID[1]);
-                if(Msg.BtnEvtInfo.BtnID == 4) { // "L" btn
-                    if(Lcd.GetBacklight() == 0) Lcd.SetBacklight(100);
-                    else Lcd.SetBacklight(0);
+//                Printf("Btn %u\r", Msg.BtnEvtInfo.BtnID);
+                if(Msg.BtnEvtInfo.BtnID == 2) {
+                    if(Mode == modeOff) Mode = modeRandom;
+                    else Mode = (Mode_t)((uint8_t)Mode - 1);
                 }
+                else if(Msg.BtnEvtInfo.BtnID == 3) {
+                    if(Mode == modeRandom) Mode = modeOff;
+                    else Mode = (Mode_t)((uint8_t)Mode + 1);
+                }
+                Interface.ShowMode(Mode);
+                Lcd.Update();
                 break;
 
 //            case evtIdRadioRx: {
@@ -215,32 +221,15 @@ void ProcessAdc(int32_t *Values) {
     }
     // Not calibration
     else {
-        // Put adc values to pkt
-        for(int i=0; i<4; i++) {
-            int32_t v = pVal->Ch[i]; // To make things shorter
-            v -= Offset[i];
-            v /= 16L;  // [0...4095] => [0...255]
-            if(v < -128L) v = -127L;
-            if(v > 127L) v = 127L;
-            Pkt.Ch[i] = v;
-        }
-        // Correct sign
-        Pkt.Ch[0] = -Pkt.Ch[0];
-        Pkt.Ch[3] = -Pkt.Ch[3];
         Pkt.ColorH = (uint16_t)(360L - (pVal->R2 * 360L) / 4096L);
-        Pkt.R2 = (uint16_t)(360L - (pVal->R1 * 360L) / 4096L);
-
-        // Add buttons
-        uint8_t b = 0;
-        for(int i=0; i<7; i++) {
-            if(GetBtnState(i) == pssLo) b |= 1<<i;
-        }
-        Pkt.Btns = b;
+        Pkt.Period = (uint8_t)((BLINK_PERIOD_MAX_S + 1) - (pVal->R1 * (BLINK_PERIOD_MAX_S + 1)) / 4096L);
     }
+
     if(!CalibrationMode) {
         // Display data
         //Printf("H=%d; R2=%d\r", Pkt.ColorH, Pkt.R2);
         Interface.ShowColor(Pkt.ColorH);
+        Interface.ShowPeriod(Pkt.Period);
         Lcd.Update();
         //SendData(Pkt);
     }

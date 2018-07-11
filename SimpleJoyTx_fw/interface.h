@@ -10,6 +10,7 @@
 #include "lcd5110.h"
 #include "lcd_images.h"
 #include "battery_consts.h"
+#include "main.h"
 
 #define Y0          8
 #define R_HEIGHT    40
@@ -34,17 +35,27 @@ public:
     }
 
     void EnterIdle() {
-        Lcd.Print(0, 0, "Цвет 000");
-        Lcd.Print(4, 2, "%c", 0x1E);
-        Lcd.Print(3, 3, "%c%c%c", 0x11, 0x0F, 0x10);
-        Lcd.Print(4, 4, "%c", 0x1F);
-        Lcd.Print(10, 2, "%c", 0x1E);
-        Lcd.Print(9, 3, "%c%c%c", 0x11, 0x0F, 0x10);
-        Lcd.Print(10, 4, "%c", 0x1F);
+        Lcd.Print(0, 1, "Режим: выкл");
+        Lcd.Print(0, 2, "Цвет: 000");
+        Lcd.Print(0, 3, "Мерцание: выкл");
         Lcd.Update();
     }
 
-    void ShowColor(uint16_t AColorH) { Lcd.Print(5, 0, "%03u ", AColorH); }
+    void ShowMode(Mode_t AMode) {
+        switch(AMode) {
+            case modeOff:    Lcd.Print(0, 1, "Режим: выкл   "); break;
+            case modeSync:   Lcd.Print(0, 1, "Режим: синхр  "); break;
+            case modeAsync:  Lcd.Print(0, 1, "Режим: асинхр "); break;
+            case modeRandom: Lcd.Print(0, 1, "Режим: случайн"); break;
+        }
+    }
+
+    void ShowColor(uint16_t AColorH) { Lcd.Print(6, 2, "%03u ", AColorH); }
+
+    void ShowPeriod(uint8_t APeriodS) {
+        if(APeriodS > BLINK_PERIOD_MAX_S) Lcd.Print(0, 3, "Мерцание: выкл");
+        else Lcd.Print(0, 3, "Мерцание: %u   ", APeriodS);
+    }
 
     void DrawR(uint8_t x, uint8_t Value) {
         for(int y = Y0; y < (Y0 + R_HEIGHT); y++) {
