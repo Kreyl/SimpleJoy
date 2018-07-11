@@ -30,7 +30,6 @@ cc1101_t CC(CC_Setup0);
 #endif
 
 rLevel1_t Radio;
-extern LedBlinker_t LedLink;
 
 #if 1 // ================================ Task =================================
 static THD_WORKING_AREA(warLvl1Thread, 256);
@@ -54,12 +53,10 @@ void rLevel1_t::ITask() {
                     // Receive
                     uint8_t RxRslt = CC.Receive(RX_T_MS, &rPktReply, RPKT_LEN, &Rssi);
                     if(RxRslt == retvOk) {
-                        LedLink.On();
 //                        Printf("%d\r", Rssi);
                         EvtQMain.SendNowOrExit(EvtMsg_t(evtIdRadioRx, Rssi));
                         break; // Get out of retries
                     }
-                    else LedLink.Off();
                 }
                 break;
 

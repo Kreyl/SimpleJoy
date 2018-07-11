@@ -62,7 +62,8 @@ union rPkt_t  {
     uint32_t DWord[2];
     struct {
         int8_t Ch[4];
-        uint8_t R1, R2;
+        uint16_t ColorH;
+        uint16_t R2;
         uint8_t Btns;
     } __packed;
     uint16_t Adc[4];
@@ -71,7 +72,7 @@ union rPkt_t  {
         DWord[1] = Right.DWord[1];
         return *this;
     }
-    void Print() { Printf("%d %d %d %d %d %d; %X\r", Ch[0],Ch[1],Ch[2],Ch[3],R1, R2, Btns); }
+//    void Print() { Printf("%d %d %d %d %d %d; %X\r", Ch[0],Ch[1],Ch[2],Ch[3],R1, R2, Btns); }
 } __packed;
 
 #define RPKT_LEN    sizeof(rPkt_t)

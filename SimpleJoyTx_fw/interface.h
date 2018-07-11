@@ -10,7 +10,6 @@
 #include "lcd5110.h"
 #include "lcd_images.h"
 #include "battery_consts.h"
-#include "LivetronicLogo.h"
 
 #define Y0          8
 #define R_HEIGHT    40
@@ -31,17 +30,11 @@
 class Interface_t {
 public:
     void Start() {
-        Lcd.DrawImage(0, 0, icon_Logo);
-        Lcd.Update();
-        chThdSleepMilliseconds(1980);
-        Lcd.DrawImage(0, 0, icon_Livetronic);
-        Lcd.Update();
-        chThdSleepMilliseconds(1980);
         Lcd.Cls();
     }
 
     void EnterIdle() {
-        Lcd.Print(0, 0, "Канал 00");
+        Lcd.Print(0, 0, "Цвет 000");
         Lcd.Print(4, 2, "%c", 0x1E);
         Lcd.Print(3, 3, "%c%c%c", 0x11, 0x0F, 0x10);
         Lcd.Print(4, 4, "%c", 0x1F);
@@ -51,7 +44,7 @@ public:
         Lcd.Update();
     }
 
-    void ShowChannel(uint8_t AChnl) { Lcd.Print(6, 0, "%02u ", AChnl); }
+    void ShowColor(uint16_t AColorH) { Lcd.Print(5, 0, "%03u ", AColorH); }
 
     void DrawR(uint8_t x, uint8_t Value) {
         for(int y = Y0; y < (Y0 + R_HEIGHT); y++) {
