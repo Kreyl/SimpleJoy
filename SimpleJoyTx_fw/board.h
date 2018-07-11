@@ -76,7 +76,7 @@
 #define LCD_CE_PIN      GPIOB, 11
 #define LCD_DC_PIN      GPIOB, 12
 #define LCD_CLK_PIN     GPIOB, 13
-#define LCD_BCKLT_PIN   GPIOB, 14, TIM15, 1, invNotInverted, omPushPull, 100
+#define LCD_BCKLT_PIN   {GPIOB, 14, TIM15, 1, invNotInverted, omPushPull, 100}
 #define LCD_DIN_PIN     GPIOB, 15
 
 // ADC
@@ -98,14 +98,6 @@
 
 #if 1 // =========================== SPI =======================================
 #define LCD_SPI         SPI2
-
-#endif
-
-#if 1 // ========================== USART ======================================
-#define PRINTF_FLOAT_EN FALSE
-#define CMD_UART        USART1
-#define UART_USE_INDEPENDENT_CLK    TRUE
-#define UART_TXBUF_SZ   1024
 
 #endif
 
@@ -151,6 +143,23 @@
 #define UART_DMA_TX     STM32_DMA1_STREAM2
 #define UART_DMA_RX     STM32_DMA1_STREAM3
 #define UART_DMA_CHNL   0   // Dummy
+#define UART_DMA_TX_MODE(Chnl) \
+                            (STM32_DMA_CR_CHSEL(Chnl) | \
+                            DMA_PRIORITY_LOW | \
+                            STM32_DMA_CR_MSIZE_BYTE | \
+                            STM32_DMA_CR_PSIZE_BYTE | \
+                            STM32_DMA_CR_MINC |       /* Memory pointer increase */ \
+                            STM32_DMA_CR_DIR_M2P |    /* Direction is memory to peripheral */ \
+                            STM32_DMA_CR_TCIE         /* Enable Transmission Complete IRQ */)
+
+#define UART_DMA_RX_MODE(Chnl) \
+                            (STM32_DMA_CR_CHSEL((Chnl)) | \
+                            DMA_PRIORITY_MEDIUM | \
+                            STM32_DMA_CR_MSIZE_BYTE | \
+                            STM32_DMA_CR_PSIZE_BYTE | \
+                            STM32_DMA_CR_MINC |       /* Memory pointer increase */ \
+                            STM32_DMA_CR_DIR_P2M |    /* Direction is peripheral to memory */ \
+                            STM32_DMA_CR_CIRC         /* Circular buffer enable */)
 
 // LCD
 #define LCD_DMA         STM32_DMA1_STREAM5
@@ -172,3 +181,16 @@
 #endif // ADC
 
 #endif // DMA
+
+#if 1 // ========================== USART ======================================
+#define PRINTF_FLOAT_EN FALSE
+#define UART_TXBUF_SZ   1024
+#define UART_RXBUF_SZ   99
+#define UART_USE_INDEPENDENT_CLK    TRUE
+
+#define CMD_UART_PARAMS \
+    USART1, UART_GPIO, UART_TX_PIN, UART_GPIO, UART_RX_PIN, \
+    UART_DMA_TX, UART_DMA_RX, UART_DMA_TX_MODE(UART_DMA_CHNL), UART_DMA_RX_MODE(UART_DMA_CHNL), \
+    UART_USE_INDEPENDENT_CLK
+
+#endif

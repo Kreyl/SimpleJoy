@@ -1,4 +1,4 @@
-(kicad_pcb (version 20171130) (host pcbnew "(5.0.0-rc2-dev-130-g0bdae22af)")
+(kicad_pcb (version 20171130) (host pcbnew "(5.0.0-rc2-dev-789-g6f249e5eb)")
 
   (general
     (thickness 1.6)
@@ -11,12 +11,12 @@
 
   (page A4)
   (layers
-    (0 F.Cu signal)
+    (0 F.Cu signal hide)
     (1 In1.Cu signal hide)
     (2 In2.Cu signal hide)
     (31 B.Cu signal hide)
-    (36 B.SilkS user hide)
-    (37 F.SilkS user)
+    (36 B.SilkS user)
+    (37 F.SilkS user hide)
     (38 B.Mask user hide)
     (39 F.Mask user hide)
     (40 Dwgs.User user)
@@ -52,7 +52,7 @@
     (pad_to_mask_clearance 0.1)
     (solder_mask_min_width 0.15)
     (aux_axis_origin 124 137)
-    (visible_elements 7FFFF67F)
+    (visible_elements 7FFFF47F)
     (pcbplotparams
       (layerselection 0x010f0_ffffffff)
       (usegerberextensions true)

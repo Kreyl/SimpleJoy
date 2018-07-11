@@ -22,6 +22,15 @@ static inline uint32_t ClrCalcDelay(uint16_t AValue, uint32_t Smooth) {
 }
 
 struct Color_t {
+private:
+    uint8_t SetSingleBrt(uint32_t v, uint32_t Brt) {
+        if(v > 0) {
+            v = (v * Brt) / 100UL;
+            if(v == 0) v = 1;
+        }
+        return v;
+    }
+public:
     union {
         uint32_t DWord32;
         struct {
@@ -116,6 +125,13 @@ struct Color_t {
         Delay2 = (Lum == AClr.Lum)? 0 : ClrCalcDelay(Lum, SmoothValue);
         return (Delay2 > Delay)? Delay2 : Delay;
     }
+    // Brt = [0; 100]
+    void SetRGBWBrightness(Color_t &AClr, uint32_t Brt) {
+        R = SetSingleBrt(AClr.R, Brt);
+        G = SetSingleBrt(AClr.G, Brt);
+        B = SetSingleBrt(AClr.B, Brt);
+        W = SetSingleBrt(AClr.W, Brt);
+    }
     void Print() { Printf("{%u, %u, %u; %u}\r", R, G, B, Lum); }
     Color_t() : R(0), G(0), B(0), Lum(LUM_MAX) {}
     Color_t(uint8_t AR, uint8_t AG, uint8_t AB) : R(AR), G(AG), B(AB), Lum(LUM_MAX) {}
@@ -199,6 +215,10 @@ struct ColorHSL_t {
 #endif
 
 #if 1 // ============================== HSV ====================================
+#define CLR_HSV_H_MAX   360
+#define CLR_HSV_S_MAX   100
+#define CLR_HSV_V_MAX   100
+
 struct ColorHSV_t {
     union {
         uint32_t DWord32;
@@ -253,6 +273,7 @@ struct ColorHSV_t {
 #define clMagenta   ((Color_t){255, 0, 255})
 #define clCyan      ((Color_t){0, 255, 255})
 #define clWhite     ((Color_t){255, 255, 255})
+#define clOrange    ((Color_t){255, 180, 0})
 
 #define clGrey      ((Color_t){126, 126, 126})
 #define clLightGrey ((Color_t){180, 180, 180})

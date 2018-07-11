@@ -27,7 +27,7 @@
  */
 
 // ================================= Settings ==================================
-#define BUTTONS_CNT                 7
+#define BUTTONS_CNT                 3
 // Select required events etc.
 #define BTN_SHORTPRESS              TRUE    // beShortPress evt
 #define BTN_RELEASE                 FALSE
@@ -42,7 +42,7 @@
 #define BTN_DELAY_BEFORE_REPEAT_MS  450
 
 // Define correct button behavior depending on schematic
-#define BTN_IDLE_LOW                FALSE
+#define BTN_IDLE_LOW                TRUE
 // =============================================================================
 
 // Selected depending on Idle state

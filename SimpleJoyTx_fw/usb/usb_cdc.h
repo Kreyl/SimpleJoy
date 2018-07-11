@@ -16,6 +16,7 @@ class UsbCDC_t : public PrintfHelper_t, public Shell_t {
 private:
     uint8_t IPutChar(char c) { SDU1.vmt->put(&SDU1, c); return retvOk; }
     void IStartTransmissionIfNotYet() {}
+    void SignalCmdProcessed() {}
 public:
     void Init();
     void Connect();
@@ -24,6 +25,7 @@ public:
     void Printf(const char *S, ...);
     // Inner use
     SerialUSBDriver SDU1;
+    bool CmdProcessInProgress;
 };
 
 extern UsbCDC_t UsbCDC;
