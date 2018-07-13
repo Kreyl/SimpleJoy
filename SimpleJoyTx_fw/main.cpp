@@ -70,55 +70,38 @@ int main(void) {
     Uart.StartRx();
 
     // LEDs
-//    LedPwr.Init();
-//    LedPwr.On();
-//    LedRgb.Init();
-//
-//    LedRgb.SetColor(clRed);
-//    chThdSleepMilliseconds(999);
-//    LedRgb.SetColor(clGreen);
-//    chThdSleepMilliseconds(999);
-//    LedRgb.SetColor(clBlue);
-//    chThdSleepMilliseconds(999);
-
-    PinSetupOut(GPIOB, 0, omPushPull);
-    PinSetHi(GPIOB, 0);
-    PinSetupOut(GPIOB, 1, omPushPull);
-    PinSetHi(GPIOB, 1);
-    PinSetupOut(GPIOB, 5, omPushPull);
-    PinSetHi(GPIOB, 5);
-    PinSetupOut(GPIOB, 4, omPushPull);
-    PinSetHi(GPIOB, 4);
-
+    LedPwr.Init();
+    LedPwr.On();
+    LedRgb.Init();
 
 //    Radio.Init();
 
-//    Lcd.Init();
-//    Lcd.SetBacklight(100);
-//    Interface.Start();
-//    Interface.EnterIdle();
+    Lcd.Init();
+    Lcd.SetBacklight(100);
+    Interface.Start();
+    Interface.EnterIdle();
 
     // Buttons
-//    SimpleSensors::Init();
+    SimpleSensors::Init();
 
 //    TmrEverySecond.StartOrRestart();
 
     // ==== Adc ====
-//    PinSetupOut(BAT_MEAS_EN, omPushPull);
-//    PinSetHi(BAT_MEAS_EN);  // Enable battery measurement
-//    PinSetupAnalog(BAT_MEAS_PIN);
-//    PinSetupAnalog(ADC0_PIN);
-//    PinSetupAnalog(ADC1_PIN);
-//    PinSetupAnalog(ADC2_PIN);
-//    PinSetupAnalog(ADC3_PIN);
-//    PinSetupAnalog(ADC4_PIN);
-//    PinSetupAnalog(ADC5_PIN);
-//    memset(CalibrationCounter, 0, sizeof(CalibrationCounter));
-//    memset(AdcOffset, 0, sizeof(AdcOffset));
-//    memset(Offset, 0, sizeof(Offset));
-//    Adc.Init();
-//    Adc.EnableVRef();
-//
+    PinSetupOut(BAT_MEAS_EN, omPushPull);
+    PinSetHi(BAT_MEAS_EN);  // Enable battery measurement
+    PinSetupAnalog(BAT_MEAS_PIN);
+    PinSetupAnalog(ADC0_PIN);
+    PinSetupAnalog(ADC1_PIN);
+    PinSetupAnalog(ADC2_PIN);
+    PinSetupAnalog(ADC3_PIN);
+    PinSetupAnalog(ADC4_PIN);
+    PinSetupAnalog(ADC5_PIN);
+    memset(CalibrationCounter, 0, sizeof(CalibrationCounter));
+    memset(AdcOffset, 0, sizeof(AdcOffset));
+    memset(Offset, 0, sizeof(Offset));
+    Adc.Init();
+    Adc.EnableVRef();
+
 //    UsbCDC.Init();
 
     // Setup sync timer
@@ -258,7 +241,9 @@ void ProcessAdc(int32_t *Values) {
         Interface.ShowColor(Pkt.ColorH);
         Interface.ShowPeriod(Pkt.Period);
         Lcd.Update();
-        //SendData(Pkt);
+        // LED
+        ColorHSV_t Clr(Pkt.ColorH, 100, 100);
+        LedRgb.SetColor(Clr.ToRGB());
     }
 }
 

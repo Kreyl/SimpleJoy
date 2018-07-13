@@ -45,6 +45,11 @@
 #define BTN_J1_PIN      GPIOB, 8, pudPullUp
 #define BTN_J2_PIN      GPIOB, 9, pudPullUp
 
+// LED
+#define LED_R_PIN       { GPIOB, 1, TIM3, 4, invNotInverted, omPushPull, 255 }
+#define LED_G_PIN       { GPIOB, 0, TIM3, 3, invNotInverted, omPushPull, 255 }
+#define LED_B_PIN       { GPIOB, 4, TIM3, 1, invNotInverted, omPushPull, 255 }
+
 // UART
 #define UART_GPIO       GPIOA
 #define UART_TX_PIN     9
