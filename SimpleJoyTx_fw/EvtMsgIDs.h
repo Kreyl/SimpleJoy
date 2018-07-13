@@ -17,6 +17,8 @@ enum EvtMsgId_t {
 
     evtIdButtons,
 
+    evtIdLedDone,
+
     evtIdMenuTimeout,
     evtIdRadioRx,
 
