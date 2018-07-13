@@ -59,14 +59,19 @@ static inline void Lvl250ToLvl1000(uint16_t *PLvl) {
 
 #if 1 // =========================== Pkt_t =====================================
 union rPkt_t  {
-    uint32_t DWord;
+    struct {
+        uint32_t DWord;
+        uint16_t Word16;
+    };
     struct {
         uint8_t Mode;
         uint16_t ColorH;
         uint8_t Period;
+        uint16_t Time;
     } __packed;
     rPkt_t& operator = (const rPkt_t &Right) {
         DWord = Right.DWord;
+        Word16 = Right.Word16;
         return *this;
     }
 //    void Print() { Printf("%d %d %d %d %d %d; %X\r", Ch[0],Ch[1],Ch[2],Ch[3],R1, R2, Btns); }
