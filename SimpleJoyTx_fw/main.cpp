@@ -23,13 +23,16 @@ void OnCmd(Shell_t *PShell);
 void ITask();
 
 LedBlinker_t LedPwr {LED_PWR};
-LedRGB_t LedRgb {LED_R_PIN, LED_G_PIN, LED_B_PIN};
+LedHSV_t LedHsv {LED_R_PIN, LED_G_PIN, LED_B_PIN};
 
 Interface_t Interface;
 Mode_t Mode = modeOff;
 
+uint8_t OldPeriod = 12; // Dummy value
+
 bool CalibrationMode = true;
 void ProcessAdc(int32_t *Values);
+void ProcessData();
 #define CONTROL_CNT         6
 #define CALIBRATION_CNT     16
 int32_t AdcOffset[CONTROL_CNT];
@@ -47,6 +50,12 @@ struct AdcValues_t {
 
 static int32_t Offset[6];
 static rPkt_t Pkt;
+
+static LedHSVChunk_t lsqFlicker[] = {
+        {csSetup, 99, hsvRed},
+        {csSetup, 99, hsvBlack},
+        {csGoto, 0}
+};
 
 //Timer_t SyncTmr(TIM7);
 #endif
@@ -72,7 +81,7 @@ int main(void) {
     // LEDs
     LedPwr.Init();
     LedPwr.On();
-    LedRgb.Init();
+    LedHsv.Init();
 
 //    Radio.Init();
 
@@ -231,19 +240,38 @@ void ProcessAdc(int32_t *Values) {
     else {
         Pkt.ColorH = (uint16_t)(360L - (pVal->R2 * 360L) / 4096L);
         Pkt.Period = (uint8_t)((BLINK_PERIOD_MAX_S + 1) - (pVal->R1 * (BLINK_PERIOD_MAX_S + 1)) / 4096L);
+        ProcessData();
+    }
+}
+
+void ProcessData() {
+    // Send pkt
+
+    // Display data
+    //Printf("H=%d; R2=%d\r", Pkt.ColorH, Pkt.R2);
+    Interface.ShowColor(Pkt.ColorH);
+    Interface.ShowPeriod(Pkt.Period);
+    Lcd.Update();
+
+    // LED
+    ColorHSV_t Clr(Pkt.ColorH, 100, 100);
+    if(Pkt.Period > BLINK_PERIOD_MAX_S) { // No flicker
+        if(!LedHsv.IsIdle()) LedHsv.Stop();
+        LedHsv.SetColor(Clr);
     }
 
-    if(!CalibrationMode) {
-        // Send pkt
+    lsqFlicker[0].Color = Clr;
+    lsqFlicker[1].Color = Clr;
+    lsqFlicker[1].Color.V = 0; // Make it black
 
-        // Display data
-        //Printf("H=%d; R2=%d\r", Pkt.ColorH, Pkt.R2);
-        Interface.ShowColor(Pkt.ColorH);
-        Interface.ShowPeriod(Pkt.Period);
-        Lcd.Update();
-        // LED
-        ColorHSV_t Clr(Pkt.ColorH, 100, 100);
-        LedRgb.SetColor(Clr.ToRGB());
+    if(OldPeriod != Pkt.Period) {
+        OldPeriod = Pkt.Period;
+        if(OldPeriod <= BLINK_PERIOD_MAX_S) { // Flicker
+            LedHsv.Stop();
+            lsqFlicker[0].Value = Pkt.Period * 9;
+            lsqFlicker[1].Value = lsqFlicker[0].Value;
+            LedHsv.StartOrRestart(lsqFlicker);
+        }
     }
 }
 
