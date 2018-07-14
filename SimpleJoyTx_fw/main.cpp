@@ -54,17 +54,18 @@ static rPkt_t Pkt;
 static LedHSVChunk_t lsqFlicker[] = {
         {csSetup, 99, hsvRed},
         {csSetup, 99, hsvBlack},
-        {csGoto, 0}
+        {csEnd}
 };
 
-//Timer_t SyncTmr(TIM7);
+Timer_t SyncTmr(TIM7);
+uint16_t GetTimerArr(uint32_t Period);
 #endif
 
 int main(void) {
     // ==== Init Clock system ====
     Clk.EnablePrefetch();
-    Clk.SetupFlashLatency(48000000);
-    Clk.SwitchTo(csHSI48);
+//    Clk.SetupFlashLatency(48000000);
+//    Clk.SwitchTo(csHSI48);
     Clk.UpdateFreqValues();
 
     // === Init OS ===
@@ -82,7 +83,7 @@ int main(void) {
     LedPwr.Init();
     LedPwr.On();
     LedHsv.Init();
-    LedHsv.SetupSeqEndEvt(evtIdLedDone);
+//    LedHsv.SetupSeqEndEvt(evtIdLedDone);
 
 //    Radio.Init();
 
@@ -115,7 +116,12 @@ int main(void) {
 //    UsbCDC.Init();
 
     // Setup sync timer
-//    SyncTmr.Init();
+    SyncTmr.Init();
+    SyncTmr.SetTopValue(63000);
+    SyncTmr.SetupPrescaler(1000);
+    SyncTmr.EnableIrqOnUpdate();
+    SyncTmr.EnableIrq(TIM7_IRQn, IRQ_PRIO_LOW);
+    SyncTmr.Enable();
 
     // Main cycle
     ITask();
@@ -157,26 +163,6 @@ void ITask() {
                 Lcd.Update();
                 break;
 
-//            case evtIdRadioRx: {
-////                Printf("Rx: %d\r", Msg.Value);
-//                RPktReceived = true;
-//                uint8_t Lvl = 0;
-//                if(Msg.Value > -35) Lvl = 4;
-//                else if(Msg.Value > -65) Lvl = 3;
-//                else if(Msg.Value > -85) Lvl = 2;
-//                else Lvl = 1;
-//                if(Lvl != OldRadioLvl) {
-//                    OldRadioLvl = Lvl;
-//                    Interface.ShowRadioLvl(Lvl);
-//                }
-//                // ADC values received
-//                if(AdcOn and UsbCDC.IsActive()) {
-//                    UsbCDC.Printf("%u;%u;%u;%u\r\n",
-//                        Radio.rPktReply.Adc[0], Radio.rPktReply.Adc[1],
-//                        Radio.rPktReply.Adc[2], Radio.rPktReply.Adc[3]);
-//                }
-//            } break;
-
             case evtIdEverySecond:
 //                Printf("%u\r", (TIM2->CNT % 1000));
                 // Radio: reset rx level if nothing received
@@ -209,19 +195,28 @@ void ITask() {
                 ProcessAdc((int32_t*)Msg.Ptr);
                 break;
 
-            case evtIdLedDone:
-                if(Mode == modeRandom) {
-                    int16_t H;
-                    while(true) {
-                        H = Random::Generate(0, 360);
-                        int16_t OldH = lsqFlicker[0].Color.H;
-                        if(ABS(H - OldH) > 36) break;
+//            case evtIdLedDone:
+//                Printf("Tmr: %u\r", SyncTmr.GetCounter());
+//                SyncTmr.SetCounter(0);
+//                break;
+
+            case evtIdSyncTmrUpdate:
+//                Printf("Aga\r");
+                if(Pkt.Period <= BLINK_PERIOD_MAX_S) {
+                    if(Mode == modeRandom) {
+                        int16_t H;
+                        while(true) {
+                            H = Random::Generate(0, 360);
+                            int16_t OldH = lsqFlicker[0].Color.H;
+                            if(ABS(H - OldH) > 36) break;
+                        }
+                        Interface.ShowColor(H);
+                        Lcd.Update();
+                        lsqFlicker[0].Color.FromHSV(H, 100, 100);
+                        lsqFlicker[1].Color.FromHSV(H, 100, 0);
+                        LedHsv.SetColorAndMakeCurrent(ColorHSV_t(H, 100, 0));
                     }
-                    Interface.ShowColor(H);
-                    Lcd.Update();
-                    lsqFlicker[0].Color.FromHSV(H, 100, 100);
-                    lsqFlicker[1].Color.FromHSV(H, 100, 0);
-                    LedHsv.SetColorAndMakeCurrent(ColorHSV_t(H, 100, 0));
+                    LedHsv.StartOrRestart(lsqFlicker);  // Restart flicker
                 }
                 break;
 
@@ -288,48 +283,59 @@ void ProcessData() {
         case modeAsync:
         case modeSync:
         {
+            // Color
             lsqFlicker[0].Color.FromHSV(Pkt.ColorH, 100, 100);
             lsqFlicker[1].Color.FromHSV(Pkt.ColorH, 100, 0);    // Make it black
-
+            // Period
             if(OldPeriod != Pkt.Period) {
-                if(Pkt.Period > BLINK_PERIOD_MAX_S) { // Become NoFlicker
-                    LedHsv.Stop();
-                }
-                else { // Flicker
-                    lsqFlicker[0].Value = Pkt.Period * 9;
-                    lsqFlicker[1].Value = lsqFlicker[0].Value;
-                    // if was NoFlicker
-                    if(OldPeriod > BLINK_PERIOD_MAX_S) {
-                        LedHsv.SetColorAndMakeCurrent(ColorHSV_t(Pkt.ColorH, 100, 0));
-                        LedHsv.StartOrRestart(lsqFlicker);
-                    }
-                }
                 OldPeriod = Pkt.Period;
-            }
-            if(Pkt.Period > BLINK_PERIOD_MAX_S) { // No flicker
-                LedHsv.SetColorAndMakeCurrent(ColorHSV_t(Pkt.ColorH, 100, 100));
+                // Timer
+                SyncTmr.SetCounter(0);
+                SyncTmr.SetTopValue(GetTimerArr(Pkt.Period));
+                // lsq
+                lsqFlicker[0].Value = Pkt.Period * 18;
+                lsqFlicker[1].Value = lsqFlicker[0].Value;
+                // LED
+                LedHsv.Stop();
+                if(Pkt.Period <= BLINK_PERIOD_MAX_S) {
+                    LedHsv.SetColorAndMakeCurrent(ColorHSV_t(Pkt.ColorH, 100, 0));
+                    LedHsv.StartOrRestart(lsqFlicker);
+                }
+                else LedHsv.SetColorAndMakeCurrent(ColorHSV_t(Pkt.ColorH, 100, 100));
             }
         }
         break;
 
-        case modeRandom: {
+        case modeRandom:
             if(OldPeriod != Pkt.Period) {
-                if(Pkt.Period > BLINK_PERIOD_MAX_S) { // Become NoFlicker
-                    LedHsv.Stop();
-                }
-                else { // Flicker
-                    lsqFlicker[0].Value = Pkt.Period * 9;
-                    lsqFlicker[1].Value = lsqFlicker[0].Value;
-                    // if was NoFlicker
-                    if(OldPeriod > BLINK_PERIOD_MAX_S) {
-                        LedHsv.StartOrRestart(lsqFlicker);
-                    }
-                }
                 OldPeriod = Pkt.Period;
+                // Timer
+                SyncTmr.SetCounter(0);
+                SyncTmr.SetTopValue(GetTimerArr(Pkt.Period));
+                // lsq
+                lsqFlicker[0].Value = Pkt.Period * 18;
+                lsqFlicker[1].Value = lsqFlicker[0].Value;
+                // LED
+                LedHsv.Stop();
+                if(Pkt.Period <= BLINK_PERIOD_MAX_S) LedHsv.StartOrRestart(lsqFlicker);
             }
-        }
-        break;
+            break;
     } // switch
+}
+
+uint16_t GetTimerArr(uint32_t Period) {
+    if     (Period >= 80) return Period * 114 + 11;
+    else if(Period >= 60) return Period * 115 + 11;
+    else if(Period >= 40) return Period * 116 + 11;
+    else if(Period >= 30) return Period * 117 + 11;
+    else if(Period >= 20) return Period * 119 + 11;
+    else if(Period >= 15) return Period * 121 + 11;
+    else if(Period >= 10) return Period * 125 + 11;
+    else if(Period >= 7) return Period * 130 + 11;
+    else if(Period >= 4) return Period * 155 + 11;
+    else if(Period == 3) return 534;
+    else if(Period == 2) return 469;
+    else return 412;
 }
 
 #if 1 // ================= Command processing ====================
@@ -345,3 +351,14 @@ void OnCmd(Shell_t *PShell) {
     else PShell->Ack(retvCmdUnknown);
 }
 #endif
+
+// IRQ
+extern "C"
+void Vector88() {
+    CH_IRQ_PROLOGUE();
+    chSysLockFromISR();
+    SyncTmr.ClearIrqPendingBit();
+    EvtQMain.SendNowOrExitI(EvtMsg_t(evtIdSyncTmrUpdate));
+    chSysUnlockFromISR();
+    CH_IRQ_EPILOGUE();
+}
