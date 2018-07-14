@@ -55,7 +55,7 @@ static inline void Lvl250ToLvl1000(uint16_t *PLvl) {
 
 #endif
 
-#define CC_TX_PWR   CC_PwrPlus5dBm
+#define CC_TX_PWR   CC_PwrPlus10dBm
 
 #if 1 // =========================== Pkt_t =====================================
 union rPkt_t  {
@@ -74,7 +74,7 @@ union rPkt_t  {
         Word16 = Right.Word16;
         return *this;
     }
-//    void Print() { Printf("%d %d %d %d %d %d; %X\r", Ch[0],Ch[1],Ch[2],Ch[3],R1, R2, Btns); }
+    void Print() { Printf("%d %d %d %d\r", Mode,ColorH,Period,Time); }
 } __packed;
 
 #define RPKT_LEN    sizeof(rPkt_t)

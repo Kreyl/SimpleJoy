@@ -16,8 +16,8 @@ cc1101_t CC(CC_Setup0);
 //#define DBG_PINS
 
 #ifdef DBG_PINS
-#define DBG_GPIO1   GPIOB
-#define DBG_PIN1    0
+#define DBG_GPIO1   GPIOC
+#define DBG_PIN1    3
 #define DBG1_SET()  PinSetHi(DBG_GPIO1, DBG_PIN1)
 #define DBG1_CLR()  PinSetLo(DBG_GPIO1, DBG_PIN1)
 //#define DBG_GPIO2   GPIOB
@@ -46,18 +46,11 @@ void rLevel1_t::ITask() {
         switch(Msg.ID) {
             case RMSGID_PKT:
 //                Msg.Pkt.Print();
-                for(int i=0; i<RETRY_CNT; i++) {
-                    // Transmit
-                    CC.Recalibrate();
-                    CC.Transmit(&Msg.Pkt, RPKT_LEN); // Length byte + payload
-                    // Receive
-                    uint8_t RxRslt = CC.Receive(RX_T_MS, &rPktReply, RPKT_LEN, &Rssi);
-                    if(RxRslt == retvOk) {
-//                        Printf("%d\r", Rssi);
-                        EvtQMain.SendNowOrExit(EvtMsg_t(evtIdRadioRx, Rssi));
-                        break; // Get out of retries
-                    }
-                }
+                // Transmit
+                DBG1_SET();
+                CC.Recalibrate();
+                CC.Transmit(&Msg.Pkt, RPKT_LEN);
+                DBG1_CLR();
                 break;
 
             case RMSGID_CHNL:
@@ -88,16 +81,12 @@ uint8_t rLevel1_t::Init() {
     if(CC.Init() == retvOk) {
         CC.SetTxPower(CC_TX_PWR);
         CC.SetPktSize(RPKT_LEN);
-//        CC.SetChannel(Settings.RChnl);
+        CC.SetChannel(0);
         CC.Recalibrate();
         // Thread
         chThdCreateStatic(warLvl1Thread, sizeof(warLvl1Thread), NORMALPRIO, (tfunc_t)rLvl1Thread, NULL);
         return retvOk;
     }
     else return retvFail;
-}
-
-void rLevel1_t::SetChannel(uint8_t NewChannel) {
-    CC.SetChannel(NewChannel);
 }
 #endif

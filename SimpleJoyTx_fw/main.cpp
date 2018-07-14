@@ -84,7 +84,7 @@ int main(void) {
     LedHsv.Init();
 //    LedHsv.SetupSeqEndEvt(evtIdLedDone);
 
-//    Radio.Init();
+    Radio.Init();
 
     Lcd.Init();
     Lcd.SetBacklight(100);
@@ -93,8 +93,6 @@ int main(void) {
 
     // Buttons
     SimpleSensors::Init();
-
-//    TmrEverySecond.StartOrRestart();
 
     // ==== Adc ====
     PinSetupOut(BAT_MEAS_EN, omPushPull);
@@ -307,7 +305,7 @@ void ProcessData() {
     Pkt.ColorH = ClrH;
     Pkt.Period = Period;
     Pkt.Time = SyncTmr.GetCounter();
-
+    Radio.RMsgQ.SendNowOrExit(RMsg_t(Pkt));
 }
 
 uint16_t GetTimerArr(uint32_t Period) {
