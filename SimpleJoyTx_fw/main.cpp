@@ -63,7 +63,8 @@ uint16_t GetTimerArr(uint32_t Period);
 int main(void) {
     // ==== Init Clock system ====
     Clk.EnablePrefetch();
-//    Clk.SetupFlashLatency(48000000);
+    Clk.SetupFlashLatency(12000000);
+    Clk.SwitchTo(csHSE);
 //    Clk.SwitchTo(csHSI48);
     Clk.UpdateFreqValues();
 
@@ -192,7 +193,7 @@ void ITask() {
                         lsqFlicker[1].Color.FromHSV(H, 100, 0);
                         LedHsv.SetColorAndMakeCurrent(ColorHSV_t(H, 100, 0));
                     }
-                    LedHsv.StartOrContinue(lsqFlicker);  // Restart flicker
+                    LedHsv.StartOrRestart(lsqFlicker);  // Restart flicker
                 }
                 break;
 
