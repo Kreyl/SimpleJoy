@@ -31,8 +31,7 @@
 // PortMinTim_t: GPIO, Pin, Tim, TimChnl, invInverted, omPushPull, TopValue
 
 // Battery measurement
-#define BAT_MEAS_PIN    GPIOA, 0
-#define BAT_MEAS_EN     GPIOA, 1
+#define BAT_MEAS_PIN    GPIOA, 1
 
 #define USB_DETECT_PIN  GPIOA, 2
 
@@ -46,9 +45,9 @@
 #define BTN_J2_PIN      GPIOB, 9, pudPullUp
 
 // LED
-#define LED_R_PIN       { GPIOB, 1, TIM3, 4, invNotInverted, omPushPull, 255 }
-#define LED_G_PIN       { GPIOB, 0, TIM3, 3, invNotInverted, omPushPull, 255 }
-#define LED_B_PIN       { GPIOB, 4, TIM3, 1, invNotInverted, omPushPull, 255 }
+#define LED_B_PIN       { GPIOB, 1, TIM3, 4, invNotInverted, omPushPull, 255 }
+#define LED_R_PIN       { GPIOB, 0, TIM3, 3, invNotInverted, omPushPull, 255 }
+#define LED_G_PIN       { GPIOB, 4, TIM3, 1, invNotInverted, omPushPull, 255 }
 
 // UART
 #define UART_GPIO       GPIOA

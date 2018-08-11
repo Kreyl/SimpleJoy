@@ -38,6 +38,7 @@ public:
         Lcd.Print(0, 1, "Режим: выкл");
         Lcd.Print(0, 2, "Цвет: 000");
         Lcd.Print(0, 3, "Мерцание: выкл");
+        Lcd.Print(0, 5, "Передача: выкл");
         Lcd.Update();
     }
 
@@ -55,6 +56,11 @@ public:
     void ShowPeriod(uint8_t APeriodS) {
         if(APeriodS > BLINK_PERIOD_MAX_S) Lcd.Print(0, 3, "Мерцание: выкл");
         else Lcd.Print(0, 3, "Мерцание: %u   ", APeriodS);
+    }
+
+    void ShowTxOnOff(bool TxIsOn) {
+        if(TxIsOn) Lcd.Print(0, 5, "Передача: вкл ");
+        else Lcd.Print(0, 5, "Передача: выкл");
     }
 
     void DrawR(uint8_t x, uint8_t Value) {

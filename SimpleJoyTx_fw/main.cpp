@@ -56,6 +56,8 @@ struct AdcValues_t {
 
 static int32_t Offset[6];
 
+bool TxOn = false;
+
 Timer_t SyncTmr(TIM7);
 uint16_t GetTimerArr(uint32_t Period);
 #endif
@@ -81,9 +83,7 @@ int main(void) {
 
     // LEDs
     LedPwr.Init();
-    LedPwr.On();
     LedHsv.Init();
-//    LedHsv.SetupSeqEndEvt(evtIdLedDone);
 
     Radio.Init();
 
@@ -137,25 +137,33 @@ void ITask() {
 
             case evtIdButtons:
 //                Printf("Btn %u\r", Msg.BtnEvtInfo.BtnID);
-                if(Msg.BtnEvtInfo.BtnID == 2) {
-                    if(Mode == modeOff) Mode = modeRandom;
-                    else Mode = (Mode_t)((uint8_t)Mode - 1);
+                // Mode
+                if(Msg.BtnEvtInfo.BtnID == 2 or Msg.BtnEvtInfo.BtnID == 3) {
+                    if(Msg.BtnEvtInfo.BtnID == 2) {
+                        if(Mode == modeOff) Mode = modeRandom;
+                        else Mode = (Mode_t)((uint8_t)Mode - 1);
+                    }
+                    else if(Msg.BtnEvtInfo.BtnID == 3) {
+                        if(Mode == modeRandom) Mode = modeOff;
+                        else Mode = (Mode_t)((uint8_t)Mode + 1);
+                    }
+                    // Handle synctmr
+                    LedHsv.Stop();
+                    SyncTmr.SetCounter(0);
+                    if(Mode == modeOff) SyncTmr.Disable();
+                    else {
+                        SyncTmr.Enable();
+                        if(Mode != modeRandom) LedHsv.SetColorAndMakeCurrent(ColorHSV_t(ClrH, 100, 0));
+                        EvtQMain.SendNowOrExit(evtIdSyncTmrUpdate);
+                    }
+                    Interface.ShowMode(Mode);
                 }
-                else if(Msg.BtnEvtInfo.BtnID == 3) {
-                    if(Mode == modeRandom) Mode = modeOff;
-                    else Mode = (Mode_t)((uint8_t)Mode + 1);
+                else if(Msg.BtnEvtInfo.BtnID == 4) {
+                    TxOn = !TxOn;
+                    if(TxOn) LedPwr.On();
+                    else LedPwr.Off();
+                    Interface.ShowTxOnOff(TxOn);
                 }
-                // Handle synctmr
-                LedHsv.Stop();
-                SyncTmr.SetCounter(0);
-                if(Mode == modeOff) SyncTmr.Disable();
-                else {
-                    SyncTmr.Enable();
-                    if(Mode != modeRandom) LedHsv.SetColorAndMakeCurrent(ColorHSV_t(ClrH, 100, 0));
-                    EvtQMain.SendNowOrExit(evtIdSyncTmrUpdate);
-                }
-
-                Interface.ShowMode(Mode);
                 Lcd.Update();
                 break;
 
@@ -179,22 +187,23 @@ void ITask() {
             case evtIdAdcRslt: ProcessAdc((int32_t*)Msg.Ptr); break;
 
             case evtIdSyncTmrUpdate:
-//                Printf("Aga\r");
-                if(IsFlickering) {
-                    if(Mode == modeRandom) {
-                        int16_t H;
-                        int16_t OldH = lsqFlicker[0].Color.H;
-                        do {
-                            H = Random::Generate(0, 360);
-                        } while(ABS(H - OldH) < 36);
-                        Interface.ShowColor(H);
-                        Lcd.Update();
+                if(Mode == modeRandom) {
+                    int16_t H;
+                    int16_t OldH = lsqFlicker[0].Color.H;
+                    do {
+                        H = Random::Generate(0, 360);
+                    } while(ABS(H - OldH) < 36);
+                    Interface.ShowColor(H);
+                    Lcd.Update();
+                    if(IsFlickering) {
                         lsqFlicker[0].Color.FromHSV(H, 100, 100);
                         lsqFlicker[1].Color.FromHSV(H, 100, 0);
                         LedHsv.SetColorAndMakeCurrent(ColorHSV_t(H, 100, 0));
                     }
-                    LedHsv.StartOrRestart(lsqFlicker);  // Restart flicker
+                    else LedHsv.SetColorAndMakeCurrent(ColorHSV_t(H, 100, 100));
                 }
+                if(IsFlickering) LedHsv.StartOrRestart(lsqFlicker);  // Restart flicker
+                else SyncTmr.Disable();
                 break;
 
             default: break;
@@ -239,7 +248,7 @@ void ProcessAdc(int32_t *Values) {
     // Not calibration
     else {
         ClrH = (uint16_t)(360L - (pVal->R2 * 360L) / 4096L);
-        Period = (uint8_t)((BLINK_PERIOD_MAX_S + 1) - (pVal->R1 * (BLINK_PERIOD_MAX_S + 1)) / 4096L);
+        Period = (uint8_t)(((BLINK_PERIOD_MAX_S / 2) + 1) - (pVal->R1 * ((BLINK_PERIOD_MAX_S / 2) + 1)) / 4096L) * 2;
         ProcessData();
     }
 }
@@ -290,12 +299,17 @@ void ProcessData() {
                 // Timer
                 SyncTmr.SetCounter(0);
                 SyncTmr.SetTopValue(GetTimerArr(Period));
-                // lsq
-                lsqFlicker[0].Value = Period * 18;
-                lsqFlicker[1].Value = lsqFlicker[0].Value;
-                // LED
                 LedHsv.Stop();
-                if(IsFlickering) LedHsv.StartOrContinue(lsqFlicker);
+                if(IsFlickering) {
+                    // lsq
+                    lsqFlicker[0].Value = Period * 18;
+                    lsqFlicker[1].Value = lsqFlicker[0].Value;
+                    // LED
+                    LedHsv.StartOrContinue(lsqFlicker);
+                }
+                else {
+                    EvtQMain.SendNowOrExit(evtIdSyncTmrUpdate);
+                }
             }
             break;
     } // switch

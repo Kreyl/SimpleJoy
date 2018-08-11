@@ -30,6 +30,8 @@ cc1101_t CC(CC_Setup0);
 #endif
 
 rLevel1_t Radio;
+extern bool TxOn;
+static bool TxWasOn = false;
 
 #if 1 // ================================ Task =================================
 static THD_WORKING_AREA(warLvl1Thread, 256);
@@ -46,15 +48,25 @@ void rLevel1_t::ITask() {
         switch(Msg.ID) {
             case RMSGID_PKT:
 //                Msg.Pkt.Print();
-                // Transmit
-                DBG1_SET();
-                CC.Recalibrate();
-                CC.Transmit(&Msg.Pkt, RPKT_LEN);
-                DBG1_CLR();
+                if(TxOn) {
+                    TxWasOn = true;
+                    // Transmit
+                    DBG1_SET();
+                    CC.Recalibrate();
+                    CC.Transmit(&Msg.Pkt, RPKT_LEN);
+                    DBG1_CLR();
+                }
+                else {
+                    if(TxWasOn) {
+                        TxWasOn = false;
+                        CC.EnterPwrDown();
+                    }
+                }
                 break;
 
             case RMSGID_CHNL:
                 CC.SetChannel(Msg.Value);
+                if(!TxOn) CC.EnterPwrDown();
                 break;
 
             default: break;
@@ -82,7 +94,7 @@ uint8_t rLevel1_t::Init() {
         CC.SetTxPower(CC_TX_PWR);
         CC.SetPktSize(RPKT_LEN);
         CC.SetChannel(0);
-        CC.Recalibrate();
+        CC.EnterPwrDown();
         // Thread
         chThdCreateStatic(warLvl1Thread, sizeof(warLvl1Thread), NORMALPRIO, (tfunc_t)rLvl1Thread, NULL);
         return retvOk;

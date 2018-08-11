@@ -11,13 +11,13 @@
 
   (page A4)
   (layers
-    (0 F.Cu signal)
-    (31 B.Cu signal)
-    (36 B.SilkS user)
+    (0 F.Cu signal hide)
+    (31 B.Cu signal hide)
+    (36 B.SilkS user hide)
     (37 F.SilkS user)
     (38 B.Mask user)
     (39 F.Mask user)
-    (40 Dwgs.User user)
+    (40 Dwgs.User user hide)
     (44 Edge.Cuts user)
     (49 F.Fab user hide)
   )
@@ -49,7 +49,7 @@
     (pad_to_mask_clearance 0.1)
     (solder_mask_min_width 0.15)
     (aux_axis_origin 109.9 115)
-    (visible_elements 7FFFF67F)
+    (visible_elements 7FFFF77F)
     (pcbplotparams
       (layerselection 0x010f0_ffffffff)
       (usegerberextensions true)
