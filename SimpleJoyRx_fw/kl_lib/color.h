@@ -22,6 +22,15 @@ static inline uint32_t ClrCalcDelay(uint16_t AValue, uint32_t Smooth) {
 }
 
 struct Color_t {
+private:
+    uint8_t SetSingleBrt(uint32_t v, uint32_t Brt) {
+        if(v > 0) {
+            v = (v * Brt) / 100UL;
+            if(v == 0) v = 1;
+        }
+        return v;
+    }
+public:
     union {
         uint32_t DWord32;
         struct {
@@ -116,6 +125,13 @@ struct Color_t {
         Delay2 = (Lum == AClr.Lum)? 0 : ClrCalcDelay(Lum, SmoothValue);
         return (Delay2 > Delay)? Delay2 : Delay;
     }
+    // Brt = [0; 100]
+    void SetRGBWBrightness(Color_t &AClr, uint32_t Brt) {
+        R = SetSingleBrt(AClr.R, Brt);
+        G = SetSingleBrt(AClr.G, Brt);
+        B = SetSingleBrt(AClr.B, Brt);
+        W = SetSingleBrt(AClr.W, Brt);
+    }
     void Print() { Printf("{%u, %u, %u; %u}\r", R, G, B, Lum); }
     Color_t() : R(0), G(0), B(0), Lum(LUM_MAX) {}
     Color_t(uint8_t AR, uint8_t AG, uint8_t AB) : R(AR), G(AG), B(AB), Lum(LUM_MAX) {}
@@ -199,6 +215,10 @@ struct ColorHSL_t {
 #endif
 
 #if 1 // ============================== HSV ====================================
+#define CLR_HSV_H_MAX   360
+#define CLR_HSV_S_MAX   100
+#define CLR_HSV_V_MAX   100
+
 struct ColorHSV_t {
     union {
         uint32_t DWord32;
@@ -207,6 +227,25 @@ struct ColorHSV_t {
             uint8_t S, V;   // 0...100
         };
     };
+
+    void Adjust(const ColorHSV_t &Target) {
+        if     (H < Target.H) H++;
+        else if(H > Target.H) H--;
+        if     (S < Target.S) S++;
+        else if(S > Target.S) S--;
+        if     (V < Target.V) V++;
+        else if(V > Target.V) V--;
+    }
+
+    uint32_t DelayToNextAdj(const ColorHSV_t &Target, uint32_t SmoothValue) {
+        uint32_t Delay, Delay2;
+        Delay = (H == Target.H)? 0 : ClrCalcDelay(H, SmoothValue);
+        Delay2 = (S == Target.S)? 0 : ClrCalcDelay(S, SmoothValue);
+        if(Delay2 > Delay) Delay = Delay2;
+        Delay2 = (V == Target.V)? 0 : ClrCalcDelay(V, SmoothValue);
+        return (Delay2 > Delay)? Delay2 : Delay;
+    }
+
     void ToRGB(uint8_t *PR, uint8_t *PG, uint8_t *PB) const {
         // Calc chroma: 0...255
         int32_t C = ((int32_t)V * (int32_t)S * 255) / 10000;
@@ -230,6 +269,41 @@ struct ColorHSV_t {
         return rgb;
     }
 
+    void FromRGB(int32_t Red, int32_t Green, int32_t Blue) {
+        int32_t Max, Min;
+        // Find Min & Max
+        Max = Red;
+        if(Max < Green) Max = Green;
+        if(Max < Blue) Max = Blue;
+        Min = Red;
+        if(Min > Green) Min = Green;
+        if(Min > Blue) Min = Blue;
+        // H
+        if(Max == Min) H = 0;
+        else if(Max == Red and Green >= Blue) H = (60 * (Green - Blue)) / (Max - Min) + 0;
+        else if(Max == Red and Green <  Blue) H = (60 * (Green - Blue)) / (Max - Min) + 360;
+        else if(Max == Green)                 H = (60 * (Blue - Red))   / (Max - Min) + 120;
+        else if(Max == Blue)                  H = (60 * (Red - Green))  / (Max - Min) + 240;
+        // S
+        if(Max == 0) S = 0;
+        else S = 100 - (100 * Min) / Max;
+        // V
+        V = (100 * Max) / 255;
+    }
+
+    void FromRGB(Color_t Clr) {
+        FromRGB(Clr.R, Clr.G, Clr.B);
+    }
+
+    void FromHSV(uint16_t AH, uint8_t AS, uint8_t AV) {
+        H = AH; S = AS; V = AV;
+    }
+
+    ColorHSV_t& operator = (const ColorHSV_t &Right) { DWord32 = Right.DWord32; return *this; }
+    bool operator == (const ColorHSV_t &AColor) const { return (DWord32 == AColor.DWord32); }
+    bool operator != (const ColorHSV_t &AColor) const { return (DWord32 != AColor.DWord32); }
+
+    ColorHSV_t() : H(0), S(0), V(0) {}
     ColorHSV_t(uint16_t AH, uint8_t AS, uint8_t AV) : H(AH), S(AS), V(AV) {}
     ColorHSV_t(const ColorHSV_t &AClr) : H(AClr.H), S(AClr.S), V(AClr.V) {}
 } __attribute__((packed));
@@ -242,6 +316,7 @@ struct ColorHSV_t {
 #define hsvBlue      ((ColorHSV_t){240, 100, 100})
 #define hsvMagenta   ((ColorHSV_t){300, 100, 100})
 #define hsvWhite     ((ColorHSV_t){0,   0,   100})
+#define hsvBlack     ((ColorHSV_t){0,   0,   0  })
 #endif
 
 #if 1 // ============================= Colors ==================================

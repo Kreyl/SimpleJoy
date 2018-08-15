@@ -62,7 +62,6 @@ enum ADCDiv_t {
 #if defined STM32F0XX
 class Adc_t {
 private:
-    uint16_t IBuf[ADC_SEQ_LEN];
     void StartConversion() { ADC1->CR |= ADC_CR_ADSTART; }
     void IDisableNow() { ADC1->CR = 0; }  // Clear all bits
 public:
@@ -79,6 +78,8 @@ public:
     }
     void Stop() { ADC1->CR |= ADC_CR_ADSTP; }
     void Disable();
+    int32_t Values[ADC_CHANNEL_CNT];
+    uint16_t IBuf[ADC_SEQ_LEN];
 };
 #endif
 

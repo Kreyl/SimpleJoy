@@ -16,8 +16,8 @@ cc1101_t CC(CC_Setup0);
 //#define DBG_PINS
 
 #ifdef DBG_PINS
-#define DBG_GPIO1   GPIOB
-#define DBG_PIN1    0
+#define DBG_GPIO1   GPIOC
+#define DBG_PIN1    3
 #define DBG1_SET()  PinSetHi(DBG_GPIO1, DBG_PIN1)
 #define DBG1_CLR()  PinSetLo(DBG_GPIO1, DBG_PIN1)
 //#define DBG_GPIO2   GPIOB
@@ -30,7 +30,6 @@ cc1101_t CC(CC_Setup0);
 #endif
 
 rLevel1_t Radio;
-extern LedBlinker_t LedLink;
 
 #if 1 // ================================ Task =================================
 static THD_WORKING_AREA(warLvl1Thread, 256);
@@ -43,18 +42,29 @@ static void rLvl1Thread(void *arg) {
 __noreturn
 void rLevel1_t::ITask() {
     while(true) {
-        CC.Recalibrate();
-        uint8_t RxRslt = CC.Receive(36, &PktRx, RPKT_LEN, &Rssi);
-        if(RxRslt == retvOk) {
-            LedLink.On();
-//            Printf("Rssi=%d\r", Rssi);
-//            PktRx.Print();
-            // Transmit reply
-            CC.Transmit(&PktReply, RPKT_LEN);
-            EvtMsg_t Msg(evtIdRadioRx, &PktRx);
-            EvtQMain.SendNowOrExit(Msg);
-        } // if RxRslt ok
-        else LedLink.Off();
+        RMsg_t Msg = RMsgQ.Fetch(TIME_INFINITE);
+        switch(Msg.ID) {
+            case RMSGID_PKT:
+//                Msg.Pkt.Print();
+                    // Transmit
+                    DBG1_SET();
+                    CC.Recalibrate();
+                    CC.Transmit(&Msg.Pkt, RPKT_LEN);
+                    DBG1_CLR();
+                break;
+
+            case RMSGID_CHNL:
+                CC.SetChannel(Msg.Value);
+                break;
+
+            default: break;
+        } // switch
+//
+//
+//            Printf("Par %u; Rssi=%d\r", PktRx.CmdID, Rssi);
+            // Transmit reply, it formed inside OnRadioRx
+//            if(OnRadioRx() == retvOk) CC.Transmit(&PktTx);
+//        } // if RxRslt ok
     } // while
 }
 #endif // task
@@ -66,21 +76,17 @@ uint8_t rLevel1_t::Init() {
 //    PinSetupOut(DBG_GPIO2, DBG_PIN2, omPushPull);
 #endif    // Init radioIC
 
+    RMsgQ.Init();
+
     if(CC.Init() == retvOk) {
         CC.SetTxPower(CC_TX_PWR);
         CC.SetPktSize(RPKT_LEN);
-//        CC.SetChannel(Settings.RChnl);
-        CC.Recalibrate();
+        CC.SetChannel(0);
+        CC.EnterPwrDown();
         // Thread
-        chThdCreateStatic(warLvl1Thread, sizeof(warLvl1Thread), HIGHPRIO, (tfunc_t)rLvl1Thread, NULL);
+        chThdCreateStatic(warLvl1Thread, sizeof(warLvl1Thread), NORMALPRIO, (tfunc_t)rLvl1Thread, NULL);
         return retvOk;
     }
     else return retvFail;
-}
-
-void rLevel1_t::SetChannel(uint8_t NewChannel) {
-    chSysLock();
-    CC.SetChannel(NewChannel);
-    chSysUnlock();
 }
 #endif

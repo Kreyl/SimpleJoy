@@ -55,23 +55,26 @@ static inline void Lvl250ToLvl1000(uint16_t *PLvl) {
 
 #endif
 
-#define CC_TX_PWR   CC_PwrPlus5dBm
+#define CC_TX_PWR   CC_PwrPlus10dBm
 
 #if 1 // =========================== Pkt_t =====================================
 union rPkt_t  {
-    uint32_t DWord[2];
     struct {
-        int8_t Ch[4];
-        uint8_t R1, R2;
-        uint8_t Btns;
+        uint32_t DWord;
+        uint16_t Word16;
+    };
+    struct {
+        uint8_t Mode;
+        uint16_t ColorH;
+        uint8_t Period;
+        uint16_t Time;
     } __packed;
-    uint16_t Adc[4];
     rPkt_t& operator = (const rPkt_t &Right) {
-        DWord[0] = Right.DWord[0];
-        DWord[1] = Right.DWord[1];
+        DWord = Right.DWord;
+        Word16 = Right.Word16;
         return *this;
     }
-    void Print() { Printf("%d %d %d %d %d %d; %X\r", Ch[0],Ch[1],Ch[2],Ch[3],R1, R2, Btns); }
+    void Print() { Printf("%d %d %d %d\r", Mode,ColorH,Period,Time); }
 } __packed;
 
 #define RPKT_LEN    sizeof(rPkt_t)
@@ -95,17 +98,40 @@ union rPkt_t  {
 #define RMSGID_PKT      1
 #define RMSGID_CHNL     2
 
+union RMsg_t {
+    uint32_t DWord[3];
+    rPkt_t Pkt;
+    struct {
+        uint32_t _Rsrvd;
+        uint32_t Value;
+        uint32_t ID;
+    };
+    RMsg_t& operator = (const RMsg_t &Right) {
+        DWord[0] = Right.DWord[0];
+        DWord[1] = Right.DWord[1];
+        DWord[2] = Right.DWord[2];
+        return *this;
+    }
+    RMsg_t() {
+        DWord[0] = 0;
+        DWord[1] = 0;
+        DWord[2] = 0;
+    }
+    RMsg_t(rPkt_t &APkt)  { ID = RMSGID_PKT;  Pkt = APkt; }
+    RMsg_t(uint8_t AChnl) { ID = RMSGID_CHNL; Value = AChnl; _Rsrvd = 0; }
+} __attribute__((__packed__));
+
+
 class rLevel1_t {
 private:
     void TryToSleep(uint32_t SleepDuration) {
 //        if(SleepDuration >= MIN_SLEEP_DURATION_MS) CC.EnterPwrDown();
         chThdSleepMilliseconds(SleepDuration); // XXX
     }
-
 public:
     int8_t Rssi;
-    rPkt_t PktRx;
-    rPkt_t PktReply;
+    EvtMsgQ_t<RMsg_t, RMSG_Q_LEN> RMsgQ;
+    rPkt_t rPktReply;
     uint8_t Init();
     void SetChannel(uint8_t NewChannel);
     // Inner use
