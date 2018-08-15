@@ -50,11 +50,11 @@ int main(void) {
 
     // LEDs
 
-    // Servo
-    for(int i=0; i<SRV_CNT; i++) {
-        Srv[i]->Init();
-        Srv[i]->SetAngle_dg(90);
-    }
+    // Servo XXX
+//    for(int i=0; i<SRV_CNT; i++) {
+//        Srv[i]->Init();
+//        Srv[i]->SetAngle_dg(90);
+//    }
 
 //    if(
             Radio.Init();
