@@ -42,29 +42,14 @@ static void rLvl1Thread(void *arg) {
 __noreturn
 void rLevel1_t::ITask() {
     while(true) {
-        RMsg_t Msg = RMsgQ.Fetch(TIME_INFINITE);
-        switch(Msg.ID) {
-            case RMSGID_PKT:
-//                Msg.Pkt.Print();
-                    // Transmit
-                    DBG1_SET();
-                    CC.Recalibrate();
-                    CC.Transmit(&Msg.Pkt, RPKT_LEN);
-                    DBG1_CLR();
-                break;
-
-            case RMSGID_CHNL:
-                CC.SetChannel(Msg.Value);
-                break;
-
-            default: break;
-        } // switch
-//
-//
-//            Printf("Par %u; Rssi=%d\r", PktRx.CmdID, Rssi);
-            // Transmit reply, it formed inside OnRadioRx
-//            if(OnRadioRx() == retvOk) CC.Transmit(&PktTx);
-//        } // if RxRslt ok
+        CC.EnterPwrDown();
+        chThdSleepMilliseconds(450);
+        CC.Recalibrate();
+        uint8_t RxRslt = CC.Receive(180, &PktRx, RPKT_LEN, &Rssi);
+        if(RxRslt == retvOk) {
+            Printf("Rssi: %d", Rssi);
+            EvtQMain.SendNowOrExit(EvtMsg_t(evtIdRadioRx));
+        }
     } // while
 }
 #endif // task
@@ -76,13 +61,11 @@ uint8_t rLevel1_t::Init() {
 //    PinSetupOut(DBG_GPIO2, DBG_PIN2, omPushPull);
 #endif    // Init radioIC
 
-    RMsgQ.Init();
-
     if(CC.Init() == retvOk) {
         CC.SetTxPower(CC_TX_PWR);
         CC.SetPktSize(RPKT_LEN);
         CC.SetChannel(0);
-        CC.EnterPwrDown();
+//        CC.EnterPwrDown();
         // Thread
         chThdCreateStatic(warLvl1Thread, sizeof(warLvl1Thread), NORMALPRIO, (tfunc_t)rLvl1Thread, NULL);
         return retvOk;

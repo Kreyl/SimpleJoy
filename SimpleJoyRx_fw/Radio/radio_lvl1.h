@@ -59,22 +59,12 @@ static inline void Lvl250ToLvl1000(uint16_t *PLvl) {
 
 #if 1 // =========================== Pkt_t =====================================
 union rPkt_t  {
-    struct {
-        uint32_t DWord;
-        uint16_t Word16;
-    };
-    struct {
-        uint8_t Mode;
-        uint16_t ColorH;
-        uint8_t Period;
-        uint16_t Time;
-    } __packed;
+    uint32_t ID;
     rPkt_t& operator = (const rPkt_t &Right) {
-        DWord = Right.DWord;
-        Word16 = Right.Word16;
+        ID = Right.ID;
         return *this;
     }
-    void Print() { Printf("%d %d %d %d\r", Mode,ColorH,Period,Time); }
+//    void Print() { Printf("%d %d %d %d\r", Mode,ColorH,Period,Time); }
 } __packed;
 
 #define RPKT_LEN    sizeof(rPkt_t)
@@ -130,8 +120,8 @@ private:
     }
 public:
     int8_t Rssi;
-    EvtMsgQ_t<RMsg_t, RMSG_Q_LEN> RMsgQ;
-    rPkt_t rPktReply;
+//    EvtMsgQ_t<RMsg_t, RMSG_Q_LEN> RMsgQ;
+    rPkt_t PktRx, PktTx;
     uint8_t Init();
     void SetChannel(uint8_t NewChannel);
     // Inner use

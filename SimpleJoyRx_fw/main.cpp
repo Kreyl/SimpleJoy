@@ -1,15 +1,13 @@
 #include "hal.h"
 #include "board.h"
 #include "MsgQ.h"
-#include "uart.h"
 #include "shell.h"
 #include "kl_lib.h"
-#include "kl_adc.h"
 #include "led.h"
 #include "Sequences.h"
 #include "kl_servo.h"
 #include "radio_lvl1.h"
-#include "kl_adc.h"
+#include "ws2812b.h"
 
 #if 1 // ======================== Variables and defines ========================
 // Forever
@@ -18,6 +16,9 @@ static const UartParams_t CmdUartParams(115200, CMD_UART_PARAMS);
 CmdUart_t Uart{&CmdUartParams};
 void OnCmd(Shell_t *PShell);
 void ITask();
+
+static const NeopixelParams_t LedParams(NPX1_SPI, NPX1_GPIO, NPX1_PIN, NPX1_AF, NPX1_DMA, NPX_DMA_MODE(NPX1_DMA_CHNL));
+Neopixels_t Leds(&LedParams);
 
 static void OnRadioRx();
 
@@ -49,6 +50,7 @@ int main(void) {
     Clk.PrintFreqs();
 
     // LEDs
+    Leds.Init();
 
     // Servo XXX
 //    for(int i=0; i<SRV_CNT; i++) {
@@ -56,10 +58,23 @@ int main(void) {
 //        Srv[i]->SetAngle_dg(90);
 //    }
 
-//    if(
-            Radio.Init();
-//    == retvOk) LedLink.StartOrRestart(lbsqBlink1s);
-//    else LedLink.StartOrRestart(lbsqFailure);
+    if(Radio.Init() != retvOk) {
+        while(true) {
+            for(Color_t &Clr : Leds.ICurrentClr) Clr = clRed;
+            Leds.ISetCurrentColors();
+            chThdSleepMilliseconds(99);
+            for(Color_t &Clr : Leds.ICurrentClr) Clr = clBlack;
+            Leds.ISetCurrentColors();
+            chThdSleepMilliseconds(54);
+        }
+    }
+    else {
+        for(Color_t &Clr : Leds.ICurrentClr) Clr = clGreen;
+        Leds.ISetCurrentColors();
+        chThdSleepMilliseconds(999);
+        for(Color_t &Clr : Leds.ICurrentClr) Clr = clBlack;
+        Leds.ISetCurrentColors();
+    }
 
     TmrEverySecond.StartOrRestart();
 
@@ -90,6 +105,13 @@ void ITask() {
 } // ITask()
 
 void OnRadioRx() {
+    for(Color_t &Clr : Leds.ICurrentClr) Clr = clBlue;
+    Leds.ISetCurrentColors();
+    chThdSleepMilliseconds(135);
+    for(Color_t &Clr : Leds.ICurrentClr) Clr = clBlack;
+    Leds.ISetCurrentColors();
+
+
 //    rPkt_t Pkt = Radio.PktRx;
 //    Pkt.Print();
     // Servo
