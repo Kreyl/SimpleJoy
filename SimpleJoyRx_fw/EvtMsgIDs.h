@@ -18,6 +18,8 @@ enum EvtMsgId_t {
     evtIdButtons,
 
     evtIdMenuTimeout,
-    evtIdRadioRx,
-    evtIdLinkLost,
+    evtIdRadioNoone,
+    evtIdRadioLowPwr,
+    evtIdRadioHiPwrCrystal,
+    evtIdRadioHiPwrKey,
 };

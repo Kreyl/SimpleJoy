@@ -7,7 +7,7 @@
 #include "Sequences.h"
 #include "kl_servo.h"
 #include "radio_lvl1.h"
-#include "ws2812b.h"
+#include "IntelLedEffs.h"
 
 #if 1 // ======================== Variables and defines ========================
 // Forever
@@ -17,20 +17,29 @@ CmdUart_t Uart{&CmdUartParams};
 void OnCmd(Shell_t *PShell);
 void ITask();
 
-static const NeopixelParams_t LedParams(NPX1_SPI, NPX1_GPIO, NPX1_PIN, NPX1_AF, NPX1_DMA, NPX_DMA_MODE(NPX1_DMA_CHNL));
-Neopixels_t Leds(&LedParams);
+static void CloseDoors();
+static void OpenDoors();
 
-static void OnRadioRx();
+static const NeopixelParams_t LedParams(NPX1_SPI, NPX1_GPIO, NPX1_PIN, NPX1_AF, NPX1_DMA, NPX_DMA_MODE(NPX1_DMA_CHNL));
+Neopixels_t Npx(&LedParams);
+Effects_t Leds(&Npx);
+
+#define MIN_OPENED_DURATION_S   11
+int32_t OpenedTimeout = 0;
 
 // Servo
-#define SRV_CNT     6
-static const Servo_t Srv1{SRV1_PIN};
-static const Servo_t Srv2{SRV2_PIN};
-static const Servo_t Srv3{SRV3_PIN};
-static const Servo_t Srv4{SRV4_PIN};
+#define SRV_CNT     3
+static const Servo_t Srv1{SRV1_PIN, 700, 2300};
+static const Servo_t Srv2{SRV2_PIN, 700, 2300};
+//static const Servo_t Srv3{SRV3_PIN, 700, 2200};
+static const Servo_t Srv4{SRV4_PIN, 700, 2200};
 static const Servo_t Srv5{SRV5_PIN};
 static const Servo_t Srv6{SRV6_PIN};
-static const Servo_t* Srv[SRV_CNT] = { &Srv1, &Srv2, &Srv3, &Srv4, &Srv5, &Srv6 };
+static const Servo_t* Srv[SRV_CNT] = { &Srv1, &Srv2, /*&Srv3,*/ &Srv4};
+
+#define CLOSED_ANGLE    168
+#define OPENED_ANGLE    63
+uint32_t CurrAngle;
 
 TmrKL_t TmrEverySecond {MS2ST(999),  evtIdEverySecond, tktPeriodic};
 #endif
@@ -50,30 +59,23 @@ int main(void) {
     Clk.PrintFreqs();
 
     // LEDs
-    Leds.Init();
+    Npx.Init();
+    CommonEffectsInit();
 
-    // Servo XXX
-//    for(int i=0; i<SRV_CNT; i++) {
-//        Srv[i]->Init();
-//        Srv[i]->SetAngle_dg(90);
-//    }
+    // Servo
+    for(int i=0; i<SRV_CNT; i++) {
+        Srv[i]->Init();
+        Srv[i]->SetAngle_dg(CLOSED_ANGLE);
+        chThdSleepMilliseconds(540);
+    }
+    CurrAngle = CLOSED_ANGLE;
 
-    if(Radio.Init() != retvOk) {
-        while(true) {
-            for(Color_t &Clr : Leds.ICurrentClr) Clr = clRed;
-            Leds.ISetCurrentColors();
-            chThdSleepMilliseconds(99);
-            for(Color_t &Clr : Leds.ICurrentClr) Clr = clBlack;
-            Leds.ISetCurrentColors();
-            chThdSleepMilliseconds(54);
-        }
+    if(Radio.Init() == retvOk) {
+        Leds.SeqAllTogetherStartOrRestart(lsqIdle);
     }
     else {
-        for(Color_t &Clr : Leds.ICurrentClr) Clr = clGreen;
-        Leds.ISetCurrentColors();
-        chThdSleepMilliseconds(999);
-        for(Color_t &Clr : Leds.ICurrentClr) Clr = clBlack;
-        Leds.ISetCurrentColors();
+        Leds.SeqAllTogetherStartOrRestart(lsqFailure);
+        chThdSleepMilliseconds(1008);
     }
 
     TmrEverySecond.StartOrRestart();
@@ -92,33 +94,58 @@ void ITask() {
                 ((Shell_t*)Msg.Ptr)->SignalCmdProcessed();
                 break;
 
-            case evtIdRadioRx:
-                OnRadioRx();
+            case evtIdRadioNoone:
+                Leds.SeqAllTogetherStartOrContinue(lsqIdle);
+                CloseDoors();
                 break;
 
-            case evtIdEverySecond: {
-            } break;
+            case evtIdRadioLowPwr:
+                Leds.SeqAllTogetherStartOrContinue(lsqLowPower);
+                CloseDoors();
+                break;
+
+            case evtIdRadioHiPwrCrystal:
+                Leds.SeqAllTogetherStartOrContinue(lsqHiPower);
+                CloseDoors();
+                break;
+
+            case evtIdRadioHiPwrKey:
+                Leds.SeqAllTogetherStartOrContinue(lsqHiPowerKey);
+                OpenDoors();
+                break;
+
+            case evtIdEverySecond:
+                if(OpenedTimeout > 0) OpenedTimeout--;
+                break;
 
             default: break;
         } // switch
     } // while true
 } // ITask()
 
-void OnRadioRx() {
-    for(Color_t &Clr : Leds.ICurrentClr) Clr = clBlue;
-    Leds.ISetCurrentColors();
-    chThdSleepMilliseconds(135);
-    for(Color_t &Clr : Leds.ICurrentClr) Clr = clBlack;
-    Leds.ISetCurrentColors();
-
-
-//    rPkt_t Pkt = Radio.PktRx;
-//    Pkt.Print();
-    // Servo
-//    for(int i=0; i<4; i++) {
-//        Srv[i]->SetValue(Pkt.Ch[i], -127L, 127L);
-//    }
+void SetupAngle(uint32_t DesiredAngle, uint32_t Delay_ms) {
+    while(CurrAngle != DesiredAngle) {
+        // Adjust angle
+        if(CurrAngle > DesiredAngle) CurrAngle--;
+        else CurrAngle++;
+        // Setup angle
+        for(int i=0; i<SRV_CNT; i++) {
+            Srv[i]->SetAngle_dg(CurrAngle);
+            chThdSleepMilliseconds(Delay_ms);
+        }
+    }
 }
+
+void CloseDoors() {
+    if(OpenedTimeout > 0) return; // Do not close too fast
+    SetupAngle(CLOSED_ANGLE, 9);
+}
+
+void OpenDoors() {
+    SetupAngle(OPENED_ANGLE, 9);
+    OpenedTimeout = MIN_OPENED_DURATION_S;
+}
+
 
 #if 1 // ================= Command processing ====================
 void OnCmd(Shell_t *PShell) {
@@ -129,14 +156,21 @@ void OnCmd(Shell_t *PShell) {
     }
 
     else if(PCmd->NameIs("Srv")) {
-        int32_t Angle;
-//        if(PCmd->GetNext<int32_t>(&Indx) != retvOk) PShell->Ack(retvBadValue);
+        int32_t Angle = 0, Indx = 0;
+        if(PCmd->GetNext<int32_t>(&Indx) != retvOk) PShell->Ack(retvBadValue);
         if(PCmd->GetNext<int32_t>(&Angle) != retvOk) PShell->Ack(retvBadValue);
-        Srv[0]->SetAngle_dg(Angle);
-        Srv[1]->SetAngle_dg(Angle);
-        Srv[2]->SetAngle_dg(Angle);
-        Srv[3]->SetAngle_dg(Angle);
+        Srv[Indx]->SetAngle_dg(Angle);
+//        Srv[1]->SetAngle_dg(Angle);
+//        Srv[2]->SetAngle_dg(Angle);
+//        Srv[3]->SetAngle_dg(Angle);
         PShell->Ack(retvOk);
+    }
+
+    else if(PCmd->NameIs("c")) {
+        CloseDoors();
+    }
+    else if(PCmd->NameIs("o")) {
+        OpenDoors();
     }
 
     else PShell->Ack(retvCmdUnknown);

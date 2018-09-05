@@ -10,6 +10,7 @@
 #include "MsgQ.h"
 #include "led.h"
 #include "Sequences.h"
+#include "main.h"
 
 cc1101_t CC(CC_Setup0);
 
@@ -39,17 +40,52 @@ static void rLvl1Thread(void *arg) {
     Radio.ITask();
 }
 
+#define RSSI_DUMMY  (-117) // Some lowest value not possible
+#define RSSI_WEAK   (-72)  // Ignore all weaker signals
+#define RSSI_NEAR   (-60)
+
 __noreturn
 void rLevel1_t::ITask() {
+    EvtMsg_t msg;
+    int32_t MaxRssi;
     while(true) {
-        CC.EnterPwrDown();
-        chThdSleepMilliseconds(450);
-        CC.Recalibrate();
-        uint8_t RxRslt = CC.Receive(180, &PktRx, RPKT_LEN, &Rssi);
-        if(RxRslt == retvOk) {
-            Printf("Rssi: %d", Rssi);
-            EvtQMain.SendNowOrExit(EvtMsg_t(evtIdRadioRx));
+        msg.ID = evtIdRadioNoone;
+        MaxRssi = RSSI_DUMMY;
+        for(int N=0; N<4; N++) { // Iterate channels N times
+            // Iterate channels
+            for(int32_t i = ID_MIN; i <= ID_MAX; i++) {
+                CC.SetChannel(ID2RCHNL(i));
+                CC.Recalibrate();
+                uint8_t RxRslt = CC.Receive(45, &PktRx, RPKT_LEN, &Rssi);   // Double pkt duration + TX sleep time
+                if(RxRslt == retvOk) {
+                    Printf("Ch=%u; Rssi=%d; Type=%u\r", ID2RCHNL(i), Rssi, PktRx.Type);
+                    if(PktRx.DWord == THE_WORD) {
+                        if(PktRx.Type == appmKey) {
+                            if(Rssi > RSSI_NEAR) {
+                                msg.ID = evtIdRadioHiPwrKey;
+                                chThdSleepMilliseconds(999);
+                                goto CycleEnd;
+                            }
+                            else if(Rssi > RSSI_WEAK) {
+                                if(Rssi > MaxRssi) MaxRssi = Rssi;
+                            }
+                        }
+                        else if(PktRx.Type == appmCrystal) {
+                            if(Rssi > RSSI_WEAK) { // Ignore weak signals
+                                if(Rssi > MaxRssi) MaxRssi = Rssi;
+                            }
+                        }
+                    } // if the word
+                } // if rslt
+            } // for i
+            TryToSleep(270);
+        } // For N
+        CycleEnd:
+        // Check who is near
+        if(msg.ID != evtIdRadioHiPwrKey and MaxRssi != RSSI_DUMMY) {
+            msg.ID = (MaxRssi > -60)? evtIdRadioHiPwrCrystal : evtIdRadioLowPwr;
         }
+        EvtQMain.SendNowOrExit(msg);
     } // while
 }
 #endif // task
