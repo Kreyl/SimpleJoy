@@ -1,7 +1,7 @@
 /*
  * Sequences.h
  *
- *  Created on: 09 ÿíâ. 2015 ã.
+ *  Created on: 09 ï¿½ï¿½ï¿½. 2015 ï¿½.
  *      Author: Kreyl
  */
 
@@ -235,34 +235,40 @@ const LedRGBChunk_t lsqFailure[] = {
 
 #if 1 // ======================== Simple LED blink =============================
 #define BLINK_DELAY_MS      180
-const BaseChunk_t lbsqBlink1s[] = {
+const BaseChunk_t lbsqOk[] = {
         {csSetup, 1},
-        {csWait, 999},
+        {csWait, 720},
         {csSetup, 0},
         {csEnd}
 };
 
-const BaseChunk_t lbsqFailure[] = {
-        {csSetup, 1},
-        {csWait, 108},
+const BaseChunk_t lbsqBlink3[] = {
         {csSetup, 0},
-        {csWait, 108},
+        {csWait, BLINK_DELAY_MS},
+        {csSetup, 1},
+        {csWait, BLINK_DELAY_MS},
+        {csRepeat, 3},
+        {csEnd}
+};
+
+const BaseChunk_t lsqUSBCmd[] = {
+        {csSetup, 0},
+        {csWait, BLINK_DELAY_MS},
+        {csSetup, 1},
+        {csWait, BLINK_DELAY_MS},
+        {csEnd}
+};
+
+const BaseChunk_t lbsqCharging[] = {
+        {csSetup, 1},
+        {csWait, 720},
+        {csSetup, 0},
+        {csWait, 270},
         {csGoto, 0}
 };
 
-
-const BaseChunk_t lbsqBlink3[] = {
+const BaseChunk_t lbsqChargingDone[] = {
         {csSetup, 1},
-        {csWait, BLINK_DELAY_MS},
-        {csSetup, 0},
-        {csWait, BLINK_DELAY_MS},
-        {csSetup, 1},
-        {csWait, BLINK_DELAY_MS},
-        {csSetup, 0},
-        {csWait, BLINK_DELAY_MS},
-        {csSetup, 1},
-        {csWait, BLINK_DELAY_MS},
-        {csSetup, 0},
         {csEnd}
 };
 #endif

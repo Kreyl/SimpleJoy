@@ -1,7 +1,7 @@
 /*
  * SnsPins.h
  *
- *  Created on: 17 ÿíâ. 2015 ã.
+ *  Created on: 17 ï¿½ï¿½ï¿½. 2015 ï¿½.
  *      Author: Kreyl
  */
 
@@ -21,29 +21,13 @@
 #if SIMPLESENSORS_ENABLED
 #define SNS_POLL_PERIOD_MS      72
 
-extern void ProcessButtons(PinSnsState_t *PState, uint32_t Len);
+// Handlers
 extern void ProcessUsbDetect(PinSnsState_t *PState, uint32_t Len);
 
 const PinSns_t PinSns[] = {
-        // Buttons
-        {BTN_A_PIN, ProcessButtons},
-        {BTN_B_PIN, ProcessButtons},
-        {BTN_C_PIN, ProcessButtons},
-        {BTN_D_PIN, ProcessButtons},
-        {BTN_L_PIN, ProcessButtons},
-        {BTN_J1_PIN, ProcessButtons},
-        {BTN_J2_PIN, ProcessButtons},
         // USB
         {USB_DETECT_PIN, pudPullDown, ProcessUsbDetect},
 };
 #define PIN_SNS_CNT     countof(PinSns)
-
-#define BTN_A_INDX  0
-#define BTN_B_INDX  1
-#define BTN_C_INDX  2
-#define BTN_D_INDX  3
-#define BTN_L_INDX  4
-#define BTN_J1_INDX  5
-#define BTN_J2_INDX  6
 
 #endif  // if enabled

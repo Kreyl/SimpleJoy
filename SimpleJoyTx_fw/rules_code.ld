@@ -1,5 +1,5 @@
 /*
-    ChibiOS - Copyright (C) 2006..2016 Giovanni Di Sirio
+    ChibiOS - Copyright (C) 2006..2018 Giovanni Di Sirio
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -18,35 +18,36 @@ ENTRY(Reset_Handler)
 
 SECTIONS
 {
-    .vectors : ALIGN(16)
+    .vectors : ALIGN(1024)
     {
         KEEP(*(.vectors))
     } > VECTORS_FLASH AT > VECTORS_FLASH_LMA
 
     .xtors : ALIGN(4)
     {
-        __init_array_start = .;
+        __init_array_base__ = .;
         KEEP(*(SORT(.init_array.*)))
         KEEP(*(.init_array))
-        __init_array_end = .;
-        __fini_array_start = .;
+        __init_array_end__ = .;
+        __fini_array_base__ = .;
         KEEP(*(.fini_array))
         KEEP(*(SORT(.fini_array.*)))
-        __fini_array_end = .;
+        __fini_array_end__ = .;
     } > XTORS_FLASH AT > XTORS_FLASH_LMA
 
-    .text ALIGN(16) : ALIGN(16)
+    .text : ALIGN_WITH_INPUT
     {
+        __text_base__ = .;
         *(.text)
         *(.text.*)
         *(.glue_7t)
         *(.glue_7)
         *(.gcc*)
+        __text_end__ = .;
     } > TEXT_FLASH AT > TEXT_FLASH_LMA
 
     .rodata : ALIGN(4)
     {
-        . = ALIGN(4);
         __rodata_base__ = .;
         *(.rodata)
         *(.rodata.*)
@@ -60,8 +61,10 @@ SECTIONS
     } > VARIOUS_FLASH AT > VARIOUS_FLASH_LMA
 
     .ARM.exidx : {
+        __exidx_base__ = .;
         __exidx_start = .;
         *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+        __exidx_end__ = .;
         __exidx_end = .;
      } > VARIOUS_FLASH AT > VARIOUS_FLASH_LMA
 

@@ -1,12 +1,12 @@
 /*
  * shell.cpp
  *
- *  Created on: 21 апр. 2017 г.
+ *  Created on: 21 пїЅпїЅпїЅ. 2017 пїЅ.
  *      Author: Kreyl
  */
 
+#include <uart.h>
 #include "shell.h"
-#include "uart.h"
 
 extern CmdUart_t Uart;
 
@@ -70,7 +70,7 @@ char* PrintfToBuf(char* PBuf, const char *format, ...) {
     return PtB.S;
 }
 
-
+#if 0
 void ByteShell_t::Reply(uint8_t CmdCode, uint32_t Len, uint8_t *PData) {
 //    Printf("BSendCmd %X; %u; %A\r", CmdCode, Len, PData, Len, ' ');
     // Send StartOfCmd
@@ -88,6 +88,7 @@ void ByteShell_t::Reply(uint8_t CmdCode, uint32_t Len, uint8_t *PData) {
     if(IPutChar('\n') != retvOk) return;
     IStartTransmissionIfNotYet();
 }
+#endif
 
 #if PRINTF_FLOAT_EN
 #define FLOAT_PRECISION     9
@@ -104,7 +105,7 @@ void PrintfHelper_t::PrintEOL() {
 
 void PrintfHelper_t::IVsPrintf(const char *format, va_list args) {
     const char *fmt = format;
-    uint32_t width = 0, precision;
+    int width = 0, precision;
     char c, filler;
     while(true) {
         c = *fmt++;
@@ -151,9 +152,9 @@ void PrintfHelper_t::IVsPrintf(const char *format, va_list args) {
             case 's':
             case 'S': {
                 char *s = va_arg(args, char*);
-                while(*s != 0) {
-                    if(IPutChar(*s++) != retvOk) goto End;
-                }
+                width -= strlen(s); // Do padding of string
+                while(s and *s)    { if(IPutChar(*s++)   != retvOk) goto End; }
+                while(width-- > 0) { if(IPutChar(filler) != retvOk) goto End; } // Do padding of string
             }
             break;
 

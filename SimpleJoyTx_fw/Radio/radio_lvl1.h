@@ -11,129 +11,143 @@
 #include "ch.h"
 #include "cc1101.h"
 #include "kl_buf.h"
-#include "shell.h"
+#include "uart.h"
 #include "MsgQ.h"
 
-#if 0 // ========================= Signal levels ===============================
-// Python translation for db
-#define RX_LVL_TOP      1000
-// Jolaf: str(tuple(1 + int(sqrt(float(i) / 65) * 99) for i in xrange(0, 65 + 1)))
-//const int32_t dBm2Percent1000Tbl[66] = {10, 130, 180, 220, 250, 280, 310, 330, 350, 370, 390, 410, 430, 450, 460, 480, 500, 510, 530, 540, 550, 570, 580, 590, 610, 620, 630, 640, 650, 670, 680, 690, 700, 710, 720, 730, 740, 750, 760, 770, 780, 790, 800, 810, 820, 830, 840, 850, 860, 860, 870, 880, 890, 900, 910, 920, 920, 930, 940, 950, 960, 960, 970, 980, 990, 1000};
-const int32_t dBm2Percent1000Tbl[86] = {
-         10, 117, 162, 196, 225, 250, 273, 294, 314, 332,
-        350, 366, 382, 397, 412, 426, 440, 453, 466, 478,
-        490, 502, 514, 525, 536, 547, 558, 568, 578, 588,
-        598, 608, 617, 627, 636, 645, 654, 663, 672, 681,
-        689, 698, 706, 714, 722, 730, 738, 746, 754, 762,
-        769, 777, 784, 792, 799, 806, 814, 821, 828, 835,
-        842, 849, 856, 862, 869, 876, 882, 889, 895, 902,
-        908, 915, 921, 927, 934, 940, 946, 952, 958, 964,
-        970, 976, 982, 988, 994, 1000
+__unused
+static const uint8_t PwrTable[12] = {
+        CC_PwrMinus30dBm, // 0
+        CC_PwrMinus27dBm, // 1
+        CC_PwrMinus25dBm, // 2
+        CC_PwrMinus20dBm, // 3
+        CC_PwrMinus15dBm, // 4
+        CC_PwrMinus10dBm, // 5
+        CC_PwrMinus6dBm,  // 6
+        CC_Pwr0dBm,       // 7
+        CC_PwrPlus5dBm,   // 8
+        CC_PwrPlus7dBm,   // 9
+        CC_PwrPlus10dBm,  // 10
+        CC_PwrPlus12dBm   // 11
 };
 
-static inline int32_t dBm2Percent(int32_t Rssi) {
-    if(Rssi < -100) Rssi = -100;
-    else if(Rssi > -15) Rssi = -15;
-    Rssi += 100;    // 0...85
-    return dBm2Percent1000Tbl[Rssi];
-}
-
-// Conversion Lvl1000 <=> Lvl250
-#define Lvl1000ToLvl250(Lvl1000) ((uint8_t)((Lvl1000 + 3) / 4))
-
-static inline void Lvl250ToLvl1000(uint16_t *PLvl) {
-    *PLvl = (*PLvl) * 4;
-}
-
-// Sensitivity Constants, percent [1...1000]. Feel if RxLevel > SnsConst.
-#define RLVL_NEVER              10000
-#define RLVL_2M                 800     // 0...4m
-#define RLVL_4M                 700     // 1...20m
-#define RLVL_10M                600
-#define RLVL_50M                1
-#define RLVL_PELENGATOR         RLVL_4M // LED will lit if rlevel is higher
-
-#endif
-
-#define CC_TX_PWR   CC_PwrPlus10dBm
-
 #if 1 // =========================== Pkt_t =====================================
-union rPkt_t  {
+// Just uint16_t signature
+#define SIGN16  0xCA11
+
+union rPkt_t {
+    uint32_t DW32[2];
     struct {
-        uint32_t DWord;
-        uint16_t Word16;
-    };
-    struct {
-        uint8_t Mode;
-        uint16_t ColorH;
-        uint8_t Period;
-        uint16_t Time;
-    } __packed;
+        int8_t Joy[4];
+        uint8_t Flags;
+        uint16_t Sign = SIGN16;
+    } __attribute__((__packed__));
     rPkt_t& operator = (const rPkt_t &Right) {
-        DWord = Right.DWord;
-        Word16 = Right.Word16;
+        DW32[0] = Right.DW32[0];
+        DW32[1] = Right.DW32[1];
         return *this;
     }
-    void Print() { Printf("%d %d %d %d\r", Mode,ColorH,Period,Time); }
-} __packed;
+} __attribute__ ((__packed__));
+#endif
 
 #define RPKT_LEN    sizeof(rPkt_t)
 
-#endif
-
-#if 1 // ======================= Channels & cycles =============================
-#define RCHNL_SRV       0
-#define ID2RCHNL(ID)    (RCHNL_MIN + ID)
-#endif
-
-#if 1 // =========================== Timings ===================================
-#define RX_T_MS                 11
-#define RX_SLEEP_T_MS           810
-#define MIN_SLEEP_DURATION_MS   18
-#define RETRY_CNT               2
+#if 1 // =================== Channels, cycles, Rssi  ===========================
+#define RCHNL_INDX      0
 
 #endif
 
-#define RMSG_Q_LEN      18
-#define RMSGID_PKT      1
-#define RMSGID_CHNL     2
-
-union RMsg_t {
-    uint32_t DWord[3];
-    rPkt_t Pkt;
-    struct {
-        uint32_t _Rsrvd;
-        uint32_t Value;
-        uint32_t ID;
-    };
-    RMsg_t& operator = (const RMsg_t &Right) {
-        DWord[0] = Right.DWord[0];
-        DWord[1] = Right.DWord[1];
-        DWord[2] = Right.DWord[2];
-        return *this;
+#if 0 // ============================= RX Table ================================
+#define RXTABLE_SZ              50
+#define RXT_PKT_REQUIRED        TRUE
+class RxTable_t {
+private:
+#if RXT_PKT_REQUIRED
+    rPkt_t IBuf[RXTABLE_SZ];
+#else
+    uint8_t IdBuf[RXTABLE_SZ];
+#endif
+public:
+    uint32_t Cnt = 0;
+#if RXT_PKT_REQUIRED
+    void AddOrReplaceExistingPkt(rPkt_t &APkt) {
+        chSysLock();
+        for(uint32_t i=0; i<Cnt; i++) {
+            if((IBuf[i].ID == APkt.ID) and (IBuf[i].RCmd == APkt.RCmd)) {
+                if(IBuf[i].Rssi < APkt.Rssi) IBuf[i] = APkt; // Replace with newer pkt if RSSI is stronger
+                chSysUnlock();
+                return;
+            }
+        }
+        // Same ID not found
+        if(Cnt < RXTABLE_SZ) {
+            IBuf[Cnt] = APkt;
+            Cnt++;
+        }
+        chSysUnlock();
     }
-    RMsg_t() {
-        DWord[0] = 0;
-        DWord[1] = 0;
-        DWord[2] = 0;
-    }
-    RMsg_t(rPkt_t &APkt)  { ID = RMSGID_PKT;  Pkt = APkt; }
-    RMsg_t(uint8_t AChnl) { ID = RMSGID_CHNL; Value = AChnl; _Rsrvd = 0; }
-} __attribute__((__packed__));
 
+    uint8_t GetPktByID(uint8_t ID, rPkt_t *ptr) {
+        for(uint32_t i=0; i<Cnt; i++) {
+            if(IBuf[i].ID == ID) {
+                *ptr = IBuf[i];
+                return retvOk;
+            }
+        }
+        return retvFail;
+    }
+
+    bool IDPresents(uint8_t ID) {
+        for(uint32_t i=0; i<Cnt; i++) {
+            if(IBuf[i].ID == ID) return true;
+        }
+        return false;
+    }
+
+    rPkt_t& operator[](const int32_t Indx) {
+        return IBuf[Indx];
+    }
+#else
+    void AddId(uint8_t ID) {
+        if(Cnt >= RXTABLE_SZ) return;   // Buffer is full, nothing to do here
+        for(uint32_t i=0; i<Cnt; i++) {
+            if(IdBuf[i] == ID) return;
+        }
+        IdBuf[Cnt] = ID;
+        Cnt++;
+    }
+
+#endif
+
+    void Print() {
+        Printf("RxTable Cnt: %u\r", Cnt);
+        for(uint32_t i=0; i<Cnt; i++) {
+#if RXT_PKT_REQUIRED
+//            Printf("ID: %u; State: %u\r", IBuf[i].ID, IBuf[i].State);
+#else
+            Printf("ID: %u\r", IdBuf[i]);
+#endif
+        }
+    }
+};
+#endif
+
+// Message queue
+//#define R_MSGQ_LEN      18
+//enum RmsgId_t { rmsgNothing = 0, rmsgTx, rmsgSleep };
+//struct RMsg_t {
+//    RmsgId_t Cmd;
+//    uint8_t Value;
+//    RMsg_t() : Cmd(rmsgSleep), Value(0) {}
+//    RMsg_t(RmsgId_t ACmd) : Cmd(ACmd), Value(0) {}
+//    RMsg_t(RmsgId_t ACmd, uint8_t AValue) : Cmd(ACmd), Value(AValue) {}
+//} __attribute__((packed));
 
 class rLevel1_t {
 private:
-    void TryToSleep(uint32_t SleepDuration) {
-//        if(SleepDuration >= MIN_SLEEP_DURATION_MS) CC.EnterPwrDown();
-        chThdSleepMilliseconds(SleepDuration); // XXX
-    }
 public:
-    int8_t Rssi;
-    EvtMsgQ_t<RMsg_t, RMSG_Q_LEN> RMsgQ;
-    rPkt_t rPktReply;
-    uint8_t Init();
-    void SetChannel(uint8_t NewChannel);
+    rPkt_t PktRx, PktTx;
+//    EvtMsgQ_t<RMsg_t, R_MSGQ_LEN> RMsgQ;
+    uint8_t Init(uint32_t RPwrId);
     // Inner use
     void ITask();
 };

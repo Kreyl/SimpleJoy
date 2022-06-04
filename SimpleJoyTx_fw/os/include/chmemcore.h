@@ -1,12 +1,12 @@
 /*
-    ChibiOS - Copyright (C) 2006..2016 Giovanni Di Sirio.
+    ChibiOS - Copyright (C) 2006,2007,2008,2009,2010,2011,2012,2013,2014,
+              2015,2016,2017,2018,2019,2020,2021 Giovanni Di Sirio.
 
     This file is part of ChibiOS.
 
     ChibiOS is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 3 of the License, or
-    (at your option) any later version.
+    the Free Software Foundation version 3 of the License.
 
     ChibiOS is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -18,10 +18,10 @@
 */
 
 /**
- * @file    chmemcore.h
+ * @file    oslib/include/chmemcore.h
  * @brief   Core memory manager macros and structures.
  *
- * @addtogroup memcore
+ * @addtogroup oslib_memcore
  * @{
  */
 
@@ -70,20 +70,61 @@
  */
 typedef void *(*memgetfunc_t)(size_t size, unsigned align);
 
+/**
+ * @brief   Enhanced memory get function.
+ */
+typedef void *(*memgetfunc2_t)(size_t size, unsigned align, size_t offset);
+
+/**
+ * @brief   Type of memory core object.
+ */
+typedef struct {
+  /**
+   * @brief   Next free address.
+   */
+  uint8_t *basemem;
+  /**
+   * @brief   Final address.
+   */
+  uint8_t *topmem;
+} memcore_t;
+
 /*===========================================================================*/
 /* Module macros.                                                            */
 /*===========================================================================*/
+
+/**
+ * @brief   Allocates a memory block.
+ * @note    This is a generic form with unspecified allocation position.
+ *
+ * @iclass
+ */
+#define chCoreAllocAlignedWithOffsetI chCoreAllocFromTopI
+
+/**
+ * @brief   Allocates a memory block.
+ * @note    This is a generic form with unspecified allocation position.
+ *
+ * @api
+ */
+#define chCoreAllocAlignedWithOffset chCoreAllocFromTop
 
 /*===========================================================================*/
 /* External declarations.                                                    */
 /*===========================================================================*/
 
+#if !defined(__DOXYGEN__)
+extern memcore_t ch_memcore;
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-  void _core_init(void);
-  void *chCoreAllocAlignedI(size_t size, unsigned align);
-  void *chCoreAllocAligned(size_t size, unsigned align);
+  void __core_init(void);
+  void *chCoreAllocFromBaseI(size_t size, unsigned align, size_t offset);
+  void *chCoreAllocFromTopI(size_t size, unsigned align, size_t offset);
+  void *chCoreAllocFromBase(size_t size, unsigned align, size_t offset);
+  void *chCoreAllocFromTop(size_t size, unsigned align, size_t offset);
   size_t chCoreGetStatusX(void);
 #ifdef __cplusplus
 }
@@ -95,8 +136,45 @@ extern "C" {
 
 /**
  * @brief   Allocates a memory block.
+ * @details The allocated block is guaranteed to be properly aligned to the
+ *          specified alignment.
+ * @note    This is a generic form with unspecified allocation position.
+ *
+ * @param[in] size      the size of the block to be allocated.
+ * @param[in] align     desired memory alignment
+ * @return              A pointer to the allocated memory block.
+ * @retval NULL         allocation failed, core memory exhausted.
+ *
+ * @iclass
+ */
+static inline void *chCoreAllocAlignedI(size_t size, unsigned align) {
+
+  return chCoreAllocAlignedWithOffsetI(size, align, 0U);
+}
+
+/**
+ * @brief   Allocates a memory block.
+ * @details The allocated block is guaranteed to be properly aligned to the
+ *          specified alignment.
+ * @note    This is a generic form with unspecified allocation position.
+ *
+ * @param[in] size      the size of the block to be allocated
+ * @param[in] align     desired memory alignment
+ * @return              A pointer to the allocated memory block.
+ * @retval NULL         allocation failed, core memory exhausted.
+ *
+ * @api
+ */
+static inline void *chCoreAllocAligned(size_t size, unsigned align) {
+
+  return chCoreAllocAlignedWithOffset(size, align, 0U);
+}
+
+/**
+ * @brief   Allocates a memory block.
  * @details The allocated block is guaranteed to be properly aligned for a
  *          pointer data type.
+ * @note    This is a generic form with unspecified allocation position.
  *
  * @param[in] size      the size of the block to be allocated.
  * @return              A pointer to the allocated memory block.
@@ -106,13 +184,14 @@ extern "C" {
  */
 static inline void *chCoreAllocI(size_t size) {
 
-  return chCoreAllocAlignedI(size, PORT_NATURAL_ALIGN);
+  return chCoreAllocAlignedWithOffsetI(size, PORT_NATURAL_ALIGN, 0U);
 }
 
 /**
  * @brief   Allocates a memory block.
  * @details The allocated block is guaranteed to be properly aligned for a
  *          pointer data type.
+ * @note    This is a generic form with unspecified allocation position.
  *
  * @param[in] size      the size of the block to be allocated.
  * @return              A pointer to the allocated memory block.
@@ -122,7 +201,7 @@ static inline void *chCoreAllocI(size_t size) {
  */
 static inline void *chCoreAlloc(size_t size) {
 
-  return chCoreAllocAligned(size, PORT_NATURAL_ALIGN);
+  return chCoreAllocAlignedWithOffset(size, PORT_NATURAL_ALIGN, 0U);
 }
 
 #endif /* CH_CFG_USE_MEMCORE == TRUE */

@@ -1,11 +1,13 @@
 /*
  * kl_usb_defins.h
  *
- *  Created on: 30 ÿíâ. 2016 ã.
+ *  Created on: 30 ï¿½ï¿½ï¿½. 2016 ï¿½.
  *      Author: Kreyl
  */
 
 #pragma once
+
+#include <inttypes.h>
 
 struct SetupPkt_t {
     union {

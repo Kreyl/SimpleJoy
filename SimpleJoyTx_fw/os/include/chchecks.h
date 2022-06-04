@@ -1,12 +1,12 @@
 /*
-    ChibiOS - Copyright (C) 2006..2016 Giovanni Di Sirio.
+    ChibiOS - Copyright (C) 2006,2007,2008,2009,2010,2011,2012,2013,2014,
+              2015,2016,2017,2018,2019,2020,2021 Giovanni Di Sirio.
 
     This file is part of ChibiOS.
 
     ChibiOS is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 3 of the License, or
-    (at your option) any later version.
+    the Free Software Foundation version 3 of the License.
 
     ChibiOS is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -18,10 +18,13 @@
 */
 
 /**
- * @file    chchecks.h
- * @brief   Configuration checks macros and structures.
+ * @file    rt/include/chchecks.h
+ * @brief   Configuration file checks header.
  *
- * @addtogroup checks
+ * @addtogroup conf_checks
+ * @details This module performs a series of checks on configuration data,
+ *          it is able to detect and reject obsolete or incomplete
+ *          @p chconf.h files.
  * @{
  */
 
@@ -36,59 +39,229 @@
 /* Module pre-compile time settings.                                         */
 /*===========================================================================*/
 
+/* Configuration file checks.*/
+#if !defined(_CHIBIOS_RT_CONF_)
+#error "invalid configuration file"
+#endif
+
+#if !defined(_CHIBIOS_RT_CONF_VER_7_0_)
+#error "obsolete or unknown configuration file"
+#endif
+
+/* System checks.*/
+#if !defined(CH_CFG_SMP_MODE)
+#error "CH_CFG_SMP_MODE not defined in chconf.h"
+#endif
+
+/* System timers checks.*/
+#if !defined(CH_CFG_ST_RESOLUTION)
+#error "CH_CFG_ST_RESOLUTION not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_ST_FREQUENCY)
+#error "CH_CFG_ST_FREQUENCY not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_INTERVALS_SIZE)
+#error "CH_CFG_INTERVALS_SIZE not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_TIME_TYPES_SIZE)
+#error "CH_CFG_TIME_TYPES_SIZE not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_ST_TIMEDELTA)
+#error "CH_CFG_ST_TIMEDELTA not defined in chconf.h"
+#endif
+
+/* Kernel parameters and options checks.*/
+#if !defined(CH_CFG_TIME_QUANTUM)
+#error "CH_CFG_TIME_QUANTUM not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_MEMCORE_SIZE)
+#error "CH_CFG_MEMCORE_SIZE not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_NO_IDLE_THREAD)
+#error "CH_CFG_NO_IDLE_THREAD not defined in chconf.h"
+#endif
+
+/* Performance options checks.*/
+#if !defined(CH_CFG_OPTIMIZE_SPEED)
+#error "CH_CFG_OPTIMIZE_SPEED not defined in chconf.h"
+#endif
+
+/* Subsystem options checks.*/
+#if !defined(CH_CFG_USE_TM)
+#error "CH_CFG_USE_TM not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_USE_TIMESTAMP)
+#error "CH_CFG_USE_TIMESTAMP not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_USE_REGISTRY)
+#error "CH_CFG_USE_REGISTRY not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_USE_WAITEXIT)
+#error "CH_CFG_USE_WAITEXIT not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_USE_SEMAPHORES)
+#error "CH_CFG_USE_SEMAPHORES not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_USE_SEMAPHORES_PRIORITY)
+#error "CH_CFG_USE_SEMAPHORES_PRIORITY not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_USE_MUTEXES)
+#error "CH_CFG_USE_MUTEXES not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_USE_MUTEXES_RECURSIVE)
+#error "CH_CFG_USE_MUTEXES_RECURSIVE not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_USE_CONDVARS)
+#error "CH_CFG_USE_CONDVARS not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_USE_CONDVARS_TIMEOUT)
+#error "CH_CFG_USE_CONDVARS_TIMEOUT not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_USE_EVENTS)
+#error "CH_CFG_USE_EVENTS not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_USE_EVENTS_TIMEOUT)
+#error "CH_CFG_USE_EVENTS_TIMEOUT not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_USE_MESSAGES)
+#error "CH_CFG_USE_MESSAGES not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_USE_MESSAGES_PRIORITY)
+#error "CH_CFG_USE_MESSAGES_PRIORITY not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_USE_DYNAMIC)
+#error "CH_CFG_USE_DYNAMIC not defined in chconf.h"
+#endif
+
+/* Debug options checks.*/
+#if !defined(CH_DBG_STATISTICS)
+#error "CH_DBG_STATISTICS not defined in chconf.h"
+#endif
+
+#if !defined(CH_DBG_SYSTEM_STATE_CHECK)
+#error "CH_DBG_SYSTEM_STATE_CHECK not defined in chconf.h"
+#endif
+
+#if !defined(CH_DBG_ENABLE_CHECKS)
+#error "CH_DBG_ENABLE_CHECKS not defined in chconf.h"
+#endif
+
+#if !defined(CH_DBG_ENABLE_ASSERTS)
+#error "CH_DBG_ENABLE_ASSERTS not defined in chconf.h"
+#endif
+
+#if !defined(CH_DBG_TRACE_MASK)
+#error "CH_DBG_TRACE_MASK not defined in chconf.h"
+#endif
+
+#if !defined(CH_DBG_TRACE_BUFFER_SIZE)
+#error "CH_DBG_TRACE_BUFFER_SIZE not defined in chconf.h"
+#endif
+
+#if !defined(CH_DBG_ENABLE_STACK_CHECK)
+#error "CH_DBG_ENABLE_STACK_CHECK not defined in chconf.h"
+#endif
+
+#if !defined(CH_DBG_FILL_THREADS)
+#error "CH_DBG_FILL_THREADS not defined in chconf.h"
+#endif
+
+#if !defined(CH_DBG_THREADS_PROFILING)
+#error "CH_DBG_THREADS_PROFILING not defined in chconf.h"
+#endif
+
+/* System hooks checks.*/
+#if !defined(CH_CFG_SYSTEM_EXTRA_FIELDS)
+#error "CH_CFG_SYSTEM_EXTRA_FIELDS not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_SYSTEM_INIT_HOOK)
+#error "CH_CFG_SYSTEM_INIT_HOOK not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_OS_INSTANCE_INIT_HOOK)
+#error "CH_CFG_OS_INSTANCE_INIT_HOOK not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_OS_INSTANCE_EXTRA_FIELDS)
+#error "CH_CFG_OS_INSTANCE_EXTRA_FIELDS not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_THREAD_EXTRA_FIELDS)
+#error "CH_CFG_THREAD_EXTRA_FIELDS not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_THREAD_INIT_HOOK)
+#error "CH_CFG_THREAD_INIT_HOOK not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_THREAD_EXIT_HOOK)
+#error "CH_CFG_THREAD_EXIT_HOOK not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_CONTEXT_SWITCH_HOOK)
+#error "CH_CFG_CONTEXT_SWITCH_HOOK not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_IRQ_PROLOGUE_HOOK)
+#error "CH_CFG_IRQ_PROLOGUE_HOOK not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_IRQ_EPILOGUE_HOOK)
+#error "CH_CFG_IRQ_EPILOGUE_HOOK not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_IDLE_ENTER_HOOK)
+#error "CH_CFG_IDLE_ENTER_HOOK not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_IDLE_LEAVE_HOOK)
+#error "CH_CFG_IDLE_LEAVE_HOOK not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_IDLE_LOOP_HOOK)
+#error "CH_CFG_IDLE_LOOP_HOOK not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_SYSTEM_TICK_HOOK)
+#error "CH_CFG_SYSTEM_TICK_HOOK not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_SYSTEM_HALT_HOOK)
+#error "CH_CFG_SYSTEM_HALT_HOOK not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_TRACE_HOOK)
+#error "CH_CFG_TRACE_HOOK not defined in chconf.h"
+#endif
+
+#if !defined(CH_CFG_RUNTIME_FAULTS_HOOK)
+#error "CH_CFG_RUNTIME_FAULTS_HOOK not defined in chconf.h"
+#endif
+
 /*===========================================================================*/
 /* Derived constants and error checks.                                       */
 /*===========================================================================*/
-
-#if CH_CUSTOMER_LIC_RT == FALSE
-#error "ChibiOS/RT not licensed"
-#endif
-
-#if (CH_LICENSE_FEATURES != CH_FEATURES_FULL) &&                            \
-    (CH_LICENSE_FEATURES != CH_FEATURES_INTERMEDIATE) &&                    \
-    (CH_LICENSE_FEATURES == CH_FEATURES_BASIC)
-#error "invalid CH_LICENSE_FEATURES setting"
-#endif
-
-/* Restrictions in basic and intermediate modes.*/
-#if (CH_LICENSE_FEATURES == CH_FEATURES_INTERMEDIATE) ||                    \
-    (CH_LICENSE_FEATURES == CH_FEATURES_BASIC)
-
-/* System tick limited to 1000hz.*/
-#if CH_CFG_ST_FREQUENCY > 1000
-#undef CH_CFG_ST_FREQUENCY
-#define CH_CFG_ST_FREQUENCY                 1000
-#endif
-
-/* Restricted subsystems.*/
-#undef CH_DBG_STATISTICS
-#undef CH_DBG_TRACE_MASK
-
-#define CH_DBG_STATISTICS                   FALSE
-#define CH_DBG_TRACE_MASK                   CH_DBG_TRACE_MASK_DISABLED
-
-#endif /* (CH_LICENSE_FEATURES == CH_FEATURES_INTERMEDIATE) ||
-          (CH_LICENSE_FEATURES == CH_FEATURES_BASIC) */
-
-/* Restrictions in basic mode.*/
-#if CH_LICENSE_FEATURES == CH_FEATURES_BASIC
-
-/* Tick-Less mode restricted.*/
-#undef CH_CFG_ST_TIMEDELTA
-#define CH_CFG_ST_TIMEDELTA                 0
-
-/* Restricted subsystems.*/
-#undef CH_CFG_USE_TM
-#undef CH_CFG_USE_MUTEXES
-#undef CH_CFG_USE_CONDVARS
-#undef CH_CFG_USE_DYNAMIC
-
-#define CH_CFG_USE_TM                       FALSE
-#define CH_CFG_USE_MUTEXES                  FALSE
-#define CH_CFG_USE_CONDVARS                 FALSE
-#define CH_CFG_USE_DYNAMIC                  FALSE
-
-#endif /* CH_LICENSE_FEATURES == CH_FEATURES_BASIC */
 
 /*===========================================================================*/
 /* Module data structures and types.                                         */

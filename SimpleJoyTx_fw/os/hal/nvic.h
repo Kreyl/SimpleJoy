@@ -1,5 +1,5 @@
 /*
-    ChibiOS - Copyright (C) 2006..2016 Giovanni Di Sirio
+    ChibiOS - Copyright (C) 2006..2018 Giovanni Di Sirio
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -75,10 +75,12 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+  void nvicInit(void);
   void nvicEnableVector(uint32_t n, uint32_t prio);
   void nvicDisableVector(uint32_t n);
   void nvicSetSystemHandlerPriority(uint32_t handler, uint32_t prio);
   void nvicClearPending(uint32_t n);
+  void nvicSetPending(uint32_t n);
 #ifdef __cplusplus
 }
 #endif

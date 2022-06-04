@@ -1,12 +1,12 @@
 /*
-    ChibiOS - Copyright (C) 2006..2016 Giovanni Di Sirio.
+    ChibiOS - Copyright (C) 2006,2007,2008,2009,2010,2011,2012,2013,2014,
+              2015,2016,2017,2018,2019,2020,2021 Giovanni Di Sirio.
 
     This file is part of ChibiOS.
 
     ChibiOS is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 3 of the License, or
-    (at your option) any later version.
+    the Free Software Foundation version 3 of the License.
 
     ChibiOS is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -18,10 +18,11 @@
 */
 
 /**
- * @file    chmem.h
+ * @file    rt/include/chalign.h
  * @brief   Memory alignment macros and structures.
  *
  * @addtogroup mem
+ * @details Memory Alignment services.
  * @{
  */
 
@@ -50,6 +51,7 @@
 
 /**
  * @name    Memory alignment support macros
+ * @{
  */
 /**
  * @brief   Alignment mask constant.
@@ -70,7 +72,7 @@
   /*lint -restore*/
 
 /**
- * @brief   Aligns to the new aligned memory address.
+ * @brief   Aligns to the next aligned memory address.
  *
  * @param[in] p         variable to be aligned
  * @param[in] a         alignment, must be a power of two

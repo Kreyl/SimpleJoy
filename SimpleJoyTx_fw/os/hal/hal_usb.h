@@ -1,5 +1,5 @@
 /*
-    ChibiOS - Copyright (C) 2006..2016 Giovanni Di Sirio
+    ChibiOS - Copyright (C) 2006..2018 Giovanni Di Sirio
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -230,6 +230,9 @@
 #define USB_EP_MODE_TYPE_INTR           0x0003U /**< Interrupt endpoint.    */
 /** @} */
 
+#define USB_IN_STATE                    0x08U
+#define USB_OUT_STATE                   0x10U
+
 /*===========================================================================*/
 /* Driver pre-compile time settings.                                         */
 /*===========================================================================*/
@@ -285,13 +288,13 @@ typedef enum {
  * @brief   Type of an endpoint zero state machine states.
  */
 typedef enum {
-  USB_EP0_WAITING_SETUP,                /**< Waiting for SETUP data.        */
-  USB_EP0_TX,                           /**< Transmitting.                  */
-  USB_EP0_WAITING_TX0,                  /**< Waiting transmit 0.            */
-  USB_EP0_WAITING_STS,                  /**< Waiting status.                */
-  USB_EP0_RX,                           /**< Receiving.                     */
-  USB_EP0_SENDING_STS,                  /**< Sending status.                */
-  USB_EP0_ERROR                         /**< Error, EP0 stalled.            */
+  USB_EP0_STP_WAITING = 0U,                     /**< Waiting for SETUP data.*/
+  USB_EP0_IN_TX = USB_IN_STATE | 1U,            /**< Transmitting.          */
+  USB_EP0_IN_WAITING_TX0 = USB_IN_STATE | 2U,   /**< Waiting transmit 0.    */
+  USB_EP0_IN_SENDING_STS = USB_IN_STATE | 3U,   /**< Sending status.        */
+  USB_EP0_OUT_WAITING_STS = USB_OUT_STATE | 4U, /**< Waiting status.        */
+  USB_EP0_OUT_RX = USB_OUT_STATE | 5U,          /**< Receiving.             */
+  USB_EP0_ERROR = 6U                            /**< Error, EP0 stalled.    */
 } usbep0state_t;
 
 /**
@@ -601,7 +604,7 @@ extern "C" {
 #endif
   void usbInit(void);
   void usbObjectInit(USBDriver *usbp);
-  void usbStart(USBDriver *usbp, const USBConfig *config);
+  msg_t usbStart(USBDriver *usbp, const USBConfig *config);
   void usbStop(USBDriver *usbp);
   void usbInitEndpointI(USBDriver *usbp, usbep_t ep,
                         const USBEndpointConfig *epcp);
@@ -617,6 +620,7 @@ extern "C" {
 #endif
   bool usbStallReceiveI(USBDriver *usbp, usbep_t ep);
   bool usbStallTransmitI(USBDriver *usbp, usbep_t ep);
+  void usbWakeupHost(USBDriver *usbp);
   void _usb_reset(USBDriver *usbp);
   void _usb_suspend(USBDriver *usbp);
   void _usb_wakeup(USBDriver *usbp);

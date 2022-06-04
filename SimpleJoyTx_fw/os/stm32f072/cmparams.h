@@ -1,5 +1,5 @@
 /*
-    ChibiOS - Copyright (C) 2006..2016 Giovanni Di Sirio
+    ChibiOS - Copyright (C) 2006..2018 Giovanni Di Sirio
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -43,6 +43,22 @@
  */
 #define CORTEX_PRIORITY_BITS    2
 
+/* If the device type is not externally defined, for example from the Makefile,
+   then a file named board.h is included. This file must contain a device
+   definition compatible with the vendor include file.*/
+#if !defined (STM32F030x4) && !defined (STM32F030x6) &&                     \
+    !defined (STM32F030x8) && !defined (STM32F030xC) &&                     \
+    !defined (STM32F070x6) && !defined (STM32F070xB) &&                     \
+    !defined (STM32F031x6) && !defined (STM32F051x8) &&                     \
+    !defined (STM32F071xB) && !defined (STM32F091xC) &&                     \
+    !defined (STM32F042x6) && !defined (STM32F072xB) &&                     \
+    !defined (STM32F038xx) && !defined (STM32F048xx) &&                     \
+    !defined (STM32F058xx) && !defined (STM32F078xx) &&                     \
+    !defined (STM32F098xx)                                                  \
+
+#include "board.h"
+#endif
+
 /**
  * @brief   Number of interrupt vectors.
  * @note    This number does not include the 16 system vectors and must be
@@ -53,18 +69,6 @@
 /* The following code is not processed when the file is included from an
    asm module.*/
 #if !defined(_FROM_ASM_)
-
-/* If the device type is not externally defined, for example from the Makefile,
-   then a file named board.h is included. This file must contain a device
-   definition compatible with the vendor include file.*/
-#if !defined (STM32F030x6) && !defined (STM32F030x8) &&                     \
-    !defined (STM32F031x6) && !defined (STM32F038xx) &&                     \
-    !defined (STM32F042x6) && !defined (STM32F048xx) &&                     \
-    !defined (STM32F051x8) && !defined (STM32F058xx) &&                     \
-    !defined (STM32F071xB) && !defined (STM32F072xB) &&                     \
-    !defined (STM32F078xx)
-#include "board.h"
-#endif
 
 /* Including the device CMSIS header. Note, we are not using the definitions
    from this header because we need this file to be usable also from

@@ -1,12 +1,12 @@
 /*
-    ChibiOS - Copyright (C) 2006..2016 Giovanni Di Sirio.
+    ChibiOS - Copyright (C) 2006,2007,2008,2009,2010,2011,2012,2013,2014,
+              2015,2016,2017,2018,2019,2020,2021 Giovanni Di Sirio.
 
     This file is part of ChibiOS.
 
     ChibiOS is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 3 of the License, or
-    (at your option) any later version.
+    the Free Software Foundation version 3 of the License.
 
     ChibiOS is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -18,12 +18,12 @@
 */
 
 /**
- * @file    ch.h
+ * @file    rt/include/ch.h
  * @brief   ChibiOS/RT main include file.
- * @details This header includes all the required kernel headers so it is the
- *          only kernel header you usually want to include in your application.
  *
  * @addtogroup kernel_info
+ * @details This header includes all the required kernel headers so it is the
+ *          only kernel header you usually want to include in your application.
  * @details Kernel related info.
  * @{
  */
@@ -34,7 +34,7 @@
 /**
  * @brief   ChibiOS/RT identification macro.
  */
-#define _CHIBIOS_RT_
+#define __CHIBIOS_RT__
 
 /**
  * @brief   Stable release flag.
@@ -48,12 +48,12 @@
 /**
  * @brief   Kernel version string.
  */
-#define CH_KERNEL_VERSION       "4.0.0"
+#define CH_KERNEL_VERSION       "7.0.1"
 
 /**
  * @brief   Kernel version major number.
  */
-#define CH_KERNEL_MAJOR         4
+#define CH_KERNEL_MAJOR         7
 
 /**
  * @brief   Kernel version minor number.
@@ -63,48 +63,69 @@
 /**
  * @brief   Kernel version patch number.
  */
-#define CH_KERNEL_PATCH         0
+#define CH_KERNEL_PATCH         1
 /** @} */
 
-/* Core headers.*/
-#include "chtypes.h"
-#include "chconf.h"
-
-#if !defined(_CHIBIOS_RT_CONF_)
-#error "invalid configuration file"
+/**
+ * @name    Constants for configuration options
+ * @{
+ */
+/**
+ * @brief   Generic 'false' preprocessor boolean constant.
+ * @note    It is meant to be used in configuration files as switch.
+ */
+#if !defined(FALSE) || defined(__DOXYGEN__)
+#define FALSE                   0
 #endif
 
+/**
+ * @brief   Generic 'true' preprocessor boolean constant.
+ * @note    It is meant to be used in configuration files as switch.
+ */
+#if !defined(TRUE) || defined(__DOXYGEN__)
+#define TRUE                    1
+#endif
+/** @} */
+
+/* License.*/
 #include "chlicense.h"
+
+/* Configuration headers, checks and licensing restrictions.*/
+#include "chconf.h"
 #include "chchecks.h"
-#include "chsystypes.h"
-#include "chalign.h"
-#include "chcore.h"
+#include "chrestrictions.h"
+
+/* Base kernel headers.*/
+#include "chearly.h"
+#include "chrfcu.h"
 #include "chdebug.h"
+#include "chtime.h"
+#include "chlists.h"
+#include "chalign.h"
 #include "chtrace.h"
+#include "chport.h"
 #include "chtm.h"
 #include "chstats.h"
-#include "chschd.h"
+#include "chobjects.h"
 #include "chsys.h"
+#include "chinstances.h"
 #include "chvt.h"
+#include "chschd.h"
 #include "chthreads.h"
 
 /* Optional subsystems headers.*/
 #include "chregistry.h"
 #include "chsem.h"
-#include "chbsem.h"
 #include "chmtx.h"
 #include "chcond.h"
 #include "chevents.h"
 #include "chmsg.h"
-#include "chmboxes.h"
-#include "chmemcore.h"
-#include "chheap.h"
-#include "chmempools.h"
-#include "chdynamic.h"
 
-#if !defined(_CHIBIOS_RT_CONF_)
-#error "missing or wrong configuration file"
-#endif
+/* OSLIB.*/
+#include "chlib.h"
+
+/* Headers dependent on the OSLIB.*/
+#include "chdynamic.h"
 
 #endif /* CH_H */
 

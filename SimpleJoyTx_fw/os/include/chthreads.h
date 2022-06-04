@@ -1,12 +1,12 @@
 /*
-    ChibiOS - Copyright (C) 2006..2016 Giovanni Di Sirio.
+    ChibiOS - Copyright (C) 2006,2007,2008,2009,2010,2011,2012,2013,2014,
+              2015,2016,2017,2018,2019,2020,2021 Giovanni Di Sirio.
 
     This file is part of ChibiOS.
 
     ChibiOS is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 3 of the License, or
-    (at your option) any later version.
+    the Free Software Foundation version 3 of the License.
 
     ChibiOS is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -18,7 +18,7 @@
 */
 
 /**
- * @file    chthreads.h
+ * @file    rt/include/chthreads.h
  * @brief   Threads module macros and structures.
  *
  * @addtogroup threads
@@ -37,18 +37,6 @@
 /*===========================================================================*/
 /* Module pre-compile time settings.                                         */
 /*===========================================================================*/
-
-#if !defined(CH_CFG_THREAD_EXTRA_FIELDS)
-#error "CH_CFG_THREAD_EXTRA_FIELDS not defined in chconf.h"
-#endif
-
-#if !defined(CH_CFG_THREAD_INIT_HOOK)
-#error "CH_CFG_THREAD_INIT_HOOK not defined in chconf.h"
-#endif
-
-#if !defined(CH_CFG_THREAD_EXIT_HOOK)
-#error "CH_CFG_THREAD_EXIT_HOOK not defined in chconf.h"
-#endif
 
 /*===========================================================================*/
 /* Derived constants and error checks.                                       */
@@ -76,7 +64,7 @@ typedef struct {
    */
   stkalign_t        *wbase;
   /**
-   * @brief   End of the working area.
+   * @brief   Pointer to the working area end.
    */
   stkalign_t        *wend;
   /**
@@ -91,6 +79,12 @@ typedef struct {
    * @brief   Thread argument.
    */
   void              *arg;
+#if (CH_CFG_SMP_MODE != FALSE) || defined(__DOXYGEN__)
+  /**
+   * @brief         OS instance affinity or @p NULL for current one.
+   */
+  os_instance_t     *instance;
+#endif
 } thread_descriptor_t;
 
 /*===========================================================================*/
@@ -99,6 +93,7 @@ typedef struct {
 
 /**
  * @name    Threads queues
+ * @{
  */
 /**
  * @brief   Data part of a static threads queue object initializer.
@@ -107,7 +102,7 @@ typedef struct {
  *
  * @param[in] name      the name of the threads queue variable
  */
-#define _THREADS_QUEUE_DATA(name) {(thread_t *)&name, (thread_t *)&name}
+#define __THREADS_QUEUE_DATA(name) {__CH_QUEUE_DATA(name)}
 
 /**
  * @brief   Static threads queue object initializer.
@@ -116,12 +111,13 @@ typedef struct {
  *
  * @param[in] name      the name of the threads queue variable
  */
-#define _THREADS_QUEUE_DECL(name)                                           \
-  threads_queue_t name = _THREADS_QUEUE_DATA(name)
+#define THREADS_QUEUE_DECL(name)                                            \
+  threads_queue_t name = __THREADS_QUEUE_DATA(name)
 /** @} */
 
 /**
  * @name    Working Areas
+ * @{
  */
 /**
  * @brief   Calculates the total Working Area size.
@@ -164,6 +160,7 @@ typedef struct {
 
 /**
  * @name    Threads abstraction macros
+ * @{
  */
 /**
  * @brief   Thread declaration macro.
@@ -171,6 +168,63 @@ typedef struct {
  *          the port layer could define optimizations for thread functions.
  */
 #define THD_FUNCTION(tname, arg) PORT_THD_FUNCTION(tname, arg)
+/** @} */
+
+/**
+ * @name    Threads initializers
+ * @{
+ */
+#if (CH_CFG_SMP_MODE != FALSE) || defined(__DOXYGEN__)
+/**
+ * @brief   Thread descriptor initializer with no affinity.
+ *
+ * @param[in] name      thread name
+ * @param[in] wbase     pointer to the working area base
+ * @param[in] wend      pointer to the working area end
+ * @param[in] prio      thread priority
+ * @param[in] funcp     thread function pointer
+ * @param[in] arg       thread argument
+ */
+#define THD_DESCRIPTOR(name, wbase, wend, prio, funcp, arg) {               \
+  (name),                                                                   \
+  (wbase),                                                                  \
+  (wend),                                                                   \
+  (prio),                                                                   \
+  (funcp),                                                                  \
+  (arg),                                                                    \
+  NULL                                                                      \
+}
+#else
+#define THD_DESCRIPTOR(name, wbase, wend, prio, funcp, arg) {               \
+  (name),                                                                   \
+  (wbase),                                                                  \
+  (wend),                                                                   \
+  (prio),                                                                   \
+  (funcp),                                                                  \
+  (arg)                                                                     \
+}
+#endif
+
+/**
+ * @brief   Thread descriptor initializer with no affinity.
+ *
+ * @param[in] name      thread name
+ * @param[in] wbase     pointer to the working area base
+ * @param[in] wend      pointer to the working area end
+ * @param[in] prio      thread priority
+ * @param[in] funcp     thread function pointer
+ * @param[in] arg       thread argument
+ * @param[in] oip       instance affinity
+ */
+#define THD_DESCRIPTOR_AFFINITY(name, wbase, wend, prio, funcp, arg, oip) { \
+  (name),                                                                   \
+  (wbase),                                                                  \
+  (wend),                                                                   \
+  (prio),                                                                   \
+  (funcp),                                                                  \
+  (arg),                                                                    \
+  (oip)                                                                     \
+}
 /** @} */
 
 /**
@@ -190,7 +244,7 @@ typedef struct {
  *
  * @api
  */
-#define chThdSleepSeconds(sec) chThdSleep(S2ST(sec))
+#define chThdSleepSeconds(sec) chThdSleep(TIME_S2I(sec))
 
 /**
  * @brief   Delays the invoking thread for the specified number of
@@ -206,7 +260,7 @@ typedef struct {
  *
  * @api
  */
-#define chThdSleepMilliseconds(msec) chThdSleep(MS2ST(msec))
+#define chThdSleepMilliseconds(msec) chThdSleep(TIME_MS2I(msec))
 
 /**
  * @brief   Delays the invoking thread for the specified number of
@@ -222,7 +276,7 @@ typedef struct {
  *
  * @api
  */
-#define chThdSleepMicroseconds(usec) chThdSleep(US2ST(usec))
+#define chThdSleepMicroseconds(usec) chThdSleep(TIME_US2I(usec))
 /** @} */
 
 /*===========================================================================*/
@@ -232,9 +286,12 @@ typedef struct {
 #ifdef __cplusplus
 extern "C" {
 #endif
-   thread_t *_thread_init(thread_t *tp, const char *name, tprio_t prio);
+   thread_t *__thd_object_init(os_instance_t *oip,
+                               thread_t *tp,
+                               const char *name,
+                               tprio_t prio);
 #if CH_DBG_FILL_THREADS == TRUE
-  void _thread_memfill(uint8_t *startp, uint8_t *endp, uint8_t v);
+  void __thd_stackfill(uint8_t *startp, uint8_t *endp);
 #endif
   thread_t *chThdCreateSuspendedI(const thread_descriptor_t *tdp);
   thread_t *chThdCreateSuspended(const thread_descriptor_t *tdp);
@@ -255,14 +312,14 @@ extern "C" {
   tprio_t chThdSetPriority(tprio_t newprio);
   void chThdTerminate(thread_t *tp);
   msg_t chThdSuspendS(thread_reference_t *trp);
-  msg_t chThdSuspendTimeoutS(thread_reference_t *trp, systime_t timeout);
+  msg_t chThdSuspendTimeoutS(thread_reference_t *trp, sysinterval_t timeout);
   void chThdResumeI(thread_reference_t *trp, msg_t msg);
   void chThdResumeS(thread_reference_t *trp, msg_t msg);
   void chThdResume(thread_reference_t *trp, msg_t msg);
-  msg_t chThdEnqueueTimeoutS(threads_queue_t *tqp, systime_t timeout);
+  msg_t chThdEnqueueTimeoutS(threads_queue_t *tqp, sysinterval_t timeout);
   void chThdDequeueNextI(threads_queue_t *tqp, msg_t msg);
   void chThdDequeueAllI(threads_queue_t *tqp, msg_t msg);
-  void chThdSleep(systime_t time);
+  void chThdSleep(sysinterval_t time);
   void chThdSleepUntil(systime_t time);
   systime_t chThdSleepUntilWindowed(systime_t prev, systime_t next);
   void chThdYield(void);
@@ -274,16 +331,16 @@ extern "C" {
 /* Module inline functions.                                                  */
 /*===========================================================================*/
 
- /**
-  * @brief   Returns a pointer to the current @p thread_t.
-  *
-  * @return             A pointer to the current thread.
-  *
-  * @xclass
-  */
+/**
+ * @brief   Returns a pointer to the current @p thread_t.
+ *
+ * @return             A pointer to the current thread.
+ *
+ * @xclass
+ */
 static inline thread_t *chThdGetSelfX(void) {
 
-  return ch.rlist.current;
+  return __sch_get_currthread();
 }
 
 /**
@@ -296,7 +353,7 @@ static inline thread_t *chThdGetSelfX(void) {
  */
 static inline tprio_t chThdGetPriorityX(void) {
 
-  return chThdGetSelfX()->prio;
+  return chThdGetSelfX()->hdr.pqueue.prio;
 }
 
 /**
@@ -376,9 +433,9 @@ static inline thread_t *chThdStartI(thread_t *tp) {
 }
 
 /**
- * @brief   Suspends the invoking thread for the specified time.
+ * @brief   Suspends the invoking thread for the specified number of ticks.
  *
- * @param[in] time      the delay in system ticks, the special values are
+ * @param[in] ticks     the delay in system ticks, the special values are
  *                      handled as follow:
  *                      - @a TIME_INFINITE the thread enters an infinite sleep
  *                        state.
@@ -387,11 +444,11 @@ static inline thread_t *chThdStartI(thread_t *tp) {
  *
  * @sclass
  */
-static inline void chThdSleepS(systime_t time) {
+static inline void chThdSleepS(sysinterval_t ticks) {
 
-  chDbgCheck(time != TIME_IMMEDIATE);
+  chDbgCheck(ticks != TIME_IMMEDIATE);
 
-  (void) chSchGoSleepTimeoutS(CH_STATE_SLEEPING, time);
+  (void) chSchGoSleepTimeoutS(CH_STATE_SLEEPING, ticks);
 }
 
 /**
@@ -403,7 +460,7 @@ static inline void chThdSleepS(systime_t time) {
  */
 static inline void chThdQueueObjectInit(threads_queue_t *tqp) {
 
-  queue_init(tqp);
+  ch_queue_init(&tqp->queue);
 }
 
 /**
@@ -420,7 +477,7 @@ static inline bool chThdQueueIsEmptyI(threads_queue_t *tqp) {
 
   chDbgCheckClassI();
 
-  return queue_isempty(tqp);
+  return ch_queue_isempty(&tqp->queue);
 }
 
 /**
@@ -437,9 +494,9 @@ static inline bool chThdQueueIsEmptyI(threads_queue_t *tqp) {
 static inline void chThdDoDequeueNextI(threads_queue_t *tqp, msg_t msg) {
   thread_t *tp;
 
-  chDbgAssert(queue_notempty(tqp), "empty queue");
+  chDbgAssert(ch_queue_notempty(&tqp->queue), "empty queue");
 
-  tp = queue_fifo_remove(tqp);
+  tp = threadref(ch_queue_fifo_remove(&tqp->queue));
 
   chDbgAssert(tp->state == CH_STATE_QUEUED, "invalid state");
 

@@ -1,12 +1,12 @@
 /*
-    ChibiOS - Copyright (C) 2006..2016 Giovanni Di Sirio.
+    ChibiOS - Copyright (C) 2006,2007,2008,2009,2010,2011,2012,2013,2014,
+              2015,2016,2017,2018,2019,2020,2021 Giovanni Di Sirio.
 
     This file is part of ChibiOS.
 
     ChibiOS is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 3 of the License, or
-    (at your option) any later version.
+    the Free Software Foundation version 3 of the License.
 
     ChibiOS is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -18,10 +18,8 @@
 */
 
 /**
- * @file    chbsem.h
+ * @file    oslib/include/chbsem.h
  * @brief   Binary semaphores structures and macros.
- *
- * @addtogroup binary_semaphores
  * @details Binary semaphores related APIs and services.
  *          <h2>Operation mode</h2>
  *          Binary semaphores are implemented as a set of inline functions
@@ -43,6 +41,8 @@
  *          implement the priority inheritance protocol.<br>
  *          In order to use the binary semaphores APIs the
  *          @p CH_CFG_USE_SEMAPHORES option must be enabled in @p chconf.h.
+ *
+ * @addtogroup oslib_binary_semaphores
  * @{
  */
 
@@ -72,7 +72,7 @@
  *
  * @brief   Binary semaphore type.
  */
-typedef struct {
+typedef struct ch_binary_semaphore {
   semaphore_t           sem;
 } binary_semaphore_t;
 
@@ -88,8 +88,8 @@ typedef struct {
  * @param[in] name      the name of the semaphore variable
  * @param[in] taken     the semaphore initial state
  */
-#define _BSEMAPHORE_DATA(name, taken)                                       \
-  {_SEMAPHORE_DATA(name.sem, ((taken) ? 0 : 1))}
+#define __BSEMAPHORE_DATA(name, taken)                                      \
+  {__SEMAPHORE_DATA(name.sem, ((taken) ? 0 : 1))}
 
 /**
  * @brief   Static semaphore initializer.
@@ -100,7 +100,7 @@ typedef struct {
  * @param[in] taken     the semaphore initial state
  */
 #define BSEMAPHORE_DECL(name, taken)                                        \
-    binary_semaphore_t name = _BSEMAPHORE_DATA(name, taken)
+  binary_semaphore_t name = __BSEMAPHORE_DATA(name, taken)
 
 /*===========================================================================*/
 /* External declarations.                                                    */
@@ -166,7 +166,7 @@ static inline msg_t chBSemWaitS(binary_semaphore_t *bsp) {
  * @brief   Wait operation on the binary semaphore.
  *
  * @param[in] bsp       pointer to a @p binary_semaphore_t structure
- * @param[in] time      the number of ticks before the operation timeouts,
+ * @param[in] timeout   the number of ticks before the operation timeouts,
  *                      the following special values are allowed:
  *                      - @a TIME_IMMEDIATE immediate timeout.
  *                      - @a TIME_INFINITE no timeout.
@@ -182,18 +182,18 @@ static inline msg_t chBSemWaitS(binary_semaphore_t *bsp) {
  * @sclass
  */
 static inline msg_t chBSemWaitTimeoutS(binary_semaphore_t *bsp,
-                                       systime_t time) {
+                                       sysinterval_t timeout) {
 
   chDbgCheckClassS();
 
-  return chSemWaitTimeoutS(&bsp->sem, time);
+  return chSemWaitTimeoutS(&bsp->sem, timeout);
 }
 
 /**
  * @brief   Wait operation on the binary semaphore.
  *
  * @param[in] bsp       pointer to a @p binary_semaphore_t structure
- * @param[in] time      the number of ticks before the operation timeouts,
+ * @param[in] timeout   the number of ticks before the operation timeouts,
  *                      the following special values are allowed:
  *                      - @a TIME_IMMEDIATE immediate timeout.
  *                      - @a TIME_INFINITE no timeout.
@@ -209,9 +209,9 @@ static inline msg_t chBSemWaitTimeoutS(binary_semaphore_t *bsp,
  * @api
  */
 static inline msg_t chBSemWaitTimeout(binary_semaphore_t *bsp,
-                                      systime_t time) {
+                                      sysinterval_t timeout) {
 
-  return chSemWaitTimeout(&bsp->sem, time);
+  return chSemWaitTimeout(&bsp->sem, timeout);
 }
 
 /**
@@ -297,7 +297,7 @@ static inline void chBSemSignal(binary_semaphore_t *bsp) {
  *
  * @iclass
  */
-static inline bool chBSemGetStateI(binary_semaphore_t *bsp) {
+static inline bool chBSemGetStateI(const binary_semaphore_t *bsp) {
 
   chDbgCheckClassI();
 

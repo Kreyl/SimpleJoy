@@ -1,7 +1,7 @@
 /*
  * EvtMsgIDs.h
  *
- *  Created on: 21 апр. 2017 г.
+ *  Created on: 21 пїЅпїЅпїЅ. 2017 пїЅ.
  *      Author: Kreyl
  */
 
@@ -11,17 +11,9 @@ enum EvtMsgId_t {
     evtIdNone = 0, // Always
 
     // Pretending to eternity
-    evtIdShellCmd,
-    evtIdEverySecond,
-    evtIdAdcRslt,
+    evtIdShellCmdRcvd,
 
     evtIdButtons,
-
-    evtIdLedDone,
-    evtIdSyncTmrUpdate,
-
-    evtIdMenuTimeout,
-    evtIdRadioRx,
 
     // Usb
     evtIdUsbConnect,
@@ -30,4 +22,7 @@ enum EvtMsgId_t {
     evtIdUsbNewCmd,
     evtIdUsbInDone,
     evtIdUsbOutDone,
+
+    evtIdUsbCmdRcvd,
+
 };

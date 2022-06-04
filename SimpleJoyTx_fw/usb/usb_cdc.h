@@ -1,31 +1,33 @@
 /*
  * usb_cdc.h
  *
- *  Created on: 03 сент. 2015 г.
+ *  Created on: 03 пїЅпїЅпїЅпїЅ. 2015 пїЅ.
  *      Author: Kreyl
  */
 
 #pragma once
 
 #include "hal.h"
-#include "hal_serial_usb.h"
-#include "stdarg.h"
 #include "shell.h"
 
 class UsbCDC_t : public PrintfHelper_t, public Shell_t {
 private:
-    uint8_t IPutChar(char c) { SDU1.vmt->put(&SDU1, c); return retvOk; }
-    void IStartTransmissionIfNotYet() {}
-    void SignalCmdProcessed() {}
+    void IStartTransmissionIfNotYet() {} // Dummy
+    uint8_t IPutChar(char c);
 public:
     void Init();
     void Connect();
     void Disconnect();
-    bool IsActive() { return (SDU1.config->usbp->state == USB_ACTIVE); }
-    void Printf(const char *S, ...);
-    // Inner use
-    SerialUSBDriver SDU1;
-    bool CmdProcessInProgress;
+    bool IsActive();
+    void Print(const char *format, ...) {
+        va_list args;
+        va_start(args, format);
+        IVsPrintf(format, args);
+        va_end(args);
+    }
+    void SignalCmdProcessed();
+    uint8_t ReceiveBinaryToBuf(uint8_t *ptr, uint32_t Len, uint32_t Timeout_ms);
+    uint8_t TransmitBinaryFromBuf(uint8_t *ptr, uint32_t Len, uint32_t Timeout_ms);
 };
 
 extern UsbCDC_t UsbCDC;
