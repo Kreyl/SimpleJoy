@@ -1,3 +1,4 @@
 (sym_lib_table
-  (lib (name display_kl)(type Legacy)(uri ${KICAD_SYMBOL_DIR}/display_kl.lib)(options "")(descr ""))
+  (lib (name "display_kl")(type "Legacy")(uri "${KICAD_SYMBOL_DIR}/display_kl.lib")(options "")(descr ""))
+  (lib (name "SimpleJoyTx-rescue")(type "Legacy")(uri "${KIPRJMOD}/SimpleJoyTx-rescue.lib")(options "")(descr ""))
 )

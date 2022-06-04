@@ -22,4 +22,5 @@ enum EvtMsgId_t {
     evtIdRadioLowPwr,
     evtIdRadioHiPwrCrystal,
     evtIdRadioHiPwrKey,
+    evtIdRadioActivated,
 };

@@ -6,3 +6,7 @@ SimpleJoyTx_fw/.settings/language.settings.xml
 SimpleJoyTx_fw/Debug/
 *.csv
 *.zip
+*.bak
+*.sch-bak
+SimpleJoyRx_hw/rescue-backup/
+SimpleJoyTx_hw/rescue-backup/

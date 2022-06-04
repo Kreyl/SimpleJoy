@@ -111,6 +111,11 @@ void ITask() {
 
             case evtIdRadioHiPwrKey:
                 Leds.SeqAllTogetherStartOrContinue(lsqHiPowerKey);
+                CloseDoors();
+                break;
+
+            case evtIdRadioActivated:
+                Leds.SeqAllTogetherStartOrContinue(lsqHiPowerKey);
                 OpenDoors();
                 break;
 

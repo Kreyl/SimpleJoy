@@ -19,7 +19,8 @@
 #if 1 // =========================== Pkt_t =====================================
 struct rPkt_t {
     uint32_t DWord;
-    uint32_t Type;
+    uint16_t Type;
+    uint16_t Activated;
 //    bool operator == (const rPkt_t &APkt) { return (DWord32 == APkt.DWord32); }
 //    rPkt_t& operator = (const rPkt_t &Right) { DWord32 = Right.DWord32; return *this; }
 } __attribute__ ((__packed__));

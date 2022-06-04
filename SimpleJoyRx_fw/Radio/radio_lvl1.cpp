@@ -58,11 +58,12 @@ void rLevel1_t::ITask() {
                 CC.Recalibrate();
                 uint8_t RxRslt = CC.Receive(45, &PktRx, RPKT_LEN, &Rssi);   // Double pkt duration + TX sleep time
                 if(RxRslt == retvOk) {
-                    Printf("Ch=%u; Rssi=%d; Type=%u\r", ID2RCHNL(i), Rssi, PktRx.Type);
+//                    Printf("Ch=%u; Rssi=%d; Type=%u\r", ID2RCHNL(i), Rssi, PktRx.Type);
                     if(PktRx.DWord == THE_WORD) {
                         if(PktRx.Type == appmKey) {
                             if(Rssi > RSSI_NEAR) {
-                                msg.ID = evtIdRadioHiPwrKey;
+                                if(PktRx.Activated != 0) msg.ID = evtIdRadioActivated;
+                                else msg.ID = evtIdRadioHiPwrKey;
                                 chThdSleepMilliseconds(999);
                                 goto CycleEnd;
                             }
