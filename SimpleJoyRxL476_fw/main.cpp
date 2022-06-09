@@ -60,7 +60,14 @@ int main(void) {
 
     Led1.On();
 
-//    Radio.Init();
+    if(Radio.Init(7) != retvOk) {
+        for(int i=0; i<99; i++) {
+            Led1.Off();
+            chThdSleepMilliseconds(27);
+            Led1.On();
+            chThdSleepMilliseconds(27);
+        }
+    }
 
     // Main cycle
     ITask();

@@ -11,7 +11,7 @@
 
 cc1101_t CC(CC_Setup0);
 
-//#define DBG_PINS
+#define DBG_PINS
 
 #ifdef DBG_PINS
 #define DBG_GPIO1   GPIOB
@@ -19,7 +19,7 @@ cc1101_t CC(CC_Setup0);
 #define DBG1_SET()  PinSetHi(DBG_GPIO1, DBG_PIN1)
 #define DBG1_CLR()  PinSetLo(DBG_GPIO1, DBG_PIN1)
 #define DBG_GPIO2   GPIOB
-#define DBG_PIN2    9
+#define DBG_PIN2    11
 #define DBG2_SET()  PinSetHi(DBG_GPIO2, DBG_PIN2)
 #define DBG2_CLR()  PinSetLo(DBG_GPIO2, DBG_PIN2)
 #else
@@ -43,8 +43,10 @@ static void rLvl1Thread(void *arg) {
 __noreturn
 void rLevel1_t::ITask() {
     while(true) {
+        DBG1_SET();
         CC.Recalibrate();
         CC.Transmit(&PktTx, RPKT_LEN);
+        DBG1_CLR();
         chThdSleepMilliseconds(4);
     } // while true
 }

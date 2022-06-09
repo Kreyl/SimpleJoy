@@ -57,6 +57,9 @@ const AdcSetup_t AdcSetup = {
 int main(void) {
     // ==== Init Clock system ====
     Clk.EnablePrefetch();
+    Clk.SetupFlashLatency(48000000);
+    Clk.SwitchTo(csHSI48);
+    Clk.SelectUSBClock_HSI48();
     Clk.UpdateFreqValues();
 
     // === Init OS ===
@@ -99,33 +102,33 @@ void ITask() {
             case evtIdUsbConnect:
                 Printf("USB connect\r");
                 // Enable HSI48
-                chSysLock();
-                Clk.SetupFlashLatency(48000000);
-                while(Clk.SwitchTo(csHSI48) != retvOk) {
-                    PrintfI("Hsi48 Fail\r");
-                    chThdSleepS(TIME_MS2I(207));
-                }
-                Clk.UpdateFreqValues();
-                chSysUnlock();
-                Clk.PrintFreqs();
-                Clk.SelectUSBClock_HSI48();
+//                chSysLock();
+//                Clk.SetupFlashLatency(48000000);
+//                while(Clk.SwitchTo(csHSI48) != retvOk) {
+//                    PrintfI("Hsi48 Fail\r");
+//                    chThdSleepS(TIME_MS2I(207));
+//                }
+//                Clk.UpdateFreqValues();
+//                chSysUnlock();
+//                Clk.PrintFreqs();
+//                Clk.SelectUSBClock_HSI48();
                 Clk.EnableCRS();
                 UsbCDC.Connect();
                 break;
 
             case evtIdUsbDisconnect: {
                 UsbCDC.Disconnect();
-                chSysLock();
-                uint8_t r = Clk.SwitchTo(csHSI);
-                Clk.UpdateFreqValues();
-                chSysUnlock();
-                Clk.PrintFreqs();
-                if(r == retvOk) {
+//                chSysLock();
+//                uint8_t r = Clk.SwitchTo(csHSI);
+//                Clk.UpdateFreqValues();
+//                chSysUnlock();
+//                Clk.PrintFreqs();
+//                if(r == retvOk) {
                     Clk.DisableCRS();
-                    Clk.DisableHSI48();
-                    Clk.SetupFlashLatency(8000000);
-                }
-                else Printf("Hsi Fail\r");
+//                    Clk.DisableHSI48();
+//                    Clk.SetupFlashLatency(8000000);
+//                }
+//                else Printf("Hsi Fail\r");
                 Printf("USB disconnect\r");
             } break;
 
@@ -169,7 +172,7 @@ void OnCmd(Shell_t *PShell) {
     else if(PCmd->NameIs("Set")) {
         int8_t Joy[4];
         uint8_t Flags;
-        if(PCmd->Get("%d8%d8%d8%d8%u8", &Joy[0], &Joy[0], &Joy[0], &Joy[0], &Flags) == 5) {
+        if(PCmd->Get("%d8%d8%d8%d8%u8", &Joy[0], &Joy[1], &Joy[2], &Joy[3], &Flags) == 5) {
             chSysLock();
             Radio.PktTx.Joy[0] = Joy[0];
             Radio.PktTx.Joy[1] = Joy[1];

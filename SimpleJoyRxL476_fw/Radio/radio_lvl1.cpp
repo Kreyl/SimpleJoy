@@ -43,28 +43,25 @@ static void rLvl1Thread(void *arg) {
 __noreturn
 void rLevel1_t::ITask() {
     while(true) {
-        bool WasTx = false;
-        if(MustTx) {
-            PktTx.R = ClrToTx.R;
-            PktTx.G = ClrToTx.G;
-            PktTx.B = ClrToTx.B;
-            PktTx.BtnIndx = BtnIndx;
-            PktTx.Sign = 0xCA115EA1;
-            CC.Recalibrate();
-            CC.Transmit(&PktTx, RPKT_LEN);
-            chThdSleepMilliseconds(4);
+        CC.Recalibrate();
+        uint8_t Rslt = CC.Receive(270, &PktRx, RPKT_LEN, &Rssi);
+        if(Rslt == retvOk) {
+            Printf("%d %d %d %d 0x%02X; rssi %d\r",
+                    PktRx.Joy[0], PktRx.Joy[1], PktRx.Joy[2], PktRx.Joy[3], PktRx.Flags,
+                    Rssi);
+            if(PktRx.Sign == 0xCA11) {
+
+            }
         }
-        else {
-            if(WasTx and !MustTx) CC.EnterPwrDown();
-            chThdSleepMilliseconds(270);
-        }
-        WasTx = MustTx;
+
+//        CC.Transmit(&PktTx, RPKT_LEN);
+//        chThdSleepMilliseconds(4);
     } // while true
 }
 #endif // task
 
 #if 1 // ============================
-uint8_t rLevel1_t::Init() {
+uint8_t rLevel1_t::Init(uint32_t RPwrId) {
 #ifdef DBG_PINS
     PinSetupOut(DBG_GPIO1, DBG_PIN1, omPushPull);
     PinSetupOut(DBG_GPIO2, DBG_PIN2, omPushPull);
@@ -74,11 +71,11 @@ uint8_t rLevel1_t::Init() {
     if(CC.Init() == retvOk) {
         CC.SetPktSize(RPKT_LEN);
         CC.DoIdleAfterTx();
-        CC.SetChannel(RCHNL_EACH_OTH);
-        CC.SetTxPower(CC_Pwr0dBm);
-        CC.SetBitrate(CCBitrate100k);
+        CC.SetChannel(RCHNL_INDX);
+        CC.SetTxPower(PwrTable[RPwrId]);
+        CC.SetBitrate(CCBitrate10k);
 //        CC.EnterPwrDown();
-
+//        Printf("RPwr: %u\r", RPwrId);
         // Thread
         chThdCreateStatic(warLvl1Thread, sizeof(warLvl1Thread), HIGHPRIO, (tfunc_t)rLvl1Thread, NULL);
         return retvOk;
